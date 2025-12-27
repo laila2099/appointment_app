@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Stars extends StatelessWidget {
   final int value;
@@ -11,7 +12,7 @@ class Stars extends StatelessWidget {
         final filled = i < value;
         return Icon(
           filled ? Icons.star : Icons.star_border,
-          size: 20,
+          size: 20.sp,
           color: Colors.amber,
         );
       }),

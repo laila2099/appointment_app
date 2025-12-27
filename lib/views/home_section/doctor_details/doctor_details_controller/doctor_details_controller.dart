@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 import '../../../../models/doctor_model.dart';
 import '../../../../models/review_model.dart';
+import '../../../../routes/app_routes.dart';
 
 class DoctorDetailsController extends GetxController {
   final isLoading = true.obs;
@@ -62,6 +63,7 @@ class DoctorDetailsController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+
     _load();
   }
 
@@ -72,6 +74,6 @@ class DoctorDetailsController extends GetxController {
   }
 
   void onMakeAppointment() {
-    Get.snackbar("Coming soon", "Booking screen will be added in next phase");
+    Get.toNamed(AppRoutes.bookingAppointment);
   }
 }
