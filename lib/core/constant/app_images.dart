@@ -6,7 +6,4 @@ class AppImages {
   static const String baseIconPath = "assets/icons/";
 
   static const String doctor = "${basePath}doctor.png";
-
-  /// ------------ Icons
-  static const String chat = "${baseIconPath}chat.svg";
 }

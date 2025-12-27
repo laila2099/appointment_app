@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/constant/app_colors.dart';
@@ -32,18 +33,18 @@ class DoctorDetailsScreen extends GetView<DoctorDetailsController> {
               AppHeader(
                 leading: HeaderButton(
                   onTap: Get.back,
-                  child: const Icon(
+                  child: Icon(
                     Icons.arrow_back_ios_new,
-                    size: 18,
+                    size: 18.sp,
                     color: Colors.black,
                   ),
                 ),
                 center: HeaderTitle(doctor.name),
                 trailing: HeaderButton(
                   onTap: () {},
-                  child: const Icon(
+                  child: Icon(
                     Icons.more_horiz,
-                    size: 22,
+                    size: 22.sp,
                     color: Colors.black,
                   ),
                 ),
@@ -59,21 +60,21 @@ class DoctorDetailsScreen extends GetView<DoctorDetailsController> {
                 onChatTap: () {},
               ),
 
-              const SizedBox(height: 8),
+              SizedBox(height: 8.h),
               Expanded(
                 child: DefaultTabController(
                   length: 3,
                   child: Column(
                     children: [
-                      const TabBar(
+                      TabBar(
                         labelColor: AppColors.primary,
 
                         indicatorColor: AppColors.primary,
                         indicatorSize: TabBarIndicatorSize.tab,
                         tabs: [
-                          Tab(text: "About"),
-                          Tab(text: "Location"),
-                          Tab(text: "Reviews"),
+                          Tab(text: "about".tr),
+                          Tab(text: "location".tr),
+                          Tab(text: "reviews".tr),
                         ],
                       ),
                       Expanded(
@@ -90,7 +91,7 @@ class DoctorDetailsScreen extends GetView<DoctorDetailsController> {
                 ),
               ),
               PrimaryButton(
-                text: "Make An Appointment",
+                text: "make_appointment".tr,
                 onPressed: controller.onMakeAppointment,
               ),
             ],
