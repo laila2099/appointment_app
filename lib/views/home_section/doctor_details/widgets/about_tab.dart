@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../../../models/doctor_model.dart';
+import '../../../../widgets/general_widgets/section_title.dart';
 import 'info_text.dart';
-import 'section_title.dart';
 
 class AboutTab extends StatelessWidget {
   final Doctor doctor;
@@ -11,33 +13,33 @@ class AboutTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.fromLTRB(24, 32, 24, 0),
+      padding: EdgeInsets.fromLTRB(24.w, 32.h, 24.w, 0.h),
       children: [
-        const SectionTitle("About me"),
-        const SizedBox(height: 12),
+        SectionTitle("about_me".tr),
+        SizedBox(height: 12.h),
 
         InfoText(doctor.about),
 
-        const SizedBox(height: 24),
+        SizedBox(height: 24.h),
 
-        const SectionTitle("Working Time"),
-        const SizedBox(height: 12),
+        SectionTitle("working_time".tr),
+        SizedBox(height: 12.h),
 
         InfoText(doctor.workingTime),
 
-        const SizedBox(height: 24),
+        SizedBox(height: 24.h),
 
-        const SectionTitle("STR"),
-        const SizedBox(height: 12),
+        SectionTitle("str".tr),
+        SizedBox(height: 12.h),
 
         InfoText(doctor.strNumber),
 
-        const SizedBox(height: 24),
+        SizedBox(height: 24.h),
 
-        const SectionTitle("Pengalaman Praktik"),
-        const SizedBox(height: 12),
+        SectionTitle("practice_experience".tr),
+        SizedBox(height: 12.h),
         InfoText(doctor.experiencePlace, emphasis: true),
-        const SizedBox(height: 16),
+        SizedBox(height: 16.h),
         InfoText(doctor.experiencePeriod),
       ],
     );

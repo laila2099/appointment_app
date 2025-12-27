@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/constant/text_style.dart';
+
 class HeaderTitle extends StatelessWidget {
   final String text;
   const HeaderTitle(this.text, {super.key});
@@ -10,11 +12,7 @@ class HeaderTitle extends StatelessWidget {
       text,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-      style: const TextStyle(
-        fontSize: 18,
-        fontWeight: FontWeight.w700,
-        color: Colors.black,
-      ),
+      style: CustomTextStyles.screenTitle,
     );
   }
 }
