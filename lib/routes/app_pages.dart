@@ -1,8 +1,7 @@
 import 'package:appoitment_app/routes/app_routes.dart';
-import 'package:appoitment_app/views/home_section/doctor_details/doctor_details_binding/doctor_details_binding.dart';
-import 'package:appoitment_app/views/home_section/doctor_details/doctor_details_view/doctor_details_screen.dart';
-
-import 'package:appoitment_app/views/profile_section/views/profile_views.dart';
+import 'package:appoitment_app/views/my_apponiment_section/my_appoitment_binding/my_appoitment_binding.dart';
+import 'package:appoitment_app/views/my_apponiment_section/my_appoitment_view/my_appoitment_view.dart';
+import 'package:appoitment_app/views/my_apponiment_section/reschedule/reschedule_view.dart';
 import 'package:appoitment_app/views/splash_screen/splash_screen_view/splash_screen_view.dart';
 import 'package:get/get.dart';
 
@@ -14,15 +13,11 @@ import '../views/home_section/doctor_details/doctor_details_view/doctor_details_
 
 final appPages = <GetPage>[
   GetPage(name: AppRoutes.splash, page: () => SplashScreen()),
-  GetPage(name: AppRoutes.profile, page: () => const ProfileView()),
-
-  GetPage(name: AppRoutes.splash, page: () => SplashScreen()),
   GetPage(
     name: AppRoutes.doctorDetails,
     page: () => const DoctorDetailsScreen(),
     binding: DoctorDetailsBinding(),
   ),
-
   GetPage(
     name: AppRoutes.bookingAppointment,
     page: () => const BookingFlowScreen(),
@@ -31,5 +26,15 @@ final appPages = <GetPage>[
   GetPage(
     name: AppRoutes.bookingConfirmed,
     page: () => const BookingConfirmedScreen(),
+  ),
+  GetPage(
+    name: AppRoutes.myAppoitment,
+    page: () => const AppoitmentView(),
+    binding: MyAppoitmentBinding(),
+  ),
+  GetPage(
+    name: AppRoutes.rescedual,
+    page: () => const ReschedualScreen(),
+    binding: BookingBinding(),
   ),
 ];
