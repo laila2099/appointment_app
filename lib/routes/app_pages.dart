@@ -1,4 +1,7 @@
 import 'package:appoitment_app/routes/app_routes.dart';
+import 'package:appoitment_app/views/my_apponiment_section/my_appoitment_binding/my_appoitment_binding.dart';
+import 'package:appoitment_app/views/my_apponiment_section/my_appoitment_view/my_appoitment_view.dart';
+import 'package:appoitment_app/views/my_apponiment_section/reschedule/reschedule_view.dart';
 import 'package:appoitment_app/views/splash_screen/splash_screen_view/splash_screen_view.dart';
 import 'package:get/get.dart';
 
@@ -23,5 +26,15 @@ final appPages = <GetPage>[
   GetPage(
     name: AppRoutes.bookingConfirmed,
     page: () => const BookingConfirmedScreen(),
+  ),
+  GetPage(
+    name: AppRoutes.myAppoitment,
+    page: () => const AppoitmentView(),
+    binding: MyAppoitmentBinding(),
+  ),
+  GetPage(
+    name: AppRoutes.rescedual,
+    page: () => const ReschedualScreen(),
+    binding: BookingBinding(),
   ),
 ];
