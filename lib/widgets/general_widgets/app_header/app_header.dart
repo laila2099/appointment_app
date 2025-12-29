@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppHeader extends StatelessWidget implements PreferredSizeWidget {
   final Widget leading;
   final Widget center;
-  final Widget trailing;
+  final Widget? trailing;
 
   final double height;
   final EdgeInsetsGeometry padding;
@@ -13,7 +14,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     required this.leading,
     required this.center,
-    required this.trailing,
+    this.trailing,
     this.height = 72,
     this.padding = const EdgeInsets.symmetric(horizontal: 16),
     this.backgroundColor = Colors.white,
@@ -29,15 +30,16 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
       child: SafeArea(
         bottom: false,
         child: Container(
-          height: height,
+          height: height.h,
           padding: padding,
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(width: 44, height: 44, child: leading),
-              const SizedBox(width: 12),
+              SizedBox(width: 40.w, height: 40.h, child: leading),
+
               Expanded(child: Center(child: center)),
-              const SizedBox(width: 12),
-              SizedBox(width: 44, height: 44, child: trailing),
+              if (trailing != null)
+                SizedBox(width: 40.w, height: 40.h, child: trailing),
             ],
           ),
         ),

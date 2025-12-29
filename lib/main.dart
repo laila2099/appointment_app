@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import 'core/constant/app_theme.dart';
 import 'core/services/initialize_service.dart';
 
 Future<void> main() async {
@@ -25,8 +26,9 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
+          theme: AppTheme.light,
           initialBinding: InitializeBinding(),
-          initialRoute: AppRoutes.profile,
+          initialRoute: AppRoutes.doctorDetails,
           translations: AppTranslations(),
           locale: const Locale('en', 'US'),
           getPages: appPages,
