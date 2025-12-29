@@ -4,13 +4,6 @@ class AppImages {
   static const String nurse = "${basePath}nurse.png";
   static const String doctor = "${basePath}doctor.png";
 
- 
-
-  /// ------------ Icons
-  static const String chat = "${baseIconPath}chat.svg";
-
-
   //profile icons
-   static const String avatar="${basePath}AVATAR.png";
-
+  static const String avatar = "${basePath}AVATAR.png";
 }

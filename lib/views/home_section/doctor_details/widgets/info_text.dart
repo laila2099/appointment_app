@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-=======
 import 'package:flutter_screenutil/flutter_screenutil.dart';
->>>>>>> b23f4ceb15782ec67744af3d30a98a8c5da46a9c
 
 import '../../../../core/constant/app_colors.dart';
 
@@ -17,11 +14,7 @@ class InfoText extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-<<<<<<< HEAD
-        fontSize: 14,
-=======
         fontSize: 14.sp,
->>>>>>> b23f4ceb15782ec67744af3d30a98a8c5da46a9c
         fontWeight: emphasis ? FontWeight.w500 : FontWeight.w400,
         color: emphasis ? AppColors.black : AppColors.subtitle,
         letterSpacing: 0.5,
