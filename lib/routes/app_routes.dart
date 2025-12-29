@@ -5,4 +5,11 @@ class AppRoutes {
   static const bookingConfirmed = "/booking_confirmed";
   static const myAppoitment = "/my_appoitment";
   static const rescedual = "/rescedual";
+
+  // profile
+  static const profile = "/profile";
+  static const settingsPage = "/settings";
+  static const notificayionPage = "/notification";
+  static const faqPage = "/faq";
+  static const securityPage = "/security";
 }
