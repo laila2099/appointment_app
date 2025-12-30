@@ -1,126 +1,57 @@
+import 'package:appoitment_app/core/constant/app_colors.dart';
+import 'package:appoitment_app/core/constant/text_style.dart';
+import 'package:appoitment_app/views/settings_section/settings_controller/security_controller.dart';
+import 'package:appoitment_app/views/settings_section/settings_view/widgets/settings_item.dart';
+import 'package:appoitment_app/views/settings_section/settings_view/widgets/switch_tile.dart';
+import 'package:appoitment_app/widgets/general_widgets/app_header/app_header.dart';
+import 'package:appoitment_app/widgets/general_widgets/custom_divider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class SecurityPage extends StatefulWidget {
-  const SecurityPage({super.key});
+class SecurityPage extends StatelessWidget {
+  SecurityPage({super.key});
 
-  @override
-  State<SecurityPage> createState() => _SecurityPageState();
-}
-
-class _SecurityPageState extends State<SecurityPage> {
-  bool rememberPassword = true;
-  bool faceId = false;
-  bool pin = true;
+  final SecurityController controller = Get.put(SecurityController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: const Text(
-          'Security',
-          style: TextStyle(fontWeight: FontWeight.w600),
-        ),
-        centerTitle: true,
-      ),
+      backgroundColor: AppColors.white,
       body: Column(
         children: [
-          _switchTile(
-            title: 'Remember password',
-            value: rememberPassword,
-            onChanged: (val) =>
-                setState(() => rememberPassword = val),
-          ),
-          _divider(),
-          _switchTile(
-            title: 'Face ID',
-            value: faceId,
-            onChanged: (val) => setState(() => faceId = val),
-          ),
-          _divider(),
-          _switchTile(
-            title: 'PIN',
-            value: pin,
-            onChanged: (val) => setState(() => pin = val),
-          ),
-          _divider(),
-          _navigationTile(
-            title: 'Google Authenticator',
-            onTap: () {
-              // navigate to authenticator page
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _switchTile({
-    required String title,
-    required bool value,
-    required ValueChanged<bool> onChanged,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              title,
-              style: const TextStyle(fontSize: 16),
-            ),
-          ),
-          Switch(
-            value: value,
-            onChanged: onChanged,
-            activeColor: Colors.white,
-            activeTrackColor: Colors.blue,
-            inactiveTrackColor: Colors.grey.shade300,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _navigationTile({
-    required String title,
-    required VoidCallback onTap,
-  }) {
-    return InkWell(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-        child: Row(
-          children: [
-            Expanded(
-              child: Text(
-                title,
-                style: const TextStyle(fontSize: 16),
-              ),
-            ),
-            const Icon(
-              Icons.chevron_right,
-              color: Colors.grey,
-            ),
-          ],
+          AppHeader(
+            leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Get.back();
+          },
         ),
+            center: Text(
+              "Security",
+              style: CustomTextStyles.screenTitle,
+            ),
+            trailing: Text(""),
+          ),
+          switchTile(
+            title: 'Remember password',
+            value: controller.rememberPassword,
+          ),
+          CustomDivider(),
+          switchTile(
+            title: 'Face ID',
+            value: controller.faceId,
+          ),
+          CustomDivider(),
+          switchTile(
+            title: 'PIN',
+            value: controller.pin,
+          ),
+          CustomDivider(),
+          settingItem(onTap: () {}, title: "Google Authenticator"),
+        ],
       ),
     );
   }
 
-  Widget _divider() {
-    return const Divider(
-      height: 1,
-      thickness: 0.5,
-      indent: 20,
-      endIndent: 20,
-    );
   }
-}
+
