@@ -1,9 +1,10 @@
+import 'package:appoitment_app/core/constant/app_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../core/constant/app_icons.dart';
-import '../../core/constant/text_style.dart';
+import '../../core/constant/app_colors.dart';
+
+enum DoctorMetaType { rating, date }
 
 class DoctorTile extends StatelessWidget {
   final String name;
@@ -13,9 +14,15 @@ class DoctorTile extends StatelessWidget {
   final int reviewsCount;
   final ImageProvider avatar;
 
+  final String? dateText;
+  final String? time;
+
+  final DoctorMetaType metaType;
+
   final VoidCallback? onTap;
   final VoidCallback? onChatTap;
 
+  // config
   final EdgeInsetsGeometry padding;
   final bool asCard;
   final double height;
@@ -40,6 +47,9 @@ class DoctorTile extends StatelessWidget {
     required this.showChat,
     required this.chatButtonSize,
     required this.chatRadius,
+    required this.metaType,
+    this.dateText,
+    this.time,
     this.onTap,
     this.onChatTap,
     super.key,
@@ -56,7 +66,7 @@ class DoctorTile extends StatelessWidget {
     required ImageProvider avatar,
     VoidCallback? onTap,
     VoidCallback? onChatTap,
-    bool? showChat,
+    bool showChat = true,
   }) {
     return DoctorTile._(
       key: key,
@@ -73,9 +83,47 @@ class DoctorTile extends StatelessWidget {
       height: 79,
       avatarSize: 56,
       avatarRadius: 16,
-      showChat: showChat ?? true,
+      showChat: showChat,
       chatButtonSize: 44,
       chatRadius: BorderRadius.circular(14),
+      metaType: DoctorMetaType.rating,
+    );
+  }
+
+  ///  تفاصيل الطبيب مع التاريخ (بدون شادو/بدون كارد) + زر شات
+  factory DoctorTile.withDate({
+    Key? key,
+    required String name,
+    required String specialty,
+    required String clinic,
+    required String dateText,
+    required String time,
+    required ImageProvider avatar,
+    VoidCallback? onTap,
+    VoidCallback? onChatTap,
+    bool showChat = true,
+  }) {
+    return DoctorTile._(
+      key: key,
+      name: name,
+      specialty: specialty,
+      clinic: clinic,
+      rating: 0,
+      reviewsCount: 0,
+      avatar: avatar,
+      onTap: onTap,
+      onChatTap: onChatTap,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      asCard: false,
+      height: 79,
+      avatarSize: 56,
+      avatarRadius: 16,
+      showChat: showChat && onChatTap != null, // يظهر فقط إذا فيه onChatTap
+      chatButtonSize: 44,
+      chatRadius: BorderRadius.circular(14),
+      metaType: DoctorMetaType.date,
+      dateText: dateText,
+      time: time,
     );
   }
 
@@ -108,26 +156,50 @@ class DoctorTile extends StatelessWidget {
       showChat: false,
       chatButtonSize: 0,
       chatRadius: BorderRadius.zero,
+      metaType: DoctorMetaType.rating,
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final metaStyle = TextStyle(
+      fontSize: 12.5,
+      fontWeight: FontWeight.w500,
+      color: AppColors.infoText,
+    );
+
+    final nameStyle = const TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.w700,
+      color: AppColors.black,
+    );
+
+    final ratingStyle = TextStyle(
+      fontSize: 12,
+      fontWeight: FontWeight.w600,
+      color: AppColors.infoText,
+    );
+
+    final reviewsStyle = TextStyle(
+      fontSize: 12,
+      fontWeight: FontWeight.w500,
+      color: AppColors.infoText,
+    );
+
     Widget content = SizedBox(
-      height: height.h,
+      height: height,
       child: Row(
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(avatarRadius),
             child: Image(
               image: avatar,
-              width: avatarSize.w,
-              height: avatarSize.h,
+              width: avatarSize,
+              height: avatarSize,
               fit: BoxFit.cover,
             ),
           ),
-          SizedBox(width: 14.w),
-
+          const SizedBox(width: 14),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -144,21 +216,20 @@ class DoctorTile extends StatelessWidget {
                             name,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: CustomTextStyles.title16W700,
+                            style: nameStyle,
                           ),
-                          SizedBox(height: 6.h),
+                          const SizedBox(height: 6),
                           Text(
                             "$specialty  |  $clinic",
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: CustomTextStyles.subtitle12W500,
+                            style: metaStyle,
                           ),
                         ],
                       ),
                     ),
-
                     if (showChat && onChatTap != null) ...[
-                      SizedBox(width: 12.w),
+                      const SizedBox(width: 12),
                       _ChatButton(
                         size: chatButtonSize,
                         radius: chatRadius,
@@ -167,24 +238,8 @@ class DoctorTile extends StatelessWidget {
                     ],
                   ],
                 ),
-
-                SizedBox(height: 10.h),
-
-                Row(
-                  children: [
-                    Icon(Icons.star, size: 16.sp, color: Colors.amber),
-                    SizedBox(width: 6.w),
-                    Text(
-                      rating.toStringAsFixed(1),
-                      style: CustomTextStyles.subtitle12W500,
-                    ),
-                    SizedBox(width: 6.w),
-                    Text(
-                      "($reviewsCount reviews)",
-                      style: CustomTextStyles.subtitle12W500,
-                    ),
-                  ],
-                ),
+                const SizedBox(height: 10),
+                _buildMetaRow(ratingStyle, reviewsStyle),
               ],
             ),
           ),
@@ -198,11 +253,11 @@ class DoctorTile extends StatelessWidget {
       content = Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(18.r),
+          borderRadius: BorderRadius.circular(18),
           border: Border.all(color: Colors.black.withOpacity(0.05)),
           boxShadow: [
             BoxShadow(
-              blurRadius: 18.r,
+              blurRadius: 18,
               offset: const Offset(0, 10),
               color: Colors.black.withOpacity(0.06),
             ),
@@ -215,12 +270,37 @@ class DoctorTile extends StatelessWidget {
     if (onTap != null) {
       content = InkWell(
         onTap: onTap,
-        borderRadius: asCard ? BorderRadius.circular(18.r) : BorderRadius.zero,
+        borderRadius: asCard ? BorderRadius.circular(18) : BorderRadius.zero,
         child: content,
       );
     }
 
     return content;
+  }
+
+  Widget _buildMetaRow(TextStyle ratingStyle, TextStyle reviewsStyle) {
+    if (metaType == DoctorMetaType.date && dateText != null && time != null) {
+      return Row(
+        children: [
+          Text(
+            "$dateText  |  $time",
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: ratingStyle,
+          ),
+        ],
+      );
+    }
+
+    return Row(
+      children: [
+        const Icon(Icons.star, size: 16, color: Colors.amber),
+        const SizedBox(width: 6),
+        Text(rating.toStringAsFixed(1), style: ratingStyle),
+        const SizedBox(width: 6),
+        Text("($reviewsCount reviews)", style: reviewsStyle),
+      ],
+    );
   }
 }
 
@@ -241,8 +321,8 @@ class _ChatButton extends StatelessWidget {
       onTap: onTap,
       borderRadius: radius,
       child: Container(
-        width: size.w,
-        height: size.h,
+        width: size,
+        height: size,
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -251,8 +331,8 @@ class _ChatButton extends StatelessWidget {
         ),
         child: SvgPicture.asset(
           AppIcons.chat,
-          width: 22.w,
-          height: 22.h,
+          width: 22,
+          height: 22,
           colorFilter: const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
         ),
       ),

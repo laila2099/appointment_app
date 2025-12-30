@@ -41,8 +41,8 @@ dependencies:
   flutter_screenutil: ^5.9.3
   shared_preferences: ^2.5.4
   http: ^1.6.0
-  flutter_svg: ^2.2.3
   google_maps_flutter: ^2.14.0
+  flutter_svg: ^2.0.10
 
 
 dev_dependencies:
@@ -71,8 +71,6 @@ flutter:
   assets:
       - assets/images/
       - assets/icons/
-      - assets/fonts/
-
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

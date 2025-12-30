@@ -2,7 +2,10 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+<<<<<<< HEAD
         
+=======
+>>>>>>> 54670a97018368bfc6e78e64e3e244cf8e964163
     }
 }
 
@@ -23,6 +26,7 @@ subprojects {
 tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }
+<<<<<<< HEAD
 subprojects {
     configurations.all {
         resolutionStrategy {
@@ -30,3 +34,5 @@ subprojects {
         }
     }
 }
+=======
+>>>>>>> 54670a97018368bfc6e78e64e3e244cf8e964163
