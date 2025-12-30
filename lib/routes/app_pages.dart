@@ -8,10 +8,10 @@ import 'package:appoitment_app/views/home_section/booking_appointment/booking_ap
 import 'package:appoitment_app/views/home_section/doctor_details/doctor_details_binding/doctor_details_binding.dart';
 import 'package:appoitment_app/views/home_section/doctor_details/doctor_details_view/doctor_details_screen.dart';
 
-import 'package:appoitment_app/views/settings_section/settings_view/faq_view.dart';
+import 'package:appoitment_app/views/settings_section/settings_view/help_view.dart';
 import 'package:appoitment_app/views/settings_section/settings_view/notification_view.dart';
 
-import 'package:appoitment_app/views/profile_section/profile_view/profile_views.dart';
+import 'package:appoitment_app/views/profile_section/profile_view/profile_view.dart';
 import 'package:appoitment_app/views/settings_section/settings_view/security_view.dart';
 import 'package:appoitment_app/views/settings_section/settings_view/setting_view.dart';
 import 'package:appoitment_app/views/splash_screen/splash_screen_view/splash_screen_view.dart';
@@ -26,11 +26,20 @@ final appPages = <GetPage>[
     binding: DoctorDetailsBinding(),
   ),
 
-  GetPage(name: AppRoutes.profile, page: () => ProfileView()),
-  GetPage(name: AppRoutes.settingsPage, page: () => SettingsPage()),
-  GetPage(name: AppRoutes.notificayionPage, page: () => NotificationPage()),
-  GetPage(name: AppRoutes.faqPage, page: () => FaqPage()),
-  GetPage(name: AppRoutes.securityPage, page: () => SecurityPage()),
+
+//profile
+  GetPage(name: AppRoutes.profile, page: () =>  ProfileScreen()),
+
+  //Settings
+  GetPage(name: AppRoutes.settingsPage, page: () =>  SettingsPage()),
+  GetPage(name: AppRoutes.notificationPage, page: () =>  NotificationPage()),
+  GetPage(name: AppRoutes.helpPage, page: () =>  HelpPage()),
+  GetPage(name: AppRoutes.securityPage, page: () =>  SecurityPage()),
+
+
+
+
+
 
   GetPage(
     name: AppRoutes.bookingAppointment,
