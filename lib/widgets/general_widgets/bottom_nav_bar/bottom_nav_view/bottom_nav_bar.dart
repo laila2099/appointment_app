@@ -41,7 +41,7 @@ class CustomBottomNavBar extends GetView<NavigationController> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                NavBarIcon(iconPath: AppIcons.home_2, index: 0),
+                NavBarIcon(iconPath: AppIcons.home, index: 0),
                 NavBarIcon(iconPath: AppIcons.chat, index: 1, hasBadge: true),
                 SizedBox(width: 60.w),
                 NavBarIcon(iconPath: AppIcons.calendar, index: 3),

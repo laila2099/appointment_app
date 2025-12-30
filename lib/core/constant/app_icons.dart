@@ -8,7 +8,7 @@ class AppIcons {
   static const String general = "${baseIconPath}general.svg";
   static const String hepatology = "${baseIconPath}hepatology.svg";
   static const String histologist = "${baseIconPath}histologist.svg";
-  static const String home_2 = "${baseIconPath}home_2.svg";
+  static const String home = "${baseIconPath}home.svg";
   static const String intestine = "${baseIconPath}intestine.svg";
   static const String neurologic = "${baseIconPath}neurologic.svg";
   static const String optometry = "${baseIconPath}optometry.svg";

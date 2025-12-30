@@ -1,5 +1,6 @@
 class AppRoutes {
   static const splash = '/splash';
+  static const bottomnavbar = '/bottomnavbar';
   static const home = '/home';
   static const notificationScreen = '/notificationScreen';
   static const doctorDetails = "/doctor-details";

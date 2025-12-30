@@ -11,7 +11,9 @@ class DoctorCard extends StatelessWidget {
   final int reviews;
   final bool shadow;
   final double? height;
-  final void Function()?  onTap;
+  final void Function()? onTap;
+  final double? widthimage;
+  final double? heightimage;
 
   const DoctorCard({
     super.key,
@@ -24,6 +26,8 @@ class DoctorCard extends StatelessWidget {
     this.shadow = false,
     this.height,
     this.onTap,
+    this.widthimage,
+    this.heightimage,
   });
 
   @override
@@ -34,7 +38,7 @@ class DoctorCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         height: height ?? 130.h,
-        padding: EdgeInsets.only(bottom: 16.h),
+        padding: EdgeInsets.only(bottom: 8.h, left: 8.w, top: 8.h),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),
@@ -54,14 +58,14 @@ class DoctorCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               child: Image.asset(
                 image,
-                width: 110,
-                height: 110,
+                width: widthimage ?? 110.w,
+                height: heightimage ?? 110.h,
                 fit: BoxFit.cover,
               ),
             ),
-      
+
             const SizedBox(width: 16),
-      
+
             // النصوص
             Expanded(
               child: Column(
@@ -76,9 +80,9 @@ class DoctorCard extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-      
+
                   const SizedBox(height: 6),
-      
+
                   // التخصص + المستشفى
                   Row(
                     children: [
@@ -96,9 +100,9 @@ class DoctorCard extends StatelessWidget {
                       ),
                     ],
                   ),
-      
+
                   const SizedBox(height: 6),
-      
+
                   // التقييم والريڤيوز
                   Row(
                     children: [

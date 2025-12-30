@@ -144,7 +144,7 @@ class HomeScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final d = doctorcontroller.doctors[index];
                   return DoctorCard(
-                    onTap: ()=> Get.toNamed(AppRoutes.doctorDetails),
+                    onTap: () => Get.toNamed(AppRoutes.doctorDetails),
                     image: d.image,
                     name: d.name,
                     department: d.department,
@@ -155,6 +155,7 @@ class HomeScreen extends StatelessWidget {
                 },
               ),
             ),
+            SizedBox(height: 100.h),
           ],
         ),
       ),

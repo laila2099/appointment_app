@@ -46,7 +46,12 @@ class CustomSearch extends StatelessWidget {
           SizedBox(width: 12.w),
 
           Container(
-            color: AppColors.white,
+            width: 46.w,
+            height: 46.h,
+            decoration: BoxDecoration(
+              color: AppColors.white,
+              borderRadius: BorderRadius.circular(12.r),
+            ),
             child: IconButton(
               style: TextButton.styleFrom(
                 padding: EdgeInsets.zero,

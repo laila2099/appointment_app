@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           initialBinding: InitializeBinding(),
-          initialRoute: AppRoutes.home,
+          initialRoute: AppRoutes.bottomnavbar,
           translations: AppTranslations(),
           locale: const Locale('en', 'US'),
           getPages: appPages,
