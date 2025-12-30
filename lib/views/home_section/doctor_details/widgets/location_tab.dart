@@ -17,7 +17,7 @@ class LocationTab extends StatelessWidget {
     final controller = Get.put(DoctorDetailsController());
 
     return ListView(
-      padding: EdgeInsets.fromLTRB(24.w, 32.h, 24.w, 0.h),
+      padding: EdgeInsets.fromLTRB(24.w, 32.h, 24.w, 0),
       children: [
         SectionTitle("practice_place".tr),
         SizedBox(height: 12.h),

@@ -17,11 +17,17 @@ class CustomTextStyles {
     color: AppColors.white,
   );
 
-    static const TextStyle profileTitle = TextStyle(
+    static  TextStyle profileTitle = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w600,
-    fontSize: 20,
-    color: AppColors.white,
+    fontSize: 20.sp,
+    color: AppColors.black,
+  );
+      static  TextStyle subTitle = TextStyle(
+    fontFamily: _fontFamily,
+    fontWeight: FontWeight.w400,
+    fontSize: 14.sp,
+    color: AppColors.subtitle,
   );
 
 
@@ -39,7 +45,7 @@ class CustomTextStyles {
     color: AppColors.textField,
   );
 
-  static const TextStyle screenTitle = TextStyle(
+  static  TextStyle screenTitle = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w600,
     fontSize: 18,
