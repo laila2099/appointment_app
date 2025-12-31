@@ -39,7 +39,6 @@ class AppoitmentStatus extends GetView<MyAppointmentsController> {
 
       return ListView.separated(
         shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
         itemCount: filteredAppointments.length,
         separatorBuilder: (_, __) => SizedBox(height: 16.h),
         itemBuilder: (context, index) {

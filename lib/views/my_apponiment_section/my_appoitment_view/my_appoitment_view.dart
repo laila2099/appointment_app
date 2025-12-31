@@ -11,7 +11,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-class AppoitmentView extends StatelessWidget {
+import '../my_appoitment_controller/my_appoitment_controller.dart';
+
+class AppoitmentView extends GetView<MyAppointmentsController> {
   const AppoitmentView({super.key});
 
   @override
