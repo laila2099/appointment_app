@@ -1,12 +1,9 @@
-
-import 'package:appoitment_app/core/constant/app_colors.dart';
+import 'package:appointment_app/core/constant/app_colors.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextStyles {
   CustomTextStyles._();
-
 
   static const String _fontFamily = 'Inter';
 
@@ -17,19 +14,18 @@ class CustomTextStyles {
     color: AppColors.white,
   );
 
-    static  TextStyle profileTitle = TextStyle(
+  static TextStyle profileTitle = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w600,
     fontSize: 20.sp,
     color: AppColors.black,
   );
-      static  TextStyle subTitle = TextStyle(
+  static TextStyle subTitle = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w400,
     fontSize: 14.sp,
     color: AppColors.subtitle,
   );
-
 
   static const TextStyle headline = TextStyle(
     fontFamily: _fontFamily,
@@ -45,7 +41,7 @@ class CustomTextStyles {
     color: AppColors.textField,
   );
 
-  static  TextStyle screenTitle = TextStyle(
+  static TextStyle screenTitle = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w600,
     fontSize: 18,
@@ -65,7 +61,6 @@ class CustomTextStyles {
     fontSize: 12,
     color: AppColors.subtitle,
   );
-
 
   static TextStyle sectionTitle = TextStyle(
     fontFamily: _fontFamily,
@@ -118,7 +113,6 @@ class CustomTextStyles {
     fontWeight: FontWeight.w600,
     color: AppColors.primary,
   );
-
 
   static TextStyle custom({
     double fontSize = 14,

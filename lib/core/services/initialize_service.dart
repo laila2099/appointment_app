@@ -1,4 +1,4 @@
-import 'package:appoitment_app/core/services/shared_prefrences.dart';
+import 'package:appointment_app/core/services/shared_prefrences.dart';
 import 'package:get/get.dart';
 
 Future<void> initServices() async {

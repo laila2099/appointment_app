@@ -1,11 +1,11 @@
-import 'package:appoitment_app/core/constant/app_colors.dart';
-import 'package:appoitment_app/core/constant/app_icons.dart';
-import 'package:appoitment_app/core/constant/text_style.dart';
-import 'package:appoitment_app/models/appoitments_details.dart';
-import 'package:appoitment_app/views/my_apponiment_section/widgets/appoitment_status.dart';
-import 'package:appoitment_app/widgets/general_widgets/app_header/app_header.dart';
-import 'package:appoitment_app/widgets/general_widgets/app_header/header_button.dart';
-import 'package:appoitment_app/widgets/general_widgets/app_header/header_title.dart';
+import 'package:appointment_app/core/constant/app_colors.dart';
+import 'package:appointment_app/core/constant/app_icons.dart';
+import 'package:appointment_app/core/constant/text_style.dart';
+import 'package:appointment_app/models/appoitments_details.dart';
+import 'package:appointment_app/views/my_apponiment_section/widgets/appoitment_status.dart';
+import 'package:appointment_app/widgets/general_widgets/app_header/app_header.dart';
+import 'package:appointment_app/widgets/general_widgets/app_header/header_button.dart';
+import 'package:appointment_app/widgets/general_widgets/app_header/header_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -63,7 +63,6 @@ class AppoitmentView extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                     color: AppColors.lightGrey,
                   ),
-
                   tabs: [
                     Tab(text: "Upcoming".tr),
                     Tab(text: "Completed".tr),

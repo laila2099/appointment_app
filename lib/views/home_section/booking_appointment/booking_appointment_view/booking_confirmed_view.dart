@@ -68,7 +68,6 @@ class BookingConfirmedScreen extends GetView<BookingController> {
                   children: [
                     SectionTitle('booking_information'.tr),
                     SizedBox(height: 24.h),
-
                     SummaryRow(
                       svgAsset: AppIcons.calendar2,
                       iconBg: AppColors.secondBlue,
@@ -81,7 +80,6 @@ class BookingConfirmedScreen extends GetView<BookingController> {
                       ),
                     ),
                     SizedBox(height: 24.h),
-
                     SummaryRow(
                       svgAsset: AppIcons.clipboard,
                       iconBg: AppColors.secondGreen,
@@ -109,12 +107,9 @@ class BookingConfirmedScreen extends GetView<BookingController> {
                         child: Text('get_location'.tr),
                       ),
                     ),
-
                     SizedBox(height: 24.h),
-
                     SectionTitle('doctor_information'.tr),
                     SizedBox(height: 12.h),
-
                     if (doctor != null)
                       DoctorTile.details(
                         name: doctor.name,
@@ -148,7 +143,6 @@ class BookingConfirmedScreen extends GetView<BookingController> {
                         );
                       });
                     },
-
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary,
                       shape: RoundedRectangleBorder(
