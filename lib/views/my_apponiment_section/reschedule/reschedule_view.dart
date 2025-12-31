@@ -47,9 +47,13 @@ class ReschedualScreen extends GetView<BookingController> {
                 Padding(
                   padding: EdgeInsets.fromLTRB(16.w, 10.h, 16.w, 16.h),
                   child: PrimaryButton(
-                    text: 'continue'.tr,
+                    text: controller.stepIndex.value == 1
+                        ? 'done'.tr
+                        : 'continue'.tr,
                     onPressed: controller.canContinue
-                        ? controller.next
+                        ? controller.stepIndex.value == 1
+                            ? controller.goBackAfterConfirmReschedule
+                            : controller.next
                         : () => Get.snackbar(
                               "Error",
                               "Please select a date, time and payment method",

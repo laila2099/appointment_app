@@ -299,6 +299,10 @@ class BookingController extends GetxController {
     Get.toNamed(AppRoutes.bookingConfirmed);
   }
 
+  void goBackAfterConfirmReschedule() {
+    Get.back();
+  }
+
   @override
   void onClose() {
     datePageController.removeListener(_onDateWheelScroll);
