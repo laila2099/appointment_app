@@ -4,6 +4,8 @@ import 'package:appointment_app/widgets/general_widgets/bottom_nav_bar/controlle
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../views/profile_section/profile_view/profile_view.dart';
+
 class MainLayout extends StatelessWidget {
   MainLayout({super.key});
 
@@ -14,7 +16,7 @@ class MainLayout extends StatelessWidget {
     const Center(child: Text("Chat")),
     const Center(child: Text("Search")),
     const Center(child: Text("Apoitments")),
-    const Center(child: Text("Profile")),
+    const ProfileScreen(),
   ];
 
   @override
