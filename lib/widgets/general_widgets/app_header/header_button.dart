@@ -33,7 +33,7 @@ class HeaderButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(radius.r),
       child: Container(
         width: size.w,
-        height: size.w,
+        height: size.h,
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: backgroundColor,

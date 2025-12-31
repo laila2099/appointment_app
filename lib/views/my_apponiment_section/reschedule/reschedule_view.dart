@@ -47,6 +47,7 @@ class ReschedualScreen extends GetView<BookingController> {
                 Padding(
                   padding: EdgeInsets.fromLTRB(16.w, 10.h, 16.w, 16.h),
                   child: PrimaryButton(
+                    padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 16.h),
                     text: controller.stepIndex.value == 1
                         ? 'done'.tr
                         : 'continue'.tr,

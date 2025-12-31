@@ -55,10 +55,10 @@ class CustomTextStyles {
     color: AppColors.black,
   );
 
-  static const TextStyle subtitle = TextStyle(
+  static TextStyle subtitle = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w400,
-    fontSize: 12,
+    fontSize: 12.sp,
     color: AppColors.subtitle,
   );
 

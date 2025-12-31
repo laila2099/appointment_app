@@ -38,7 +38,6 @@ class BookingFlowScreen extends GetView<BookingController> {
               SizedBox(height: 32.h),
               StepperHeader(activeIndex: controller.stepIndex.value),
               SizedBox(height: 20.h),
-
               Expanded(
                 child: IndexedStack(
                   index: controller.stepIndex.value,
@@ -49,11 +48,11 @@ class BookingFlowScreen extends GetView<BookingController> {
                   ],
                 ),
               ),
-
               if (controller.stepIndex.value != 2)
                 Padding(
                   padding: EdgeInsets.fromLTRB(16.w, 10.h, 16.w, 16.h),
                   child: PrimaryButton(
+                    padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 16.h),
                     text: 'continue'.tr,
                     onPressed: controller.stepIndex.value == 2
                         ? () {}

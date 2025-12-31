@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/constant/app_colors.dart';
-import '../../../../core/constant/text_style.dart';
 import '../../../../models/payment_method.dart';
 
 class PaymentMethodTile extends StatelessWidget {
@@ -30,7 +29,12 @@ class PaymentMethodTile extends StatelessWidget {
           children: [
             _RadioDot(selected: selected),
             SizedBox(width: 12.w),
-            Text(method.label, style: CustomTextStyles.label14Semi),
+            Text(method.label,
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.black,
+                )),
           ],
         ),
       ),
