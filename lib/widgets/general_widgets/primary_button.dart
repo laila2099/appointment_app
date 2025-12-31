@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../core/constant/app_colors.dart';
-import '../../core/constant/text_style.dart';
 
 class PrimaryButton extends StatelessWidget {
   final String text;
@@ -18,8 +17,8 @@ class PrimaryButton extends StatelessWidget {
     required this.onPressed,
     this.height = 54,
     this.radius = 16,
-    this.padding = const EdgeInsets.fromLTRB(24, 16, 24, 16),
     this.enabled = true,
+    required this.padding,
   });
 
   @override
@@ -39,10 +38,12 @@ class PrimaryButton extends StatelessWidget {
             ),
             elevation: 0,
           ),
-          child: Text(
-            text,
-            style: CustomTextStyles.sectionTitle.copyWith(color: Colors.white),
-          ),
+          child: Text(text,
+              style: TextStyle(
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              )),
         ),
       ),
     );

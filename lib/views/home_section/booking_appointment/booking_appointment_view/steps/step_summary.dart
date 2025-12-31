@@ -32,7 +32,6 @@ class StepSummary extends StatelessWidget {
         children: [
           SectionTitle('booking_information'.tr),
           SizedBox(height: 12.h),
-
           SummaryRow(
             svgAsset: AppIcons.calendar2,
             iconBg: AppColors.secondBlue,
@@ -40,7 +39,6 @@ class StepSummary extends StatelessWidget {
             title: 'date_time'.tr,
             subtitle: formatDateTime(context, a.date, a.time),
           ),
-
           SummaryRow(
             svgAsset: AppIcons.clipboard,
             iconBg: AppColors.secondGreen,
@@ -48,12 +46,9 @@ class StepSummary extends StatelessWidget {
             title: 'appointment_type'.tr,
             subtitle: type.label.tr,
           ),
-
           SizedBox(height: 18.h),
-
           SectionTitle('doctor_information'.tr),
           SizedBox(height: 12.h),
-
           if (doctor != null)
             DoctorTile.details(
               name: doctor.name,
@@ -64,12 +59,9 @@ class StepSummary extends StatelessWidget {
               avatar: const AssetImage(AppImages.doctor),
               showChat: false,
             ),
-
           SizedBox(height: 18.h),
-
           SectionTitle('payment_information'.tr),
           SizedBox(height: 12.h),
-
           _PaymentRow(
             svgLogo: _paymentLogo(payment?.type),
             title: payment?.label ?? '-',
@@ -121,7 +113,6 @@ class _PaymentRow extends StatelessWidget {
             child: SvgPicture.asset(svgLogo, width: 26.w, height: 26.w),
           ),
           SizedBox(width: 12.w),
-
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,16 +121,24 @@ class _PaymentRow extends StatelessWidget {
                   title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: CustomTextStyles.label14Semi,
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.black,
+                  ),
                 ),
                 if (subtitle.isNotEmpty) ...[
                   SizedBox(height: 4.h),
-                  Text(subtitle, style: CustomTextStyles.body12),
+                  Text(subtitle,
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.black,
+                      )),
                 ],
               ],
             ),
           ),
-
           OutlinedButton(
             onPressed: onChange,
             style: OutlinedButton.styleFrom(

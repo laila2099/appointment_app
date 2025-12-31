@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../core/constant/app_colors.dart';
-import '../../../core/constant/text_style.dart';
 
 class ManualDateButton extends StatelessWidget {
   final DateTime initialDate;
@@ -28,11 +28,13 @@ class ManualDateButton extends StatelessWidget {
           onPicked(picked);
         }
       },
-
       child: Text(
         'set_manual'.tr,
-        style: CustomTextStyles.subtitle12W500.copyWith(
+        style: TextStyle(
+          fontSize: 12.sp,
+          fontWeight: FontWeight.w500,
           color: AppColors.primary,
+          height: 1.35,
         ),
       ),
     );
