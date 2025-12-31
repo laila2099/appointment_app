@@ -23,10 +23,8 @@ class LocationTab extends StatelessWidget {
         SizedBox(height: 12.h),
         Text(doctor.locationText),
         SizedBox(height: 18.h),
-
         SectionTitle("location_map".tr),
         SizedBox(height: 12.h),
-
         ClipRRect(
           borderRadius: BorderRadius.circular(14.r),
           child: SizedBox(

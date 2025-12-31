@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -19,25 +17,16 @@ class AboutTab extends StatelessWidget {
       children: [
         SectionTitle("about_me".tr),
         SizedBox(height: 12.h),
-
         InfoText(doctor.about),
-
         SizedBox(height: 24.h),
-
         SectionTitle("working_time".tr),
         SizedBox(height: 12.h),
-
         InfoText(doctor.workingTime),
-
         SizedBox(height: 24.h),
-
         SectionTitle("str".tr),
         SizedBox(height: 12.h),
-
         InfoText(doctor.strNumber),
-
         SizedBox(height: 24.h),
-
         SectionTitle("practice_experience".tr),
         SizedBox(height: 12.h),
         InfoText(doctor.experiencePlace, emphasis: true),

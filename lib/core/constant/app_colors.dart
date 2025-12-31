@@ -14,7 +14,11 @@ class AppColors {
   static const Color secondGreen = Color(0xffE9FAEF);
   static const Color red = Color(0xffFF4C5E);
   static const Color secondRed = Color(0xffFFEEEF);
+  static const Color search = Color(0xffF5F5F5);
   static const Color transparent = Colors.transparent;
   static const Color separator = Color(0xffededed);
-
+  static const Color black12 = Colors.black12;
+  static const Color greencircle = Color(0xffE9FAEF);
+  static const Color bluecircle = Color(0xffEAF2FF);
+  static const Color redcircle = Color(0xffFFEEEF);
 }
