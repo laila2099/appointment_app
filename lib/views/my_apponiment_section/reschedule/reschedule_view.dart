@@ -1,6 +1,6 @@
-import 'package:appoitment_app/views/home_section/booking_appointment/booking_appointment_controller/booking_controller.dart';
-import 'package:appoitment_app/views/home_section/booking_appointment/booking_appointment_view/steps/step_date_time.dart';
-import 'package:appoitment_app/views/my_apponiment_section/widgets/reschedule_summary.dart';
+import 'package:appointment_app/views/home_section/booking_appointment/booking_appointment_controller/booking_controller.dart';
+import 'package:appointment_app/views/home_section/booking_appointment/booking_appointment_view/steps/step_date_time.dart';
+import 'package:appointment_app/views/my_apponiment_section/widgets/reschedule_summary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -33,7 +33,6 @@ class ReschedualScreen extends GetView<BookingController> {
                 center: HeaderTitle('Reschedual'),
               ),
               SizedBox(height: 20.h),
-
               Expanded(
                 child: Obx(() {
                   final index = controller.stepIndex.value.clamp(0, 1);
@@ -44,7 +43,6 @@ class ReschedualScreen extends GetView<BookingController> {
                   );
                 }),
               ),
-
               if (controller.stepIndex.value != 2)
                 Padding(
                   padding: EdgeInsets.fromLTRB(16.w, 10.h, 16.w, 16.h),
@@ -53,10 +51,10 @@ class ReschedualScreen extends GetView<BookingController> {
                     onPressed: controller.canContinue
                         ? controller.next
                         : () => Get.snackbar(
-                            "Error",
-                            "Please select a date, time and payment method",
-                            snackPosition: SnackPosition.BOTTOM,
-                          ),
+                              "Error",
+                              "Please select a date, time and payment method",
+                              snackPosition: SnackPosition.BOTTOM,
+                            ),
                   ),
                 ),
             ],

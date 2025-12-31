@@ -1,4 +1,4 @@
-import 'package:appoitment_app/core/constant/app_icons.dart';
+import 'package:appointment_app/core/constant/app_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

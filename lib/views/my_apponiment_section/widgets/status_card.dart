@@ -1,8 +1,8 @@
-import 'package:appoitment_app/core/constant/app_colors.dart';
-import 'package:appoitment_app/core/constant/app_images.dart';
-import 'package:appoitment_app/core/constant/text_style.dart';
-import 'package:appoitment_app/models/appoitments_details.dart';
-import 'package:appoitment_app/widgets/general_widgets/doctor_tile.dart';
+import 'package:appointment_app/core/constant/app_colors.dart';
+import 'package:appointment_app/core/constant/app_images.dart';
+import 'package:appointment_app/core/constant/text_style.dart';
+import 'package:appointment_app/models/appoitments_details.dart';
+import 'package:appointment_app/widgets/general_widgets/doctor_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -85,7 +85,6 @@ class StatusCard extends StatelessWidget {
                 ),
               ],
             ),
-
             SizedBox(height: 15.h),
             Container(height: 1.h, color: AppColors.separator),
             SizedBox(height: 8.h),

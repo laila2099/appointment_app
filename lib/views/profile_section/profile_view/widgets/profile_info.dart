@@ -1,7 +1,7 @@
+import 'package:appointment_app/core/constant/app_colors.dart';
+import 'package:appointment_app/core/constant/app_images.dart';
+import 'package:appointment_app/core/constant/text_style.dart';
 import 'package:flutter/material.dart';
-import 'package:appoitment_app/core/constant/app_images.dart';
-import 'package:appoitment_app/core/constant/app_colors.dart';
-import 'package:appoitment_app/core/constant/text_style.dart';
 
 class ProfileInfo extends StatelessWidget {
   const ProfileInfo({super.key});
@@ -39,8 +39,7 @@ class ProfileInfo extends StatelessWidget {
         ),
         const SizedBox(height: 32),
         Text("Omar Ahmed", style: CustomTextStyles.profileTitle),
-        Text("omarahmed14@gmail.com",
-            style: CustomTextStyles.subTitle),
+        Text("omarahmed14@gmail.com", style: CustomTextStyles.subTitle),
       ],
     );
   }
