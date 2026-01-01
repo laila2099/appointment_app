@@ -6,6 +6,7 @@ import 'package:appointment_app/views/my_apponiment_section/widgets/appoitment_s
 import 'package:appointment_app/widgets/general_widgets/app_header/app_header.dart';
 import 'package:appointment_app/widgets/general_widgets/app_header/header_button.dart';
 import 'package:appointment_app/widgets/general_widgets/app_header/header_title.dart';
+import 'package:appointment_app/widgets/general_widgets/bottom_nav_bar/controller/bottom_nav_bar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -27,7 +28,7 @@ class AppointmentView extends GetView<MyAppointmentsController> {
             children: [
               AppHeader(
                 leading: HeaderButton(
-                  onTap: Get.back,
+                  onTap: () => Get.find<NavigationController>().goBack(),
                   child: Icon(
                     Icons.arrow_back_ios_new,
                     size: 18.sp,
