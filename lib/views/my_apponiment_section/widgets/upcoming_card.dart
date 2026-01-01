@@ -61,7 +61,7 @@ class UpcomingCard extends StatelessWidget {
                 StatusButton(
                   label: 'Reschedule',
                   variant: ButtonVariant.filled,
-                  onPressed: () => Get.toNamed(AppRoutes.rescedual),
+                  onPressed: () => Get.toNamed(AppRoutes.reschedule),
                 ),
               ],
             ),

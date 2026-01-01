@@ -1,10 +1,9 @@
-import 'package:appointment_app/bindings/initial_binding.dart';
 import 'package:appointment_app/routes/app_pages.dart';
 import 'package:appointment_app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
+import 'bindings/initial_binding.dart';
 import 'core/constant/app_theme.dart';
 import 'core/services/initialize_service.dart';
 import 'core/translations/app_translations.dart';
@@ -28,7 +27,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: AppTheme.light,
           initialBinding: InitializeBinding(),
-          initialRoute: AppRoutes.bottomnavbar,
+          initialRoute: AppRoutes.fillYourProfile,
           translations: AppTranslations(),
           locale: const Locale('en', 'US'),
           getPages: appPages,

@@ -16,7 +16,7 @@ class MainLayout extends StatelessWidget {
     HomeScreen(),
     const Center(child: Text("Chat")),
     const Center(child: Text("Search")),
-    const AppoitmentView(),
+    const AppointmentView(),
     const ProfileScreen(),
   ];
 

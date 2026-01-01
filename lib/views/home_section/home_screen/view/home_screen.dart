@@ -13,7 +13,7 @@ import 'package:get/get.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
   final controller = Get.put(CategoryController());
-  final doctorcontroller = Get.put(DoctorController());
+  final doctorController = Get.put(DoctorController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,7 +90,7 @@ class HomeScreen extends StatelessWidget {
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
                   onPressed: () {
-                    Get.toNamed((AppRoutes.doctorSpecialitysScreen));
+                    Get.toNamed((AppRoutes.doctorSpecialtiesScreen));
                   },
                   child: Text("See All", style: CustomTextStyles.regular),
                 ),
@@ -138,9 +138,9 @@ class HomeScreen extends StatelessWidget {
             Expanded(
               child: ListView.builder(
                 padding: EdgeInsets.zero,
-                itemCount: doctorcontroller.doctors.length,
+                itemCount: doctorController.doctors.length,
                 itemBuilder: (context, index) {
-                  final d = doctorcontroller.doctors[index];
+                  final d = doctorController.doctors[index];
                   return DoctorCard(
                     onTap: () => Get.toNamed(AppRoutes.doctorDetails),
                     image: d.image,

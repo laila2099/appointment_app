@@ -3,7 +3,12 @@ class AppImages {
 
   static const String nurse = "${basePath}nurse.png";
   static const String doctor = "${basePath}doctor.png";
-
+  static const String onboardingDoctor = "${basePath}onboardingDoctor.png";
+  static const String logo = "${basePath}logo.png";
+  static const String google = "${basePath}google.png";
+  static const String facebook = "${basePath}facebook.png";
+  static const String apple = "${basePath}apple.png";
+  static const String personPhoto = "${basePath}personPhoto.png";
   //profile icons
   static const String avatar = "${basePath}AVATAR.png";
 

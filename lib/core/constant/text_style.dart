@@ -1,6 +1,6 @@
-import 'package:appointment_app/core/constant/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'app_colors.dart';
 
 class CustomTextStyles {
   CustomTextStyles._();
@@ -62,6 +62,13 @@ class CustomTextStyles {
     color: AppColors.subtitle,
   );
 
+  static const TextStyle subtitle2 = TextStyle(
+    fontFamily: _fontFamily,
+    fontWeight: FontWeight.w400,
+    fontSize: 15,
+    color: AppColors.subtitle,
+  );
+
   static TextStyle sectionTitle = TextStyle(
     fontFamily: _fontFamily,
     fontSize: 16.sp,
@@ -99,6 +106,13 @@ class CustomTextStyles {
     fontWeight: FontWeight.w500,
     color: AppColors.infoText,
     height: 1.35,
+  );
+
+  static TextStyle headline32Bold = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 32.sp,
+    fontWeight: FontWeight.w700,
+    color: AppColors.primary,
   );
 
   // -------- Buttons
