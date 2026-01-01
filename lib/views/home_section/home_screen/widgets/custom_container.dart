@@ -16,13 +16,18 @@ class CustomContainer extends StatelessWidget {
       children: [
         Container(
           width: 345.w,
-          height: 170.h,
+          height: 167.h,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(24.r),
             color: AppColors.primary,
           ),
-          child: Row(
+          child: Stack(
             children: [
+              Positioned(
+                // top: 5.h,
+                child: Image.asset(AppImages.rectangle),
+              ),
+
               Padding(
                 padding: EdgeInsets.only(left: 18.w, top: 12.h),
                 child: Column(
@@ -31,7 +36,7 @@ class CustomContainer extends StatelessWidget {
                       "Book and\nschedule with\nnearest doctor",
                       style: CustomTextStyles.container,
                     ),
-                    SizedBox(height: 15.h),
+                    SizedBox(height: 13.h),
                     ElevatedButton(
                       onPressed: () {
                         Get.to(FindNearbyScreen());
@@ -49,9 +54,9 @@ class CustomContainer extends StatelessWidget {
           ),
         ),
         Positioned(
-          left: 190.w,
-          top: -55.h,
-          child: Image.asset(height: 250.h, width: 150.w, AppImages.nurse),
+          left: 200.w,
+          top: -28.h,
+          child: Image.asset(height: 197.h, width: 136.w, AppImages.nurse),
         ),
         Positioned(
           left: 230.w,
