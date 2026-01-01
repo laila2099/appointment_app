@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../../core/constant/app_colors.dart';
 import '../../../../core/constant/app_images.dart';
 import '../../../../core/constant/text_style.dart';
 import '../../../../widgets/helpful_widgets/primary_button_widget.dart';
 import '../../../widgets/helpful_widgets/text_field_widget.dart';
 import '../widgets/phone_field_widget.dart';
+import '../../../../routes/app_routes.dart'; // للتنقل
 
 class FillYourProfileView extends StatelessWidget {
   const FillYourProfileView({super.key});
@@ -24,10 +26,30 @@ class FillYourProfileView extends StatelessWidget {
                   children: [
                     const SizedBox(height: 40),
 
-                    // Title
-                    Text(
-                      "Fill Your Profile",
-                      style: CustomTextStyles.headline32Bold,
+                    // عنوان + زر Skip ضمن نفس السطر
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Fill Your Profile",
+                          style: CustomTextStyles.headline32Bold,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            // الانتقال لصفحة الهوم
+                            // Get.toNamed(AppRoutes.home);
+                          },
+                          child: Text(
+                            "Skip",
+                            style: CustomTextStyles.subtitle.copyWith(
+                              color: AppColors.primary,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 16),
 
@@ -120,8 +142,7 @@ class FillYourProfileView extends StatelessWidget {
                 height: 52,
                 child: CustomPrimaryButton(
                   label: "Submit",
-                  onTap: () {
-                  },
+                  onTap: () {},
                 ),
               ),
             ),
