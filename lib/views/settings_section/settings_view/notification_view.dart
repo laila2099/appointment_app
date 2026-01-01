@@ -28,7 +28,6 @@ class NotificationPage extends StatelessWidget {
               "Notification",
               style: CustomTextStyles.screenTitle,
             ),
-            trailing: Text(""),
           ),
           switchTile(
             title: 'Notification from DocNow',
