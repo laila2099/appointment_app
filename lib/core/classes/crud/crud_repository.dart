@@ -1,7 +1,5 @@
- 
-
-import 'package:app_appointment/core/classes/crud/crud_result.dart';
-import 'package:app_appointment/core/classes/crud/pagination.dart';
+import 'package:appointment_app/core/classes/crud/crud_result.dart';
+import 'package:appointment_app/core/classes/crud/pagination.dart';
 
 abstract class CrudRepository<T> {
   Future<CrudResult<T>> create(T entity);

@@ -1,5 +1,5 @@
-import 'package:app_appointment/core/constant/app_images.dart';
-import 'package:app_appointment/views/home_section/home_screen/model/doctor_model.dart';
+import 'package:appointment_app/core/constant/app_images.dart';
+import 'package:appointment_app/views/home_section/home_screen/model/doctor_model.dart';
 
 class DoctorController {
   final List<DoctorModel> doctors = [

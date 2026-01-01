@@ -1,6 +1,7 @@
-import 'package:app_appointment/core/constant/app_colors.dart';
+import 'package:appointment_app/core/constant/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class SortChip extends StatelessWidget {
   final String title;
   final IconData? icon;

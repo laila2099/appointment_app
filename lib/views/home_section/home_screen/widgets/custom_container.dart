@@ -1,7 +1,7 @@
-import 'package:app_appointment/core/constant/app_colors.dart';
-import 'package:app_appointment/core/constant/app_images.dart';
-import 'package:app_appointment/core/constant/text_style.dart';
-import 'package:app_appointment/views/home_section/find_nearby/views/find_nearby_screen.dart';
+import 'package:appointment_app/core/constant/app_colors.dart';
+import 'package:appointment_app/core/constant/app_images.dart';
+import 'package:appointment_app/core/constant/text_style.dart';
+import 'package:appointment_app/views/home_section/find_nearby/views/find_nearby_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

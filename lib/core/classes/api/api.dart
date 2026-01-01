@@ -1,5 +1,6 @@
 import 'dart:convert';
-import 'package:app_appointment/core/classes/api/api_result.dart';
+
+import 'package:appointment_app/core/classes/api/api_result.dart';
 import 'package:http/http.dart' as http;
 
 class ApiClient {
@@ -91,9 +92,8 @@ class ApiClient {
       final response = await request().timeout(timeout);
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
-        final json = response.body.isNotEmpty
-            ? jsonDecode(response.body)
-            : null;
+        final json =
+            response.body.isNotEmpty ? jsonDecode(response.body) : null;
         return ApiSuccess(parser(json));
       }
 

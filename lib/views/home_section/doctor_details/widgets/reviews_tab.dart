@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/constant/app_colors.dart';
 import '../../../../models/review_model.dart';
@@ -15,20 +16,20 @@ class ReviewsTab extends StatelessWidget {
     }
 
     return ListView.separated(
-      padding: const EdgeInsets.fromLTRB(24, 32, 24, 0),
+      padding: EdgeInsets.fromLTRB(24.w, 32.h, 24.w, 0),
       itemCount: reviews.length,
-      separatorBuilder: (_, __) => const SizedBox(height: 24),
+      separatorBuilder: (_, __) => SizedBox(height: 24.h),
       itemBuilder: (_, i) {
         final r = reviews[i];
         return Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CircleAvatar(
-              radius: 24,
+              radius: 24.r,
               backgroundColor: Colors.grey.shade200,
               child: const Icon(Icons.person, color: Colors.grey),
             ),
-            const SizedBox(width: 12),
+            SizedBox(width: 12.w),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,6 +40,7 @@ class ReviewsTab extends StatelessWidget {
                         child: Text(
                           r.userName,
                           style: TextStyle(
+                            fontSize: 16.sp,
                             fontWeight: FontWeight.w600,
                             color: AppColors.black,
                           ),
@@ -46,23 +48,23 @@ class ReviewsTab extends StatelessWidget {
                       ),
                       Text(
                         r.dateLabel,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: AppColors.subtitle,
-                          fontSize: 12,
+                          fontSize: 12.sp,
                           letterSpacing: .4,
                           height: 1.8,
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10.h),
                   Stars(r.stars),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10.h),
                   Text(
                     r.comment,
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: AppColors.subtitle,
-                      fontSize: 12,
+                      fontSize: 12.sp,
                       letterSpacing: .4,
                       height: 1.6,
                     ),

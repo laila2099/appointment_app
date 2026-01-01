@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HeaderTitle extends StatelessWidget {
   final String text;
@@ -10,10 +11,9 @@ class HeaderTitle extends StatelessWidget {
       text,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-      style: const TextStyle(
-        fontSize: 18,
-        fontWeight: FontWeight.w700,
-        color: Colors.black,
+      style: TextStyle(
+        fontWeight: FontWeight.w600,
+        fontSize: 18.sp,
       ),
     );
   }

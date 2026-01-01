@@ -1,11 +1,11 @@
-import 'package:app_appointment/core/constant/app_colors.dart';
-import 'package:app_appointment/core/constant/app_icons.dart';
-import 'package:app_appointment/core/constant/app_images.dart';
-import 'package:app_appointment/views/home_section/find_nearby/widget/location_doctor.dart';
-import 'package:app_appointment/widgets/map_widget.dart';
-import 'package:app_appointment/views/home_section/recommendation_doctor/widgets/custom_search.dart';
-import 'package:app_appointment/widgets/doctor_card.dart';
-import 'package:app_appointment/widgets/general_widgets/app_bar/app_bar.dart';
+import 'package:appointment_app/core/constant/app_colors.dart';
+import 'package:appointment_app/core/constant/app_icons.dart';
+import 'package:appointment_app/core/constant/app_images.dart';
+import 'package:appointment_app/views/home_section/find_nearby/widget/location_doctor.dart';
+import 'package:appointment_app/views/home_section/recommendation_doctor/widgets/custom_search.dart';
+import 'package:appointment_app/widgets/doctor_card.dart';
+import 'package:appointment_app/widgets/general_widgets/app_bar/app_bar.dart';
+import 'package:appointment_app/widgets/map_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

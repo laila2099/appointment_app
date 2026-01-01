@@ -1,4 +1,4 @@
-import 'package:app_appointment/core/constant/text_style.dart';
+import 'package:appointment_app/core/constant/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -24,9 +24,7 @@ class CategoryItem extends StatelessWidget {
             child: SvgPicture.asset(iconPath, height: 24.h, width: 24.w),
           ),
         ),
-
         SizedBox(height: 12.h),
-
         Text(
           title,
           style: CustomTextStyles.specialitytext,

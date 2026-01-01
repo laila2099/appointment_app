@@ -1,25 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HeaderButton extends StatelessWidget {
   final Widget child;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
-  const HeaderButton({super.key, required this.child, required this.onTap});
+  final bool showBorder;
+
+  final Color? backgroundColor;
+
+  final double size;
+
+  final double radius;
+
+  const HeaderButton({
+    super.key,
+    required this.child,
+    this.onTap,
+    this.showBorder = true,
+    this.backgroundColor,
+    this.size = 44,
+    this.radius = 14,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final border =
+        showBorder ? Border.all(color: Colors.black.withOpacity(0.06)) : null;
+
     return InkWell(
-      borderRadius: BorderRadius.circular(14),
       onTap: onTap,
+      borderRadius: BorderRadius.circular(radius.r),
       child: Container(
-        width: 44,
-        height: 44,
+        width: size.w,
+        height: size.h,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: Colors.black.withOpacity(0.06)),
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(radius.r),
+          border: border,
         ),
-        child: child,
+        child: Opacity(
+          opacity: onTap == null ? 0.45 : 1,
+          child: child,
+        ),
       ),
     );
   }

@@ -1,8 +1,8 @@
-import 'package:app_appointment/core/constant/app_colors.dart';
-import 'package:app_appointment/core/constant/text_style.dart';
-import 'package:app_appointment/views/home_section/notification/controller/notification_controller.dart';
-import 'package:app_appointment/views/home_section/notification/widgets/notification_item.dart';
-import 'package:app_appointment/widgets/general_widgets/app_bar/app_bar.dart';
+import 'package:appointment_app/core/constant/app_colors.dart';
+import 'package:appointment_app/core/constant/text_style.dart';
+import 'package:appointment_app/views/home_section/notification/controller/notification_controller.dart';
+import 'package:appointment_app/views/home_section/notification/widgets/notification_item.dart';
+import 'package:appointment_app/widgets/general_widgets/app_bar/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

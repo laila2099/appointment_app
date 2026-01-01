@@ -1,7 +1,6 @@
-
-import 'package:app_appointment/core/classes/crud/crud_repository.dart';
-import 'package:app_appointment/core/classes/crud/crud_result.dart';
-import 'package:app_appointment/core/classes/crud/pagination.dart';
+import 'package:appointment_app/core/classes/crud/crud_repository.dart';
+import 'package:appointment_app/core/classes/crud/crud_result.dart';
+import 'package:appointment_app/core/classes/crud/pagination.dart';
 import 'package:get/get.dart';
 
 abstract class CrudController<T> extends GetxController {
