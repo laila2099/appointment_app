@@ -131,7 +131,7 @@ class CustomTextStyles {
   static TextStyle container = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w500,
-    fontSize: 24.sp,
+    fontSize: 22.sp,
     color: AppColors.white,
     height: 1.6.h,
   );
