@@ -13,8 +13,8 @@ import 'package:get/get.dart';
 
 import '../my_appoitment_controller/my_appoitment_controller.dart';
 
-class AppoitmentView extends GetView<MyAppointmentsController> {
-  const AppoitmentView({super.key});
+class AppointmentView extends GetView<MyAppointmentsController> {
+  const AppointmentView({super.key});
 
   @override
   Widget build(BuildContext context) {
