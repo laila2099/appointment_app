@@ -19,7 +19,7 @@ class NotificationItem extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: 325.w,
-        height: 110.h,
+        // height: 110.h,
         margin: EdgeInsets.symmetric(vertical: 6.h),
         padding: EdgeInsets.all(12.r),
         decoration: BoxDecoration(
@@ -59,6 +59,7 @@ class NotificationItem extends StatelessWidget {
                   Text(
                     notification.message,
                     softWrap: true,
+                    maxLines: null,
                     style: TextStyle(color: Colors.grey),
                   ),
                 ],
@@ -66,6 +67,8 @@ class NotificationItem extends StatelessWidget {
             ),
 
             Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Text(notification.time, style: TextStyle(color: Colors.grey)),
                 SizedBox(height: 6.h),

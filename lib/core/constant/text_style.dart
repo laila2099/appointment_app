@@ -10,7 +10,7 @@ class CustomTextStyles {
   static TextStyle container = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w500,
-    fontSize: 24.sp,
+    fontSize: 22.sp,
     color: AppColors.white,
     height: 1.6.h,
   );
@@ -35,13 +35,13 @@ class CustomTextStyles {
     color: AppColors.black,
   );
 
-static TextStyle semiBold = TextStyle(
+  static TextStyle semiBold = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w600,
     fontSize: 16.sp,
     color: AppColors.black,
   );
-  
+
   static TextStyle bold = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.bold,
