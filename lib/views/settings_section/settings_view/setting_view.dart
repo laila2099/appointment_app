@@ -1,21 +1,11 @@
-<<<<<<< Updated upstream
+
 import 'package:appoitment_app/core/constant/app_colors.dart';
 import 'package:appoitment_app/core/constant/text_style.dart';
 import 'package:appoitment_app/routes/app_routes.dart';
+import 'package:appoitment_app/views/settings_section/settings_view/widgets/settings_header.dart';
 import 'package:appoitment_app/views/settings_section/settings_view/widgets/settings_item.dart';
 import 'package:appoitment_app/widgets/general_widgets/app_header/app_header.dart';
 import 'package:appoitment_app/widgets/general_widgets/custom_divider.dart';
-=======
-import 'package:appointment_app/core/constant/app_colors.dart';
-import 'package:appointment_app/core/constant/text_style.dart';
-import 'package:appointment_app/routes/app_routes.dart';
-import 'package:appointment_app/views/profile_section/profile_view/widgets/profile_header.dart';
-import 'package:appointment_app/views/settings_section/settings_view/widgets/settings_header.dart';
-import 'package:appointment_app/views/settings_section/settings_view/widgets/settings_item.dart';
-import 'package:appointment_app/widgets/general_widgets/app_bar/app_bar.dart';
-import 'package:appointment_app/widgets/general_widgets/app_header/app_header.dart';
-import 'package:appointment_app/widgets/general_widgets/custom_divider.dart';
->>>>>>> Stashed changes
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

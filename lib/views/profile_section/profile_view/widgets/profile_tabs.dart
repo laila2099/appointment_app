@@ -19,13 +19,7 @@ class ProfileTabs extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-<<<<<<< Updated upstream
-              child: Container(
-                alignment: Alignment.center,
-                child:  Text(
-                  'My Appointment',
-                  style:CustomTextStyles.body14 ,
-=======
+
               child: InkWell(
                 onTap: (){},
                 child: Container(
@@ -34,7 +28,7 @@ class ProfileTabs extends StatelessWidget {
                     'my_appointment'.tr,
                     style: CustomTextStyles.body14,
                   ),
->>>>>>> Stashed changes
+
                 ),
               ),
               
