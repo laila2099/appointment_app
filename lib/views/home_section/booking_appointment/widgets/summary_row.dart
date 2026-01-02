@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/constant/app_colors.dart';
 import '../../../../core/constant/text_style.dart';
 import '../../../../widgets/general_widgets/icon_badge.dart';
 
@@ -46,7 +47,12 @@ class SummaryRow extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(title, style: CustomTextStyles.label14Semi),
+                    Text(title,
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.black,
+                        )),
                     SizedBox(height: 4.h),
                     Text(subtitle, style: CustomTextStyles.body12),
                   ],

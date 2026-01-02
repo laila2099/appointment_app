@@ -1,8 +1,8 @@
 
-import 'package:appoitment_app/core/constant/app_colors.dart';
-import 'package:appoitment_app/core/constant/text_style.dart';
-import 'package:appoitment_app/widgets/general_widgets/app_header/app_header.dart';
-import 'package:appoitment_app/widgets/general_widgets/app_header/header_button.dart';
+import 'package:appointment_app/core/constant/app_colors.dart';
+import 'package:appointment_app/core/constant/text_style.dart';
+import 'package:appointment_app/widgets/general_widgets/app_header/app_header.dart';
+import 'package:appointment_app/widgets/general_widgets/app_header/header_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -18,16 +18,7 @@ class SettingsHeader extends StatelessWidget {
       padding: EdgeInsets.only(left: 16.w ,),
      
       backgroundColor: AppColors.white,
-      leading: HeaderButton(
-       
-        child: Icon(
-          Icons.arrow_back_ios_new_rounded,
-          color: AppColors.black,
-        ),
-        onTap: () {
-          Get.back();
-        },
-      ),
+
       center: Text(
         title,
         style: CustomTextStyles.screenTitle,

@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../widgets/general_widgets/app_header/app_header.dart';
-import '../../../../widgets/general_widgets/app_header/header_button.dart';
 import '../../../../widgets/general_widgets/app_header/header_title.dart';
 import '../../../../widgets/general_widgets/primary_button.dart';
 import '../booking_appointment_controller/booking_controller.dart';
@@ -25,20 +24,11 @@ class BookingFlowScreen extends GetView<BookingController> {
           return Column(
             children: [
               AppHeader(
-                leading: HeaderButton(
-                  onTap: Get.back,
-                  child: Icon(
-                    Icons.arrow_back_ios_new,
-                    size: 18.sp,
-                    color: Colors.black,
-                  ),
-                ),
                 center: HeaderTitle('book_appointment'.tr),
               ),
               SizedBox(height: 32.h),
               StepperHeader(activeIndex: controller.stepIndex.value),
               SizedBox(height: 20.h),
-
               Expanded(
                 child: IndexedStack(
                   index: controller.stepIndex.value,
@@ -49,11 +39,11 @@ class BookingFlowScreen extends GetView<BookingController> {
                   ],
                 ),
               ),
-
               if (controller.stepIndex.value != 2)
                 Padding(
                   padding: EdgeInsets.fromLTRB(16.w, 10.h, 16.w, 16.h),
                   child: PrimaryButton(
+                    padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 16.h),
                     text: 'continue'.tr,
                     onPressed: controller.stepIndex.value == 2
                         ? () {}

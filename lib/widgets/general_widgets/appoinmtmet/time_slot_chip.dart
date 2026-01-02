@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/constant/app_colors.dart';
-import '../../../core/constant/text_style.dart';
 
 class TimeSlotChip extends StatelessWidget {
   final TimeOfDay time;
@@ -39,7 +38,11 @@ class TimeSlotChip extends StatelessWidget {
         alignment: Alignment.center,
         child: Text(
           _format(time),
-          style: CustomTextStyles.textField.copyWith(color: fg),
+          style: TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 14.sp,
+            color: fg,
+          ),
         ),
       ),
     );

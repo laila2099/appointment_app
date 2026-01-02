@@ -59,7 +59,7 @@ class CenterSnapDatePicker extends StatelessWidget {
                         alignment: Alignment.center,
                         child: _DateChip(
                           date: d,
-                          height: itemHeight,
+                          height: itemHeight.h,
                           selected: selected,
                         ),
                       ),
@@ -162,7 +162,7 @@ class _DateChip extends StatelessWidget {
             Text(
               dayNum,
               style: TextStyle(
-                fontSize: selected ? 16.sp : 14.sp,
+                fontSize: selected ? 15.sp : 14.sp,
                 height: 1.0,
                 fontWeight: FontWeight.w800,
                 color: selected ? Colors.white : Colors.black.withOpacity(.35),

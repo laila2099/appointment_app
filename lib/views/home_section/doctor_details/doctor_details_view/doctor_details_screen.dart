@@ -31,14 +31,6 @@ class DoctorDetailsScreen extends GetView<DoctorDetailsController> {
           return Column(
             children: [
               AppHeader(
-                leading: HeaderButton(
-                  onTap: Get.back,
-                  child: Icon(
-                    Icons.arrow_back_ios_new,
-                    size: 18.sp,
-                    color: Colors.black,
-                  ),
-                ),
                 center: HeaderTitle(doctor.name),
                 trailing: HeaderButton(
                   onTap: () {},
@@ -49,7 +41,6 @@ class DoctorDetailsScreen extends GetView<DoctorDetailsController> {
                   ),
                 ),
               ),
-
               DoctorTile.details(
                 name: doctor.name,
                 specialty: doctor.specialty,
@@ -59,7 +50,6 @@ class DoctorDetailsScreen extends GetView<DoctorDetailsController> {
                 avatar: const AssetImage(AppImages.doctor),
                 onChatTap: () {},
               ),
-
               SizedBox(height: 8.h),
               Expanded(
                 child: DefaultTabController(
@@ -68,9 +58,9 @@ class DoctorDetailsScreen extends GetView<DoctorDetailsController> {
                     children: [
                       TabBar(
                         labelColor: AppColors.primary,
-
                         indicatorColor: AppColors.primary,
                         indicatorSize: TabBarIndicatorSize.tab,
+                        labelStyle: TextStyle(fontSize: 14.sp),
                         tabs: [
                           Tab(text: "about".tr),
                           Tab(text: "location".tr),
@@ -91,6 +81,7 @@ class DoctorDetailsScreen extends GetView<DoctorDetailsController> {
                 ),
               ),
               PrimaryButton(
+                padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 16.h),
                 text: "make_appointment".tr,
                 onPressed: controller.onMakeAppointment,
               ),

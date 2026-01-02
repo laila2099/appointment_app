@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/constant/app_colors.dart';
-import '../../../../core/constant/text_style.dart';
 
 class StepperHeader extends StatelessWidget {
   final int activeIndex;
@@ -71,7 +70,11 @@ class _StepDot extends StatelessWidget {
           alignment: Alignment.center,
           child: Text(
             '${index + 1}',
-            style: CustomTextStyles.body12.copyWith(color: Colors.white),
+            style: TextStyle(
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w400,
+              color: Colors.white,
+            ),
           ),
         ),
         SizedBox(height: 6.h),
@@ -82,8 +85,8 @@ class _StepDot extends StatelessWidget {
             color: isDone
                 ? AppColors.green
                 : isActive
-                ? AppColors.black
-                : Colors.grey,
+                    ? AppColors.black
+                    : Colors.grey,
             fontWeight: FontWeight.w400,
           ),
         ),

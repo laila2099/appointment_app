@@ -1,5 +1,6 @@
-import 'package:appoitment_app/core/constant/app_icons.dart';
+import 'package:appointment_app/core/constant/app_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../core/constant/app_colors.dart';
@@ -25,7 +26,6 @@ class DoctorTile extends StatelessWidget {
   // config
   final EdgeInsetsGeometry padding;
   final bool asCard;
-  final double height;
   final double avatarSize;
   final double avatarRadius;
   final bool showChat;
@@ -41,7 +41,6 @@ class DoctorTile extends StatelessWidget {
     required this.avatar,
     required this.padding,
     required this.asCard,
-    required this.height,
     required this.avatarSize,
     required this.avatarRadius,
     required this.showChat,
@@ -78,9 +77,8 @@ class DoctorTile extends StatelessWidget {
       avatar: avatar,
       onTap: onTap,
       onChatTap: onChatTap,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
       asCard: false,
-      height: 79,
       avatarSize: 56,
       avatarRadius: 16,
       showChat: showChat,
@@ -113,14 +111,13 @@ class DoctorTile extends StatelessWidget {
       avatar: avatar,
       onTap: onTap,
       onChatTap: onChatTap,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
       asCard: false,
-      height: 79,
       avatarSize: 56,
       avatarRadius: 16,
       showChat: showChat && onChatTap != null, // يظهر فقط إذا فيه onChatTap
-      chatButtonSize: 44,
-      chatRadius: BorderRadius.circular(14),
+      chatButtonSize: 44.w,
+      chatRadius: BorderRadius.circular(14.r),
       metaType: DoctorMetaType.date,
       dateText: dateText,
       time: time,
@@ -148,9 +145,8 @@ class DoctorTile extends StatelessWidget {
       avatar: avatar,
       onTap: onTap,
       onChatTap: null,
-      padding: const EdgeInsets.all(14),
+      padding: EdgeInsets.all(14.w),
       asCard: true,
-      height: 92,
       avatarSize: 64,
       avatarRadius: 18,
       showChat: false,
@@ -163,88 +159,84 @@ class DoctorTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final metaStyle = TextStyle(
-      fontSize: 12.5,
+      fontSize: 12.5.sp,
       fontWeight: FontWeight.w500,
       color: AppColors.infoText,
     );
 
-    final nameStyle = const TextStyle(
-      fontSize: 16,
+    final nameStyle = TextStyle(
+      fontSize: 16.sp,
       fontWeight: FontWeight.w700,
       color: AppColors.black,
     );
 
     final ratingStyle = TextStyle(
-      fontSize: 12,
+      fontSize: 12.sp,
       fontWeight: FontWeight.w600,
       color: AppColors.infoText,
     );
 
     final reviewsStyle = TextStyle(
-      fontSize: 12,
+      fontSize: 12.sp,
       fontWeight: FontWeight.w500,
       color: AppColors.infoText,
     );
 
-    Widget content = SizedBox(
-      height: height,
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(avatarRadius),
-            child: Image(
-              image: avatar,
-              width: avatarSize,
-              height: avatarSize,
-              fit: BoxFit.cover,
-            ),
+    Widget content = Row(
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(avatarRadius.r),
+          child: Image(
+            image: avatar,
+            width: avatarSize.sp,
+            height: avatarSize.sp,
+            fit: BoxFit.cover,
           ),
-          const SizedBox(width: 14),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            name,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: nameStyle,
-                          ),
-                          const SizedBox(height: 6),
-                          Text(
-                            "$specialty  |  $clinic",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: metaStyle,
-                          ),
-                        ],
-                      ),
+        ),
+        SizedBox(width: 12.w),
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: nameStyle,
+                        ),
+                        SizedBox(height: 6.h),
+                        Text(
+                          "$specialty  |  $clinic",
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: metaStyle,
+                        ),
+                      ],
                     ),
-                    if (showChat && onChatTap != null) ...[
-                      const SizedBox(width: 12),
-                      _ChatButton(
-                        size: chatButtonSize,
-                        radius: chatRadius,
-                        onTap: onChatTap!,
-                      ),
-                    ],
+                  ),
+                  if (showChat && onChatTap != null) ...[
+                    _ChatButton(
+                      size: chatButtonSize,
+                      radius: chatRadius,
+                      onTap: onChatTap!,
+                    ),
                   ],
-                ),
-                const SizedBox(height: 10),
-                _buildMetaRow(ratingStyle, reviewsStyle),
-              ],
-            ),
+                ],
+              ),
+              SizedBox(height: 12.w),
+              _buildMetaRow(ratingStyle, reviewsStyle),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
 
     content = Padding(padding: padding, child: content);
@@ -253,7 +245,7 @@ class DoctorTile extends StatelessWidget {
       content = Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(18.r),
           border: Border.all(color: Colors.black.withOpacity(0.05)),
           boxShadow: [
             BoxShadow(
@@ -270,7 +262,7 @@ class DoctorTile extends StatelessWidget {
     if (onTap != null) {
       content = InkWell(
         onTap: onTap,
-        borderRadius: asCard ? BorderRadius.circular(18) : BorderRadius.zero,
+        borderRadius: asCard ? BorderRadius.circular(18.r) : BorderRadius.zero,
         child: content,
       );
     }
@@ -294,10 +286,10 @@ class DoctorTile extends StatelessWidget {
 
     return Row(
       children: [
-        const Icon(Icons.star, size: 16, color: Colors.amber),
-        const SizedBox(width: 6),
+        Icon(Icons.star, size: 16.w, color: Colors.amber),
+        SizedBox(width: 6.w),
         Text(rating.toStringAsFixed(1), style: ratingStyle),
-        const SizedBox(width: 6),
+        SizedBox(width: 6.w),
         Text("($reviewsCount reviews)", style: reviewsStyle),
       ],
     );
@@ -319,20 +311,20 @@ class _ChatButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: radius,
+      borderRadius: radius.r,
       child: Container(
-        width: size,
-        height: size,
+        width: size.w,
+        height: size.h,
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: radius,
+          borderRadius: radius.r,
           border: Border.all(color: Colors.black.withOpacity(0.08)),
         ),
         child: SvgPicture.asset(
           AppIcons.chat,
-          width: 22,
-          height: 22,
+          width: 22.w,
+          height: 22.h,
           colorFilter: const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
         ),
       ),

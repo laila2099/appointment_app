@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../../../core/constant/text_style.dart';
 import '../../../../../models/payment_method.dart';
 import '../../../../../widgets/general_widgets/section_title.dart';
 import '../../booking_appointment_controller/booking_controller.dart';
@@ -39,14 +38,12 @@ class StepPayment extends StatelessWidget {
           SizedBox(height: 8.h),
           SectionTitle('payment_option'.tr),
           SizedBox(height: 24.h),
-
           _RadioRow(
             title: 'credit_card'.tr,
             selected: selectedType == 'card',
             enabled: hasCards,
             onTap: hasCards ? () => c.selectCategory('card') : null,
           ),
-
           if (selectedType == 'card' && hasCards) ...[
             SizedBox(height: 10.h),
             ...c.cardMethods.map(
@@ -58,7 +55,6 @@ class StepPayment extends StatelessWidget {
             ),
             SizedBox(height: 10.h),
           ],
-
           SizedBox(height: 24.h),
           _RadioRow(
             title: 'bank_transfer'.tr,
@@ -66,7 +62,6 @@ class StepPayment extends StatelessWidget {
             enabled: c.bankMethod != null,
             onTap: c.bankMethod == null ? null : () => c.selectCategory('bank'),
           ),
-
           SizedBox(height: 24.h),
           _RadioRow(
             title: 'paypal'.tr,
@@ -113,7 +108,11 @@ class _RadioRow extends StatelessWidget {
             SizedBox(width: 12.w),
             Text(
               title,
-              style: CustomTextStyles.label14Semi.copyWith(color: color),
+              style: TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w600,
+                color: color,
+              ),
             ),
           ],
         ),
@@ -163,7 +162,10 @@ class _CardRow extends StatelessWidget {
                     subtitle.isEmpty
                         ? method.label
                         : '${method.label}  $subtitle',
-                    style: CustomTextStyles.body12,
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
                 InkWell(

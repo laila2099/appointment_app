@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/constant/app_colors.dart';
-import '../../../../core/constant/text_style.dart';
 import '../../../../models/review_model.dart';
 import 'stars.dart';
 
@@ -40,7 +39,11 @@ class ReviewsTab extends StatelessWidget {
                       Expanded(
                         child: Text(
                           r.userName,
-                          style: CustomTextStyles.sectionTitle,
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.black,
+                          ),
                         ),
                       ),
                       Text(

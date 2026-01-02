@@ -34,5 +34,4 @@ class Doctor {
     required this.lat,
     required this.lng,
   });
-
 }
