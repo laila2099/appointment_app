@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../widgets/general_widgets/app_header/app_header.dart';
-import '../../../../widgets/general_widgets/app_header/header_button.dart';
 import '../../../../widgets/general_widgets/app_header/header_title.dart';
 import '../../../../widgets/general_widgets/primary_button.dart';
 import '../booking_appointment_controller/booking_controller.dart';
@@ -25,14 +24,6 @@ class BookingFlowScreen extends GetView<BookingController> {
           return Column(
             children: [
               AppHeader(
-                leading: HeaderButton(
-                  onTap: Get.back,
-                  child: Icon(
-                    Icons.arrow_back_ios_new,
-                    size: 18.sp,
-                    color: Colors.black,
-                  ),
-                ),
                 center: HeaderTitle('book_appointment'.tr),
               ),
               SizedBox(height: 32.h),

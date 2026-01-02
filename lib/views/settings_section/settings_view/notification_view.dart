@@ -18,12 +18,6 @@ class NotificationPage extends StatelessWidget {
       body: Column(
         children: [
           AppHeader(
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                Get.back();
-              },
-            ),
             center: Text(
               "Notification",
               style: CustomTextStyles.screenTitle,

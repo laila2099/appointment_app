@@ -17,12 +17,6 @@ class SettingsPage extends StatelessWidget {
       body: Column(
         children: [
           AppHeader(
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                Get.back();
-              },
-            ),
             center: Text(
               "Settings",
               style: CustomTextStyles.screenTitle,
