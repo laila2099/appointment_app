@@ -1,3 +1,4 @@
+import 'package:appoitment_app/core/classes/utils/dialogs.dart';
 import 'package:appoitment_app/core/constant/app_colors.dart';
 import 'package:appoitment_app/core/constant/text_style.dart';
 import 'package:appoitment_app/routes/app_routes.dart';
@@ -55,14 +56,18 @@ class SettingsPage extends StatelessWidget {
           settingItem(
             icon: Icons.language,
             title: 'Language',
-            onTap: () {},
+            onTap: () {
+              Get.toNamed(AppRoutes.languageScreen);
+            },
           ),
           CustomDivider(),
           settingItem(
             icon: Icons.logout,
             title: 'Logout',
             color: AppColors.red,
-            onTap: () {},
+            onTap: () {
+              showLogoutDialog();
+            },
           ),
         ],
       ),

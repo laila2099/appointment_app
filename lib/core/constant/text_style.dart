@@ -119,6 +119,13 @@ class CustomTextStyles {
     color: AppColors.primary,
   );
 
+//   //personal_info hintText field
+// static TextStyle hintText = TextStyle(
+//             fontSize: 14.sp,
+//             fontWeight: FontWeight.w500,
+//             color: const Color(0xFF242424),
+//           );
+
 
   static TextStyle custom({
     double fontSize = 14,
