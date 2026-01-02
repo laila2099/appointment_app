@@ -1,8 +1,9 @@
-import 'package:app_appointment/core/constant/app_colors.dart';
-import 'package:app_appointment/core/constant/text_style.dart';
-import 'package:app_appointment/views/home_section/notification/controller/notification_controller.dart';
-import 'package:app_appointment/views/home_section/notification/widgets/notification_item.dart';
-import 'package:app_appointment/widgets/general_widgets/app_bar/app_bar.dart';
+import 'package:appointment_app/core/constant/app_colors.dart';
+import 'package:appointment_app/core/constant/text_style.dart';
+import 'package:appointment_app/views/home_section/notification/controller/notification_controller.dart';
+import 'package:appointment_app/views/home_section/notification/widgets/notification_item.dart';
+import 'package:appointment_app/widgets/general_widgets/app_header/app_header.dart';
+import 'package:appointment_app/widgets/general_widgets/app_header/header_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -15,19 +16,33 @@ class NotificationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: CustomAppBar(
-        width: 51.w,
-        height: 27.h,
-        titel: "Notifications",
-        actionicon: Container(
-          decoration: BoxDecoration(
-            color: AppColors.primary,
-            borderRadius: BorderRadius.circular(24.r),
+      appBar: AppHeader(
+        leading: HeaderButton(
+          onTap: Get.back,
+          child: Icon(
+            Icons.arrow_back_ios_new,
+            size: 18.sp,
+            color: AppColors.black,
           ),
-          child: Center(
-            child: Text(
-              "2 New",
-              style: TextStyle(fontSize: 12.sp, color: AppColors.white),
+        ),
+        center: Text(
+          "Doctor Speciality",
+          style: CustomTextStyles.screenTitle,
+        ),
+        trailing: HeaderButton(
+          showBorder: false,
+          child: Container(
+            width: 51.w,
+            height: 27.h,
+            decoration: BoxDecoration(
+              color: AppColors.primary,
+              borderRadius: BorderRadius.circular(24.r),
+            ),
+            child: Center(
+              child: Text(
+                "2 New",
+                style: TextStyle(fontSize: 12.sp, color: AppColors.white),
+              ),
             ),
           ),
         ),

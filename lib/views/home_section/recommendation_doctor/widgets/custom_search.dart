@@ -1,4 +1,4 @@
-import 'package:app_appointment/core/constant/app_colors.dart';
+import 'package:appointment_app/core/constant/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -44,7 +44,6 @@ class CustomSearch extends StatelessWidget {
             ),
           ),
           SizedBox(width: 12.w),
-
           Container(
             width: 46.w,
             height: 46.h,

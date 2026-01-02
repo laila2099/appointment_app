@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/constant/app_colors.dart';
@@ -6,7 +7,7 @@ import '../../../../core/constant/app_images.dart';
 import '../../../../widgets/general_widgets/app_header/app_header.dart';
 import '../../../../widgets/general_widgets/app_header/header_button.dart';
 import '../../../../widgets/general_widgets/app_header/header_title.dart';
-import '../../home_screen/widgets/doctor_tile.dart';
+import '../../../../widgets/general_widgets/doctor_tile.dart';
 import '../../../../widgets/general_widgets/primary_button.dart';
 import '../doctor_details_controller/doctor_details_controller.dart';
 import '../widgets/about_tab.dart';
@@ -32,48 +33,46 @@ class DoctorDetailsScreen extends GetView<DoctorDetailsController> {
               AppHeader(
                 leading: HeaderButton(
                   onTap: Get.back,
-                  child: const Icon(
+                  child: Icon(
                     Icons.arrow_back_ios_new,
-                    size: 18,
+                    size: 16.sp,
                     color: Colors.black,
                   ),
                 ),
                 center: HeaderTitle(doctor.name),
                 trailing: HeaderButton(
                   onTap: () {},
-                  child: const Icon(
+                  child: Icon(
                     Icons.more_horiz,
-                    size: 22,
+                    size: 22.sp,
                     color: Colors.black,
                   ),
                 ),
               ),
-
               DoctorTile.details(
                 name: doctor.name,
                 specialty: doctor.specialty,
                 clinic: doctor.clinic,
                 rating: doctor.ratingAvg,
                 reviewsCount: doctor.ratingCount,
-                avatar: const AssetImage(AppImages.doctor1),
+                avatar: const AssetImage(AppImages.doctor),
                 onChatTap: () {},
               ),
-
-              const SizedBox(height: 8),
+              SizedBox(height: 8.h),
               Expanded(
                 child: DefaultTabController(
                   length: 3,
                   child: Column(
                     children: [
-                      const TabBar(
+                      TabBar(
                         labelColor: AppColors.primary,
-
                         indicatorColor: AppColors.primary,
                         indicatorSize: TabBarIndicatorSize.tab,
+                        labelStyle: TextStyle(fontSize: 14.sp),
                         tabs: [
-                          Tab(text: "About"),
-                          Tab(text: "Location"),
-                          Tab(text: "Reviews"),
+                          Tab(text: "about".tr),
+                          Tab(text: "location".tr),
+                          Tab(text: "reviews".tr),
                         ],
                       ),
                       Expanded(
@@ -90,7 +89,8 @@ class DoctorDetailsScreen extends GetView<DoctorDetailsController> {
                 ),
               ),
               PrimaryButton(
-                text: "Make An Appointment",
+                padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 16.h),
+                text: "make_appointment".tr,
                 onPressed: controller.onMakeAppointment,
               ),
             ],

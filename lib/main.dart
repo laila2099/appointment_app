@@ -1,13 +1,13 @@
-
-import 'package:app_appointment/bindings/initial_binding.dart';
-import 'package:app_appointment/core/translations/app_translations.dart';
-import 'package:app_appointment/routes/app_pages.dart';
-import 'package:app_appointment/routes/app_routes.dart';
+import 'package:appointment_app/bindings/initial_binding.dart';
+import 'package:appointment_app/routes/app_pages.dart';
+import 'package:appointment_app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import 'core/constant/app_theme.dart';
 import 'core/services/initialize_service.dart';
+import 'core/translations/app_translations.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
+          theme: AppTheme.light,
           initialBinding: InitializeBinding(),
           initialRoute: AppRoutes.bottomnavbar,
           translations: AppTranslations(),

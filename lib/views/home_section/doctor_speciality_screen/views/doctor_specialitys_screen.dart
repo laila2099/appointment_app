@@ -1,7 +1,9 @@
-import 'package:app_appointment/core/constant/app_colors.dart';
-import 'package:app_appointment/views/home_section/home_screen/controller/category_controller.dart';
-import 'package:app_appointment/views/home_section/home_screen/widgets/category_item.dart';
-import 'package:app_appointment/widgets/general_widgets/app_bar/app_bar.dart';
+import 'package:appointment_app/core/constant/app_colors.dart';
+import 'package:appointment_app/core/constant/text_style.dart';
+import 'package:appointment_app/views/home_section/home_screen/controller/category_controller.dart';
+import 'package:appointment_app/views/home_section/home_screen/widgets/category_item.dart';
+import 'package:appointment_app/widgets/general_widgets/app_header/app_header.dart';
+import 'package:appointment_app/widgets/general_widgets/app_header/header_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -14,7 +16,21 @@ class DoctorSpecialitysScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: CustomAppBar(titel: 'Doctor Speciality'),
+      appBar: AppHeader(
+        leading: HeaderButton(
+          onTap: Get.back,
+          child: Icon(
+            Icons.arrow_back_ios_new,
+            size: 18.sp,
+            color: AppColors.black,
+          ),
+        ),
+        center: Text(
+          "Doctor Speciality",
+          style: CustomTextStyles.screenTitle,
+        ),
+      ),
+      // CustomAppBar(titel: ''),
       body: Column(
         children: [
           SizedBox(height: 32.h),

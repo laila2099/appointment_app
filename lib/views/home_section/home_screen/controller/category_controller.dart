@@ -1,4 +1,4 @@
-import 'package:app_appointment/core/constant/app_icons.dart';
+import 'package:appointment_app/core/constant/app_icons.dart';
 
 import '../model/category_model.dart';
 

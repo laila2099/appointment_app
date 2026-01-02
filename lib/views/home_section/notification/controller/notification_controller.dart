@@ -1,6 +1,7 @@
-import 'package:app_appointment/core/constant/app_colors.dart';
-import 'package:app_appointment/core/constant/app_icons.dart';
+import 'package:appointment_app/core/constant/app_colors.dart';
+import 'package:appointment_app/core/constant/app_icons.dart';
 import 'package:get/get.dart';
+
 import '../models/notification_model.dart';
 
 class NotificationController extends GetxController {
@@ -25,8 +26,7 @@ class NotificationController extends GetxController {
       ),
       NotificationModel(
         title: 'Schedule Changed',
-        message:
-            "You have successfully changed your appointment with Dr. Randy"
+        message: "You have successfully changed your appointment with Dr. Randy"
             "Wigham. Don’t forget to active your reminder.",
         time: '5h',
         icon: AppIcons.calendar_2,

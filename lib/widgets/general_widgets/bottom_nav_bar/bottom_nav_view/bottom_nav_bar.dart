@@ -1,9 +1,9 @@
-import 'package:app_appointment/core/constant/app_colors.dart';
-import 'package:app_appointment/core/constant/app_icons.dart';
-import 'package:app_appointment/widgets/general_widgets/bottom_nav_bar/bottom_nav_view/bottom_nav_icon.dart';
-import 'package:app_appointment/widgets/general_widgets/bottom_nav_bar/bottom_nav_view/floating_bottom.dart';
-import 'package:app_appointment/widgets/general_widgets/bottom_nav_bar/bottom_nav_view/profile_nav_icon.dart';
-import 'package:app_appointment/widgets/general_widgets/bottom_nav_bar/controller/bottom_nav_bar_controller.dart';
+import 'package:appointment_app/core/constant/app_colors.dart';
+import 'package:appointment_app/core/constant/app_icons.dart';
+import 'package:appointment_app/widgets/general_widgets/bottom_nav_bar/bottom_nav_view/bottom_nav_icon.dart';
+import 'package:appointment_app/widgets/general_widgets/bottom_nav_bar/bottom_nav_view/floating_bottom.dart';
+import 'package:appointment_app/widgets/general_widgets/bottom_nav_bar/bottom_nav_view/profile_nav_icon.dart';
+import 'package:appointment_app/widgets/general_widgets/bottom_nav_bar/controller/bottom_nav_bar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -32,7 +32,6 @@ class CustomBottomNavBar extends GetView<NavigationController> {
               ],
             ),
           ),
-
           Positioned(
             bottom: 0,
             left: 0,
@@ -49,7 +48,6 @@ class CustomBottomNavBar extends GetView<NavigationController> {
               ],
             ),
           ),
-
           Positioned(bottom: 25.h, child: const FloatingSearchButton()),
         ],
       ),

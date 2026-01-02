@@ -1,6 +1,7 @@
-import 'package:app_appointment/core/constant/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../core/constant/app_colors.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String titel;
@@ -48,7 +49,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             height: 40.h,
             margin: EdgeInsets.all(2.r),
             decoration: BoxDecoration(
-              border: Border.all(color: AppColors.lighgrey, width: 1.5.w),
+              border: Border.all(color: AppColors.lightGrey, width: 1.5.w),
               borderRadius: BorderRadius.circular(8.r),
             ),
             child: Icon(
@@ -76,7 +77,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       decoration: showAction
                           ? BoxDecoration(
                               border: Border.all(
-                                color: AppColors.lighgrey,
+                                color: AppColors.lightGrey,
                                 width: 1.5.w,
                               ),
                               borderRadius: BorderRadius.circular(8.r),

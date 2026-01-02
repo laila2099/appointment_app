@@ -1,11 +1,11 @@
-import 'package:app_appointment/core/constant/app_colors.dart';
-import 'package:app_appointment/core/constant/text_style.dart';
-import 'package:app_appointment/routes/app_routes.dart';
-import 'package:app_appointment/views/home_section/home_screen/controller/category_controller.dart';
-import 'package:app_appointment/views/home_section/home_screen/controller/doctor_controller.dart';
-import 'package:app_appointment/views/home_section/home_screen/widgets/category_item.dart';
-import 'package:app_appointment/views/home_section/home_screen/widgets/custom_container.dart';
-import 'package:app_appointment/widgets/doctor_card.dart';
+import 'package:appointment_app/core/constant/app_colors.dart';
+import 'package:appointment_app/core/constant/text_style.dart';
+import 'package:appointment_app/routes/app_routes.dart';
+import 'package:appointment_app/views/home_section/home_screen/controller/category_controller.dart';
+import 'package:appointment_app/views/home_section/home_screen/controller/doctor_controller.dart';
+import 'package:appointment_app/views/home_section/home_screen/widgets/category_item.dart';
+import 'package:appointment_app/views/home_section/home_screen/widgets/custom_container.dart';
+import 'package:appointment_app/widgets/doctor_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -35,12 +35,11 @@ class HomeScreen extends StatelessWidget {
                       SizedBox(height: 5.h),
                       Text(
                         "How Are You Today?!",
-                        style: CustomTextStyles.subtitle,
+                        style: CustomTextStyles.subTitle,
                       ),
                     ],
                   ),
                   Spacer(),
-
                   Stack(
                     children: [
                       Container(
@@ -60,7 +59,6 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-
                       Positioned(
                         right: 15.w,
                         top: 13.h,

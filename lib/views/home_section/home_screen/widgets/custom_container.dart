@@ -1,7 +1,7 @@
-import 'package:app_appointment/core/constant/app_colors.dart';
-import 'package:app_appointment/core/constant/app_images.dart';
-import 'package:app_appointment/core/constant/text_style.dart';
-import 'package:app_appointment/views/home_section/find_nearby/views/find_nearby_screen.dart';
+import 'package:appointment_app/core/constant/app_colors.dart';
+import 'package:appointment_app/core/constant/app_images.dart';
+import 'package:appointment_app/core/constant/text_style.dart';
+import 'package:appointment_app/views/home_section/find_nearby/views/find_nearby_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -16,7 +16,6 @@ class CustomContainer extends StatelessWidget {
       children: [
         Container(
           width: 345.w,
-          height: 167.h,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(24.r),
             color: AppColors.primary,
@@ -27,7 +26,6 @@ class CustomContainer extends StatelessWidget {
                 // top: 5.h,
                 child: Image.asset(AppImages.rectangle),
               ),
-
               Padding(
                 padding: EdgeInsets.only(left: 18.w, top: 12.h),
                 child: Column(
@@ -46,6 +44,7 @@ class CustomContainer extends StatelessWidget {
                         style: CustomTextStyles.regular,
                       ),
                     ),
+                    SizedBox(height: 15.h),
                   ],
                 ),
               ),
@@ -55,7 +54,7 @@ class CustomContainer extends StatelessWidget {
         ),
         Positioned(
           left: 200.w,
-          top: -28.h,
+          top: -24.h,
           child: Image.asset(height: 197.h, width: 136.w, AppImages.nurse),
         ),
         Positioned(

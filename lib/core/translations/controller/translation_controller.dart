@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:app_appointment/core/services/shared_prefrences.dart';
+import 'package:appointment_app/core/services/shared_prefrences.dart';
 import 'package:get/get.dart';
 
 class TranslationController extends GetxController {
