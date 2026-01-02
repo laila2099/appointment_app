@@ -7,6 +7,8 @@ import 'package:appointment_app/widgets/general_widgets/custom_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../core/classes/utils/dialogs.dart';
+
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
@@ -49,14 +51,18 @@ class SettingsPage extends StatelessWidget {
           settingItem(
             icon: Icons.language,
             title: 'Language',
-            onTap: () {},
+            onTap: () {
+              Get.toNamed(AppRoutes.languageScreen);
+            },
           ),
           CustomDivider(),
           settingItem(
             icon: Icons.logout,
             title: 'Logout',
             color: AppColors.red,
-            onTap: () {},
+            onTap: () {
+              showLogoutDialog();
+            },
           ),
         ],
       ),

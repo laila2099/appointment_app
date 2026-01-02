@@ -9,12 +9,16 @@ class AppRoutes {
 
   // Profile
   static const profile = '/profile';
+  static const personalInfo = "/personal_info";
+  static const paymentScreen = "/payment_screen";
+  static const medicalRecordsScreen = "/medical_records_Screen";
 
   // Settings
   static const settingsPage = '/settings';
   static const notificationPage = '$settingsPage/notification';
   static const helpPage = '$settingsPage/help';
   static const securityPage = '$settingsPage/security';
+  static const languageScreen = "$settingsPage/language";
 
   // Bottom Navigation & Home
   static const bottomnavbar = '/bottomnavbar';

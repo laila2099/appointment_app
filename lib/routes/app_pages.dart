@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+
 import '../views/auth_section/forgot_password/forgot_password_screens/forgot_password_view.dart';
 import '../views/auth_section/forgot_password/forgot_password_screens/otp_verification_view.dart';
 import '../views/auth_section/sign_in/sign_in_view.dart';
@@ -17,8 +18,13 @@ import '../views/home_section/recommendation_doctor/views/recommendation_doctor_
 import '../views/my_apponiment_section/my_appoitment_binding/my_appoitment_binding.dart';
 import '../views/my_apponiment_section/my_appoitment_view/my_appoitment_view.dart';
 import '../views/my_apponiment_section/reschedule/reschedule_view.dart';
+import '../views/profile_section/profile_binding/profile_binding.dart';
+import '../views/profile_section/profile_view/medical_records_screen.dart';
+import '../views/profile_section/profile_view/payment_screen.dart';
+import '../views/profile_section/profile_view/personal_info.dart';
 import '../views/profile_section/profile_view/profile_view.dart';
 import '../views/settings_section/settings_view/help_view.dart';
+import '../views/settings_section/settings_view/language_screen.dart';
 import '../views/settings_section/settings_view/notification_view.dart';
 import '../views/settings_section/settings_view/security_view.dart';
 import '../views/settings_section/settings_view/setting_view.dart';
@@ -29,7 +35,6 @@ import '../widgets/general_widgets/bottom_nav_bar/bottom_nav_view/main_nav_bar.d
 import 'app_routes.dart';
 
 final appPages = <GetPage>[
-
   // Splash + Onboarding
   GetPage(name: AppRoutes.splash, page: () => const SplashScreen()),
   GetPage(name: AppRoutes.onboarding, page: () => const OnBoardingView()),
@@ -37,9 +42,11 @@ final appPages = <GetPage>[
   // Auth + Reset Password
   GetPage(name: AppRoutes.login, page: () => const LoginView()),
   GetPage(name: AppRoutes.createAccount, page: () => const CreateAccountView()),
-  GetPage(name: AppRoutes.forgotPassword, page: () => const ForgotPasswordView()),
-  GetPage(name: AppRoutes.otpVerification, page: () =>  OtpVerificationView()),
-  GetPage(name: AppRoutes.fillYourProfile, page: () => const FillYourProfileView()),
+  GetPage(
+      name: AppRoutes.forgotPassword, page: () => const ForgotPasswordView()),
+  GetPage(name: AppRoutes.otpVerification, page: () => OtpVerificationView()),
+  GetPage(
+      name: AppRoutes.fillYourProfile, page: () => const FillYourProfileView()),
 
   // Doctor Details
   GetPage(
@@ -56,20 +63,36 @@ final appPages = <GetPage>[
   ),
 
   // Home
-  GetPage(name: AppRoutes.home, page: () =>  HomeScreen()),
-  GetPage(name: AppRoutes.notificationScreen, page: () =>  NotificationScreen()),
-  GetPage(name: AppRoutes.findNearbyScreen, page: () => const FindNearbyScreen()),
-  GetPage(name: AppRoutes.doctorSpecialtiesScreen, page: () =>  DoctorSpecialitysScreen()),
-  GetPage(name: AppRoutes.recommendationDoctorScreen, page: () =>  RecommendationDoctorScreen()),
+  GetPage(name: AppRoutes.home, page: () => HomeScreen()),
+  GetPage(name: AppRoutes.notificationScreen, page: () => NotificationScreen()),
+  GetPage(
+      name: AppRoutes.findNearbyScreen, page: () => const FindNearbyScreen()),
+  GetPage(
+      name: AppRoutes.doctorSpecialtiesScreen,
+      page: () => DoctorSpecialitysScreen()),
+  GetPage(
+      name: AppRoutes.recommendationDoctorScreen,
+      page: () => RecommendationDoctorScreen()),
 
-  // Profile
-  GetPage(name: AppRoutes.profile, page: () => const ProfileScreen()),
+  //profile
+  GetPage(
+      name: AppRoutes.profile,
+      page: () => ProfileScreen(),
+      binding: ProfileBinding()),
+  GetPage(
+      name: AppRoutes.personalInfo,
+      page: () => PersonalInfo(),
+      binding: ProfileBinding()),
+  GetPage(name: AppRoutes.paymentScreen, page: () => PaymentScreen()),
+  GetPage(
+      name: AppRoutes.medicalRecordsScreen, page: () => MedicalRecordsScreen()),
 
   // Settings
   GetPage(name: AppRoutes.settingsPage, page: () => const SettingsPage()),
-  GetPage(name: AppRoutes.notificationPage, page: () =>  NotificationPage()),
-  GetPage(name: AppRoutes.helpPage, page: () =>  HelpPage()),
-  GetPage(name: AppRoutes.securityPage, page: () =>  SecurityPage()),
+  GetPage(name: AppRoutes.notificationPage, page: () => NotificationPage()),
+  GetPage(name: AppRoutes.helpPage, page: () => HelpPage()),
+  GetPage(name: AppRoutes.securityPage, page: () => SecurityPage()),
+  GetPage(name: AppRoutes.languageScreen, page: () => LanguageScreen()),
 
   // Booking
   GetPage(
