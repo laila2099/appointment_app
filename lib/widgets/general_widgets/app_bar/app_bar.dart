@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../core/constant/app_colors.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String titel;
+  final String? subTitle;          // جديد
   final bool showAction;
   final VoidCallback? onactiontap;
   final Widget? actionicon;
@@ -13,6 +13,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
     super.key,
     required this.titel,
+    this.subTitle,                  // جديد
     this.showAction = false,
     this.onactiontap,
     this.actionicon,
@@ -29,14 +30,27 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       scrolledUnderElevation: 0,
       backgroundColor: AppColors.white,
       elevation: 0,
-      centerTitle: true,
-      title: Text(
-        titel,
-        style: TextStyle(
-          fontSize: 24.sp,
-          fontWeight: FontWeight.w600,
-          color: AppColors.black,
-        ),
+      centerTitle: false, // الأفضل يكون start مع subTitle
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            titel,
+            style: TextStyle(
+              fontSize: 24.sp,
+              fontWeight: FontWeight.w600,
+              color: AppColors.black,
+            ),
+          ),
+          if (subTitle != null)
+            Text(
+              subTitle!,
+              style: TextStyle(
+                fontSize: 14.sp,
+                color: Colors.grey,
+              ),
+            ),
+        ],
       ),
       leading: Padding(
         padding: EdgeInsets.all(8.r),
@@ -61,34 +75,29 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       actions: [
-        Padding(
-          padding: EdgeInsets.all(8.r),
-          child: InkWell(
-            onTap: onactiontap,
-            borderRadius: BorderRadius.circular(8.r),
-            child: SizedBox(
-              width: width ?? 40.w,
-              height: height ?? 40.h,
-              child: showAction
-                  ? Container(
-                      // width: 40.w,
-                      // height: 40.h,
-                      margin: EdgeInsets.all(2.r),
-                      decoration: showAction
-                          ? BoxDecoration(
-                              border: Border.all(
-                                color: AppColors.lightGrey,
-                                width: 1.5.w,
-                              ),
-                              borderRadius: BorderRadius.circular(8.r),
-                            )
-                          : null,
-                      child: actionicon,
-                    )
-                  : actionicon,
+        if (showAction && actionicon != null)
+          Padding(
+            padding: EdgeInsets.all(8.r),
+            child: InkWell(
+              onTap: onactiontap,
+              borderRadius: BorderRadius.circular(8.r),
+              child: SizedBox(
+                width: width ?? 40.w,
+                height: height ?? 40.h,
+                child: Container(
+                  margin: EdgeInsets.all(2.r),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: AppColors.lightGrey,
+                      width: 1.5.w,
+                    ),
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  child: actionicon,
+                ),
+              ),
             ),
           ),
-        ),
       ],
     );
   }

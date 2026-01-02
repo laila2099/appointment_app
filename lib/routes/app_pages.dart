@@ -14,6 +14,9 @@ import '../views/home_section/find_nearby/views/find_nearby_screen.dart';
 import '../views/home_section/home_screen/view/home_screen.dart';
 import '../views/home_section/notification/views/notification_screen.dart';
 import '../views/home_section/recommendation_doctor/views/recommendation_doctor_screen.dart';
+import '../views/inbox_section/inbox_binding/chat_binding.dart';
+import '../views/inbox_section/view/chat_view.dart' show ChatView;
+import '../views/inbox_section/view/inbox_view.dart';
 import '../views/my_apponiment_section/my_appoitment_binding/my_appoitment_binding.dart';
 import '../views/my_apponiment_section/my_appoitment_view/my_appoitment_view.dart';
 import '../views/my_apponiment_section/reschedule/reschedule_view.dart';
@@ -91,4 +94,15 @@ final appPages = <GetPage>[
     page: () => const ReschedualScreen(),
     binding: BookingBinding(),
   ),
+  // Inbox Page
+  GetPage(
+    name: AppRoutes.inbox,
+    page: () => const InboxView(), // تأكد إنه عندك InboxScreen موجودة
+  ),
+  GetPage(
+    name: AppRoutes.chat,
+    page: () =>  ChatView(),
+    binding: ChatBinding(), // هاد عشان يتحمل ChatController تلقائياً
+  ),
+
 ];

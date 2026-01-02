@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: AppTheme.light,
           initialBinding: InitializeBinding(),
-          initialRoute: AppRoutes.fillYourProfile,
+          initialRoute: AppRoutes.inbox,
           translations: AppTranslations(),
           locale: const Locale('en', 'US'),
           getPages: appPages,
