@@ -27,7 +27,6 @@ class HeaderButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final border =
         showBorder ? Border.all(color: Colors.black.withOpacity(0.06)) : null;
-
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(radius.r),

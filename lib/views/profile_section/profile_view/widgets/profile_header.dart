@@ -11,11 +11,9 @@ class ProfileHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppHeader(
+      iconColor: AppColors.white,
+      showBorder: false,
       backgroundColor: AppColors.primary,
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back_ios, color: AppColors.white),
-        onPressed: () => Get.back(),
-      ),
       center: Text(
         'Profile',
         style: CustomTextStyles.screenTitle.copyWith(color: AppColors.white),

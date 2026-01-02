@@ -31,14 +31,6 @@ class DoctorDetailsScreen extends GetView<DoctorDetailsController> {
           return Column(
             children: [
               AppHeader(
-                leading: HeaderButton(
-                  onTap: Get.back,
-                  child: Icon(
-                    Icons.arrow_back_ios_new,
-                    size: 16.sp,
-                    color: Colors.black,
-                  ),
-                ),
                 center: HeaderTitle(doctor.name),
                 trailing: HeaderButton(
                   onTap: () {},
