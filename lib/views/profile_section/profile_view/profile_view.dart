@@ -1,18 +1,17 @@
-import 'package:appoitment_app/routes/app_routes.dart';
-import 'package:appoitment_app/views/profile_section/profile_controller/personal_info_controller.dart';
-import 'package:appoitment_app/widgets/general_widgets/bottom_nav_bar/controller/bottom_nav_bar_controller.dart';
+import 'package:appointment_app/core/constant/app_colors.dart';
+import 'package:appointment_app/core/constant/app_icons.dart';
+import 'package:appointment_app/widgets/general_widgets/bottom_nav_bar/bottom_nav_view/bottom_nav_bar.dart';
+import 'package:appointment_app/widgets/general_widgets/bottom_nav_bar/controller/bottom_nav_bar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:appoitment_app/core/constant/app_colors.dart';
-import 'package:appoitment_app/widgets/general_widgets/bottom_nav_bar/bottom_nav_view/bottom_nav_bar.dart';
 import 'package:get/get.dart';
 
+import '../../../routes/app_routes.dart';
+import '../../../widgets/general_widgets/custom_divider.dart';
 import 'widgets/profile_header.dart';
 import 'widgets/profile_info.dart';
 import 'widgets/profile_tabs.dart';
 import 'widgets/profile_tile.dart';
-import '../../../widgets/general_widgets/custom_divider.dart';
-import 'package:appoitment_app/core/constant/app_icons.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -20,7 +19,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final NavigationController navCtrl = Get.put(NavigationController());
-    
+
     return Scaffold(
       backgroundColor: AppColors.white,
       bottomNavigationBar: const CustomBottomNavBar(),

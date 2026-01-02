@@ -1,17 +1,18 @@
-import 'package:appoitment_app/core/constant/app_colors.dart';
-import 'package:appoitment_app/core/constant/app_images.dart';
-import 'package:appoitment_app/core/constant/text_style.dart';
-import 'package:appoitment_app/views/profile_section/profile_controller/personal_info_controller.dart';
-import 'package:appoitment_app/views/profile_section/profile_view/widgets/personal_info/personal_text_field.dart';
-import 'package:appoitment_app/views/profile_section/profile_view/widgets/personal_info/phone_text_field.dart';
-import 'package:appoitment_app/widgets/general_widgets/app_header/app_header.dart';
-import 'package:appoitment_app/widgets/general_widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../core/constant/app_colors.dart';
+import '../../../core/constant/app_images.dart';
+import '../../../core/constant/text_style.dart';
+import '../../../widgets/general_widgets/app_header/app_header.dart';
+import '../../../widgets/general_widgets/primary_button.dart';
+import '../profile_controller/personal_info_controller.dart';
+import 'widgets/personal_info/personal_text_field.dart';
+import 'widgets/personal_info/phone_text_field.dart';
+
 class PersonalInfo extends StatelessWidget {
-  PersonalInfo({Key? key}) : super(key: key);
+  const PersonalInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +25,6 @@ class PersonalInfo extends StatelessWidget {
         child: Column(
           children: [
             AppHeader(
-              leading: IconButton(
-                icon:  Icon(Icons.arrow_back_ios_new),
-                onPressed: () => Get.back(),
-              ),
               center: Text(
                 "Personal information",
                 style: CustomTextStyles.screenTitle,
@@ -97,10 +94,12 @@ class PersonalInfo extends StatelessWidget {
                   ),
                   SizedBox(height: 60.h),
                   PrimaryButton(
-                      text: "Save",
-                      onPressed: () {
-                        Get.back();
-                      }),
+                    text: "Save",
+                    onPressed: () {
+                      Get.back();
+                    },
+                    padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 16.h),
+                  ),
                   SizedBox(height: 20.h),
                 ],
               ),

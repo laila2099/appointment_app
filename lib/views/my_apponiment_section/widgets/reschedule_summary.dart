@@ -1,6 +1,6 @@
-import 'package:appoitment_app/views/home_section/booking_appointment/booking_appointment_controller/booking_controller.dart';
-import 'package:appoitment_app/views/home_section/booking_appointment/models/appointment_type.dart';
-import 'package:appoitment_app/views/home_section/booking_appointment/widgets/summary_row.dart';
+import 'package:appointment_app/views/home_section/booking_appointment/booking_appointment_controller/booking_controller.dart';
+import 'package:appointment_app/views/home_section/booking_appointment/models/appointment_type.dart';
+import 'package:appointment_app/views/home_section/booking_appointment/widgets/summary_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -39,10 +39,8 @@ class RescheduleSummary extends StatelessWidget {
           SizedBox(height: 20.h),
           Center(child: SectionTitle('Booking has been rescheduled'.tr)),
           SizedBox(height: 40.h),
-
           SectionTitle('booking_information'.tr),
           SizedBox(height: 12.h),
-
           SummaryRow(
             svgAsset: AppIcons.calendar2,
             iconBg: AppColors.secondBlue,
@@ -50,7 +48,6 @@ class RescheduleSummary extends StatelessWidget {
             title: 'date_time'.tr,
             subtitle: formatDateTime(context, a.date, a.time),
           ),
-
           SummaryRow(
             svgAsset: AppIcons.clipboard,
             iconBg: AppColors.secondGreen,
@@ -58,12 +55,9 @@ class RescheduleSummary extends StatelessWidget {
             title: 'appointment_type'.tr,
             subtitle: type.label.tr,
           ),
-
           SizedBox(height: 18.h),
-
           SectionTitle('doctor_information'.tr),
           SizedBox(height: 12.h),
-
           if (doctor != null)
             DoctorTile.details(
               name: doctor.name,
@@ -74,7 +68,6 @@ class RescheduleSummary extends StatelessWidget {
               avatar: const AssetImage(AppImages.doctor),
               showChat: false,
             ),
-
           SizedBox(height: 18.h),
         ],
       );

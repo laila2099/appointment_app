@@ -1,12 +1,10 @@
-
-import 'package:appoitment_app/core/constant/app_colors.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'app_colors.dart';
 
 class CustomTextStyles {
   CustomTextStyles._();
-
 
   static const String _fontFamily = 'Inter';
 
@@ -17,19 +15,18 @@ class CustomTextStyles {
     color: AppColors.white,
   );
 
-    static  TextStyle profileTitle = TextStyle(
+  static TextStyle profileTitle = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w600,
     fontSize: 20.sp,
     color: AppColors.black,
   );
-      static  TextStyle subTitle = TextStyle(
+  static TextStyle subTitle = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w400,
     fontSize: 14.sp,
     color: AppColors.subtitle,
   );
-
 
   static const TextStyle headline = TextStyle(
     fontFamily: _fontFamily,
@@ -45,7 +42,7 @@ class CustomTextStyles {
     color: AppColors.textField,
   );
 
-  static  TextStyle screenTitle = TextStyle(
+  static TextStyle screenTitle = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w600,
     fontSize: 18,
@@ -59,13 +56,19 @@ class CustomTextStyles {
     color: AppColors.black,
   );
 
-  static const TextStyle subtitle = TextStyle(
+  static TextStyle subtitle = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w400,
-    fontSize: 12,
+    fontSize: 12.sp,
     color: AppColors.subtitle,
   );
 
+  static const TextStyle subtitle2 = TextStyle(
+    fontFamily: _fontFamily,
+    fontWeight: FontWeight.w400,
+    fontSize: 15,
+    color: AppColors.subtitle,
+  );
 
   static TextStyle sectionTitle = TextStyle(
     fontFamily: _fontFamily,
@@ -106,6 +109,13 @@ class CustomTextStyles {
     height: 1.35,
   );
 
+  static TextStyle headline32Bold = TextStyle(
+    fontFamily: _fontFamily,
+    fontSize: 32.sp,
+    fontWeight: FontWeight.w700,
+    color: AppColors.primary,
+  );
+
   // -------- Buttons
   static TextStyle button12 = TextStyle(
     fontSize: 12.sp,
@@ -119,13 +129,55 @@ class CustomTextStyles {
     color: AppColors.primary,
   );
 
-//   //personal_info hintText field
-// static TextStyle hintText = TextStyle(
-//             fontSize: 14.sp,
-//             fontWeight: FontWeight.w500,
-//             color: const Color(0xFF242424),
-//           );
+  static TextStyle nameperson = TextStyle(
+    fontFamily: _fontFamily,
+    fontWeight: FontWeight.w700,
+    fontSize: 18.sp,
+    color: AppColors.black,
+  );
 
+  static TextStyle specialitytext = TextStyle(
+    fontFamily: _fontFamily,
+    fontWeight: FontWeight.w400,
+    fontSize: 14.sp,
+    color: AppColors.black,
+  );
+
+  static TextStyle container = TextStyle(
+    fontFamily: _fontFamily,
+    fontWeight: FontWeight.w500,
+    fontSize: 22.sp,
+    color: AppColors.white,
+    height: 1.6.h,
+  );
+
+  static TextStyle medium = TextStyle(
+    fontFamily: _fontFamily,
+    fontWeight: FontWeight.w500,
+    fontSize: 16.sp,
+    color: AppColors.black,
+  );
+
+  static TextStyle semiBold = TextStyle(
+    fontFamily: _fontFamily,
+    fontWeight: FontWeight.w600,
+    fontSize: 16.sp,
+    color: AppColors.black,
+  );
+
+  static TextStyle bold = TextStyle(
+    fontFamily: _fontFamily,
+    fontWeight: FontWeight.bold,
+    fontSize: 22.sp,
+    color: AppColors.black,
+  );
+
+  static TextStyle regular = TextStyle(
+    fontFamily: _fontFamily,
+    fontWeight: FontWeight.w400,
+    fontSize: 16.sp,
+    color: AppColors.primary,
+  );
 
   static TextStyle custom({
     double fontSize = 14,

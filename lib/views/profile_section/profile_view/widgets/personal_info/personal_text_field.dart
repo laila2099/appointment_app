@@ -1,4 +1,3 @@
-import 'package:appoitment_app/core/constant/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

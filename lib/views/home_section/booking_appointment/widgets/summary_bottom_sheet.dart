@@ -50,30 +50,25 @@ class SummaryBottomSheet extends StatelessWidget {
               ),
             ),
             SizedBox(height: 14.h),
-
             Align(
               alignment: Alignment.centerLeft,
               child: Text('payment_info'.tr, style: CustomTextStyles.label14),
             ),
             SizedBox(height: 12.h),
-
             _TotalRow(label: 'subtotal'.tr, value: _money(subtotal)),
             SizedBox(height: 10.h),
             _TotalRow(label: 'tax'.tr, value: _money(tax)),
-
             SizedBox(height: 14.h),
             Divider(color: Colors.black.withOpacity(.08), height: 1.h),
             SizedBox(height: 14.h),
-
             _TotalRow(
               label: 'payment_total'.tr,
               value: _money(total),
               bold: true,
             ),
-
             SizedBox(height: 16.h),
-
             PrimaryButton(
+              padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 16.h),
               text: 'book_now'.tr,
               onPressed: () {
                 Get.toNamed(AppRoutes.bookingConfirmed);

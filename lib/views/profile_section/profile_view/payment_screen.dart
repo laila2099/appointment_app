@@ -1,15 +1,15 @@
-import 'package:appoitment_app/core/constant/app_icons.dart';
-import 'package:appoitment_app/views/profile_section/profile_controller/payment_controller.dart';
-import 'package:appoitment_app/views/profile_section/profile_view/widgets/wallets_item.dart';
-import 'package:appoitment_app/widgets/general_widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../core/constant/app_colors.dart';
+import '../../../core/constant/app_icons.dart';
 import '../../../widgets/general_widgets/app_header/app_header.dart';
 import '../../../widgets/general_widgets/app_header/header_button.dart';
+import '../../../widgets/general_widgets/primary_button.dart';
+import '../profile_controller/payment_controller.dart';
+import 'widgets/wallets_item.dart';
 
 class PaymentScreen extends StatelessWidget {
   const PaymentScreen({Key? key}) : super(key: key);
@@ -36,10 +36,6 @@ class PaymentScreen extends StatelessWidget {
                 ),
                 onTap: () {},
               ),
-              leading: IconButton(
-                icon:  Icon(Icons.arrow_back_ios_new),
-                onPressed: () => Get.back(),
-              ),
               center: const Text('Payment'),
             ),
             SizedBox(height: 20.h),
@@ -60,10 +56,12 @@ class PaymentScreen extends StatelessWidget {
               ),
             ),
             PrimaryButton(
-                text: "Add New",
-                onPressed: () {
-                  Get.back();
-                }),
+              text: "Add New",
+              onPressed: () {
+                Get.back();
+              },
+              padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 16.h),
+            ),
           ],
         ),
       ),

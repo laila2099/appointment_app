@@ -1,12 +1,13 @@
-import 'package:appoitment_app/core/classes/utils/dialogs.dart';
-import 'package:appoitment_app/core/constant/app_colors.dart';
-import 'package:appoitment_app/core/constant/text_style.dart';
-import 'package:appoitment_app/routes/app_routes.dart';
-import 'package:appoitment_app/views/settings_section/settings_view/widgets/settings_item.dart';
-import 'package:appoitment_app/widgets/general_widgets/app_header/app_header.dart';
-import 'package:appoitment_app/widgets/general_widgets/custom_divider.dart';
+import 'package:appointment_app/core/constant/app_colors.dart';
+import 'package:appointment_app/core/constant/text_style.dart';
+import 'package:appointment_app/routes/app_routes.dart';
+import 'package:appointment_app/views/settings_section/settings_view/widgets/settings_item.dart';
+import 'package:appointment_app/widgets/general_widgets/app_header/app_header.dart';
+import 'package:appointment_app/widgets/general_widgets/custom_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../core/classes/utils/dialogs.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -18,12 +19,6 @@ class SettingsPage extends StatelessWidget {
       body: Column(
         children: [
           AppHeader(
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                Get.back();
-              },
-            ),
             center: Text(
               "Settings",
               style: CustomTextStyles.screenTitle,

@@ -1,6 +1,7 @@
-import 'package:appoitment_app/core/constant/app_icons.dart';
-import 'package:appoitment_app/models/wallets_model.dart';
 import 'package:get/get.dart';
+
+import '../../../core/constant/app_icons.dart';
+import '../../../models/wallets_model.dart';
 
 class PaymentController extends GetxController {
   final wallets = <WalletsModel>[

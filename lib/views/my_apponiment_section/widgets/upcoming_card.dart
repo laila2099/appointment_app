@@ -1,10 +1,10 @@
-import 'package:appoitment_app/core/constant/app_colors.dart';
-import 'package:appoitment_app/core/constant/app_images.dart';
-import 'package:appoitment_app/models/appoitments_details.dart';
-import 'package:appoitment_app/routes/app_routes.dart';
-import 'package:appoitment_app/views/my_apponiment_section/my_appoitment_controller/my_appoitment_controller.dart';
-import 'package:appoitment_app/views/my_apponiment_section/widgets/status_button.dart';
-import 'package:appoitment_app/widgets/general_widgets/doctor_tile.dart';
+import 'package:appointment_app/core/constant/app_colors.dart';
+import 'package:appointment_app/core/constant/app_images.dart';
+import 'package:appointment_app/models/appoitments_details.dart';
+import 'package:appointment_app/routes/app_routes.dart';
+import 'package:appointment_app/views/my_apponiment_section/my_appoitment_controller/my_appoitment_controller.dart';
+import 'package:appointment_app/views/my_apponiment_section/widgets/status_button.dart';
+import 'package:appointment_app/widgets/general_widgets/doctor_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -45,7 +45,6 @@ class UpcomingCard extends StatelessWidget {
               showChat: true,
               onChatTap: () {},
             ),
-
             SizedBox(height: 15.h),
             Container(height: 1.h, color: AppColors.separator),
             SizedBox(height: 15.h),
@@ -58,12 +57,11 @@ class UpcomingCard extends StatelessWidget {
                     controller.cancelAppointment(appt);
                   },
                 ),
-
                 SizedBox(width: 10.w),
                 StatusButton(
                   label: 'Reschedule',
                   variant: ButtonVariant.filled,
-                  onPressed: () => Get.toNamed(AppRoutes.rescedual),
+                  onPressed: () => Get.toNamed(AppRoutes.reschedule),
                 ),
               ],
             ),

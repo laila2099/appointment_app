@@ -1,8 +1,9 @@
-import 'package:appoitment_app/core/constant/app_colors.dart';
-import 'package:appoitment_app/models/wallets_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../../core/constant/app_colors.dart';
+import '../../../../models/wallets_model.dart';
 
 class WalletContainerItem extends StatelessWidget {
   final WalletsModel wallet;
@@ -56,10 +57,9 @@ class WalletContainerItem extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w500,
-                        color:  Color(0xFF242424)
-                      ),
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xFF242424)),
                     ),
                     SizedBox(height: 4.h),
                     Text(
@@ -69,7 +69,7 @@ class WalletContainerItem extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 10.sp,
                         fontWeight: FontWeight.w400,
-                        color:  Color(0xFF616161),
+                        color: Color(0xFF616161),
                       ),
                     ),
                   ],
@@ -80,7 +80,7 @@ class WalletContainerItem extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w400,
-                  color:  Color(0xFF247CFF),
+                  color: Color(0xFF247CFF),
                 ),
               ),
             ],

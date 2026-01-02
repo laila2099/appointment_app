@@ -1,4 +1,4 @@
-name: appoitment_app
+name: appointment_app
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -43,6 +43,7 @@ dependencies:
   http: ^1.6.0
   google_maps_flutter: ^2.14.0
   flutter_svg: ^2.0.10
+  intl_phone_field: ^3.2.0
   country_picker: ^2.0.26
 
 
@@ -72,7 +73,7 @@ flutter:
   assets:
       - assets/images/
       - assets/icons/
-  #   - images/a_dot_ham.jpeg
+      - assets/map_no_labels.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
@@ -89,9 +90,6 @@ flutter:
     - family: Inter
       fonts:
       - asset: assets/fonts/Inter-VariableFont_opsz,wght.ttf
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

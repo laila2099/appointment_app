@@ -22,3 +22,11 @@ subprojects {
 tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }
+
+subprojects {
+    configurations.all {
+        resolutionStrategy {
+            force("com.google.android.gms:play-services-maps:18.2.0")
+        }
+    }
+}

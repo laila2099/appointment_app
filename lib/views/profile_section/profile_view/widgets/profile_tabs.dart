@@ -1,5 +1,4 @@
-import 'package:appoitment_app/core/constant/app_colors.dart';
-import 'package:appoitment_app/core/constant/text_style.dart';
+import 'package:appointment_app/core/constant/text_style.dart';
 import 'package:flutter/material.dart';
 
 class ProfileTabs extends StatelessWidget {
@@ -20,14 +19,16 @@ class ProfileTabs extends StatelessWidget {
             Expanded(
               child: Container(
                 alignment: Alignment.center,
-                child:  Text(
+                child: Text(
                   'My Appointment',
-                  style:CustomTextStyles.body14 ,
+                  style: CustomTextStyles.body14,
                 ),
               ),
-              
             ),
-            VerticalDivider( indent: 6,endIndent: 6,),
+            VerticalDivider(
+              indent: 6,
+              endIndent: 6,
+            ),
             Expanded(
               child: Center(
                 child: Text(

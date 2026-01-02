@@ -1,18 +1,20 @@
-import 'package:appoitment_app/core/constant/app_colors.dart';
-import 'package:appoitment_app/core/constant/app_icons.dart';
-import 'package:appoitment_app/core/constant/text_style.dart';
-import 'package:appoitment_app/models/appoitments_details.dart';
-import 'package:appoitment_app/views/my_apponiment_section/widgets/appoitment_status.dart';
-import 'package:appoitment_app/widgets/general_widgets/app_header/app_header.dart';
-import 'package:appoitment_app/widgets/general_widgets/app_header/header_button.dart';
-import 'package:appoitment_app/widgets/general_widgets/app_header/header_title.dart';
+import 'package:appointment_app/core/constant/app_colors.dart';
+import 'package:appointment_app/core/constant/app_icons.dart';
+import 'package:appointment_app/core/constant/text_style.dart';
+import 'package:appointment_app/models/appoitments_details.dart';
+import 'package:appointment_app/views/my_apponiment_section/widgets/appoitment_status.dart';
+import 'package:appointment_app/widgets/general_widgets/app_header/app_header.dart';
+import 'package:appointment_app/widgets/general_widgets/app_header/header_button.dart';
+import 'package:appointment_app/widgets/general_widgets/app_header/header_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-class AppoitmentView extends StatelessWidget {
-  const AppoitmentView({super.key});
+import '../my_appoitment_controller/my_appoitment_controller.dart';
+
+class AppointmentView extends GetView<MyAppointmentsController> {
+  const AppointmentView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +26,6 @@ class AppoitmentView extends StatelessWidget {
           child: Column(
             children: [
               AppHeader(
-                leading: HeaderButton(
-                  onTap: Get.back,
-                  child: Icon(
-                    Icons.arrow_back_ios_new,
-                    size: 18.sp,
-                    color: AppColors.black,
-                  ),
-                ),
                 center: HeaderTitle("Appointments"),
                 trailing: HeaderButton(
                   onTap: () {},
@@ -63,7 +57,6 @@ class AppoitmentView extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                     color: AppColors.lightGrey,
                   ),
-
                   tabs: [
                     Tab(text: "Upcoming".tr),
                     Tab(text: "Completed".tr),

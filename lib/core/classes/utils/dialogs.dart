@@ -1,6 +1,6 @@
-import 'package:appoitment_app/widgets/helpful_widgets/logout_dialog.dart';
 import 'package:get/get.dart';
 
+import '../../../widgets/helpful_widgets/logout_dialog.dart';
 
 void showLogoutDialog() {
   Get.dialog(

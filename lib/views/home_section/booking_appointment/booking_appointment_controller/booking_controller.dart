@@ -230,8 +230,7 @@ class BookingController extends GetxController {
       final firstCard = cardMethods.isNotEmpty ? cardMethods.first : null;
       if (def != null)
         selectPayment(def);
-      else if (firstCard != null)
-        selectPayment(firstCard);
+      else if (firstCard != null) selectPayment(firstCard);
     } else if (type == 'paypal') {
       final p = paypalMethod;
       if (p != null) selectPayment(p);
@@ -287,9 +286,8 @@ class BookingController extends GetxController {
 
       // category حسب المختار (card/bank/paypal)
       final t = selectedPayment.value?.type;
-      paymentCategory.value = (t == 'card' || t == 'bank' || t == 'paypal')
-          ? t!
-          : 'card';
+      paymentCategory.value =
+          (t == 'card' || t == 'bank' || t == 'paypal') ? t! : 'card';
     } catch (e) {
       paymentError.value = e.toString();
     } finally {
@@ -299,6 +297,10 @@ class BookingController extends GetxController {
 
   void goToConfirm() {
     Get.toNamed(AppRoutes.bookingConfirmed);
+  }
+
+  void goBackAfterConfirmReschedule() {
+    Get.back();
   }
 
   @override

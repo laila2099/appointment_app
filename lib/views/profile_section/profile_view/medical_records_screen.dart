@@ -1,14 +1,14 @@
-import 'package:appoitment_app/core/constant/app_colors.dart';
-import 'package:appoitment_app/core/constant/app_icons.dart';
-import 'package:appoitment_app/core/constant/text_style.dart';
-import 'package:appoitment_app/views/profile_section/profile_view/widgets/medical_record/medical_record_section.dart';
-import 'package:appoitment_app/views/profile_section/profile_view/widgets/medical_record/medical_record_row.dart';
-import 'package:appoitment_app/widgets/general_widgets/app_header/app_header.dart';
-import 'package:appoitment_app/widgets/general_widgets/app_header/header_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
+
+import '../../../core/constant/app_colors.dart';
+import '../../../core/constant/app_icons.dart';
+import '../../../core/constant/text_style.dart';
+import '../../../widgets/general_widgets/app_header/app_header.dart';
+import '../../../widgets/general_widgets/app_header/header_button.dart';
+import 'widgets/medical_record/medical_record_row.dart';
+import 'widgets/medical_record/medical_record_section.dart';
 
 class MedicalRecordsScreen extends StatelessWidget {
   const MedicalRecordsScreen({Key? key}) : super(key: key);
@@ -24,10 +24,6 @@ class MedicalRecordsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppHeader(
-                leading: IconButton(
-                  icon: const Icon(Icons.arrow_back_ios_new),
-                  onPressed: () => Get.back(),
-                ),
                 center: Text(
                   "Medical Record",
                   style: CustomTextStyles.screenTitle,
@@ -45,15 +41,12 @@ class MedicalRecordsScreen extends StatelessWidget {
                   onTap: () {},
                 ),
               ),
-
               SizedBox(height: 32.h),
-
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
                     /// This Month
                     MedicalRecordSection(
                       title: 'This Month',

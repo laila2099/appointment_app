@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/constant/app_colors.dart';
-import '../../../../core/constant/text_style.dart';
 
 class DateChip extends StatelessWidget {
   final DateTime date;
@@ -41,9 +40,19 @@ class DateChip extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(_dow, style: CustomTextStyles.label14Semi.copyWith(color: bg)),
+            Text(_dow,
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w600,
+                  color: bg,
+                )),
             SizedBox(height: 6.h),
-            Text(_dd, style: CustomTextStyles.label14Semi.copyWith(color: fg)),
+            Text(_dd,
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w600,
+                  color: fg,
+                )),
           ],
         ),
       ),

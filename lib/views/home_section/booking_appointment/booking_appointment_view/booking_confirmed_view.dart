@@ -9,7 +9,6 @@ import '../../../../core/constant/app_images.dart';
 import '../../../../core/constant/text_style.dart';
 import '../../../../routes/app_routes.dart';
 import '../../../../widgets/general_widgets/app_header/app_header.dart';
-import '../../../../widgets/general_widgets/app_header/header_button.dart';
 import '../../../../widgets/general_widgets/app_header/header_title.dart';
 import '../../../../widgets/general_widgets/doctor_tile.dart';
 import '../../../../widgets/general_widgets/section_title.dart';
@@ -34,14 +33,6 @@ class BookingConfirmedScreen extends GetView<BookingController> {
           return Column(
             children: [
               AppHeader(
-                leading: HeaderButton(
-                  onTap: Get.back,
-                  child: Icon(
-                    Icons.arrow_back_ios_new,
-                    size: 18.sp,
-                    color: Colors.black,
-                  ),
-                ),
                 center: HeaderTitle('details'.tr),
               ),
 
@@ -68,7 +59,6 @@ class BookingConfirmedScreen extends GetView<BookingController> {
                   children: [
                     SectionTitle('booking_information'.tr),
                     SizedBox(height: 24.h),
-
                     SummaryRow(
                       svgAsset: AppIcons.calendar2,
                       iconBg: AppColors.secondBlue,
@@ -81,7 +71,6 @@ class BookingConfirmedScreen extends GetView<BookingController> {
                       ),
                     ),
                     SizedBox(height: 24.h),
-
                     SummaryRow(
                       svgAsset: AppIcons.clipboard,
                       iconBg: AppColors.secondGreen,
@@ -109,12 +98,9 @@ class BookingConfirmedScreen extends GetView<BookingController> {
                         child: Text('get_location'.tr),
                       ),
                     ),
-
                     SizedBox(height: 24.h),
-
                     SectionTitle('doctor_information'.tr),
                     SizedBox(height: 12.h),
-
                     if (doctor != null)
                       DoctorTile.details(
                         name: doctor.name,
@@ -148,7 +134,6 @@ class BookingConfirmedScreen extends GetView<BookingController> {
                         );
                       });
                     },
-
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary,
                       shape: RoundedRectangleBorder(

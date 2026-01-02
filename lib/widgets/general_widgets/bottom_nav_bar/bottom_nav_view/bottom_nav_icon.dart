@@ -1,5 +1,5 @@
-import 'package:appoitment_app/core/constant/app_colors.dart';
-import 'package:appoitment_app/widgets/general_widgets/bottom_nav_bar/controller/bottom_nav_bar_controller.dart';
+import 'package:appointment_app/core/constant/app_colors.dart';
+import 'package:appointment_app/widgets/general_widgets/bottom_nav_bar/controller/bottom_nav_bar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';

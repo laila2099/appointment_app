@@ -1,12 +1,13 @@
-import 'package:appoitment_app/core/constant/app_icons.dart';
-import 'package:appoitment_app/core/constant/text_style.dart';
-import 'package:appoitment_app/views/settings_section/settings_controller/language_controller.dart';
-import 'package:appoitment_app/widgets/general_widgets/app_header/app_header.dart';
-import 'package:appoitment_app/widgets/general_widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+
+import '../../../core/constant/app_icons.dart';
+import '../../../core/constant/text_style.dart';
+import '../../../widgets/general_widgets/app_header/app_header.dart';
+import '../../../widgets/general_widgets/primary_button.dart';
+import '../settings_controller/language_controller.dart';
 import 'widgets/language_item.dart';
 
 class LanguageScreen extends StatelessWidget {
@@ -22,12 +23,6 @@ class LanguageScreen extends StatelessWidget {
         child: Column(
           children: [
             AppHeader(
-              leading: IconButton(
-                icon: Icon(Icons.arrow_back_ios_new),
-                onPressed: () {
-                  Get.back();
-                },
-              ),
               center: Text(
                 "Language",
                 style: CustomTextStyles.screenTitle,
@@ -109,10 +104,12 @@ class LanguageScreen extends StatelessWidget {
               ),
             ),
             PrimaryButton(
-                text: "Save",
-                onPressed: () {
-                  Get.back();
-                }),
+              text: "Save",
+              onPressed: () {
+                Get.back();
+              },
+              padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 16.h),
+            ),
           ],
         ),
       ),
