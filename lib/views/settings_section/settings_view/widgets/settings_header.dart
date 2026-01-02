@@ -1,0 +1,37 @@
+import 'package:appointment_app/core/constant/app_colors.dart';
+import 'package:appointment_app/core/constant/text_style.dart';
+import 'package:appointment_app/routes/app_routes.dart';
+import 'package:appointment_app/widgets/general_widgets/app_header/app_header.dart';
+import 'package:appointment_app/widgets/general_widgets/app_header/header_button.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+
+class SettingsHeader extends StatelessWidget {
+  final String title;
+
+  const SettingsHeader({super.key, required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return AppHeader(
+      padding: EdgeInsets.only(left: 16.w ,),
+     
+      backgroundColor: AppColors.white,
+      leading: HeaderButton(
+        size: 40,
+        child: Icon(
+          Icons.arrow_back_ios_new_rounded,
+          color: AppColors.black,
+        ),
+        onTap: () {
+          Get.back();
+        },
+      ),
+      center: Text(
+        title,
+        style: CustomTextStyles.screenTitle,
+      ),
+    );
+  }
+}

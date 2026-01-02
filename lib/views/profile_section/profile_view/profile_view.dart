@@ -49,7 +49,7 @@ class ProfileScreen extends StatelessWidget {
                         const SizedBox(height: 24),
                         ProfileTile(
                           iconPath: AppIcons.personalCard,
-                          title: "Personal Information",
+                          title: "personal_information".tr,
                           iconColor: AppColors.primary,
                           bgColor: const Color(0xFFD8E7FE),
                           onTap: () {},
@@ -57,7 +57,7 @@ class ProfileScreen extends StatelessWidget {
                         const CustomDivider(),
                         ProfileTile(
                           iconPath: AppIcons.medicalRecord,
-                          title: "My Test & Diagnostic",
+                          title: "my_test_diagnostic".tr,
                           iconColor: AppColors.green,
                           bgColor: const Color(0xFFDCF4E7),
                           onTap: () {},
@@ -65,7 +65,7 @@ class ProfileScreen extends StatelessWidget {
                         const CustomDivider(),
                         ProfileTile(
                           iconPath: AppIcons.wallet,
-                          title: "Payment",
+                          title: "payment".tr,
                           iconColor: AppColors.red,
                           bgColor: const Color(0xFFFEE1E1),
                           onTap: () {},
