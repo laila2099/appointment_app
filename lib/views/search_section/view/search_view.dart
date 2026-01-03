@@ -20,11 +20,8 @@ class SearchView extends StatelessWidget {
       appBar: CustomAppBar(
         titel: 'Search',
         showAction: true,
-        actionicon: Icon(Icons.clear_all, color: AppColors.primary),
-        onactiontap: () {
-          searchController.clearHistory();
-        },
       ),
+      backgroundColor: AppColors.white,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
         child: Column(
@@ -36,7 +33,7 @@ class SearchView extends StatelessWidget {
                   child: CustomTextField(
                     hint: 'Search',
                     controller: searchController.searchController,
-                    prefixIcon: Icon(Icons.search, color: AppColors.primary),
+                    prefixIcon: Icon(Icons.search, color: AppColors.lightGrey),
                     onChanged: (value) {
                       searchController.addSearch(value);
                     },

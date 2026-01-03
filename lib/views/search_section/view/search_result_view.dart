@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import '../../../core/constant/app_colors.dart';
 import '../../../widgets/doctor_card.dart';
 import '../../../widgets/general_widgets/app_bar/app_bar.dart';
-import '../../../widgets/general_widgets/bottom_nav_bar/bottom_nav_view/bottom_nav_bar.dart';
 import '../../../widgets/helpful_widgets/text_field_widget.dart';
 import '../controller/search_result_controller.dart';
 

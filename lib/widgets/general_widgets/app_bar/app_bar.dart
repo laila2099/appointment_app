@@ -29,7 +29,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-
       scrolledUnderElevation: 0,
 
       backgroundColor: AppColors.white,
@@ -58,7 +57,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
       leading: Padding(
-
         padding: EdgeInsets.all(8.r),
         child: InkWell(
           onTap: () => Navigator.pop(context),
