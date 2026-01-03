@@ -145,7 +145,7 @@ class FillYourProfileView extends StatelessWidget {
                 child: CustomPrimaryButton(
                   label: "Submit",
                   onTap: () {
-                    Get.toNamed(AppRoutes.main);
+                    Get.toNamed(AppRoutes.bottomnavbar);
                   },
                 ),
               ),

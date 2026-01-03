@@ -14,6 +14,13 @@ class AppIcons {
   static const String calendar2 = "${basePath}calendar-2.svg";
   static const String clipboard = "${basePath}clipboard-text.svg";
   static const String card = "${basePath}Mastercard logo.svg";
+  static const String scanner = "${basePath}scanner.svg";
+  static const String paypal = "${basePath}paypal_logo.svg";
+  static const String master_card = "${basePath}Mastercard_logo.svg";
+  static const String applepay = "${basePath}applepay_logo.svg";
+  static const String payoneer = "${basePath}payoneer_logo.svg";
+  static const String dana = "${basePath}dana_logo.svg";
+  static const String three_point = "${basePath}three_point.svg";
 
   static const String cardiologist = "${basePath}cardiologist.svg";
   static const String dentistry = "${basePath}dentistry.svg";

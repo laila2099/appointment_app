@@ -16,12 +16,6 @@ class HelpPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppHeader(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Get.back();
-          },
-        ),
         center: Text(
           "Notification",
           style: CustomTextStyles.screenTitle,

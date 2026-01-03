@@ -20,12 +20,6 @@ class SecurityPage extends StatelessWidget {
       body: Column(
         children: [
           AppHeader(
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                Get.back();
-              },
-            ),
             center: Text(
               "Security",
               style: CustomTextStyles.screenTitle,

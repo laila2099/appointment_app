@@ -2,14 +2,16 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' hide TextField;
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
+
 import '../../../core/constant/app_colors.dart';
 import '../../../core/constant/app_images.dart';
 import '../../../core/constant/text_style.dart';
+import '../../../routes/app_routes.dart';
 import '../../../widgets/helpful_widgets/primary_button_widget.dart';
-import '../forgot_password/forgot_password_screens/forgot_password_view.dart';
-import '../widgets/socialButton.dart';
 import '../../../widgets/helpful_widgets/text_field_widget.dart';
+import '../forgot_password/forgot_password_screens/forgot_password_view.dart';
 import '../sign_up/sign_up_view.dart';
+import '../widgets/socialButton.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -97,7 +99,9 @@ class LoginView extends StatelessWidget {
                 height: 52,
                 child: CustomPrimaryButton(
                   label: "Login",
-                  onTap: () {},
+                  onTap: () {
+                    Get.offAllNamed(AppRoutes.bottomnavbar);
+                  },
                 ),
               ),
 

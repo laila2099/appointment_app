@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+
 import '../views/auth_section/forgot_password/forgot_password_screens/forgot_password_view.dart';
 import '../views/auth_section/forgot_password/forgot_password_screens/otp_verification_view.dart';
 import '../views/auth_section/sign_in/sign_in_view.dart';
@@ -17,8 +18,13 @@ import '../views/home_section/recommendation_doctor/views/recommendation_doctor_
 import '../views/my_apponiment_section/my_appoitment_binding/my_appoitment_binding.dart';
 import '../views/my_apponiment_section/my_appoitment_view/my_appoitment_view.dart';
 import '../views/my_apponiment_section/reschedule/reschedule_view.dart';
+import '../views/profile_section/profile_binding/profile_binding.dart';
+import '../views/profile_section/profile_view/medical_records_screen.dart';
+import '../views/profile_section/profile_view/payment_screen.dart';
+import '../views/profile_section/profile_view/personal_info.dart';
 import '../views/profile_section/profile_view/profile_view.dart';
 import '../views/settings_section/settings_view/help_view.dart';
+import '../views/settings_section/settings_view/language_screen.dart';
 import '../views/settings_section/settings_view/notification_view.dart';
 import '../views/settings_section/settings_view/security_view.dart';
 import '../views/settings_section/settings_view/setting_view.dart';
@@ -71,14 +77,25 @@ final appPages = <GetPage>[
       name: AppRoutes.recommendationDoctorScreen,
       page: () => RecommendationDoctorScreen()),
 
-  // Profile
-  GetPage(name: AppRoutes.profile, page: () => const ProfileScreen()),
+  //profile
+  GetPage(
+      name: AppRoutes.profile,
+      page: () => ProfileScreen(),
+      binding: ProfileBinding()),
+  GetPage(
+      name: AppRoutes.personalInfo,
+      page: () => PersonalInfo(),
+      binding: ProfileBinding()),
+  GetPage(name: AppRoutes.paymentScreen, page: () => PaymentScreen()),
+  GetPage(
+      name: AppRoutes.medicalRecordsScreen, page: () => MedicalRecordsScreen()),
 
   // Settings
   GetPage(name: AppRoutes.settingsPage, page: () => const SettingsPage()),
   GetPage(name: AppRoutes.notificationPage, page: () => NotificationPage()),
   GetPage(name: AppRoutes.helpPage, page: () => HelpPage()),
   GetPage(name: AppRoutes.securityPage, page: () => SecurityPage()),
+  GetPage(name: AppRoutes.languageScreen, page: () => LanguageScreen()),
 
   // Booking
   GetPage(
@@ -99,10 +116,5 @@ final appPages = <GetPage>[
     name: AppRoutes.reschedule,
     page: () => const ReschedualScreen(),
     binding: BookingBinding(),
-  ),
-  GetPage(
-    name: AppRoutes.main,
-    page: () => MainLayout(),
-    binding: BottomNavBarBinding(),
   ),
 ];
