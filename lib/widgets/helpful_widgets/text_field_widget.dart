@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../../../core/constant/app_colors.dart';
-import '../../../../core/constant/text_style.dart';
+
+import '../../core/constant/app_colors.dart';
+import '../../core/constant/text_style.dart';
 
 class CustomTextField extends StatelessWidget {
   final String hint;
@@ -10,6 +12,7 @@ class CustomTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final String? Function(String?)? validator;
+  final ValueChanged<String>? onChanged; // <-- اضف هذا
 
   const CustomTextField({
     super.key,
@@ -20,6 +23,7 @@ class CustomTextField extends StatelessWidget {
     this.suffixIcon,
     this.prefixIcon,
     this.validator,
+    this.onChanged, // <-- اضف هذا
   });
 
   @override
@@ -30,6 +34,7 @@ class CustomTextField extends StatelessWidget {
       obscureText: isPassword,
       validator: validator,
       style: CustomTextStyles.textField,
+      onChanged: onChanged, // <-- اربط ال callback هنا
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: CustomTextStyles.subtitle,

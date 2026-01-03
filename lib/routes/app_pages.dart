@@ -15,6 +15,9 @@ import '../views/home_section/find_nearby/views/find_nearby_screen.dart';
 import '../views/home_section/home_screen/view/home_screen.dart';
 import '../views/home_section/notification/views/notification_screen.dart';
 import '../views/home_section/recommendation_doctor/views/recommendation_doctor_screen.dart';
+import '../views/inbox_section/inbox_binding/chat_binding.dart';
+import '../views/inbox_section/view/chat_view.dart' show ChatView;
+import '../views/inbox_section/view/inbox_view.dart';
 import '../views/my_apponiment_section/my_appoitment_binding/my_appoitment_binding.dart';
 import '../views/my_apponiment_section/my_appoitment_view/my_appoitment_view.dart';
 import '../views/my_apponiment_section/reschedule/reschedule_view.dart';
@@ -23,6 +26,10 @@ import '../views/profile_section/profile_view/medical_records_screen.dart';
 import '../views/profile_section/profile_view/payment_screen.dart';
 import '../views/profile_section/profile_view/personal_info.dart';
 import '../views/profile_section/profile_view/profile_view.dart';
+import '../views/search_section/search_binding/search_binding.dart';
+import '../views/search_section/search_binding/search_result_binding.dart';
+import '../views/search_section/view/search_result_view.dart';
+import '../views/search_section/view/search_view.dart';
 import '../views/settings_section/settings_view/help_view.dart';
 import '../views/settings_section/settings_view/language_screen.dart';
 import '../views/settings_section/settings_view/notification_view.dart';
@@ -116,5 +123,25 @@ final appPages = <GetPage>[
     name: AppRoutes.reschedule,
     page: () => const ReschedualScreen(),
     binding: BookingBinding(),
+  ),
+  // Inbox Page
+  GetPage(
+    name: AppRoutes.inbox,
+    page: () => const InboxView(), // تأكد إنه عندك InboxScreen موجودة
+  ),
+  GetPage(
+    name: AppRoutes.chat,
+    page: () => ChatView(),
+    binding: ChatBinding(), // هاد عشان يتحمل ChatController تلقائياً
+  ),
+  GetPage(
+    name: AppRoutes.searchresult, // قم بتحديد اسم URL المناسب
+    page: () => const SearchResultView(),
+    binding: SearchResultBinding(), // ربط الـ SearchBinding
+  ),
+  GetPage(
+    name: AppRoutes.search,
+    page: () => const SearchView(),
+    binding: SearchBinding(), // <--- مهم
   ),
 ];

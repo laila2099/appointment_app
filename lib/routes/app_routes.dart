@@ -33,4 +33,9 @@ class AppRoutes {
   static const findNearbyScreen = '/findNearbyScreen';
   static const doctorSpecialtiesScreen = '/doctorSpecialtiesScreen';
   static const recommendationDoctorScreen = '/recommendationDoctorScreen';
+
+  static const chat = '/chat';
+  static const inbox = '/inbox';
+  static const String search = '/search';
+  static const String searchresult = '/searchresult';
 }
