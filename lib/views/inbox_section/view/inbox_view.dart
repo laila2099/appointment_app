@@ -1,3 +1,4 @@
+import 'package:appointment_app/views/inbox_section/view/widget/inbox_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,7 +9,6 @@ import '../../../widgets/general_widgets/bottom_nav_bar/bottom_nav_view/bottom_n
 import '../../../widgets/search/search_text_field.dart';
 
 import '../controller/inbox_controller.dart';
-import '../widget/inbox_item.dart';
 
 class InboxView extends GetView<InboxController> {
   const InboxView({super.key});
@@ -28,14 +28,12 @@ class InboxView extends GetView<InboxController> {
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: Column(
           children: [
-            /// 🔍 reusable search widget
             const SearchTextField(
               hintText: 'Search Message',
             ),
 
             SizedBox(height: 20.h),
 
-            /// 📩 Inbox list
             Expanded(
               child: Obx(
                     () => ListView.separated(

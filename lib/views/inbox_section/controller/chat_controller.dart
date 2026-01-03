@@ -10,7 +10,6 @@ class ChatController extends GetxController {
 
     messages.add(Message(text: text, time: DateTime.now(), isUser: true));
 
-    // محاكاة رد الدكتور
     Future.delayed(Duration(seconds: 1), () {
       messages.add(Message(
           text: 'Fine, how long has the complaint been?',

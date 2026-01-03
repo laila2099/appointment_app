@@ -32,4 +32,6 @@ class AppRoutes {
 
   static const chat = '/chat';
   static const inbox = '/inbox';
+  static const String search = '/search';
+  static const String searchresult = '/searchresult';
 }

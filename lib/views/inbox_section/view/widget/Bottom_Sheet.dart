@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../controller/inbox_controller.dart';
-import '../inbox_binding/inbox_bottom_sheet_binding.dart';
+import '../../../../core/constant/app_colors.dart';
+import '../../../../widgets/search/search_text_field.dart';
+import '../../controller/inbox_controller.dart';
+import '../../inbox_binding/inbox_bottom_sheet_binding.dart';
+
 import 'inbox_item.dart';
-import '../../../widgets/search/search_text_field.dart';
-import '../../../core/constant/app_colors.dart';
+
 
 void showInboxSheet(BuildContext context) {
   InboxBottomSheetBinding().dependencies();

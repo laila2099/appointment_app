@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/constant/app_colors.dart';
-import '../model/inbox_model.dart';
+import '../../../../core/constant/app_colors.dart';
+import '../../model/inbox_model.dart';
+
+
 
 class InboxItem extends StatelessWidget {
   final InboxModel model;

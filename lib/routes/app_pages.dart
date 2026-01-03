@@ -21,6 +21,10 @@ import '../views/my_apponiment_section/my_appoitment_binding/my_appoitment_bindi
 import '../views/my_apponiment_section/my_appoitment_view/my_appoitment_view.dart';
 import '../views/my_apponiment_section/reschedule/reschedule_view.dart';
 import '../views/profile_section/profile_view/profile_view.dart';
+import '../views/search_section/search_binding/search_binding.dart';
+import '../views/search_section/search_binding/search_result_binding.dart';
+import '../views/search_section/view/search_result_view.dart';
+import '../views/search_section/view/search_view.dart';
 import '../views/settings_section/settings_view/help_view.dart';
 import '../views/settings_section/settings_view/notification_view.dart';
 import '../views/settings_section/settings_view/security_view.dart';
@@ -104,5 +108,17 @@ final appPages = <GetPage>[
     page: () =>  ChatView(),
     binding: ChatBinding(), // هاد عشان يتحمل ChatController تلقائياً
   ),
+  GetPage(
+    name: AppRoutes.searchresult, // قم بتحديد اسم URL المناسب
+    page: () => const SearchResultView(),
+    binding: SearchResultBinding(), // ربط الـ SearchBinding
+  ),
+  GetPage(
+    name: AppRoutes.search,
+    page: () => const SearchView(),
+    binding: SearchBinding(), // <--- مهم
+  ),
+
+
 
 ];

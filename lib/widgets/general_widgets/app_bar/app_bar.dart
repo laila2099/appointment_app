@@ -1,10 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../core/constant/app_colors.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String titel;
-  final String? subTitle;          // جديد
+  final String? subTitle;
   final bool showAction;
   final VoidCallback? onactiontap;
   final Widget? actionicon;
@@ -13,7 +15,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
     super.key,
     required this.titel,
-    this.subTitle,                  // جديد
+    this.subTitle,
     this.showAction = false,
     this.onactiontap,
     this.actionicon,
@@ -30,9 +32,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       scrolledUnderElevation: 0,
       backgroundColor: AppColors.white,
       elevation: 0,
-      centerTitle: false, // الأفضل يكون start مع subTitle
+      centerTitle: true, // <-- النص بالمنتصف الآن
       title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center, // <-- لتوسيط النص
         children: [
           Text(
             titel,
