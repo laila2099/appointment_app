@@ -79,7 +79,6 @@ class SearchView extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: CustomBottomNavBar(),
     );
   }
 }

@@ -17,13 +17,11 @@ class InboxView extends GetView<InboxController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-
       appBar: const CustomAppBar(
         titel: 'Message',
         showAction: true,
         actionicon: Icon(Icons.add),
       ),
-
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: Column(
@@ -31,12 +29,10 @@ class InboxView extends GetView<InboxController> {
             const SearchTextField(
               hintText: 'Search Message',
             ),
-
             SizedBox(height: 20.h),
-
             Expanded(
               child: Obx(
-                    () => ListView.separated(
+                () => ListView.separated(
                   itemCount: controller.inboxList.length,
                   itemBuilder: (context, index) {
                     return InboxItem(
@@ -56,8 +52,6 @@ class InboxView extends GetView<InboxController> {
           ],
         ),
       ),
-
-      bottomNavigationBar: const CustomBottomNavBar(),
     );
   }
 }

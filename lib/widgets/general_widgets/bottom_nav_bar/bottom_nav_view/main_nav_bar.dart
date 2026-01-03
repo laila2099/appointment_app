@@ -1,11 +1,13 @@
 import 'package:appointment_app/views/home_section/home_screen/view/home_screen.dart';
+import 'package:appointment_app/views/inbox_section/view/inbox_view.dart';
+import 'package:appointment_app/views/my_apponiment_section/my_appoitment_view/my_appoitment_view.dart';
+import 'package:appointment_app/views/profile_section/profile_view/profile_view.dart';
+import 'package:appointment_app/views/search_section/controller/search_controller.dart';
+import 'package:appointment_app/views/search_section/view/search_view.dart';
 import 'package:appointment_app/widgets/general_widgets/bottom_nav_bar/bottom_nav_view/bottom_nav_bar.dart';
 import 'package:appointment_app/widgets/general_widgets/bottom_nav_bar/controller/bottom_nav_bar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../views/my_apponiment_section/my_appoitment_view/my_appoitment_view.dart';
-import '../../../../views/profile_section/profile_view/profile_view.dart';
 
 class MainLayout extends StatelessWidget {
   MainLayout({super.key});
@@ -14,14 +16,18 @@ class MainLayout extends StatelessWidget {
 
   final List<Widget> _screens = [
     HomeScreen(),
-    const Center(child: Text("Chat")),
-    const Center(child: Text("Search")),
+    const InboxView(),
+    const SearchView(),
     const AppointmentView(),
     const ProfileScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
+    if (!Get.isRegistered<SearchViewController>()) {
+      Get.lazyPut<SearchViewController>(() => SearchViewController());
+    }
+
     return Scaffold(
       extendBody: true,
       body: Obx(
@@ -30,7 +36,7 @@ class MainLayout extends StatelessWidget {
       bottomNavigationBar: SafeArea(
         top: false,
         child: Padding(
-          padding: EdgeInsets.only(bottom: 10),
+          padding: const EdgeInsets.only(bottom: 10),
           child: CustomBottomNavBar(),
         ),
       ),

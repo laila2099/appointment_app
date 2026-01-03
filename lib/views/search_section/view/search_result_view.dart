@@ -14,7 +14,7 @@ class SearchResultView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final searchController = Get.put(SearchResultController());
+    final searchController = Get.find<SearchResultController>();
 
     final List<String> allTabs = ['All', 'General', 'Neurologic', 'Pediatric'];
 
@@ -68,24 +68,22 @@ class SearchResultView extends StatelessWidget {
               ],
             ),
             SizedBox(height: 12.h),
-
             Obx(() => SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: allTabs.map((tab) {
-                  return _buildTab(
-                    label: tab,
-                    isSelected: selectedTab.value == tab,
-                    onTap: () {
-                      selectedTab.value = tab;
-                    },
-                    isSmall: true,
-                  );
-                }).toList(),
-              ),
-            )),
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: allTabs.map((tab) {
+                      return _buildTab(
+                        label: tab,
+                        isSelected: selectedTab.value == tab,
+                        onTap: () {
+                          selectedTab.value = tab;
+                        },
+                        isSmall: true,
+                      );
+                    }).toList(),
+                  ),
+                )),
             SizedBox(height: 20.h),
-
             Expanded(
               child: Obx(() {
                 var doctorList = searchController.doctorsList;
@@ -116,7 +114,6 @@ class SearchResultView extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: CustomBottomNavBar(),
     );
   }
 
@@ -133,7 +130,8 @@ class SearchResultView extends StatelessWidget {
         borderRadius: BorderRadius.circular(30.r),
         child: Container(
           padding: EdgeInsets.symmetric(
-              horizontal: isSmall ? 12.w : 20.w, vertical: isSmall ? 6.h : 12.h),
+              horizontal: isSmall ? 12.w : 20.w,
+              vertical: isSmall ? 6.h : 12.h),
           decoration: BoxDecoration(
             color: isSelected ? AppColors.primary : AppColors.secondBlue,
             borderRadius: BorderRadius.circular(30.r),
