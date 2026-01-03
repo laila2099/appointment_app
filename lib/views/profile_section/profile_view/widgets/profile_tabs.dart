@@ -1,5 +1,6 @@
 import 'package:appointment_app/core/constant/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProfileTabs extends StatelessWidget {
   const ProfileTabs({super.key});
@@ -17,11 +18,16 @@ class ProfileTabs extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-              child: Container(
-                alignment: Alignment.center,
-                child: Text(
-                  'My Appointment',
-                  style: CustomTextStyles.body14,
+
+              child: InkWell(
+                onTap: (){},
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'my_appointment'.tr,
+                    style: CustomTextStyles.body14,
+                  ),
+
                 ),
               ),
             ),
@@ -30,10 +36,15 @@ class ProfileTabs extends StatelessWidget {
               endIndent: 6,
             ),
             Expanded(
-              child: Center(
-                child: Text(
-                  'Medical records',
-                  style: CustomTextStyles.body14,
+              child: InkWell(
+                onTap: (){},
+                child: Container(
+                  child: Center(
+                    child: Text(
+                      'medical_records'.tr,
+                      style: CustomTextStyles.body14,
+                    ),
+                  ),
                 ),
               ),
             ),

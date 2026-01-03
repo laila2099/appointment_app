@@ -15,7 +15,7 @@ class ProfileHeader extends StatelessWidget {
       showBorder: false,
       backgroundColor: AppColors.primary,
       center: Text(
-        'Profile',
+        'profile'.tr,
         style: CustomTextStyles.screenTitle.copyWith(color: AppColors.white),
       ),
       trailing: IconButton(

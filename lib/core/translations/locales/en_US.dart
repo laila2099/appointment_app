@@ -59,4 +59,35 @@ const Map<String, String> enUS = {
   "give_rate": "Give Rate",
   "share_feedback": "Share your feedback about the doctor",
   "your_review": "Your review",
+
+  // -------------------- Profile Section --------------------
+  "profile": "Profile",
+  "personal_information": "Personal Information",
+  "my_test_diagnostic": "My Test & Diagnostic",
+  "payment": "Payment",
+  "my_appointment": "My Appointment",
+  "medical_records": "Medical records",
+
+  // -------------------- Settings Section --------------------
+  "settings": "Settings",
+  "notification": "Notification",
+  "faq": "FAQ",
+  "security": "Security",
+  "language": "Language",
+  "logout": "Logout",
+
+  // -------------------- Notification Settings --------------------
+  "notification_from_docnow": "Notification from DocNow",
+  "sound": "Sound",
+  "vibrate": "Vibrate",
+  "app_updates": "App Updates",
+  "special_offers": "Special Offers",
+
+  // -------------------- Security Settings --------------------
+  "remember_password": "Remember password",
+  "face_id": "Face ID",
+  "pin": "PIN",
+  "google_authenticator": "Google Authenticator",
+
+ 
 };

@@ -1,5 +1,6 @@
 import 'package:appointment_app/core/constant/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 Widget switchTile({
@@ -7,7 +8,7 @@ Widget switchTile({
   required RxBool value,
 }) {
   return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 20),
+    padding:  EdgeInsets.symmetric(horizontal: 24.w),
     child: Row(
       children: [
         Expanded(

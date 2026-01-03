@@ -1,10 +1,13 @@
+
 import 'package:appointment_app/core/constant/app_colors.dart';
 import 'package:appointment_app/core/constant/text_style.dart';
 import 'package:appointment_app/views/settings_section/settings_controller/security_controller.dart';
+import 'package:appointment_app/views/settings_section/settings_view/widgets/settings_header.dart';
 import 'package:appointment_app/views/settings_section/settings_view/widgets/settings_item.dart';
 import 'package:appointment_app/views/settings_section/settings_view/widgets/switch_tile.dart';
 import 'package:appointment_app/widgets/general_widgets/app_header/app_header.dart';
 import 'package:appointment_app/widgets/general_widgets/custom_divider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,29 +22,30 @@ class SecurityPage extends StatelessWidget {
       backgroundColor: AppColors.white,
       body: Column(
         children: [
-          AppHeader(
-            center: Text(
-              "Security",
-              style: CustomTextStyles.screenTitle,
-            ),
-            trailing: Text(""),
+
+
+
+          SettingsHeader(
+            title: "security".tr,
+
+
           ),
           switchTile(
-            title: 'Remember password',
+            title: 'remember_password'.tr,
             value: controller.rememberPassword,
           ),
           CustomDivider(),
           switchTile(
-            title: 'Face ID',
+            title: 'face_id'.tr,
             value: controller.faceId,
           ),
           CustomDivider(),
           switchTile(
-            title: 'PIN',
+            title: 'pin'.tr,
             value: controller.pin,
           ),
           CustomDivider(),
-          settingItem(onTap: () {}, title: "Google Authenticator"),
+          settingItem(onTap: () {}, title: "google_authenticator".tr),
         ],
       ),
     );

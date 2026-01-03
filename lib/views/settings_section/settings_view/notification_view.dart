@@ -1,8 +1,11 @@
+
 import 'package:appointment_app/core/constant/text_style.dart';
 import 'package:appointment_app/views/settings_section/settings_controller/notificaions_controllers.dart';
+import 'package:appointment_app/views/settings_section/settings_view/widgets/settings_header.dart';
 import 'package:appointment_app/views/settings_section/settings_view/widgets/switch_tile.dart';
 import 'package:appointment_app/widgets/general_widgets/app_header/app_header.dart';
 import 'package:appointment_app/widgets/general_widgets/custom_divider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,34 +20,35 @@ class NotificationPage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          AppHeader(
-            center: Text(
-              "Notification",
-              style: CustomTextStyles.screenTitle,
-            ),
+
+          SettingsHeader(
+            title: "notification".tr,
+
+    
+
           ),
           switchTile(
-            title: 'Notification from DocNow',
+            title: 'notification_from_docnow'.tr,
             value: controller.docNow,
           ),
           CustomDivider(),
           switchTile(
-            title: 'Sound',
+            title: 'sound'.tr,
             value: controller.sound,
           ),
           CustomDivider(),
           switchTile(
-            title: 'Vibrate',
+            title: 'vibrate'.tr,
             value: controller.vibrate,
           ),
           CustomDivider(),
           switchTile(
-            title: 'App Updates',
+            title: 'app_updates'.tr,
             value: controller.appUpdates,
           ),
           CustomDivider(),
           switchTile(
-            title: 'Special Offers',
+            title: 'special_offers'.tr,
             value: controller.specialOffers,
           ),
         ],

@@ -1,7 +1,5 @@
 import 'package:appointment_app/core/constant/app_colors.dart';
 import 'package:appointment_app/core/constant/app_icons.dart';
-import 'package:appointment_app/widgets/general_widgets/bottom_nav_bar/bottom_nav_view/bottom_nav_bar.dart';
-import 'package:appointment_app/widgets/general_widgets/bottom_nav_bar/controller/bottom_nav_bar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -18,8 +16,6 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final NavigationController navCtrl = Get.put(NavigationController());
-
     return Scaffold(
       backgroundColor: AppColors.white,
       body: Column(
@@ -41,7 +37,7 @@ class ProfileScreen extends StatelessWidget {
                 Positioned.fill(
                   top: 32.h,
                   child: SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     child: Column(
                       children: [
                         const ProfileInfo(),
@@ -50,7 +46,7 @@ class ProfileScreen extends StatelessWidget {
                         const SizedBox(height: 24),
                         ProfileTile(
                           iconPath: AppIcons.personalCard,
-                          title: "Personal Information",
+                          title: "personal_information".tr,
                           iconColor: AppColors.primary,
                           bgColor: const Color(0xFFD8E7FE),
                           onTap: () {
@@ -60,7 +56,7 @@ class ProfileScreen extends StatelessWidget {
                         const CustomDivider(),
                         ProfileTile(
                           iconPath: AppIcons.medicalRecord,
-                          title: "My Test & Diagnostic",
+                          title: "my_test_diagnostic".tr,
                           iconColor: AppColors.green,
                           bgColor: const Color(0xFFDCF4E7),
                           onTap: () {
@@ -70,7 +66,7 @@ class ProfileScreen extends StatelessWidget {
                         const CustomDivider(),
                         ProfileTile(
                           iconPath: AppIcons.wallet,
-                          title: "Payment",
+                          title: "payment".tr,
                           iconColor: AppColors.red,
                           bgColor: const Color(0xFFFEE1E1),
                           onTap: () {
