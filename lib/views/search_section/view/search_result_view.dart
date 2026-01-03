@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/constant/app_colors.dart';
+import '../../../core/constant/app_icons.dart';
 import '../../../widgets/doctor_card.dart';
 import '../../../widgets/general_widgets/app_bar/app_bar.dart';
 import '../../../widgets/general_widgets/bottom_nav_bar/bottom_nav_view/bottom_nav_bar.dart';
 import '../../../widgets/helpful_widgets/text_field_widget.dart';
 import '../controller/search_result_controller.dart';
+import '../widget/custom_tab.dart';
+import '../widget/sort_by_bottom_sheet.dart'; // استدعاء البوتوم شيت
 
 class SearchResultView extends StatelessWidget {
   const SearchResultView({super.key});
@@ -17,10 +21,10 @@ class SearchResultView extends StatelessWidget {
     final searchController = Get.put(SearchResultController());
 
     final List<String> allTabs = ['All', 'General', 'Neurologic', 'Pediatric'];
-
     final selectedTab = ''.obs;
 
     return Scaffold(
+      backgroundColor: AppColors.white,
       appBar: CustomAppBar(
         titel: 'Search',
       ),
@@ -36,13 +40,46 @@ class SearchResultView extends StatelessWidget {
                   child: CustomTextField(
                     hint: 'Search for doctors...',
                     controller: searchController.searchController,
-                    prefixIcon: Icon(Icons.search, color: AppColors.primary),
+                    prefixIcon: Padding(
+                      padding: EdgeInsets.all(12.0),
+                      child: SvgPicture.asset(
+                        AppIcons.search,
+                        width: 20.w,
+                        height: 20.h,
+                        color: AppColors.lightGrey,
+                      ),
+                    ),
                     onChanged: (value) {
                       searchController.searchDoctors(value);
                     },
                   ),
                 ),
+
+                SizedBox(width: 8.w),
+
+                InkWell(
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+                      ),
+                      builder: (context) => const SortByBottomSheet(),
+                    );
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: SvgPicture.asset(
+                      AppIcons.sort,
+                      width: 24.w,
+                      height: 24.h,
+                    ),
+                  ),
+                ),
+
                 SizedBox(width: 12.w),
+
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -67,24 +104,48 @@ class SearchResultView extends StatelessWidget {
                 ),
               ],
             ),
+
             SizedBox(height: 12.h),
 
-            Obx(() => SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: allTabs.map((tab) {
-                  return _buildTab(
-                    label: tab,
-                    isSelected: selectedTab.value == tab,
-                    onTap: () {
-                      selectedTab.value = tab;
-                    },
-                    isSmall: true,
-                  );
-                }).toList(),
+            // Tabs
+            Obx(
+                  () => SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: allTabs.map((tab) {
+                    return CustomTab(
+                      label: tab,
+                      isSelected: selectedTab.value == tab,
+                      onTap: () {
+                        selectedTab.value = tab;
+                      },
+                      isSmall: true,
+                    );
+                  }).toList(),
+                ),
               ),
-            )),
-            SizedBox(height: 20.h),
+            ),
+
+            SizedBox(height: 12.h),
+
+            Obx(() {
+              int count = searchController.doctorsList.length;
+              return Container(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(vertical: 4.h),
+                child: Text(
+                  "$count founds",
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.black,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+              );
+            }),
+
+            SizedBox(height: 12.h),
 
             Expanded(
               child: Obx(() {
@@ -116,39 +177,7 @@ class SearchResultView extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: CustomBottomNavBar(),
-    );
-  }
-
-  Widget _buildTab({
-    required String label,
-    required bool isSelected,
-    required VoidCallback onTap,
-    bool isSmall = false,
-  }) {
-    return Padding(
-      padding: EdgeInsets.only(right: 8.w),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(30.r),
-        child: Container(
-          padding: EdgeInsets.symmetric(
-              horizontal: isSmall ? 12.w : 20.w, vertical: isSmall ? 6.h : 12.h),
-          decoration: BoxDecoration(
-            color: isSelected ? AppColors.primary : AppColors.secondBlue,
-            borderRadius: BorderRadius.circular(30.r),
-            border: Border.all(color: AppColors.primary, width: 1.5.w),
-          ),
-          child: Text(
-            label,
-            style: TextStyle(
-              color: isSelected ? AppColors.white : AppColors.primary,
-              fontSize: isSmall ? 14.sp : 16.sp,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
-      ),
+      bottomNavigationBar: const CustomBottomNavBar(),
     );
   }
 }

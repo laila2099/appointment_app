@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart'; // <-- لازم تضيفها
 
 import '../../core/constant/app_colors.dart';
 import '../../core/constant/text_style.dart';
@@ -11,8 +12,12 @@ class CustomTextField extends StatelessWidget {
   final bool isPassword;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
+  final String? prefixIconPath; // <-- مسار أيقونة SVG
+  final String? suffixIconPath; // <-- مسار أيقونة SVG
   final String? Function(String?)? validator;
-  final ValueChanged<String>? onChanged; // <-- اضف هذا
+  final ValueChanged<String>? onChanged;
+  final TextStyle? style; // ← خاصية style اختيارية
+  final ValueChanged<String>? onFieldSubmitted; // ← أضفنا onFieldSubmitted
 
   const CustomTextField({
     super.key,
@@ -22,8 +27,12 @@ class CustomTextField extends StatelessWidget {
     this.isPassword = false,
     this.suffixIcon,
     this.prefixIcon,
+    this.prefixIconPath,
+    this.suffixIconPath,
     this.validator,
-    this.onChanged, // <-- اضف هذا
+    this.onChanged,
+    this.style,
+    this.onFieldSubmitted,
   });
 
   @override
@@ -33,15 +42,41 @@ class CustomTextField extends StatelessWidget {
       keyboardType: keyboardType,
       obscureText: isPassword,
       validator: validator,
-      style: CustomTextStyles.textField,
-      onChanged: onChanged, // <-- اربط ال callback هنا
+      style: style ?? CustomTextStyles.textField.copyWith(color: AppColors.black),
+      onChanged: onChanged,
+      onFieldSubmitted: onFieldSubmitted,
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: CustomTextStyles.subtitle,
-        prefixIcon: prefixIcon,
-        suffixIcon: suffixIcon,
+
+        prefixIcon: prefixIcon ??
+            (prefixIconPath != null
+                ? Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: SvgPicture.asset(
+                prefixIconPath!,
+                width: 20,
+                height: 20,
+                color: AppColors.lightGrey,
+              ),
+            )
+                : null),
+
+        suffixIcon: suffixIcon ??
+            (suffixIconPath != null
+                ? Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: SvgPicture.asset(
+                suffixIconPath!,
+                width: 20,
+                height: 20,
+                color: AppColors.lightGrey,
+              ),
+            )
+                : null),
+
         filled: true,
-        fillColor: AppColors.white,
+        fillColor: AppColors.light2Grey,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 18,
@@ -57,7 +92,7 @@ class CustomTextField extends StatelessWidget {
 
   OutlineInputBorder _border({Color? color}) {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(30),
       borderSide: BorderSide(
         color: color ?? Colors.grey.shade300,
         width: 1,
