@@ -20,7 +20,6 @@ class ProfileScreen extends StatelessWidget {
     final NavigationController navCtrl = Get.put(NavigationController());
     return Scaffold(
       backgroundColor: AppColors.white,
-      bottomNavigationBar: const CustomBottomNavBar(),
       body: Column(
         children: [
           const ProfileHeader(),

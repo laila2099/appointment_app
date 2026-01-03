@@ -20,7 +20,8 @@ class FillYourProfileView extends StatelessWidget {
           children: [
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -87,7 +88,8 @@ class FillYourProfileView extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: AppColors.textField,
-                                  border: Border.all(color: Colors.white, width: 2),
+                                  border:
+                                      Border.all(color: Colors.white, width: 2),
                                 ),
                                 child: const Icon(
                                   Icons.edit_outlined,
@@ -142,7 +144,9 @@ class FillYourProfileView extends StatelessWidget {
                 height: 52,
                 child: CustomPrimaryButton(
                   label: "Submit",
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed(AppRoutes.main);
+                  },
                 ),
               ),
             ),

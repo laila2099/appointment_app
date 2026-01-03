@@ -10,7 +10,7 @@ import '../../../../views/profile_section/profile_view/profile_view.dart';
 class MainLayout extends StatelessWidget {
   MainLayout({super.key});
 
-  final NavigationController navCtrl = Get.put(NavigationController());
+  final NavigationController navCtrl = Get.find();
 
   final List<Widget> _screens = [
     HomeScreen(),

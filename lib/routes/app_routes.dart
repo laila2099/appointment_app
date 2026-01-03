@@ -18,6 +18,7 @@ class AppRoutes {
 
   // Bottom Navigation & Home
   static const bottomnavbar = '/bottomnavbar';
+  static const main = '/main';
   static const home = '/home';
   static const notificationScreen = '/notificationScreen';
   static const doctorDetails = '/doctor-details';

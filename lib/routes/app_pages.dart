@@ -29,7 +29,6 @@ import '../widgets/general_widgets/bottom_nav_bar/bottom_nav_view/main_nav_bar.d
 import 'app_routes.dart';
 
 final appPages = <GetPage>[
-
   // Splash + Onboarding
   GetPage(name: AppRoutes.splash, page: () => const SplashScreen()),
   GetPage(name: AppRoutes.onboarding, page: () => const OnBoardingView()),
@@ -37,9 +36,11 @@ final appPages = <GetPage>[
   // Auth + Reset Password
   GetPage(name: AppRoutes.login, page: () => const LoginView()),
   GetPage(name: AppRoutes.createAccount, page: () => const CreateAccountView()),
-  GetPage(name: AppRoutes.forgotPassword, page: () => const ForgotPasswordView()),
-  GetPage(name: AppRoutes.otpVerification, page: () =>  OtpVerificationView()),
-  GetPage(name: AppRoutes.fillYourProfile, page: () => const FillYourProfileView()),
+  GetPage(
+      name: AppRoutes.forgotPassword, page: () => const ForgotPasswordView()),
+  GetPage(name: AppRoutes.otpVerification, page: () => OtpVerificationView()),
+  GetPage(
+      name: AppRoutes.fillYourProfile, page: () => const FillYourProfileView()),
 
   // Doctor Details
   GetPage(
@@ -56,20 +57,28 @@ final appPages = <GetPage>[
   ),
 
   // Home
-  GetPage(name: AppRoutes.home, page: () =>  HomeScreen()),
-  GetPage(name: AppRoutes.notificationScreen, page: () =>  NotificationScreen()),
-  GetPage(name: AppRoutes.findNearbyScreen, page: () => const FindNearbyScreen()),
-  GetPage(name: AppRoutes.doctorSpecialtiesScreen, page: () =>  DoctorSpecialitysScreen()),
-  GetPage(name: AppRoutes.recommendationDoctorScreen, page: () =>  RecommendationDoctorScreen()),
+  GetPage(
+    name: AppRoutes.home,
+    page: () => HomeScreen(),
+  ),
+  GetPage(name: AppRoutes.notificationScreen, page: () => NotificationScreen()),
+  GetPage(
+      name: AppRoutes.findNearbyScreen, page: () => const FindNearbyScreen()),
+  GetPage(
+      name: AppRoutes.doctorSpecialtiesScreen,
+      page: () => DoctorSpecialitysScreen()),
+  GetPage(
+      name: AppRoutes.recommendationDoctorScreen,
+      page: () => RecommendationDoctorScreen()),
 
   // Profile
   GetPage(name: AppRoutes.profile, page: () => const ProfileScreen()),
 
   // Settings
   GetPage(name: AppRoutes.settingsPage, page: () => const SettingsPage()),
-  GetPage(name: AppRoutes.notificationPage, page: () =>  NotificationPage()),
-  GetPage(name: AppRoutes.helpPage, page: () =>  HelpPage()),
-  GetPage(name: AppRoutes.securityPage, page: () =>  SecurityPage()),
+  GetPage(name: AppRoutes.notificationPage, page: () => NotificationPage()),
+  GetPage(name: AppRoutes.helpPage, page: () => HelpPage()),
+  GetPage(name: AppRoutes.securityPage, page: () => SecurityPage()),
 
   // Booking
   GetPage(
@@ -90,5 +99,10 @@ final appPages = <GetPage>[
     name: AppRoutes.reschedule,
     page: () => const ReschedualScreen(),
     binding: BookingBinding(),
+  ),
+  GetPage(
+    name: AppRoutes.main,
+    page: () => MainLayout(),
+    binding: BottomNavBarBinding(),
   ),
 ];
