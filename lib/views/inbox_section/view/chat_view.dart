@@ -22,53 +22,63 @@ class ChatView extends StatelessWidget {
           print('Video call tapped!');
         },
       ),
-
+      backgroundColor: AppColors.white,
       body: Column(
         children: [
           Expanded(
             child: Obx(() => ListView.builder(
-              reverse: true,
-              itemCount: controller.messages.length,
-              itemBuilder: (context, index) {
-                final message = controller.messages[controller.messages.length - 1 - index];
-                final timeStr = DateFormat('h:mm a').format(message.time);
+                  reverse: true,
+                  itemCount: controller.messages.length,
+                  itemBuilder: (context, index) {
+                    final message = controller
+                        .messages[controller.messages.length - 1 - index];
+                    final timeStr = DateFormat('h:mm a').format(message.time);
 
-                return Align(
-                  alignment: message.isUser ? Alignment.centerRight : Alignment.centerLeft,
-                  child: Column(
-                    crossAxisAlignment: message.isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: message.isUser ? AppColors.primary : Colors.grey[300],
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Text(
-                          message.text,
-                          style: TextStyle(
-                            color: message.isUser ? AppColors.white : Colors.black,
+                    return Align(
+                      alignment: message.isUser
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
+                      child: Column(
+                        crossAxisAlignment: message.isUser
+                            ? CrossAxisAlignment.end
+                            : CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 4, horizontal: 8),
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: message.isUser
+                                  ? AppColors.primary
+                                  : Colors.grey[300],
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Text(
+                              message.text,
+                              style: TextStyle(
+                                color: message.isUser
+                                    ? AppColors.white
+                                    : Colors.black,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                        child: Text(
-                          timeStr,
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey,
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 12.0),
+                            child: Text(
+                              timeStr,
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey,
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
-                );
-              },
-            )),
+                    );
+                  },
+                )),
           ),
-
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
@@ -77,9 +87,9 @@ class ChatView extends StatelessWidget {
                   onPressed: () {
                     print('Emoji tapped!');
                   },
-                  icon: Icon(Icons.emoji_emotions_outlined, color: AppColors.lightGrey),
+                  icon: Icon(Icons.emoji_emotions_outlined,
+                      color: AppColors.lightGrey),
                 ),
-
                 Expanded(
                   child: Stack(
                     alignment: Alignment.centerRight,
@@ -88,7 +98,8 @@ class ChatView extends StatelessWidget {
                         onChanged: (val) => controller.newMessage.value = val,
                         decoration: InputDecoration(
                           hintText: 'Type a message ...',
-                          contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 16),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),
                           ),
@@ -98,21 +109,25 @@ class ChatView extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           IconButton(
-                            onPressed: () { print('Attach file tapped!'); },
-                            icon: Icon(Icons.attach_file, color: AppColors.lightGrey),
+                            onPressed: () {
+                              print('Attach file tapped!');
+                            },
+                            icon: Icon(Icons.attach_file,
+                                color: AppColors.lightGrey),
                           ),
                           IconButton(
-                            onPressed: () { print('Camera tapped!'); },
-                            icon: Icon(Icons.camera_alt, color:AppColors.lightGrey),
+                            onPressed: () {
+                              print('Camera tapped!');
+                            },
+                            icon: Icon(Icons.camera_alt,
+                                color: AppColors.lightGrey),
                           ),
                         ],
                       ),
                     ],
                   ),
                 ),
-
                 const SizedBox(width: 8),
-
                 Obx(() {
                   final hasText = controller.newMessage.value.trim().isNotEmpty;
                   return FloatingActionButton(

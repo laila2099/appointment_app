@@ -21,10 +21,10 @@ class CustomTab extends StatelessWidget {
     final bool isAllTab = label == 'All';
 
     final Color backgroundColor =
-    isSelected || isAllTab ? AppColors.primary : AppColors.light2Grey;
+        isSelected || isAllTab ? AppColors.primary : AppColors.light2Grey;
 
     final Color textColor =
-    isSelected || isAllTab ? AppColors.white : AppColors.black;
+        isSelected || isAllTab ? AppColors.white : AppColors.black;
 
     return Padding(
       padding: EdgeInsets.only(right: 8.w),

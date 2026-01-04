@@ -36,7 +36,7 @@ class CustomTextField extends StatelessWidget {
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
         filled: true,
-        fillColor: AppColors.white,
+        fillColor: Color(0xfffdfdff),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 18,

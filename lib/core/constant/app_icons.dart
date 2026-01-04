@@ -21,7 +21,7 @@ class AppIcons {
   static const String payoneer = "${basePath}payoneer_logo.svg";
   static const String dana = "${basePath}dana_logo.svg";
   static const String three_point = "${basePath}three_point.svg";
-
+  static const String add = "${basePath}message-add.svg";
   static const String cardiologist = "${basePath}cardiologist.svg";
   static const String dentistry = "${basePath}dentistry.svg";
   static const String ent = "${basePath}ent.svg";

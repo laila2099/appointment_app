@@ -1,12 +1,12 @@
+import 'package:appointment_app/routes/app_routes.dart';
+import 'package:appointment_app/views/search_section/controller/search_result_controller.dart';
+import 'package:appointment_app/views/search_section/widget/sort_by_bottom_sheet.dart';
+import 'package:appointment_app/widgets/search/search_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import '../../../core/constant/app_colors.dart';
-import '../../../core/constant/app_icons.dart';
 import '../../../widgets/general_widgets/app_bar/app_bar.dart';
-import '../../../widgets/general_widgets/bottom_nav_bar/bottom_nav_view/bottom_nav_bar.dart';
-import '../../../widgets/helpful_widgets/text_field_widget.dart';
 import '../controller/search_controller.dart';
 import '../widget/recent_search_widget.dart';
 
@@ -28,53 +28,32 @@ class SearchView extends StatelessWidget {
         child: Column(
           children: [
             Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                  child: CustomTextField(
-                    hint: 'Search',
-                    controller: searchController.searchController,
-                    // style: TextStyle(
-                    //   color: AppColors.black, // ← النص أسود
-                    //   fontSize: 16.sp,
-                    // ),
-                    prefixIcon: Padding(
-                      padding: EdgeInsets.all(12.0),
-                      child: SvgPicture.asset(
-                        AppIcons.search,
-                        width: 20.w,
-                        height: 20.h,
-                        color: AppColors.lightGrey,
-                      ),
-                    ),
-                    // onFieldSubmitted: (value) {
-                    //   searchController.addSearch(value);
-                    //   searchController.searchController.clear();
-                    // },
-                  ),
-                ),
+                    child: SearchTextField(
+                        hintText: 'Search Message',
+                        onSubmitted: (value) {
+                          if (value.trim().isNotEmpty) {
+                            Get.toNamed(AppRoutes.searchresult);
+                          }
+                        })),
                 SizedBox(width: 8.w),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 18.w,
-                      height: 3.h,
-                      color: AppColors.black,
-                      margin: EdgeInsets.only(bottom: 2.h),
-                    ),
-                    Container(
-                      width: 12.w,
-                      height: 3.h,
-                      color: AppColors.black,
-                      margin: EdgeInsets.only(bottom: 2.h),
-                    ),
-                    Container(
-                      width: 6.w,
-                      height: 3.h,
-                      color: AppColors.black,
-                    ),
-                  ],
+                IconButton(
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      backgroundColor: Colors.white,
+                      builder: (_) {
+                        return const SortByBottomSheet();
+                      },
+                    );
+                  },
+                  icon: Icon(
+                    Icons.filter_list,
+                    color: AppColors.black,
+                    size: 24.w,
+                  ),
                 ),
               ],
             ),

@@ -9,7 +9,6 @@ import '../../inbox_binding/inbox_bottom_sheet_binding.dart';
 import 'inbox_item.dart';
 
 void showInboxSheet(BuildContext context) {
-  // Bindings
   InboxBottomSheetBinding().dependencies();
   final InboxController controller = Get.find<InboxController>();
 
@@ -38,31 +37,56 @@ void showInboxSheet(BuildContext context) {
               ),
               padding: EdgeInsets.symmetric(
                 horizontal: 16.w,
-                vertical: 12.h,
+                vertical: 16.h,
               ),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // الخط الصغير فوق
-                  Container(
-                    width: 50.w,
-                    height: 5.h,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[300],
-                      borderRadius: BorderRadius.circular(10.r),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        icon: Icon(Icons.close),
+                        color: AppColors.black,
+                      ),
+                      SizedBox(
+                        width: 50.w,
+                      ),
+                      const Text(
+                        'Create New Message',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Row(
+                      children: [
+                        Flexible(
+                          child: const SearchTextField(
+                            hintText: 'Search Message',
+                          ),
+                        ),
+                        SizedBox(width: 8.w),
+                        Icon(
+                          Icons.filter_list,
+                          color: AppColors.black,
+                          size: 24.w,
+                        ),
+                      ],
                     ),
                   ),
 
                   SizedBox(height: 16.h),
 
-                  // Search داخل البوتوم شيت
-                  const SearchTextField(
-                    hintText: 'Search Message',
-                  ),
-
-                  SizedBox(height: 16.h),
-
-                  // القائمة (Obx فقط هنا ✅)
-                  Expanded(
+                  // الرسائل
+                  Flexible(
                     child: Obx(() {
                       if (controller.inboxList.isEmpty) {
                         return Center(

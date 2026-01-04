@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:appointment_app/views/search_section/controller/search_result_controller.dart';
 import 'package:get/get.dart';
 
 class SearchResultBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<SearchController>(() => SearchController());
+    Get.lazyPut<SearchResultController>(() => SearchResultController());
   }
 }

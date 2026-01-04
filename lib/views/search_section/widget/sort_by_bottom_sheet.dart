@@ -11,7 +11,12 @@ class SortByBottomSheet extends StatefulWidget {
 }
 
 class _SortByBottomSheetState extends State<SortByBottomSheet> {
-  final List<String> specialities = ['All', 'General', 'Neurologic', 'Pediatric'];
+  final List<String> specialities = [
+    'All',
+    'General',
+    'Neurologic',
+    'Pediatric'
+  ];
   final List<String> ratings = ['All', '5', '4', '3'];
 
   String selectedSpeciality = 'All';
@@ -102,12 +107,17 @@ class _SortByBottomSheetState extends State<SortByBottomSheet> {
                     },
                     child: Container(
                       margin: EdgeInsets.only(right: 8.w),
-                      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
                       decoration: BoxDecoration(
-                        color: isSelected ? AppColors.primary : AppColors.light2Grey,
+                        color: isSelected
+                            ? AppColors.primary
+                            : AppColors.light2Grey,
                         borderRadius: BorderRadius.circular(30.r),
                         border: Border.all(
-                          color: isSelected ? AppColors.primary : Colors.grey.shade300,
+                          color: isSelected
+                              ? AppColors.primary
+                              : Colors.grey.shade300,
                         ),
                       ),
                       child: Row(
@@ -154,7 +164,6 @@ class _SortByBottomSheetState extends State<SortByBottomSheet> {
                 ),
               ),
             ),
-
           ],
         ),
       ),
