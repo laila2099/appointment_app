@@ -21,6 +21,7 @@ class RecentSearchWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // Header Row
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -37,7 +38,7 @@ class RecentSearchWidget extends StatelessWidget {
                 searchController.clearHistory();
               },
               child: Text(
-                'Clear History',
+                'Clear All History',
                 style: TextStyle(
                   fontSize: 14.sp,
                   color: AppColors.primary,
@@ -47,56 +48,56 @@ class RecentSearchWidget extends StatelessWidget {
             ),
           ],
         ),
+
         SizedBox(height: 10.h),
-        ...recentSearches.asMap().entries.map((entry) {
-          int index = entry.key;
-          String search = entry.value;
 
-          return Padding(
-            padding: EdgeInsets.symmetric(vertical: 6.h),
-            child: Row(
-              children: [
-                if (index < 4)
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(width: 18.w, height: 3.h, color: AppColors.black, margin: EdgeInsets.only(bottom: 2.h)),
-                      Container(width: 12.w, height: 3.h, color: AppColors.black, margin: EdgeInsets.only(bottom: 2.h)),
-                      Container(width: 6.w, height: 3.h, color: AppColors.black),
-                    ],
-                  )
-                else
-                  SizedBox(width: 18.w),
-
-                SizedBox(width: 12.w),
-
-                Expanded(
-                  child: Text(
-                    search,
-                    style: TextStyle(fontSize: 16.sp, color: textColor),
-                  ),
-                ),
-
-                InkWell(
-                  onTap: () {
-                    searchController.removeSearch(search);
-                  },
-                  child: Icon(
-                    Icons.close,
-                    color: AppColors.red,
-                  ),
-                ),
-              ],
-            ),
-          );
-        }).toList(),
-        if (recentSearches.isEmpty)
-          Center(
+        // نستخدم Flexible بدل Expanded لتجنب nested Expanded
+        Flexible(
+          child: recentSearches.isEmpty
+              ? Center(
             child: Text(
               "No recent searches",
               style: TextStyle(color: textColor),
             ),
+          )
+              : ListView.builder(
+            itemCount: recentSearches.length,
+            itemBuilder: (context, index) {
+              String search = recentSearches[index];
+              return Padding(
+                padding: EdgeInsets.symmetric(vertical: 6.h),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.access_time,
+                      color: AppColors.lightGrey,
+                      size: 18.w,
+                    ),
+                    SizedBox(width: 12.w),
+                    Expanded(
+                      child: Text(
+                        search,
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          color: textColor,
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        searchController.removeSearch(search);
+                      },
+                      child: Icon(
+                        Icons.close,
+                        color: AppColors.lightGrey,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
+        ),
       ],
     );
   }

@@ -11,8 +11,9 @@ class SearchViewController extends GetxController {
   ].obs;
 
   void addSearch(String query) {
-    if (!recentSearches.contains(query)) {
-      recentSearches.add(query);
+    final trimmed = query.trim();
+    if (trimmed.isNotEmpty && !recentSearches.contains(trimmed)) {
+      recentSearches.add(trimmed);
     }
   }
 

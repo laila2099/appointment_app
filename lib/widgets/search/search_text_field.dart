@@ -18,7 +18,6 @@ class SearchTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        /// 🔍 TextField
         Expanded(
           child: TextField(
             controller: controller,
@@ -50,29 +49,6 @@ class SearchTextField extends StatelessWidget {
 
         SizedBox(width: 12.w),
 
-        /// ☰ filter icon
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: 22.w,
-              height: 2.h,
-              color: AppColors.lightGrey,
-            ),
-            SizedBox(height: 4.h),
-            Container(
-              width: 14.w,
-              height: 2.h,
-              color: AppColors.lightGrey,
-            ),
-            SizedBox(height: 4.h),
-            Container(
-              width: 14.w,
-              height: 2.h,
-              color: AppColors.lightGrey,
-            ),
-          ],
-        ),
       ],
     );
   }

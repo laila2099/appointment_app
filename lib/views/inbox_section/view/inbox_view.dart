@@ -1,3 +1,4 @@
+import 'package:appointment_app/views/inbox_section/view/widget/Bottom_Sheet.dart';
 import 'package:appointment_app/views/inbox_section/view/widget/inbox_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,13 +24,43 @@ class InboxView extends GetView<InboxController> {
         actionicon: Icon(Icons.add),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
         child: Column(
           children: [
-            const SearchTextField(
-              hintText: 'Search Message',
+            // Row لاحتواء TextField + أيقونة الفلتر
+            Row(
+              children: [
+                Expanded(
+                  child: const SearchTextField(
+                    hintText: 'Search Message',
+                  ),
+                ),
+
+                SizedBox(width: 8.w),
+
+                // أيقونة الفلتر تستدعي showInboxSheet
+                InkWell(
+                  onTap: () {
+                    showInboxSheet(context);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(12.w),
+                    decoration: BoxDecoration(
+                      color: AppColors.light2Grey,
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    child: Icon(
+                      Icons.filter_list,
+                      color: AppColors.black,
+                      size: 24.w,
+                    ),
+                  ),
+                ),
+              ],
             ),
             SizedBox(height: 20.h),
+
+            // قائمة الرسائل
             Expanded(
               child: Obx(
                 () => ListView.separated(
