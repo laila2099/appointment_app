@@ -28,7 +28,7 @@ class AppointmentView extends GetView<MyAppointmentsController> {
               AppHeader(
                 center: HeaderTitle("Appointments"),
                 trailing: HeaderButton(
-                  onTap: () {},
+                  onTap: () { Get.toNamed(AppRoutes.search);},
                   child: SvgPicture.asset(
                     AppIcons.search,
                     width: 22.sp,
