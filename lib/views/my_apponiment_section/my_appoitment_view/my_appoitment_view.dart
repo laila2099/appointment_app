@@ -2,6 +2,7 @@ import 'package:appointment_app/core/constant/app_colors.dart';
 import 'package:appointment_app/core/constant/app_icons.dart';
 import 'package:appointment_app/core/constant/text_style.dart';
 import 'package:appointment_app/models/appoitments_details.dart';
+import 'package:appointment_app/routes/app_routes.dart';
 import 'package:appointment_app/views/my_apponiment_section/widgets/appoitment_status.dart';
 import 'package:appointment_app/widgets/general_widgets/app_header/app_header.dart';
 import 'package:appointment_app/widgets/general_widgets/app_header/header_button.dart';
@@ -28,7 +29,9 @@ class AppointmentView extends GetView<MyAppointmentsController> {
               AppHeader(
                 center: HeaderTitle("Appointments"),
                 trailing: HeaderButton(
-                  onTap: () { Get.toNamed(AppRoutes.search);},
+                  onTap: () {
+                    Get.toNamed(AppRoutes.search);
+                  },
                   child: SvgPicture.asset(
                     AppIcons.search,
                     width: 22.sp,
