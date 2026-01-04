@@ -6,7 +6,6 @@ import 'package:appointment_app/views/home_section/home_screen/controller/doctor
 import 'package:appointment_app/views/home_section/recommendation_doctor/widgets/custom_bottom_sheet.dart';
 import 'package:appointment_app/views/home_section/recommendation_doctor/widgets/custom_search.dart';
 import 'package:appointment_app/widgets/doctor_card.dart';
-import 'package:appointment_app/widgets/general_widgets/app_bar/app_bar.dart';
 import 'package:appointment_app/widgets/general_widgets/app_header/app_header.dart';
 import 'package:appointment_app/widgets/general_widgets/app_header/header_button.dart';
 import 'package:flutter/material.dart';
