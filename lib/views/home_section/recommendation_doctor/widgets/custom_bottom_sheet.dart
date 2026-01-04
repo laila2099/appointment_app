@@ -77,11 +77,11 @@ class CustomBottomSheet extends StatelessWidget {
                         },
                       ),
                     ),
-                    SizedBox(height: 24.h),
+                    SizedBox(height: 20.h),
                     Text("Rating", style: CustomTextStyles.medium),
-                    SizedBox(height: 24.h),
+                    SizedBox(height: 20.h),
                     SizedBox(
-                      height: 45.h,
+                      height: 40.h,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: controller.ratingList.length,
@@ -106,7 +106,7 @@ class CustomBottomSheet extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 40.h),
+              SizedBox(height: 35.h),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
                 child: SizedBox(
@@ -124,6 +124,7 @@ class CustomBottomSheet extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(height: 10.h),
             ],
           ),
         );

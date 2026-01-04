@@ -16,6 +16,8 @@ class NotificationScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: CustomAppBar(
+        showActionBorder: false,
+        showAction: true,
         width: 51.w,
         height: 27.h,
         titel: "Notifications",

@@ -16,7 +16,6 @@ class CustomContainer extends StatelessWidget {
       children: [
         Container(
           width: 345.w,
-          height: 167.h,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(24.r),
             color: AppColors.primary,
@@ -27,7 +26,6 @@ class CustomContainer extends StatelessWidget {
                 // top: 5.h,
                 child: Image.asset(AppImages.rectangle),
               ),
-
               Padding(
                 padding: EdgeInsets.only(left: 18.w, top: 12.h),
                 child: Column(
@@ -55,7 +53,7 @@ class CustomContainer extends StatelessWidget {
         ),
         Positioned(
           left: 200.w,
-          top: -28.h,
+          top: -32.h,
           child: Image.asset(height: 197.h, width: 136.w, AppImages.nurse),
         ),
         Positioned(
