@@ -9,6 +9,8 @@ import 'package:appointment_app/widgets/general_widgets/bottom_nav_bar/controlle
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../login_required_gate.dart';
+
 class MainLayout extends StatelessWidget {
   MainLayout({super.key});
 
@@ -31,7 +33,17 @@ class MainLayout extends StatelessWidget {
     return Scaffold(
       extendBody: true,
       body: Obx(
-        () => IndexedStack(index: navCtrl.selectedIndex, children: _screens),
+        () {
+          final index = navCtrl.selectedIndex;
+          final isProtected = navCtrl.protectedTabs.contains(index);
+          final loggedIn = navCtrl.isLoggedIn;
+          final showGate = !loggedIn && isProtected;
+
+          if (showGate) {
+            return const LoginRequiredGate();
+          }
+          return IndexedStack(index: navCtrl.selectedIndex, children: _screens);
+        },
       ),
       bottomNavigationBar: SafeArea(
         top: false,
