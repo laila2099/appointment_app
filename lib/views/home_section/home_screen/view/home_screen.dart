@@ -6,7 +6,6 @@ import 'package:appointment_app/views/home_section/home_screen/controller/doctor
 import 'package:appointment_app/views/home_section/home_screen/widgets/category_item.dart';
 import 'package:appointment_app/views/home_section/home_screen/widgets/custom_container.dart';
 import 'package:appointment_app/widgets/doctor_card.dart';
-import 'package:appointment_app/widgets/general_widgets/bottom_nav_bar/bottom_nav_view/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -38,6 +37,7 @@ class HomeScreen extends StatelessWidget {
                         "How Are You Today?!",
                         style: CustomTextStyles.subTitle,
                       ),
+                      SizedBox(height: 10.h),
                     ],
                   ),
                   Spacer(),

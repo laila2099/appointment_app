@@ -11,6 +11,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? onactiontap;
   final Widget? actionicon;
   final double? width, height;
+  final bool showActionBorder;
+
 
   const CustomAppBar({
     super.key,
@@ -21,6 +23,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.actionicon,
     this.width,
     this.height,
+    this.showActionBorder = true,
+
   });
 
   @override
@@ -91,10 +95,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 child: Container(
                   margin: EdgeInsets.all(2.r),
                   decoration: BoxDecoration(
-                    border: Border.all(
-                      color: AppColors.lightGrey,
-                      width: 1.5.w,
-                    ),
+                    border: showActionBorder
+                        ? Border.all(
+                            color: AppColors.lightGrey,
+                            width: 1.5.w,
+                          )
+                        : null,
                     borderRadius: BorderRadius.circular(8.r),
                   ),
                   child: actionicon,
