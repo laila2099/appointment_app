@@ -89,5 +89,16 @@ const Map<String, String> enUS = {
   "pin": "PIN",
   "google_authenticator": "Google Authenticator",
 
- 
+  // -------------------- Error Messages --------------------
+  "snackbar_info": "Info",
+  "snackbar_error": "Error",
+  "snackbar_success": "Success",
+  "auth_user_already_exists": "This account already exists. Please sign in.",
+  "auth_unknown_error": "Something went wrong. Please try again.",
+  "auth_session_missing": "Your session expired. Please sign in again.",
+  "profile_saved": "Profile saved successfully.",
+  "profile_save_failed": "Could not save profile. Please try again.",
+
+  "login_required_title": "Login required",
+  "login_required_subtitle": "Please log in to continue using this feature.",
 };

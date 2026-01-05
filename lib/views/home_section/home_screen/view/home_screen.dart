@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/services/auth_gate_service.dart';
+
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
   final controller = Get.put(CategoryController());
@@ -57,7 +59,9 @@ class HomeScreen extends StatelessWidget {
                           child: IconButton(
                             color: AppColors.black,
                             onPressed: () {
-                              Get.toNamed(AppRoutes.notificationScreen);
+                              Get.find<AuthGateService>().goProtected(
+                                AppRoutes.notificationScreen,
+                              );
                             },
                             icon: Icon(Icons.notifications_none),
                           ),

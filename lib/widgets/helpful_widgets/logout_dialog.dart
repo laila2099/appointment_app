@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
 import '../../../core/constant/app_colors.dart';
+import '../../core/constant/app_keys.dart';
+import '../../core/services/shared_prefrences.dart';
+import '../../routes/app_routes.dart';
 
 class LogoutDialog extends StatelessWidget {
   const LogoutDialog({super.key});
@@ -47,7 +51,7 @@ class LogoutDialog extends StatelessWidget {
                 children: [
                   Expanded(
                     child: InkWell(
-                      onTap: () { 
+                      onTap: () {
                         Get.back();
                       },
                       child: Center(
@@ -65,8 +69,15 @@ class LogoutDialog extends StatelessWidget {
                   VerticalDivider(width: 1),
                   Expanded(
                     child: InkWell(
-                      onTap: () {
-                        Get.back();
+                      onTap: () async {
+                        final prefs = Get.find<AppPreferencesService>();
+                        await prefs.remove(PrefKeys.accessToken);
+                        await prefs.remove(PrefKeys.refreshToken);
+                        await prefs.remove(PrefKeys.expiresAt);
+                        await prefs.remove(PrefKeys.userId);
+                        await prefs.setBool(PrefKeys.isLoggedIn, false);
+
+                        Get.offAllNamed(AppRoutes.login);
                       },
                       child: Center(
                         child: Text(

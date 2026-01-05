@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../../core/constant/app_colors.dart';
 import '../../../../core/constant/app_images.dart';
 import '../../../../core/constant/text_style.dart';
 import '../../../../widgets/helpful_widgets/primary_button_widget.dart';
 import '../../../widgets/helpful_widgets/text_field_widget.dart';
+import '../auth_controller/fill_your_profile_controller.dart';
 import '../widgets/phone_field_widget.dart';
-import '../../../../routes/app_routes.dart'; // للتنقل
 
 class FillYourProfileView extends StatelessWidget {
   const FillYourProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final profileController = Get.find<AuthFillProfileController>();
     return Scaffold(
       backgroundColor: AppColors.white,
       body: SafeArea(
@@ -22,116 +24,129 @@ class FillYourProfileView extends StatelessWidget {
               child: SingleChildScrollView(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 40),
+                child: Form(
+                  key: profileController.formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 40),
 
-                    // عنوان + زر Skip ضمن نفس السطر
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Fill Your Profile",
-                          style: CustomTextStyles.headline32Bold,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            // الانتقال لصفحة الهوم
-                            // Get.toNamed(AppRoutes.home);
-                          },
-                          child: Text(
-                            "Skip",
-                            style: CustomTextStyles.subtitle.copyWith(
-                              color: AppColors.primary,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-
-                    // Subtitle
-                    Text(
-                      "Please take a few minutes to fill out your profile with as much detail as possible.",
-                      style: CustomTextStyles.subtitle,
-                    ),
-                    const SizedBox(height: 32),
-
-                    /// Profile Image
-                    Center(
-                      child: Stack(
+                      // عنوان + زر Skip ضمن نفس السطر
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Container(
-                            width: 120,
-                            height: 120,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: AppColors.lightGrey,
-                              image: const DecorationImage(
-                                image: AssetImage(AppImages.personPhoto),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
+                          Text(
+                            "Fill Your Profile",
+                            style: CustomTextStyles.headline32Bold,
                           ),
-                          Positioned(
-                            bottom: 0,
-                            right: 0,
-                            child: GestureDetector(
-                              onTap: () {},
-                              child: Container(
-                                width: 36,
-                                height: 36,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: AppColors.textField,
-                                  border:
-                                      Border.all(color: Colors.white, width: 2),
-                                ),
-                                child: const Icon(
-                                  Icons.edit_outlined,
-                                  color: AppColors.primary,
-                                  size: 20,
-                                ),
+                          GestureDetector(
+                            onTap: () {
+                              // الانتقال لصفحة الهوم
+                              // Get.toNamed(AppRoutes.home);
+                            },
+                            child: Text(
+                              "Skip",
+                              style: CustomTextStyles.subtitle.copyWith(
+                                color: AppColors.primary,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
                         ],
                       ),
-                    ),
-                    const SizedBox(height: 32),
+                      const SizedBox(height: 16),
 
-                    // Email
-                    CustomTextField(
-                      hint: "Email",
-                      keyboardType: TextInputType.emailAddress,
-                    ),
-                    const SizedBox(height: 16),
+                      // Subtitle
+                      Text(
+                        "Please take a few minutes to fill out your profile with as much detail as possible.",
+                        style: CustomTextStyles.subtitle,
+                      ),
+                      const SizedBox(height: 32),
 
-                    // Password
-                    const CustomTextField(
-                      hint: "Password",
-                      isPassword: true,
-                    ),
-                    const SizedBox(height: 16),
+                      /// Profile Image
+                      Center(
+                        child: Stack(
+                          children: [
+                            Container(
+                              width: 120,
+                              height: 120,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: AppColors.lightGrey,
+                                image: const DecorationImage(
+                                  image: AssetImage(AppImages.personPhoto),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 0,
+                              right: 0,
+                              child: GestureDetector(
+                                onTap: () {},
+                                child: Container(
+                                  width: 36,
+                                  height: 36,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: AppColors.textField,
+                                    border: Border.all(
+                                        color: Colors.white, width: 2),
+                                  ),
+                                  child: const Icon(
+                                    Icons.edit_outlined,
+                                    color: AppColors.primary,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 32),
 
-                    // Birthday
-                    const CustomTextField(
-                      hint: "Birthday",
-                    ),
-                    const SizedBox(height: 16),
+                      CustomTextField(
+                        controller: profileController.fullNameController,
+                        hint: "Full Name",
+                      ),
+                      const SizedBox(height: 16),
 
-                    // Phone
-                    PhoneFieldWidget(
-                      initialCountryCode: 'SA',
-                      onChanged: (value) {},
-                    ),
+                      // Email
+                      CustomTextField(
+                        controller: profileController.emailController,
+                        hint: "Email",
+                        keyboardType: TextInputType.emailAddress,
+                      ),
+                      const SizedBox(height: 16),
 
-                    const SizedBox(height: 24),
-                  ],
+                      // Password
+                      // const CustomTextField(
+                      //   hint: "Password",
+                      //   isPassword: true,
+                      // ),
+                      // const SizedBox(height: 16),
+
+                      // Birthday
+                      CustomTextField(
+                        controller: profileController.birthdateController,
+                        hint: "Birthday",
+                      ),
+                      const SizedBox(height: 16),
+
+                      // Phone
+                      PhoneFieldWidget(
+                        initialCountryCode: 'SA',
+                        onChanged: (value) {
+                          profileController.phoneRx.value = value;
+                        },
+                      ),
+
+                      const SizedBox(height: 24),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -145,7 +160,7 @@ class FillYourProfileView extends StatelessWidget {
                 child: CustomPrimaryButton(
                   label: "Submit",
                   onTap: () {
-                    Get.toNamed(AppRoutes.bottomnavbar);
+                    profileController.setProfile();
                   },
                 ),
               ),
