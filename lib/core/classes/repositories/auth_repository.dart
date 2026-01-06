@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:appointment_app/core/network/api_headers.dart';
+
 import '../../../models/auth/auth_models.dart';
 import '../../network/api_endpoints.dart';
 import '../api/api.dart';
@@ -40,5 +42,20 @@ class AuthRepository {
     } catch (_) {
       return raw;
     }
+  }
+
+  Future<ApiResult<AuthSession>> login({
+    required String email,
+    required String password,
+  }) {
+    return api.post<AuthSession>(
+      endpoint: ApiEndpoints.loginPassword(),
+      headers: ApiHeaders.public(),
+      body: {
+        'email': email,
+        'password': password,
+      },
+      parser: (json) => AuthSession.fromJson(json as Map<String, dynamic>),
+    );
   }
 }

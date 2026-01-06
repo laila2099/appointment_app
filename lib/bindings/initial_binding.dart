@@ -22,12 +22,11 @@ class InitializeBinding extends Bindings {
         prefs: Get.find<AppPreferencesService>()));
 
     // تسجيل MyAppointmentsController
-    Get.lazyPut(() => MyAppointmentsController());
+    Get.put(MyAppointmentsController());
 
     // تسجيل InboxController
-    Get.lazyPut(() => InboxController());
-
-    // تسجيل NavigationController ✅
-    Get.lazyPut(() => NavigationController());
+    Get.put(InboxController());
+    // تسجيل NavigationController
+    Get.put(NavigationController());
   }
 }

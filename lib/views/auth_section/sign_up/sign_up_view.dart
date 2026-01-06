@@ -179,7 +179,7 @@ class CreateAccountView extends StatelessWidget {
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Get.off(() => const LoginView());
+                                Get.off(() => LoginView());
                               },
                           ),
                         ],

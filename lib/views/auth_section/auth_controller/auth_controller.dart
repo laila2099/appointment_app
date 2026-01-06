@@ -17,13 +17,15 @@ class AuthController extends GetxController {
     required this.repo,
     required this.prefs,
   });
-
+  final LoginFormKey = GlobalKey<FormState>();
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   final isLoading = false.obs;
   final errorText = RxnString();
+  final isPasswordVisible = false.obs;
+  final rememberMe = false.obs;
 
   Future<void> signUp() async {
     print((!(formKey.currentState?.validate() ?? false)));
@@ -103,5 +105,28 @@ class AuthController extends GetxController {
     emailController.dispose();
     passwordController.dispose();
     super.onClose();
+  }
+
+  Future<void> login() async {
+    if (!(LoginFormKey.currentState?.validate() ?? false)) return;
+
+    isLoading.value = true;
+    errorText.value = null;
+
+    final res = await repo.login(
+      email: emailController.text,
+      password: passwordController.text,
+    );
+
+    if (res is ApiSuccess<AuthSession>) {
+      await _saveSession(res.data);
+      Get.offAllNamed(AppRoutes.bottomnavbar);
+    } else if (res is ApiFailure<AuthSession>) {
+      final raw = res.error.message;
+      errorText.value = repo.extractMessage(raw);
+      AppSnackBar.error(errorText.value!);
+    }
+
+    isLoading.value = false;
   }
 }

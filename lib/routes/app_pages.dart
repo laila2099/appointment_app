@@ -57,7 +57,7 @@ final appPages = <GetPage>[
       name: AppRoutes.loginRequiredGate, page: () => const LoginRequiredGate()),
 
   // Auth + Reset Password
-  GetPage(name: AppRoutes.login, page: () => const LoginView()),
+  GetPage(name: AppRoutes.login, page: () => LoginView()),
   GetPage(name: AppRoutes.createAccount, page: () => const CreateAccountView()),
   GetPage(
       name: AppRoutes.forgotPassword, page: () => const ForgotPasswordView()),
