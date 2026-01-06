@@ -5,9 +5,11 @@ import '../../../core/classes/api/api_result.dart';
 import '../../../core/classes/repositories/auth_repository.dart';
 import '../../../core/classes/utils/app_snackbar.dart';
 import '../../../core/constant/app_keys.dart';
+import '../../../core/services/auth_gate_service.dart';
 import '../../../core/services/shared_prefrences.dart';
 import '../../../models/auth/auth_models.dart';
 import '../../../routes/app_routes.dart';
+import '../../../widgets/general_widgets/bottom_nav_bar/controller/bottom_nav_bar_controller.dart';
 
 class AuthController extends GetxController {
   final AuthRepository repo;
@@ -120,7 +122,8 @@ class AuthController extends GetxController {
 
     if (res is ApiSuccess<AuthSession>) {
       await _saveSession(res.data);
-      Get.offAllNamed(AppRoutes.bottomnavbar);
+      Get.find<NavigationController>().unlockAfterLogin();
+      Get.find<AuthGateService>().continueAfterLogin();
     } else if (res is ApiFailure<AuthSession>) {
       final raw = res.error.message;
       errorText.value = repo.extractMessage(raw);

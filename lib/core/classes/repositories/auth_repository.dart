@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:appointment_app/core/network/api_headers.dart';
+import 'package:appointment_app/core/classes/api/api_headers.dart';
 
 import '../../../models/auth/auth_models.dart';
-import '../../network/api_endpoints.dart';
 import '../api/api.dart';
+import '../api/api_endpoints.dart';
 import '../api/api_result.dart';
 
 class AuthRepository {
