@@ -110,7 +110,7 @@ class OnBoardingView extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     prefs.setBool(PrefKeys.hasSeenOnboarding, true);
-                    Get.toNamed(AppRoutes.login);
+                    Get.offAllNamed(AppRoutes.bottomnavbar);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,

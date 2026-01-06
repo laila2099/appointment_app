@@ -35,7 +35,11 @@ class AuthGateService extends GetxService {
     _pendingArgs = null;
 
     if (route != null) {
-      Get.offAllNamed(route, arguments: args);
+      Get.offNamed(route, arguments: args);
+    }
+    if (Get.key.currentState?.canPop() == true) {
+      Get.back();
+      return;
     } else {
       Get.offAllNamed(fallbackRoute);
     }
@@ -45,5 +49,10 @@ class AuthGateService extends GetxService {
     _pendingRoute = null;
     _pendingArgs = null;
     Get.back();
+  }
+
+  void clearPending() {
+    _pendingRoute = null;
+    _pendingArgs = null;
   }
 }
