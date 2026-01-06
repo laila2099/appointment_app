@@ -1,7 +1,7 @@
 import '../../../models/user_profile_model.dart';
-import '../../network/api_endpoints.dart';
-import '../../network/api_headers.dart';
 import '../api/api.dart';
+import '../api/api_endpoints.dart';
+import '../api/api_headers.dart';
 import '../api/api_result.dart';
 
 class ProfileRepository {
