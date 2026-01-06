@@ -13,7 +13,7 @@ class AppIcons {
   static const String video = "${basePath}video.svg";
   static const String calendar2 = "${basePath}calendar-2.svg";
   static const String clipboard = "${basePath}clipboard-text.svg";
-  static const String card = "${basePath}Mastercard logo.svg";
+  static const String card = "${basePath}Mastercard_logo.svg";
   static const String scanner = "${basePath}scanner.svg";
   static const String paypal = "${basePath}paypal_logo.svg";
   static const String master_card = "${basePath}Mastercard_logo.svg";
