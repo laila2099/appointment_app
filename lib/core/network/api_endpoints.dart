@@ -17,4 +17,25 @@ class ApiEndpoints {
   static const String appointments = '/rest/v1/appointments';
   static const String appointmentsWithDoctor =
       '/rest/v1/appointments_with_doctor';
+
+  // -------- Profiles
+  static String getProfile(String userId, {String select = '*'}) =>
+      '$profiles?id=eq.$userId&select=$select';
+
+  static String editProfile(String userId) => '$profiles?id=eq.$userId';
+
+  // -------- Categories
+  static String getCategories({String select = '*'}) =>
+      '$categories?select=$select';
+
+  // -------- Doctors
+  static String filterDoctors(String categoryId) =>
+      '$doctorsWithReviews?category_id=eq.$categoryId';
+
+  // -------- Appointments
+  static String filterAppointments(String status) =>
+      '$appointmentsWithDoctor?status=eq.$status';
+
+  static String editAppointment(String appointmentId) =>
+      '$appointments?id=eq.$appointmentId';
 }
