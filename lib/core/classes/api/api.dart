@@ -83,6 +83,21 @@ class ApiClient {
     );
   }
 
+Future<ApiResult<T>> patch<T>({
+  required String endpoint,
+  required Map<String, dynamic> body,
+  Map<String, String>? headers,
+  required T Function(dynamic json) parser,
+}) async {
+  return _send<T>(
+    request: () => http.patch(
+      Uri.parse('$baseUrl$endpoint'),
+      headers: _defaultHeaders(headers),
+      body: jsonEncode(body),
+    ),
+    parser: parser,
+  );
+}
   // -------------------- CORE SENDER --------------------
   Future<ApiResult<T>> _send<T>({
     required Future<http.Response> Function() request,
