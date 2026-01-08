@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../core/middlewares/splash_redirect_middleware.dart';
+import '../views/auth_section/bindings/fill_your_profile_binding.dart';
 import '../views/auth_section/forgot_password/forgot_password_screens/forgot_password_view.dart';
 import '../views/auth_section/forgot_password/forgot_password_screens/otp_verification_view.dart';
 import '../views/auth_section/sign_in/sign_in_view.dart';
@@ -39,21 +41,31 @@ import '../views/splash_screen/onboarding_view/onboarding_view.dart';
 import '../views/splash_screen/splash_screen_view/splash_screen_view.dart';
 import '../widgets/general_widgets/bottom_nav_bar/bottom_nav_view/bottom_nav_bar_binding.dart';
 import '../widgets/general_widgets/bottom_nav_bar/bottom_nav_view/main_nav_bar.dart';
+import '../widgets/login_required_gate.dart';
 import 'app_routes.dart';
 
 final appPages = <GetPage>[
   // Splash + Onboarding
-  GetPage(name: AppRoutes.splash, page: () => const SplashScreen()),
+  GetPage(
+    name: AppRoutes.splash,
+    page: () => const SplashScreen(),
+    middlewares: [SplashRedirectMiddleware()],
+  ),
   GetPage(name: AppRoutes.onboarding, page: () => const OnBoardingView()),
 
+  GetPage(
+      name: AppRoutes.loginRequiredGate, page: () => const LoginRequiredGate()),
+
   // Auth + Reset Password
-  GetPage(name: AppRoutes.login, page: () => const LoginView()),
+  GetPage(name: AppRoutes.login, page: () => LoginView()),
   GetPage(name: AppRoutes.createAccount, page: () => const CreateAccountView()),
   GetPage(
       name: AppRoutes.forgotPassword, page: () => const ForgotPasswordView()),
   GetPage(name: AppRoutes.otpVerification, page: () => OtpVerificationView()),
   GetPage(
-      name: AppRoutes.fillYourProfile, page: () => const FillYourProfileView()),
+      name: AppRoutes.fillYourProfile,
+      page: () => const FillYourProfileView(),
+      binding: AuthFillProfileBinding()),
 
   // Doctor Details
   GetPage(

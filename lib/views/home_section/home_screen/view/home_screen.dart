@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/services/auth_gate_service.dart';
+
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
   final controller = Get.put(CategoryController());
@@ -32,10 +34,14 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       SizedBox(height: 10),
                       Text("Hi, Zaid", style: CustomTextStyles.bold),
-                      SizedBox(height: 5.h),
+                      SizedBox(height: 3.h),
                       Text(
                         "How Are You Today?!",
-                        style: CustomTextStyles.subTitle,
+                        style: CustomTextStyles.custom(
+                          fontSize: 10.sp,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.subtitle,
+                        ),
                       ),
                       SizedBox(height: 10.h),
                     ],
@@ -54,7 +60,9 @@ class HomeScreen extends StatelessWidget {
                           child: IconButton(
                             color: AppColors.black,
                             onPressed: () {
-                              Get.toNamed(AppRoutes.notificationScreen);
+                              Get.find<AuthGateService>().goProtected(
+                                AppRoutes.notificationScreen,
+                              );
                             },
                             icon: Icon(Icons.notifications_none),
                           ),
@@ -100,19 +108,57 @@ class HomeScreen extends StatelessWidget {
             SizedBox(height: 16.h),
             SizedBox(
               height: 100.h,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: controller.categories.length,
-                itemBuilder: (context, index) {
-                  final item = controller.categories[index];
-                  return Row(
-                    children: [
-                      CategoryItem(iconPath: item.icon, title: item.title),
-                      SizedBox(width: 25.w),
-                    ],
+              child: Obx(() {
+                if (controller.isLoading.value) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                if (controller.errorMessage.value != null) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                          Text(controller.errorMessage.value!),
+                        SizedBox(height: 12.h),
+                        ElevatedButton(
+                          onPressed: () => controller.retryFetchCategories(),
+                          child: const Text('Retry'),
+                        ),
+                      ],
+                    ),
                   );
-                },
-              ),
+                }
+                if (controller.categories.isEmpty) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('No categories available'),
+                        SizedBox(height: 12.h),
+                        ElevatedButton(
+                          onPressed: () => controller.retryFetchCategories(),
+                          child: const Text('Retry'),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+                return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: controller.categories.length,
+                  itemBuilder: (context, index) {
+                    final item = controller.categories[index];
+                    return Row(
+                      children: [
+                        CategoryItem(
+                          iconPath: item.icon,
+                          title: item.title,
+                        ),
+                        SizedBox(width: 25.w),
+                      ],
+                    );
+                  },
+                );
+              }),
             ),
             SizedBox(height: 24.h),
             Row(

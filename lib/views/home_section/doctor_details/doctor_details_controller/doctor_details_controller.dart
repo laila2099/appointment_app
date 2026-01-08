@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import '../../../../core/services/auth_gate_service.dart';
 import '../../../../models/doctor_model.dart';
 import '../../../../models/review_model.dart';
 import '../../../../routes/app_routes.dart';
@@ -74,6 +75,8 @@ class DoctorDetailsController extends GetxController {
   }
 
   void onMakeAppointment() {
-    Get.toNamed(AppRoutes.bookingAppointment);
+    Get.find<AuthGateService>().goProtected(
+      AppRoutes.bookingAppointment,
+    );
   }
 }

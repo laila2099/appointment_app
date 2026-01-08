@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../core/constant/app_colors.dart';
 import '../../../core/constant/app_images.dart';
+import '../../../core/constant/app_keys.dart';
 import '../../../core/constant/text_style.dart';
+import '../../../core/services/shared_prefrences.dart';
 import '../../../routes/app_routes.dart';
 
 class OnBoardingView extends StatelessWidget {
@@ -10,6 +13,7 @@ class OnBoardingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final prefs = Get.find<AppPreferencesService>();
     return Scaffold(
       backgroundColor: AppColors.white,
       body: SafeArea(
@@ -74,7 +78,8 @@ class OnBoardingView extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 24, vertical: 16),
                             child: Text(
                               "Best Doctor\nAppointment App",
                               textAlign: TextAlign.center,
@@ -104,7 +109,8 @@ class OnBoardingView extends StatelessWidget {
                 height: 52,
                 child: ElevatedButton(
                   onPressed: () {
-                    Get.toNamed(AppRoutes.login);
+                    prefs.setBool(PrefKeys.hasSeenOnboarding, true);
+                    Get.offAllNamed(AppRoutes.bottomnavbar);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,

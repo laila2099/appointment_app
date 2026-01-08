@@ -1,7 +1,6 @@
 import 'package:appointment_app/core/constant/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
 class CategoryItem extends StatelessWidget {
   final String iconPath;
@@ -21,7 +20,7 @@ class CategoryItem extends StatelessWidget {
             color: Color(0xffF5F9FF),
           ),
           child: Center(
-            child: SvgPicture.asset(iconPath, height: 24.h, width: 24.w),
+            child: _buildImage(),
           ),
         ),
         SizedBox(height: 12.h),
@@ -31,6 +30,20 @@ class CategoryItem extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
       ],
+    );
+  }
+
+  Widget _buildImage() {
+    return ClipOval(
+      child: Image.network(
+        iconPath,
+        height: 45.h,
+        width: 45.w,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) {
+          return Icon(Icons.category, size: 24.h);
+        },
+      ),
     );
   }
 }

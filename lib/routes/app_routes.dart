@@ -7,6 +7,8 @@ class AppRoutes {
   static const otpVerification = '/otpVerification';
   static const fillYourProfile = '/fillYourProfile';
 
+  static const loginRequiredGate = '/loginRequiredGate';
+
   // Profile
   static const profile = '/profile';
   static const personalInfo = "/personal_info";
