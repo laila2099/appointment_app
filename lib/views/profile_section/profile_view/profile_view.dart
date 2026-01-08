@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../../../routes/app_routes.dart';
 import '../../../widgets/general_widgets/custom_divider.dart';
+import '../profile_binding/profile_binding.dart';
 import 'widgets/profile_header.dart';
 import 'widgets/profile_info.dart';
 import 'widgets/profile_tabs.dart';
@@ -16,6 +17,9 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ✅ تأكد من وجود الـ Controllers قبل بناء الصفحة
+    ProfileBinding().dependencies();
+
     return Scaffold(
       backgroundColor: AppColors.white,
       body: Column(
@@ -40,7 +44,7 @@ class ProfileScreen extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     child: Column(
                       children: [
-                        const ProfileInfo(),
+                        const ProfileInfo(), // ✅ الحين الـ Controller موجود
                         const SizedBox(height: 32),
                         const ProfileTabs(),
                         const SizedBox(height: 24),
@@ -86,3 +90,4 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
+
