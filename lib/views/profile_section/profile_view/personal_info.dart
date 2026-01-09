@@ -96,8 +96,10 @@ class PersonalInfo extends StatelessWidget {
                   PrimaryButton(
                     text: "Save",
                     onPressed: () {
+                      controller.onSave();
                       Get.back();
                     },
+
                     padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 16.h),
                   ),
                   SizedBox(height: 20.h),
