@@ -28,7 +28,6 @@ class ProfileRepository {
       headers: {
         ...ApiHeaders.authed(accessToken),
         'Prefer': 'return=representation',
-        'Content-Type': 'application/json',
       },
       body: body,
       parser: (json) {
@@ -76,9 +75,7 @@ class ProfileRepository {
       endpoint: ApiEndpoints.editProfile(userId),
       headers: {
         ...ApiHeaders.authed(accessToken),
-        'Prefer': 'return=representation',
-        'Content-Type': 'application/json',
-      },
+        'Prefer': 'return=representation',      },
       body: body,
       parser: (json) {
         if (json is List && json.isNotEmpty) {
