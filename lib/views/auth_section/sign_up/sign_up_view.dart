@@ -1,21 +1,21 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' hide TextField;
 import 'package:get/get.dart';
-
 import '../../../core/constant/app_colors.dart';
 import '../../../core/constant/app_images.dart';
 import '../../../core/constant/text_style.dart';
 import '../../../widgets/helpful_widgets/primary_button_widget.dart';
 import '../../../widgets/helpful_widgets/text_field_widget.dart';
 import '../auth_controller/auth_controller.dart';
-import '../sign_in/sign_in_view.dart';
+import '../sign_in/signIn_view/sign_in_view.dart';
 import '../widgets/phone_field_widget.dart';
 import '../widgets/socialButton.dart';
 
 class CreateAccountView extends StatelessWidget {
-  const CreateAccountView({super.key});
+   CreateAccountView({super.key});
+   final AuthController authController = Get.find<AuthController>();
 
-  @override
+   @override
   Widget build(BuildContext context) {
     final auth = Get.find<AuthController>();
     return Scaffold(
@@ -24,7 +24,7 @@ class CreateAccountView extends StatelessWidget {
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           child: Form(
-            key: auth.formKey,
+            key: authController.signUpFormKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -79,13 +79,15 @@ class CreateAccountView extends StatelessWidget {
                 const SizedBox(height: 24),
 
                 // Create Account Button
-                SizedBox(
-                  width: double.infinity,
-                  height: 52,
-                  child: CustomPrimaryButton(
-                    label: "Create Account",
-                    onTap: auth.isLoading.value ? () {} : () => auth.signUp(),
-                  ),
+                CustomPrimaryButton(
+                  label: auth.isLoading.value ? "Creating..." : "Create Account",
+                  onTap: () {
+                    if (!auth.isLoading.value) {
+                      if (auth.signUpFormKey.currentState?.validate() ?? false) {
+                        auth.signUp();
+                      }
+                    }
+                  },
                 ),
 
                 const SizedBox(height: 24),

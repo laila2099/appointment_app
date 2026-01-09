@@ -19,8 +19,9 @@ class AuthController extends GetxController {
     required this.repo,
     required this.prefs,
   });
-  final LoginFormKey = GlobalKey<FormState>();
-  final formKey = GlobalKey<FormState>();
+  final loginFormKey = GlobalKey<FormState>();
+  final signUpFormKey = GlobalKey<FormState>();
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -30,8 +31,8 @@ class AuthController extends GetxController {
   final rememberMe = false.obs;
 
   Future<void> signUp() async {
-    print((!(formKey.currentState?.validate() ?? false)));
-    if (!(formKey.currentState?.validate() ?? false)) return;
+    print((!(signUpFormKey.currentState?.validate() ?? false)));
+    if (!(signUpFormKey.currentState?.validate() ?? false)) return;
 
     isLoading.value = true;
     errorText.value = null;
@@ -110,7 +111,7 @@ class AuthController extends GetxController {
   }
 
   Future<void> login() async {
-    if (!(LoginFormKey.currentState?.validate() ?? false)) return;
+    if (!(loginFormKey.currentState?.validate() ?? false)) return;
 
     isLoading.value = true;
     errorText.value = null;

@@ -20,6 +20,7 @@ class CustomTextField extends StatelessWidget {
     this.suffixIcon,
     this.prefixIcon,
     this.validator,
+
   });
 
   @override

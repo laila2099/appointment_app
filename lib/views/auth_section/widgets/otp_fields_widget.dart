@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import '../../../core/constant/app_colors.dart';
-import '../forgot_password/verification_controller/verification_controller.dart';
+import '../forgot_password/forgot_password_screens/controllers/otp_verification_controller.dart';
 
 
 class OtpFields extends StatelessWidget {

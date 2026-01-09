@@ -9,8 +9,8 @@ import '../../../../widgets/general_widgets/app_header/app_header.dart';
 import '../../../../widgets/general_widgets/app_header/header_title.dart';
 import '../../../../widgets/general_widgets/primary_button.dart';
 
-class ReschedualScreen extends GetView<BookingController> {
-  const ReschedualScreen({super.key});
+class RescheduleScreen extends GetView<BookingController> {
+  const RescheduleScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class ReschedualScreen extends GetView<BookingController> {
           return Column(
             children: [
               AppHeader(
-                center: HeaderTitle('Reschedual'),
+                center: HeaderTitle('Reschedule'),
               ),
               SizedBox(height: 20.h),
               Expanded(
