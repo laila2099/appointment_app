@@ -5,4 +5,5 @@ class SortModel {
   final IconData? icon;
 
   SortModel({required this.title, this.icon});
+
 }

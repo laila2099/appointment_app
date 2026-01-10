@@ -2,7 +2,6 @@ import 'package:appointment_app/core/classes/api/api.dart';
 import 'package:appointment_app/core/classes/api/api_result.dart';
 import 'package:appointment_app/core/classes/repositories/categories_repository.dart';
 import 'package:appointment_app/core/config/app_config.dart';
-// import 'package:appointment_app/core/constant/app_icons.dart';
 import 'package:appointment_app/views/home_section/home_screen/model/category_model.dart';
 import 'package:get/get.dart';
 
