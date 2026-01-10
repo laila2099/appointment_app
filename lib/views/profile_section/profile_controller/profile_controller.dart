@@ -1,0 +1,88 @@
+import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../core/classes/api/api_result.dart';
+import '../../../core/classes/repositories/profile_repository.dart';
+import '../../../models/user_profile_model.dart';
+
+class ProfileController extends GetxController {
+  final ProfileRepository repository;
+  ProfileController({required this.repository});
+
+  final loading = false.obs;
+  final profile = Rxn<UserProfile>();
+
+  String? _accessToken;
+  String? _userId;
+
+  @override
+  void onInit() {
+    super.onInit();
+    _initProfile();
+  }
+
+  Future<void> _initProfile() async {
+    await _loadAuthData();
+    if (_accessToken != null && _userId != null) {
+      getProfile();
+    } else {
+      Get.snackbar('Error', 'User not authenticated');
+    }
+  }
+
+  Future<void> _loadAuthData() async {
+    final prefs = await SharedPreferences.getInstance();
+    _accessToken = prefs.getString('access_token');
+    _userId = prefs.getString('user_id');
+  }
+
+  Future<void> getProfile() async {
+    loading.value = true;
+
+    final ApiResult<UserProfile> result =
+    await repository.getProfile(
+      accessToken: _accessToken!,
+      userId: _userId!,
+    );
+
+    if (result is ApiSuccess<UserProfile>) {
+      profile.value = result.data;
+    } else if (result is ApiFailure<UserProfile>) {
+      Get.snackbar(
+        'Error',
+        result.error.message ?? 'Failed to load profile',
+      );
+    }
+
+    loading.value = false;
+  }
+
+  Future<void> editProfile({
+    String? fullName,
+    String? phone,
+    String? birthdate,
+  }) async {
+    loading.value = true;
+
+    final ApiResult<UserProfile> result =
+    await repository.editProfile(
+      accessToken: _accessToken!,
+      userId: _userId!,
+      fullName: fullName,
+      phone: phone,
+      birthdate: birthdate,
+    );
+
+    if (result is ApiSuccess<UserProfile>) {
+      profile.value = result.data;
+      Get.snackbar('Success', 'Profile updated successfully');
+    } else if (result is ApiFailure<UserProfile>) {
+      Get.snackbar(
+        'Error',
+        result.error.message ?? 'Failed to update profile',
+      );
+    }
+
+    loading.value = false;
+  }
+}
