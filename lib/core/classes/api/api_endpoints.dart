@@ -29,6 +29,7 @@ class ApiEndpoints {
       '$categories?select=$select';
 
   // -------- Doctors
+
   static String getAllDoctors({String select = '*'}) =>
       '$doctorsWithReviews?select=$select';
   
@@ -37,9 +38,7 @@ class ApiEndpoints {
   
   static String getDoctorById(String doctorId, {String select = '*'}) =>
       '$doctorsWithReviews?id=eq.$doctorId&select=$select';
-  
-  static String filterDoctors(String categoryId, {String select = '*'}) =>
-      '$doctorsWithReviews?category_id=eq.$categoryId&select=$select';
+
   
   static String searchDoctors(String query, {String select = '*'}) {
     final encodedQuery = Uri.encodeComponent(query);
@@ -60,6 +59,10 @@ class ApiEndpoints {
 
   static String getReviewById(String reviewId, {String select = '*'}) =>
       '$reviews?id=eq.$reviewId&select=$select';
+
+  static String filterDoctors(String categoryId) =>
+      '$doctorsWithReviews?category_id=eq.$categoryId';
+
 
   // -------- Appointments
   static String filterAppointments(String status) =>

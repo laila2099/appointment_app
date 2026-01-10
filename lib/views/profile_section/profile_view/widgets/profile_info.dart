@@ -45,14 +45,14 @@ class ProfileInfo extends StatelessWidget {
 
         Obx(
               () => Text(
-            controller.profile.value?.name ?? 'test',
+            controller.profile.value?.name ?? '',
             style: CustomTextStyles.profileTitle,
           ),
         ),
 
         Obx(
               () => Text(
-            controller.profile.value?.email ?? 'test',
+            controller.profile.value?.email ?? '',
             style: CustomTextStyles.subTitle,
           ),
         ),

@@ -125,7 +125,7 @@ class DoctorRepository {
     String select = '*',
   }) {
     return api.get<List<Doctor>>(
-      endpoint: ApiEndpoints.filterDoctors(categoryId, select: select),
+      endpoint: ApiEndpoints.filterDoctors(categoryId,),
       headers: accessToken != null
           ? ApiHeaders.authed(accessToken)
           : ApiHeaders.public(),

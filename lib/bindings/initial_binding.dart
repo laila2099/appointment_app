@@ -10,6 +10,7 @@ import '../views/auth_section/auth_controller/auth_controller.dart';
 import '../views/inbox_section/controller/inbox_controller.dart';
 import '../views/my_apponiment_section/my_appoitment_controller/my_appoitment_controller.dart';
 import '../widgets/general_widgets/bottom_nav_bar/controller/bottom_nav_bar_controller.dart';
+import '../widgets/general_widgets/bottom_nav_bar/controller/bottom_nav_bar_controller.dart';
 
 class InitializeBinding extends Bindings {
   @override

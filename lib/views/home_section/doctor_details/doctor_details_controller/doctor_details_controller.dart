@@ -1,11 +1,13 @@
 import 'package:get/get.dart';
 
+
 import '../../../../core/classes/api/api_result.dart';
 import '../../../../core/classes/repositories/doctor_repository.dart';
 import '../../../../core/classes/repositories/review_repository.dart';
 import '../../../../core/constant/app_keys.dart';
 import '../../../../core/services/auth_gate_service.dart';
 import '../../../../core/services/shared_prefrences.dart';
+
 import '../../../../models/doctor_model.dart';
 import '../../../../models/review_model.dart';
 import '../../../../routes/app_routes.dart';
@@ -183,6 +185,7 @@ class DoctorDetailsController extends GetxController {
   }
 
   void onMakeAppointment() {
+
     if (doctor.value == null) {
       Get.snackbar(
         'Error',

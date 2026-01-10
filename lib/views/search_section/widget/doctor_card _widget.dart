@@ -1,7 +1,9 @@
+
 import 'package:appointment_app/views/home_section/home_screen/model/doctor_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/constant/app_colors.dart';
+
 
 
 class DoctorCard extends StatelessWidget {
@@ -18,6 +20,7 @@ class DoctorCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
       ),
       child: ListTile(
+
         leading: _DoctorAvatar(imageUrl: doctor.image),
         title: Text(
           doctor.name,
@@ -33,12 +36,14 @@ class DoctorCard extends StatelessWidget {
             const Icon(Icons.star, color: AppColors.primary, size: 18),
             const SizedBox(width: 4),
             Text(doctor.rating.toStringAsFixed(1)),
+
           ],
         ),
       ),
     );
   }
 }
+
 
 // -------------------- AVATAR --------------------
 
@@ -60,3 +65,4 @@ class _DoctorAvatar extends StatelessWidget {
     );
   }
 }
+
