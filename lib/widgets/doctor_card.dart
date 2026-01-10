@@ -30,9 +30,88 @@ class DoctorCard extends StatelessWidget {
     this.heightimage,
   });
 
+  Widget _buildImage({required String image, required double width, required double height}) {
+    // Determine if it's a network URL or asset path
+    final isNetworkUrl = image.startsWith('http://') || 
+                        image.startsWith('https://') ||
+                        image.startsWith('/storage/') ||
+                        (image.startsWith('/') && !image.startsWith('assets/'));
+    
+    if (isNetworkUrl) {
+      // Handle network images (including relative paths from API)
+      String imageUrl = image;
+      
+      // If it's a relative path, it should already have base URL prepended by getImagePath
+      // But handle case where it might not
+      if (imageUrl.startsWith('/') && !imageUrl.startsWith('http')) {
+        // This shouldn't happen if getImagePath works correctly, but handle it anyway
+        return _buildPlaceholder(width: width, height: height);
+      }
+      
+      return Image.network(
+        imageUrl,
+        width: width,
+        height: height,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) {
+          // If network image fails, show placeholder with person icon
+          return _buildPlaceholder(width: width, height: height);
+        },
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) return child;
+          return Container(
+            width: width,
+            height: height,
+            decoration: BoxDecoration(
+              color: Colors.grey.shade200,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Center(
+              child: SizedBox(
+                width: 24,
+                height: 24,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  value: loadingProgress.expectedTotalBytes != null
+                      ? loadingProgress.cumulativeBytesLoaded / 
+                        loadingProgress.expectedTotalBytes!
+                      : null,
+                ),
+              ),
+            ),
+          );
+        },
+      );
+    }
+    
+    // Otherwise, treat as asset image
+    return Image.asset(
+      image,
+      width: width,
+      height: height,
+      fit: BoxFit.cover,
+      errorBuilder: (context, error, stackTrace) {
+        // If asset fails, show placeholder
+        return _buildPlaceholder(width: width, height: height);
+      },
+    );
+  }
+
+  Widget _buildPlaceholder({required double width, required double height}) {
+    return Container(
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+        color: Colors.grey.shade200,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: const Icon(Icons.person, color: Colors.grey, size: 40),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final formattedReviews = NumberFormat('#,###').format(reviews);
+final formattedReviews = NumberFormat('#,###').format(reviews);
 
     return GestureDetector(
       onTap: onTap,
@@ -54,13 +133,16 @@ class DoctorCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.asset(
-                image,
-                width: widthimage ?? 110.w,
-                height: heightimage ?? 110.h,
-                fit: BoxFit.cover,
+            SizedBox(
+              width: widthimage ?? 110.w,
+              height: heightimage ?? 110.h,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: _buildImage(
+                  image: image,
+                  width: widthimage ?? 110.w,
+                  height: heightimage ?? 110.h,
+                ),
               ),
             ),
 

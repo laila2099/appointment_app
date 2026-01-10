@@ -55,4 +55,18 @@ class AuthGateService extends GetxService {
     _pendingRoute = null;
     _pendingArgs = null;
   }
+
+  Future<void> logout() async {
+    await prefs.remove(PrefKeys.accessToken);
+    await prefs.remove(PrefKeys.refreshToken);
+    await prefs.remove(PrefKeys.isLoggedIn);
+    await prefs.remove(PrefKeys.userId);
+    await prefs.remove(PrefKeys.email);
+    clearPending();
+  }
+
+  Future<void> handleUnauthorized() async {
+    await logout();
+    Get.offAllNamed(AppRoutes.login);
+  }
 }

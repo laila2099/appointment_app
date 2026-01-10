@@ -7,30 +7,50 @@ import 'package:flutter/material.dart';
 import '../../../models/user_profile_model.dart';
 
 class PersonalInfoController extends GetxController {
-  // Text placeholders
   final name = ''.obs;
   final email = ''.obs;
   final password = 'Password'.obs;
 
-  // Phone
   final selectedCountry = Country.parse('GB').obs;
   final phoneController = TextEditingController();
 
   late final ProfileController profileController;
+  late final Worker _profileWorker;
 
   @override
   void onInit() {
     super.onInit();
     profileController = Get.find<ProfileController>();
 
-    ever(profileController.profile, (UserProfile? profile) {
-      if (profile != null) {
-        name.value = profile.name;
-        phoneController.text = profile.phone;
-      }
-    });
+    final profile = profileController.profile.value;
+    if (profile != null) {
+      name.value = profile.name;
+      _applyPhoneFromProfile(profile.phone);
+    }
+
+    _profileWorker = ever<UserProfile?>(
+      profileController.profile,
+          (profile) {
+        if (profile != null) {
+          name.value = profile.name;
+          _applyPhoneFromProfile(profile.phone);
+        }
+      },
+    );
   }
 
+  void _applyPhoneFromProfile(String fullPhone) {
+    for (final country in CountryService().getAll()) {
+      final code = '+${country.phoneCode}';
+      if (fullPhone.startsWith(code)) {
+        selectedCountry.value = country;
+        phoneController.text = fullPhone.substring(code.length);
+        return;
+      }
+    }
+
+    phoneController.text = fullPhone;
+  }
 
   void onCountrySelected(Country country) {
     selectedCountry.value = country;
@@ -49,6 +69,7 @@ class PersonalInfoController extends GetxController {
 
   @override
   void onClose() {
+    _profileWorker.dispose();
     phoneController.dispose();
     super.onClose();
   }
