@@ -42,6 +42,7 @@ class BookingController extends GetxController {
       clinic: "RSUD Gatot Subroto",
       ratingAvg: 4.8,
       ratingCount: 4279,
+      isRecommended: true,
       avatarUrl: null,
       about:
           "Dr. Jenny Watson is the top most Immunologists specialist in Christ Hospital at London. "
