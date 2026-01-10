@@ -1,2 +1,5 @@
+<<<<<<< HEAD
 #include? "Pods/Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"
+=======
+>>>>>>> ca9d25623b7453e2b3de9dd4f35be8e76281a67d
 #include "ephemeral/Flutter-Generated.xcconfig"
