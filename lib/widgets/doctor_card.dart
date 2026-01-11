@@ -30,24 +30,25 @@ class DoctorCard extends StatelessWidget {
     this.heightimage,
   });
 
-  Widget _buildImage({required String image, required double width, required double height}) {
+  Widget _buildImage(
+      {required String image, required double width, required double height}) {
     // Determine if it's a network URL or asset path
-    final isNetworkUrl = image.startsWith('http://') || 
-                        image.startsWith('https://') ||
-                        image.startsWith('/storage/') ||
-                        (image.startsWith('/') && !image.startsWith('assets/'));
-    
+    final isNetworkUrl = image.startsWith('http://') ||
+        image.startsWith('https://') ||
+        image.startsWith('/storage/') ||
+        (image.startsWith('/') && !image.startsWith('assets/'));
+
     if (isNetworkUrl) {
       // Handle network images (including relative paths from API)
       String imageUrl = image;
-      
+
       // If it's a relative path, it should already have base URL prepended by getImagePath
       // But handle case where it might not
       if (imageUrl.startsWith('/') && !imageUrl.startsWith('http')) {
         // This shouldn't happen if getImagePath works correctly, but handle it anyway
         return _buildPlaceholder(width: width, height: height);
       }
-      
+
       return Image.network(
         imageUrl,
         width: width,
@@ -73,8 +74,8 @@ class DoctorCard extends StatelessWidget {
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
                   value: loadingProgress.expectedTotalBytes != null
-                      ? loadingProgress.cumulativeBytesLoaded / 
-                        loadingProgress.expectedTotalBytes!
+                      ? loadingProgress.cumulativeBytesLoaded /
+                          loadingProgress.expectedTotalBytes!
                       : null,
                 ),
               ),
@@ -83,7 +84,7 @@ class DoctorCard extends StatelessWidget {
         },
       );
     }
-    
+
     // Otherwise, treat as asset image
     return Image.asset(
       image,
@@ -111,13 +112,13 @@ class DoctorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-final formattedReviews = NumberFormat('#,###').format(reviews);
+    final formattedReviews = NumberFormat('#,###').format(reviews);
 
     return GestureDetector(
       onTap: onTap,
       child: Container(
         height: height ?? 130.h,
-        padding: EdgeInsets.only(bottom: 8.h, left: 8.w, top: 8.h),
+        padding: EdgeInsetsDirectional.only(bottom: 8.h, start: 8.w, top: 8.h),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16),

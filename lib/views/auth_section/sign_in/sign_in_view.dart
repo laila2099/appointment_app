@@ -30,7 +30,8 @@ class LoginView extends StatelessWidget {
       backgroundColor: AppColors.white,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          padding: const EdgeInsetsDirectional.symmetric(
+              horizontal: 24, vertical: 16),
           child: Form(
             key: controller.LoginFormKey,
             child: Column(
@@ -40,14 +41,14 @@ class LoginView extends StatelessWidget {
 
                 // Title
                 Text(
-                  "Welcome Back",
+                  "welcome_back".tr,
                   style: CustomTextStyles.headline32Bold,
                 ),
                 SizedBox(height: 16.h),
 
                 // Subtitle
                 Text(
-                  "We're excited to have you back, can't wait to see what you've been up to since you last logged in.",
+                  "login_subtitle".tr,
                   style: CustomTextStyles.subTitle,
                 ),
                 SizedBox(height: 32.h),
@@ -55,14 +56,14 @@ class LoginView extends StatelessWidget {
                 // Email
                 CustomTextField(
                   controller: controller.emailController,
-                  hint: "Email",
+                  hint: "email".tr,
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "Please enter your email";
+                      return "email_required".tr;
                     }
                     if (!GetUtils.isEmail(value)) {
-                      return "Enter a valid email";
+                      return "email_invalid".tr;
                     }
                     return null;
                   },
@@ -73,11 +74,11 @@ class LoginView extends StatelessWidget {
                 Obx(
                   () => CustomTextField(
                     controller: controller.passwordController,
-                    hint: "Password",
+                    hint: "password".tr,
                     isPassword: !controller.isPasswordVisible.value,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return "Please enter your password";
+                        return "password_required".tr;
                       }
                       return null;
                     },
@@ -109,7 +110,7 @@ class LoginView extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "Remember me",
+                      "remember_me".tr,
                       style: CustomTextStyles.subtitle12W500,
                     ),
                     const Spacer(),
@@ -118,7 +119,7 @@ class LoginView extends StatelessWidget {
                         Get.toNamed(AppRoutes.forgotPassword);
                       },
                       child: Text(
-                        "Forgot Password?",
+                        "forgot_password".tr,
                         style: CustomTextStyles.subtitle12W500
                             .copyWith(color: AppColors.primary),
                       ),
@@ -134,8 +135,8 @@ class LoginView extends StatelessWidget {
                     height: 52.h,
                     child: CustomPrimaryButton(
                       label: controller.isLoading.value
-                          ? "Logging in..."
-                          : "Login",
+                          ? "logging_in".tr
+                          : "login".tr,
                       onTap: () {
                         if (!controller.isLoading.value) {
                           if (controller.LoginFormKey.currentState
@@ -156,9 +157,10 @@ class LoginView extends StatelessWidget {
                   children: [
                     const Expanded(child: Divider()),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      padding:
+                          const EdgeInsetsDirectional.symmetric(horizontal: 8),
                       child: Text(
-                        "Or sign in with",
+                        "or_sign_in_with".tr,
                         style: CustomTextStyles.subtitle,
                       ),
                     ),
@@ -198,21 +200,21 @@ class LoginView extends StatelessWidget {
                       text: TextSpan(
                         style: CustomTextStyles.subtitle,
                         children: [
-                          const TextSpan(
-                            text: "By logging, you agree to our ",
+                          TextSpan(
+                            text: "login_terms_prefix".tr,
                           ),
                           TextSpan(
-                            text: "Terms & Conditions",
+                            text: "terms_conditions".tr,
                             style: CustomTextStyles.subtitle.copyWith(
                               fontWeight: FontWeight.w600,
                               color: AppColors.black,
                             ),
                           ),
-                          const TextSpan(
-                            text: " and ",
+                          TextSpan(
+                            text: " and ".tr,
                           ),
                           TextSpan(
-                            text: "Privacy Policy",
+                            text: "privacy_policy".tr,
                             style: CustomTextStyles.subtitle.copyWith(
                               fontWeight: FontWeight.w600,
                               color: AppColors.black,
@@ -227,11 +229,11 @@ class LoginView extends StatelessWidget {
                       text: TextSpan(
                         style: CustomTextStyles.subtitle,
                         children: [
-                          const TextSpan(
-                            text: "Don't have an account yet? ",
+                          TextSpan(
+                            text: "no_account".tr,
                           ),
                           TextSpan(
-                            text: "Sign Up",
+                            text: "sign_up".tr,
                             style: CustomTextStyles.subtitle.copyWith(
                               color: AppColors.primary,
                               fontWeight: FontWeight.w600,

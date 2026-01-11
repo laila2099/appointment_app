@@ -16,7 +16,7 @@ class FloatingSearchButton extends GetView<NavigationController> {
       child: Container(
         height: 75.h,
         width: 75.w,
-        padding: EdgeInsets.all(5.r),
+        padding: EdgeInsetsDirectional.all(5.r),
         decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.circular(26.r),

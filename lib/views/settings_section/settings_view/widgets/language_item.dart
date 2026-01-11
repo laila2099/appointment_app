@@ -16,7 +16,7 @@ class LanguageItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 14.h),
+      padding: EdgeInsetsDirectional.symmetric(vertical: 14.h),
       child: Row(
         children: [
           Text(

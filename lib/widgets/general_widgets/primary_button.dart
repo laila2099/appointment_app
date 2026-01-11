@@ -7,7 +7,7 @@ class PrimaryButton extends StatelessWidget {
   final String text;
   final VoidCallback? onPressed;
   final double height;
-  final EdgeInsetsGeometry padding;
+  final EdgeInsets padding;
   final double radius;
   final bool enabled;
 
@@ -24,7 +24,7 @@ class PrimaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: padding,
+      padding: padding.resolve(Directionality.of(context)),
       child: SizedBox(
         height: height.h,
         width: double.infinity,

@@ -36,17 +36,17 @@ class ChatView extends StatelessWidget {
 
                     return Align(
                       alignment: message.isUser
-                          ? Alignment.centerRight
-                          : Alignment.centerLeft,
+                          ? AlignmentDirectional.centerEnd
+                          : AlignmentDirectional.centerStart,
                       child: Column(
                         crossAxisAlignment: message.isUser
                             ? CrossAxisAlignment.end
                             : CrossAxisAlignment.start,
                         children: [
                           Container(
-                            margin: const EdgeInsets.symmetric(
+                            margin: const EdgeInsetsDirectional.symmetric(
                                 vertical: 4, horizontal: 8),
-                            padding: const EdgeInsets.all(12),
+                            padding: const EdgeInsetsDirectional.all(12),
                             decoration: BoxDecoration(
                               color: message.isUser
                                   ? AppColors.primary
@@ -63,8 +63,8 @@ class ChatView extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 12.0),
+                            padding: const EdgeInsetsDirectional.symmetric(
+                                horizontal: 12.0),
                             child: Text(
                               timeStr,
                               style: TextStyle(
@@ -80,7 +80,7 @@ class ChatView extends StatelessWidget {
                 )),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsetsDirectional.all(8.0),
             child: Row(
               children: [
                 IconButton(
@@ -92,13 +92,13 @@ class ChatView extends StatelessWidget {
                 ),
                 Expanded(
                   child: Stack(
-                    alignment: Alignment.centerRight,
+                    alignment: AlignmentDirectional.centerEnd,
                     children: [
                       TextField(
                         onChanged: (val) => controller.newMessage.value = val,
                         decoration: InputDecoration(
-                          hintText: 'Type a message ...',
-                          contentPadding: const EdgeInsets.symmetric(
+                          hintText: 'type_message'.tr,
+                          contentPadding: const EdgeInsetsDirectional.symmetric(
                               vertical: 10, horizontal: 16),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),

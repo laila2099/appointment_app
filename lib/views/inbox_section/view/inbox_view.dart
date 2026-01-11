@@ -1,5 +1,6 @@
 import 'package:appointment_app/core/constant/app_icons.dart';
 import 'package:appointment_app/routes/app_routes.dart';
+import 'package:appointment_app/views/home_section/recommendation_doctor/widgets/custom_bottom_sheet.dart';
 import 'package:appointment_app/views/inbox_section/view/widget/Bottom_Sheet.dart';
 import 'package:appointment_app/views/inbox_section/view/widget/inbox_item.dart';
 import 'package:appointment_app/widgets/general_widgets/app_header/app_header.dart';
@@ -25,7 +26,7 @@ class InboxView extends GetView<InboxController> {
       body: Column(
         children: [
           AppHeader(
-            center: HeaderTitle('Message'),
+            center: HeaderTitle('message'.tr),
             trailing: HeaderButton(
               onTap: () {
                 showInboxSheet(context);
@@ -40,21 +41,23 @@ class InboxView extends GetView<InboxController> {
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+              padding: EdgeInsetsDirectional.symmetric(
+                  horizontal: 16.w, vertical: 20.h),
               child: Column(
                 children: [
                   Row(
                     children: [
                       Expanded(
-                        child: const SearchTextField(
-                          hintText: 'Search Message',
+                        child: SearchTextField(
+                          hintText: 'search_message'.tr,
                         ),
                       ),
                       SizedBox(width: 8.w),
-                      Icon(
-                        Icons.filter_list,
+                      IconButton(
+                        onPressed: () => Get.bottomSheet(CustomBottomSheet()),
+                        icon: Icon(Icons.filter_list),
                         color: AppColors.black,
-                        size: 24.w,
+                        iconSize: 24.w,
                       ),
                     ],
                   ),

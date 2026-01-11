@@ -13,7 +13,7 @@ class CenterSnapDatePicker extends StatelessWidget {
   const CenterSnapDatePicker({
     super.key,
     this.itemHeight = 60,
-    this.padding = EdgeInsets.zero,
+    this.padding = EdgeInsetsDirectional.zero,
     required this.controller,
   });
 
@@ -56,7 +56,7 @@ class CenterSnapDatePicker extends StatelessWidget {
                     return Center(
                       child: Transform.scale(
                         scale: scale,
-                        alignment: Alignment.center,
+                        alignment: AlignmentDirectional.center,
                         child: _DateChip(
                           date: d,
                           height: itemHeight.h,
@@ -130,8 +130,8 @@ class _DateChip extends StatelessWidget {
       duration: const Duration(milliseconds: 100),
       curve: Curves.easeOut,
       height: height,
-      margin: EdgeInsets.symmetric(horizontal: 5.w),
-      padding: EdgeInsets.symmetric(vertical: 7.h),
+      margin: EdgeInsetsDirectional.symmetric(horizontal: 5.w),
+      padding: EdgeInsetsDirectional.symmetric(vertical: 7.h),
       decoration: BoxDecoration(
         color: selected ? const Color(0xFF2F6BFF) : const Color(0xFFF3F4F6),
         borderRadius: BorderRadius.circular(14.r),

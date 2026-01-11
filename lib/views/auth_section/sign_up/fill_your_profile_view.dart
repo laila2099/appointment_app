@@ -22,8 +22,8 @@ class FillYourProfileView extends StatelessWidget {
           children: [
             Expanded(
               child: SingleChildScrollView(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                padding: const EdgeInsetsDirectional.symmetric(
+                    horizontal: 24, vertical: 16),
                 child: Form(
                   key: profileController.formKey,
                   child: Column(
@@ -37,7 +37,7 @@ class FillYourProfileView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            "Fill Your Profile",
+                            "fill_your_profile".tr,
                             style: CustomTextStyles.headline32Bold,
                           ),
                           GestureDetector(
@@ -46,7 +46,7 @@ class FillYourProfileView extends StatelessWidget {
                               // Get.toNamed(AppRoutes.home);
                             },
                             child: Text(
-                              "Skip",
+                              "skip".tr,
                               style: CustomTextStyles.subtitle.copyWith(
                                 color: AppColors.primary,
                                 fontSize: 20,
@@ -60,7 +60,7 @@ class FillYourProfileView extends StatelessWidget {
 
                       // Subtitle
                       Text(
-                        "Please take a few minutes to fill out your profile with as much detail as possible.",
+                        "fill_profile_subtitle".tr,
                         style: CustomTextStyles.subtitle,
                       ),
                       const SizedBox(height: 32),
@@ -81,9 +81,9 @@ class FillYourProfileView extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            Positioned(
+                            PositionedDirectional(
                               bottom: 0,
-                              right: 0,
+                              end: 0,
                               child: GestureDetector(
                                 onTap: () {},
                                 child: Container(
@@ -110,14 +110,14 @@ class FillYourProfileView extends StatelessWidget {
 
                       CustomTextField(
                         controller: profileController.fullNameController,
-                        hint: "Full Name",
+                        hint: "full_name".tr,
                       ),
                       const SizedBox(height: 16),
 
                       // Email
                       CustomTextField(
                         controller: profileController.emailController,
-                        hint: "Email",
+                        hint: "email".tr,
                         keyboardType: TextInputType.emailAddress,
                       ),
                       const SizedBox(height: 16),
@@ -132,7 +132,7 @@ class FillYourProfileView extends StatelessWidget {
                       // Birthday
                       CustomTextField(
                         controller: profileController.birthdateController,
-                        hint: "Birthday",
+                        hint: "birthday".tr,
                       ),
                       const SizedBox(height: 16),
 
@@ -153,12 +153,13 @@ class FillYourProfileView extends StatelessWidget {
 
             // الزر ثابت أسفل الشاشة
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              padding: const EdgeInsetsDirectional.symmetric(
+                  horizontal: 24, vertical: 16),
               child: SizedBox(
                 width: double.infinity,
                 height: 52,
                 child: CustomPrimaryButton(
-                  label: "Submit",
+                  label: "submit".tr,
                   onTap: () {
                     profileController.setProfile();
                   },

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart' hide TextField;
+import 'package:get/get.dart';
 import '../../../../core/constant/app_colors.dart';
 import '../../../../core/constant/text_style.dart';
 import '../../../../widgets/helpful_widgets/text_field_widget.dart';
@@ -12,7 +13,8 @@ class ForgotPasswordView extends StatelessWidget {
       backgroundColor: AppColors.white,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          padding: const EdgeInsetsDirectional.symmetric(
+              horizontal: 24, vertical: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -20,7 +22,7 @@ class ForgotPasswordView extends StatelessWidget {
 
               // Title
               Text(
-                'Forgot Password',
+                "forgot_password".tr,
                 style: CustomTextStyles.headline32Bold,
               ),
 
@@ -28,7 +30,7 @@ class ForgotPasswordView extends StatelessWidget {
 
               // Subtitle
               Text(
-                'At our app, we take the security of your information seriously.',
+                "validation_subtitle".tr,
                 style: CustomTextStyles.subTitle,
               ),
 
@@ -36,7 +38,7 @@ class ForgotPasswordView extends StatelessWidget {
 
               // Email or Phone
               CustomTextField(
-                hint: 'Email or Phone Number',
+                hint: 'email_phone'.tr,
                 keyboardType: TextInputType.emailAddress,
               ),
 
@@ -44,7 +46,7 @@ class ForgotPasswordView extends StatelessWidget {
 
               // New Password
               CustomTextField(
-                hint: 'New Password',
+                hint: 'new_password'.tr,
                 keyboardType: TextInputType.visiblePassword,
               ),
 
@@ -52,7 +54,7 @@ class ForgotPasswordView extends StatelessWidget {
 
               // Confirm New Password
               CustomTextField(
-                hint: 'Confirm New Password',
+                hint: 'confirm_new_password'.tr,
                 keyboardType: TextInputType.visiblePassword,
               ),
 
@@ -74,7 +76,7 @@ class ForgotPasswordView extends StatelessWidget {
                     elevation: 0,
                   ),
                   child: Text(
-                    'Reset Password',
+                    'reset_password'.tr,
                     style: CustomTextStyles.button,
                   ),
                 ),

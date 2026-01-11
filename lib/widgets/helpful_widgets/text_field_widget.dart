@@ -37,7 +37,7 @@ class CustomTextField extends StatelessWidget {
         suffixIcon: suffixIcon,
         filled: true,
         fillColor: Color(0xfffdfdff),
-        contentPadding: const EdgeInsets.symmetric(
+        contentPadding: const EdgeInsetsDirectional.symmetric(
           horizontal: 16,
           vertical: 18,
         ),

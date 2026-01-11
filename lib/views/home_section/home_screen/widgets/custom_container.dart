@@ -22,16 +22,16 @@ class CustomContainer extends StatelessWidget {
           ),
           child: Stack(
             children: [
-              Positioned(
+              PositionedDirectional(
                 // top: 5.h,
                 child: Image.asset(AppImages.rectangle),
               ),
               Padding(
-                padding: EdgeInsets.only(left: 18.w, top: 12.h),
+                padding: EdgeInsetsDirectional.only(start: 18.w, top: 12.h),
                 child: Column(
                   children: [
                     Text(
-                      "Book and\nschedule with\nnearest doctor",
+                      "home_description".tr,
                       style: CustomTextStyles.container,
                     ),
                     SizedBox(height: 13.h),
@@ -40,7 +40,7 @@ class CustomContainer extends StatelessWidget {
                         Get.to(FindNearbyScreen());
                       },
                       child: Text(
-                        "Find Nearby",
+                        "Find Nearby".tr,
                         style: CustomTextStyles.regular,
                       ),
                     ),
@@ -51,13 +51,13 @@ class CustomContainer extends StatelessWidget {
             ],
           ),
         ),
-        Positioned(
-          left: 200.w,
+        PositionedDirectional(
+          start: 200.w,
           top: -32.h,
           child: Image.asset(height: 197.h, width: 136.w, AppImages.nurse),
         ),
-        Positioned(
-          left: 230.w,
+        PositionedDirectional(
+          start: 230.w,
           top: 70.h,
           child: Image.asset(AppImages.rectangle),
         ),

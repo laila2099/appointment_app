@@ -13,7 +13,7 @@ class AboutTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: EdgeInsets.fromLTRB(24.w, 32.h, 24.w, 0.h),
+      padding: EdgeInsetsDirectional.fromSTEB(24.w, 32.h, 24.w, 0.h),
       children: [
         SectionTitle("about_me".tr),
         SizedBox(height: 12.h),

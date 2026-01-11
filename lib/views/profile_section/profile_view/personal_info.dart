@@ -26,7 +26,7 @@ class PersonalInfo extends StatelessWidget {
           children: [
             AppHeader(
               center: Text(
-                "Personal information",
+                "personal_information".tr,
                 style: CustomTextStyles.screenTitle,
               ),
             ),
@@ -36,7 +36,7 @@ class PersonalInfo extends StatelessWidget {
             /// Avatar
             Center(
               child: Stack(
-                alignment: Alignment.bottomRight,
+                alignment: AlignmentDirectional.bottomEnd,
                 children: [
                   CircleAvatar(
                     radius: 62,
@@ -47,7 +47,7 @@ class PersonalInfo extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(8),
+                    padding: const EdgeInsetsDirectional.all(8),
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Color(0xffF8F8F8),
@@ -65,7 +65,7 @@ class PersonalInfo extends StatelessWidget {
             SizedBox(height: 52.h),
 
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              padding: EdgeInsetsDirectional.symmetric(horizontal: 24.w),
               child: Column(
                 children: [
                   Obx(() => PersonalTextField(text: controller.name.value)),
@@ -83,8 +83,7 @@ class PersonalInfo extends StatelessWidget {
                   const PhoneTextField(),
                   SizedBox(height: 24.h),
                   Text(
-                    "When you set up your personal information settings, "
-                    "you should take care to provide accurate information.",
+                    "personal_info_warning".tr,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 12.sp,
@@ -94,12 +93,11 @@ class PersonalInfo extends StatelessWidget {
                   ),
                   SizedBox(height: 60.h),
                   PrimaryButton(
-                    text: "Save",
+                    text: "save".tr,
                     onPressed: () {
                       controller.onSave();
                       Get.back();
                     },
-
                     padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 16.h),
                   ),
                   SizedBox(height: 20.h),

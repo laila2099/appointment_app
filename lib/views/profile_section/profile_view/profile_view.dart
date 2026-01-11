@@ -30,7 +30,7 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 Container(color: AppColors.primary),
                 Container(
-                  margin: EdgeInsets.only(top: 92.h),
+                  margin: EdgeInsetsDirectional.only(top: 92.h),
                   decoration: BoxDecoration(
                     color: AppColors.white,
                     borderRadius: BorderRadius.vertical(
@@ -38,8 +38,11 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                Positioned.fill(
+                PositionedDirectional(
                   top: 32.h,
+                  start: 0,
+                  end: 0,
+                  bottom: 0,
                   child: SingleChildScrollView(
                     physics: const NeverScrollableScrollPhysics(),
                     child: Column(
@@ -90,4 +93,3 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
-

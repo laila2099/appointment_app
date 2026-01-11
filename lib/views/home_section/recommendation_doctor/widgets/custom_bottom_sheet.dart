@@ -40,21 +40,21 @@ class CustomBottomSheet extends StatelessWidget {
               SizedBox(height: 30.h),
 
               Padding(
-                padding: EdgeInsets.only(left: 20.w),
+                padding: EdgeInsetsDirectional.only(start: 20.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Align(
-                      alignment: Alignment.center,
+                      alignment: AlignmentDirectional.center,
                       child: Text(
-                        "Sort By",
+                        "sort_by".tr,
                         style: CustomTextStyles.screenTitle,
                       ),
                     ),
                     SizedBox(height: 16.h),
                     Divider(color: AppColors.search),
                     SizedBox(height: 24.h),
-                    Text("Speciality", style: CustomTextStyles.medium),
+                    Text("speciality".tr, style: CustomTextStyles.medium),
                     SizedBox(height: 24.h),
                     SizedBox(
                       height: 45.h,
@@ -78,7 +78,7 @@ class CustomBottomSheet extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 20.h),
-                    Text("Rating", style: CustomTextStyles.medium),
+                    Text("rating".tr, style: CustomTextStyles.medium),
                     SizedBox(height: 20.h),
                     SizedBox(
                       height: 40.h,
@@ -108,7 +108,8 @@ class CustomBottomSheet extends StatelessWidget {
 
               SizedBox(height: 35.h),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 14.h),
+                padding: EdgeInsetsDirectional.symmetric(
+                    horizontal: 12.w, vertical: 14.h),
                 child: SizedBox(
                   width: 327.w,
                   height: 50.h,
@@ -120,7 +121,7 @@ class CustomBottomSheet extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12.r),
                       ),
                     ),
-                    child: Text("Done", style: CustomTextStyles.button),
+                    child: Text("done".tr, style: CustomTextStyles.button),
                   ),
                 ),
               ),

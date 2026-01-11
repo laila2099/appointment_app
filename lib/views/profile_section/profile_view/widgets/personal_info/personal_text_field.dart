@@ -13,15 +13,15 @@ class PersonalTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 345.w,
-      padding:
-          EdgeInsets.only(top: 16.h, bottom: 16.h, left: 18.w, right: 18.w),
+      padding: EdgeInsetsDirectional.only(
+          top: 16.h, bottom: 16.h, start: 18.w, end: 18.w),
       decoration: BoxDecoration(
         color: const Color(0xFFFDFDFF),
         borderRadius: BorderRadius.circular(25.r),
         border: Border.all(color: const Color(0xffEEEEEE)),
       ),
       child: Align(
-        alignment: Alignment.centerLeft,
+        alignment: AlignmentDirectional.centerStart,
         child: Text(text,
             style: TextStyle(
               fontSize: 14.sp,

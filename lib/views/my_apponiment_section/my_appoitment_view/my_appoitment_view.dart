@@ -27,7 +27,7 @@ class AppointmentView extends GetView<MyAppointmentsController> {
           child: Column(
             children: [
               AppHeader(
-                center: HeaderTitle("Appointments"),
+                center: HeaderTitle("appointments".tr),
                 trailing: HeaderButton(
                   onTap: () {
                     Get.toNamed(AppRoutes.search);
@@ -44,7 +44,7 @@ class AppointmentView extends GetView<MyAppointmentsController> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 16.0, right: 16),
+                padding: const EdgeInsetsDirectional.only(start: 16.0, end: 16),
                 child: TabBar(
                   labelColor: AppColors.primary,
                   unselectedLabelColor: AppColors.lightGrey,
@@ -69,7 +69,7 @@ class AppointmentView extends GetView<MyAppointmentsController> {
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
+                  padding: const EdgeInsetsDirectional.only(top: 8.0),
                   child: TabBarView(
                     children: [
                       AppoitmentStatus(status: AppointmentStatus.upcoming),

@@ -20,8 +20,8 @@ class NotificationItem extends StatelessWidget {
       child: Container(
         width: 325.w,
         // height: 110.h,
-        margin: EdgeInsets.symmetric(vertical: 6.h),
-        padding: EdgeInsets.all(12.r),
+        margin: EdgeInsetsDirectional.symmetric(vertical: 6.h),
+        padding: EdgeInsetsDirectional.all(12.r),
         decoration: BoxDecoration(
           color: notification.isActive ? Colors.grey.shade100 : Colors.white,
           borderRadius: BorderRadius.circular(12.r),
@@ -40,9 +40,7 @@ class NotificationItem extends StatelessWidget {
                 child: SvgPicture.asset(notification.icon, width: 22.sp),
               ),
             ),
-
             SizedBox(width: 12.w),
-
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +63,6 @@ class NotificationItem extends StatelessWidget {
                 ],
               ),
             ),
-
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisSize: MainAxisSize.min,

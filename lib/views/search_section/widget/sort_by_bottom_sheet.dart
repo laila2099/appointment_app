@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import '../../../core/constant/app_colors.dart';
 import '../widget/custom_tab.dart';
 
@@ -19,15 +20,16 @@ class _SortByBottomSheetState extends State<SortByBottomSheet> {
   ];
   final List<String> ratings = ['All', '5', '4', '3'];
 
-  String selectedSpeciality = 'All';
-  String selectedRating = 'All';
+  String selectedSpeciality = 'all'.tr;
+  String selectedRating = 'all'.tr;
 
   @override
   Widget build(BuildContext context) {
     return FractionallySizedBox(
       heightFactor: 0.5, // نص الصفحة
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+        padding:
+            EdgeInsetsDirectional.symmetric(horizontal: 16.w, vertical: 20.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -47,7 +49,7 @@ class _SortByBottomSheetState extends State<SortByBottomSheet> {
             // Title
             Center(
               child: Text(
-                'Sort By',
+                'sort_by'.tr,
                 style: TextStyle(
                   fontSize: 24.sp,
                   fontWeight: FontWeight.w600,
@@ -59,7 +61,7 @@ class _SortByBottomSheetState extends State<SortByBottomSheet> {
 
             // Speciality
             Text(
-              'Speciality',
+              'speciality'.tr,
               style: TextStyle(
                 color: AppColors.black,
                 fontWeight: FontWeight.w500,
@@ -87,7 +89,7 @@ class _SortByBottomSheetState extends State<SortByBottomSheet> {
 
             // Rating
             Text(
-              'Rating',
+              'rating'.tr,
               style: TextStyle(
                 color: AppColors.black,
                 fontWeight: FontWeight.w500,
@@ -106,9 +108,9 @@ class _SortByBottomSheetState extends State<SortByBottomSheet> {
                       });
                     },
                     child: Container(
-                      margin: EdgeInsets.only(right: 8.w),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+                      margin: EdgeInsetsDirectional.only(end: 8.w),
+                      padding: EdgeInsetsDirectional.symmetric(
+                          horizontal: 16.w, vertical: 8.h),
                       decoration: BoxDecoration(
                         color: isSelected
                             ? AppColors.primary
@@ -156,7 +158,7 @@ class _SortByBottomSheetState extends State<SortByBottomSheet> {
                 minimumSize: Size(double.infinity, 50.h),
               ),
               child: Text(
-                'Done',
+                'done'.tr,
                 style: TextStyle(
                   color: AppColors.white,
                   fontWeight: FontWeight.w600,

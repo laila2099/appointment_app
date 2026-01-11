@@ -18,7 +18,7 @@ class LogoutDialog extends StatelessWidget {
       ),
       insetPadding: EdgeInsets.symmetric(horizontal: 40.w),
       child: Padding(
-        padding: EdgeInsets.symmetric(
+        padding: EdgeInsetsDirectional.symmetric(
           horizontal: 20.w,
           vertical: 16.h,
         ),
@@ -26,7 +26,7 @@ class LogoutDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Logout',
+              'logout'.tr,
               style: TextStyle(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w500,
@@ -34,7 +34,7 @@ class LogoutDialog extends StatelessWidget {
             ),
             SizedBox(height: 12.h),
             Text(
-              "You'll need to enter your username\nand password next time\nyou want to login",
+              "logout_warning".tr,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.w400,
@@ -56,7 +56,7 @@ class LogoutDialog extends StatelessWidget {
                       },
                       child: Center(
                         child: Text(
-                          'Cancel',
+                          'cancel'.tr,
                           style: TextStyle(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w400,
@@ -81,7 +81,7 @@ class LogoutDialog extends StatelessWidget {
                       },
                       child: Center(
                         child: Text(
-                          'Logout',
+                          'logout'.tr,
                           style: TextStyle(
                             fontSize: 16.sp,
                             color: AppColors.red,
