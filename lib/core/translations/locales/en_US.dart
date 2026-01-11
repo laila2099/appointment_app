@@ -142,8 +142,8 @@ const Map<String, String> enUS = {
   "completed": "Completed",
   "cancelled": "Cancelled",
   "no_upcoming": "No upcoming appointments",
-  "no_completed": "No upcoming appointments",
-  "no_cancelled": "No upcoming appointments",
+  "no_completed": "No completed appointments",
+  "no_cancelled": "No cancelled appointments",
 
   'appointment_done': 'Appointment done',
   'appointment_cancelled': 'Appointment cancelled',

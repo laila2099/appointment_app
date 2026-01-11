@@ -1,17 +1,17 @@
-import 'package:appointment_app/core/classes/api/api.dart';
-import 'package:appointment_app/core/classes/api/api_result.dart';
-import 'package:appointment_app/core/classes/repositories/filter_doctor_repository.dart';
-import 'package:appointment_app/core/config/app_config.dart';
+import 'package:appointment_app/views/home_section/home_screen/model/category_model.dart';
 import 'package:appointment_app/views/home_section/recommendation_doctor/models/sort_model.dart';
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../../core/classes/api/api_result.dart';
+import '../../../../core/classes/repositories/doctor_repository.dart';
 
 class SortController extends GetxController {
-  late final FilterDoctorRepository _repository;
+  final DoctorRepository _repository = Get.find();
 
-   var specialityList = <SortModel>[].obs;
+  var specialityList = <CategoryModel>[].obs;
   var ratingList = <SortModel>[].obs;
-  
+
   var specialityIndex = 0.obs;
   var ratingIndex = 0.obs;
 
@@ -21,9 +21,7 @@ class SortController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-     _repository = FilterDoctorRepository(
-        api: Get.put(ApiClient(baseUrl: AppConfig.baseUrl)));
-    
+
     _initializeRatingList();
     fetchSpecialities();
   }
@@ -43,15 +41,14 @@ class SortController extends GetxController {
     try {
       isLoading(true);
       errorMessage.value = null;
-      
-      final result = await _repository.filterDoctors();
 
-      if (result is ApiSuccess<List<SortModel>>) {
-         specialityList.assignAll([
-          SortModel(title: "All"),
+      final result = await _repository.getCategories();
+
+      if (result is ApiSuccess<List<CategoryModel>>) {
+        specialityList.assignAll([
           ...result.data,
         ]);
-      } else if (result is ApiFailure<List<SortModel>>) {
+      } else if (result is ApiFailure<List<CategoryModel>>) {
         final errorMsg = result.error.message;
         errorMessage.value = errorMsg;
         Get.snackbar("Error", "Failed to load specialities: $errorMsg");
@@ -74,5 +71,14 @@ class SortController extends GetxController {
 
   void retryFetch() {
     fetchSpecialities();
+  }
+
+  void done() {
+    final selected = specialityList[specialityIndex.value];
+
+    final String? categoryId =
+        (selected.title == 'general') ? null : selected.id;
+
+    Get.back(result: categoryId);
   }
 }

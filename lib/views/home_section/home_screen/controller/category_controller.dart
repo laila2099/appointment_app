@@ -1,12 +1,11 @@
-import 'package:appointment_app/core/classes/api/api.dart';
 import 'package:appointment_app/core/classes/api/api_result.dart';
-import 'package:appointment_app/core/classes/repositories/categories_repository.dart';
-import 'package:appointment_app/core/config/app_config.dart';
 import 'package:appointment_app/views/home_section/home_screen/model/category_model.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/classes/repositories/doctor_repository.dart';
+
 class CategoryController extends GetxController {
-  late final CategoriesRepository _repository;
+  final DoctorRepository _repository = Get.find();
 
   var categories = <CategoryModel>[].obs;
   var isLoading = true.obs;
@@ -15,8 +14,6 @@ class CategoryController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _repository = CategoriesRepository(
-        api: Get.put(ApiClient(baseUrl: AppConfig.baseUrl)));
     fetchCategories();
   }
 

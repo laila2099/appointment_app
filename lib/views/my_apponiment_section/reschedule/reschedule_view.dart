@@ -4,15 +4,13 @@ import 'package:appointment_app/views/my_apponiment_section/widgets/reschedule_s
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
 import '../../../../widgets/general_widgets/app_header/app_header.dart';
 import '../../../../widgets/general_widgets/app_header/header_title.dart';
 import '../../../../widgets/general_widgets/primary_button.dart';
-import '../../../models/appointment_model.dart';
 
 class RescheduleScreen extends GetView<BookingController> {
   RescheduleScreen({super.key});
-
-  final argAppointment = Get.arguments as Appointment?;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +21,7 @@ class RescheduleScreen extends GetView<BookingController> {
           return Column(
             children: [
               AppHeader(
+                onBack: Get.back,
                 center: HeaderTitle('reschedual'.tr),
               ),
               SizedBox(height: 20.h),
@@ -53,9 +52,7 @@ class RescheduleScreen extends GetView<BookingController> {
                         );
                         return;
                       }
-                      if (argAppointment != null) {
-                        controller.appointment.value = argAppointment!;
-                      }
+
                       if (controller.stepIndex.value == 1) {
                         final id = controller.appointment.value.id;
                         if (id != null && id.isNotEmpty) {

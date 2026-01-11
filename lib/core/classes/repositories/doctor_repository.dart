@@ -1,4 +1,5 @@
 import '../../../models/doctor_model.dart';
+import '../../../views/home_section/home_screen/model/category_model.dart';
 import '../api/api.dart';
 import '../api/api_endpoints.dart';
 import '../api/api_headers.dart';
@@ -125,7 +126,9 @@ class DoctorRepository {
     String select = '*',
   }) {
     return api.get<List<Doctor>>(
-      endpoint: ApiEndpoints.filterDoctors(categoryId,),
+      endpoint: ApiEndpoints.filterDoctors(
+        categoryId,
+      ),
       headers: accessToken != null
           ? ApiHeaders.authed(accessToken)
           : ApiHeaders.public(),
@@ -163,13 +166,31 @@ class DoctorRepository {
   }
 
   /// Get doctors by specialty
-  Future<ApiResult<List<Doctor>>> getDoctorsBySpecialty({
-    required String specialty,
-    String? accessToken,
-    String select = '*',
-  }) {
+  // Future<ApiResult<List<Doctor>>> getDoctorsBySpecialty({
+  //   required String specialty,
+  //   String? accessToken,
+  //   String select = '*',
+  // }) {
+  //   return api.get<List<Doctor>>(
+  //     endpoint: ApiEndpoints.getDoctorsBySpecialty(specialty, select: select),
+  //     headers: accessToken != null
+  //         ? ApiHeaders.authed(accessToken)
+  //         : ApiHeaders.public(),
+  //     parser: (json) {
+  //       if (json is List) {
+  //         return json
+  //             .map((item) => Doctor.fromJson(item as Map<String, dynamic>))
+  //             .toList();
+  //       }
+  //       return [];
+  //     },
+  //   );
+  // }
+
+  Future<ApiResult<List<Doctor>>> filterDoctors(
+      {required String categoryId, String? accessToken}) {
     return api.get<List<Doctor>>(
-      endpoint: ApiEndpoints.getDoctorsBySpecialty(specialty, select: select),
+      endpoint: ApiEndpoints.filterDoctors(categoryId),
       headers: accessToken != null
           ? ApiHeaders.authed(accessToken)
           : ApiHeaders.public(),
@@ -177,6 +198,21 @@ class DoctorRepository {
         if (json is List) {
           return json
               .map((item) => Doctor.fromJson(item as Map<String, dynamic>))
+              .toList();
+        }
+        return [];
+      },
+    );
+  }
+
+  Future<ApiResult<List<CategoryModel>>> getCategories() {
+    return api.get<List<CategoryModel>>(
+      endpoint: ApiEndpoints.getCategories(),
+      parser: (json) {
+        if (json is List) {
+          return json
+              .map((item) =>
+                  CategoryModel.fromJson(item as Map<String, dynamic>))
               .toList();
         }
         return [];

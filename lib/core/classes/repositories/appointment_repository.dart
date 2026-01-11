@@ -54,8 +54,10 @@ class AppointmentRepository {
     DateTime? appointmentDate,
     DateTime? appointmentTime,
     String? paymentMethod,
+    String? status,
   }) {
     final body = <String, dynamic>{
+      if (status != null) 'status': status,
       if (appointmentDate != null)
         'appointment_date': appointmentDate.toIso8601String().split('T').first,
       if (appointmentTime != null)
@@ -142,13 +144,14 @@ class AppointmentRepository {
     required String accessToken,
     required String appointmentId,
   }) {
+    print(ApiEndpoints.editAppointment(appointmentId));
     return api.patch<void>(
       endpoint: ApiEndpoints.editAppointment(appointmentId),
       headers: ApiHeaders.authed(accessToken),
       body: {
-        'status': 'cancelled',
+        'status': 'canceled',
       },
-      parser: (_) => null,
+      parser: (_) {},
     );
   }
 }

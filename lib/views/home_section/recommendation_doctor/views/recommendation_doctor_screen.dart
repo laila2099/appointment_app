@@ -1,9 +1,8 @@
+import 'package:appointment_app/core/classes/repositories/doctor_repository.dart';
 import 'package:appointment_app/core/constant/app_colors.dart';
 import 'package:appointment_app/core/constant/app_icons.dart';
-import 'package:appointment_app/core/classes/repositories/doctor_repository.dart';
 import 'package:appointment_app/routes/app_routes.dart';
 import 'package:appointment_app/views/home_section/home_screen/controller/doctor_controller.dart';
-import 'package:appointment_app/views/home_section/recommendation_doctor/widgets/custom_bottom_sheet.dart';
 import 'package:appointment_app/views/home_section/recommendation_doctor/widgets/custom_search.dart';
 import 'package:appointment_app/widgets/doctor_card.dart';
 import 'package:appointment_app/widgets/general_widgets/app_bar/app_bar.dart';
@@ -45,7 +44,9 @@ class RecommendationDoctorScreen extends StatelessWidget {
 
           CustomSearch(
             icon: AppIcons.sort,
-            onTap: () => Get.bottomSheet(CustomBottomSheet()),
+            onTap: () {
+              doctorController.sortDoctorsBySpeciality();
+            },
           ),
 
           SizedBox(height: 24.h),

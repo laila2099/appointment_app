@@ -1,5 +1,5 @@
-import 'package:appointment_app/views/settings_section/settings_binding/setting_binding.dart';
 import 'package:get/get.dart';
+
 import '../core/middlewares/splash_redirect_middleware.dart';
 import '../views/auth_section/fill_your_profile/bindings/fill_your_profile_binding.dart';
 import '../views/auth_section/fill_your_profile/fill_your_profile_view/fill_your_profile_view.dart';
@@ -80,6 +80,7 @@ final appPages = <GetPage>[
     bindings: [
       BottomNavBarBinding(),
       ProfileBinding(), // <-- ضيف هذا
+      BookingBinding(),
     ],
   ),
 

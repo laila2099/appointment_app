@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 class CustomBottomSheet extends StatelessWidget {
   CustomBottomSheet({super.key});
 
-   final SortController controller = Get.put(SortController());
+  final SortController controller = Get.put(SortController());
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class CustomBottomSheet extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(height: 8.h),
-           Container(
+          Container(
             width: 60.w,
             height: 4.h,
             decoration: BoxDecoration(
@@ -48,8 +48,7 @@ class CustomBottomSheet extends StatelessWidget {
                 SizedBox(height: 24.h),
                 Text("Speciality", style: CustomTextStyles.medium),
                 SizedBox(height: 16.h),
-
-                 Obx(() {
+                Obx(() {
                   if (controller.isLoading.value) {
                     return const Center(child: CircularProgressIndicator());
                   }
@@ -61,11 +60,14 @@ class CustomBottomSheet extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: EdgeInsets.only(right: 15.w),
-                          child: GestureDetector(
+                          child: InkWell(
                             onTap: () => controller.selectSpeciality(index),
-                            child: SortChip(
-                               active: controller.specialityIndex.value == index,
-                              title: controller.specialityList[index].title,
+                            child: Obx(
+                              () => SortChip(
+                                active:
+                                    controller.specialityIndex.value == index,
+                                title: controller.specialityList[index].title,
+                              ),
                             ),
                           ),
                         );
@@ -73,31 +75,29 @@ class CustomBottomSheet extends StatelessWidget {
                     ),
                   );
                 }),
-
                 SizedBox(height: 24.h),
                 Text("Rating", style: CustomTextStyles.medium),
                 SizedBox(height: 16.h),
-
-                 Obx(() => SizedBox(
-                  height: 45.h,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: controller.ratingList.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.only(right: 15.w),
-                        child: GestureDetector(
-                          onTap: () => controller.selectRating(index),
-                          child: SortChip(
-                             active: controller.ratingIndex.value == index,
-                            title: controller.ratingList[index].title,
-                            icon: controller.ratingList[index].icon,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                )),
+                Obx(() => SizedBox(
+                      height: 45.h,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: controller.ratingList.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: EdgeInsets.only(right: 15.w),
+                            child: GestureDetector(
+                              onTap: () => controller.selectRating(index),
+                              child: SortChip(
+                                active: controller.ratingIndex.value == index,
+                                title: controller.ratingList[index].title,
+                                icon: controller.ratingList[index].icon,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    )),
               ],
             ),
           ),
@@ -108,7 +108,9 @@ class CustomBottomSheet extends StatelessWidget {
               width: double.infinity,
               height: 50.h,
               child: ElevatedButton(
-                onPressed: () => Get.back(),
+                onPressed: () {
+                  controller.done();
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
                   shape: RoundedRectangleBorder(
