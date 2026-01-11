@@ -11,11 +11,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/services/auth_gate_service.dart';
+import '../../../profile_section/profile_controller/profile_controller.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
+
   final controller = Get.put(CategoryController());
   final doctorController = Get.put(DoctorController());
+  final profileController = Get.find<ProfileController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +37,13 @@ class HomeScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: 10),
-                      Text("Hi, Zaid", style: CustomTextStyles.bold),
+                      Obx(() {
+                        final name = profileController.profile.value?.name;
+                        return Text(
+                          "Hi, ${name ?? '...'}",
+                          style: CustomTextStyles.bold,
+                        );
+                      }),
                       SizedBox(height: 3.h),
                       Text(
                         "How Are You Today?!",
@@ -45,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Stack(
                     children: [
                       Container(
@@ -63,7 +73,7 @@ class HomeScreen extends StatelessWidget {
                                 AppRoutes.notificationScreen,
                               );
                             },
-                            icon: Icon(Icons.notifications_none),
+                            icon: const Icon(Icons.notifications_none),
                           ),
                         ),
                       ),
@@ -94,11 +104,11 @@ class HomeScreen extends StatelessWidget {
                 TextButton(
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.zero,
-                    minimumSize: Size(0, 0),
+                    minimumSize: const Size(0, 0),
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
                   onPressed: () {
-                    Get.toNamed((AppRoutes.doctorSpecialtiesScreen));
+                    Get.toNamed(AppRoutes.doctorSpecialtiesScreen);
                   },
                   child: Text("See All", style: CustomTextStyles.regular),
                 ),
@@ -132,11 +142,11 @@ class HomeScreen extends StatelessWidget {
                 TextButton(
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.zero,
-                    minimumSize: Size(0, 0),
+                    minimumSize: const Size(0, 0),
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
                   onPressed: () {
-                    Get.toNamed((AppRoutes.recommendationDoctorScreen));
+                    Get.toNamed(AppRoutes.recommendationDoctorScreen);
                   },
                   child: Text("See All", style: CustomTextStyles.regular),
                 ),

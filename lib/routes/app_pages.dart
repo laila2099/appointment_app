@@ -79,8 +79,12 @@ final appPages = <GetPage>[
   GetPage(
     name: AppRoutes.bottomnavbar,
     page: () => MainLayout(),
-    binding: BottomNavBarBinding(),
+    bindings: [
+      BottomNavBarBinding(),
+      ProfileBinding(),  // <-- ضيف هذا
+    ],
   ),
+
 
   // Home
   GetPage(name: AppRoutes.home, page: () => HomeScreen()),
