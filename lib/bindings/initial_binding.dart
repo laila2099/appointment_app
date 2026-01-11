@@ -1,5 +1,5 @@
-import 'package:appointment_app/core/translations/controller/translation_controller.dart';
 import 'package:get/get.dart';
+
 import '../core/classes/api/api.dart';
 import '../core/classes/repositories/appointment_repository.dart';
 import '../core/classes/repositories/auth_repository.dart';
@@ -21,16 +21,21 @@ class InitializeBinding extends Bindings {
 
     Get.lazyPut<BookingController>(() => BookingController(repository: repo));
 
+    //  سجل ApiClient
+    Get.put<ApiClient>(api);
+
     Get.put(AuthRepository(api: api));
     Get.put(DoctorRepository(api: api));
     Get.put(ReviewRepository(api: api));
 
     Get.put(AuthController(
-      repo: Get.find<AuthRepository>(),
-      prefs: Get.find<AppPreferencesService>(),
-    ));
+        repo: Get.find<AuthRepository>(),
+        prefs: Get.find<AppPreferencesService>()));
 
-    Get.put(MyAppointmentsController());
+    // تسجيل MyAppointmentsController
+    Get.put(MyAppointmentsController(), permanent: true);
+
+    // تسجيل InboxController
     Get.put(InboxController());
     Get.put(NavigationController());
   }

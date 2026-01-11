@@ -18,8 +18,9 @@ class AppoitmentStatus extends GetView<MyAppointmentsController> {
         return const Center(child: CircularProgressIndicator());
       }
 
-      final filteredAppointments =
-          controller.appointments.where((a) => a.status == status).toList();
+      // final filteredAppointments =
+      //     controller.appointments.where((a) => a.status == status).toList();
+      final filteredAppointments = controller.appointments;
 
       if (filteredAppointments.isEmpty) {
         String text = "";
