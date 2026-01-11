@@ -1,4 +1,3 @@
-import 'package:http/http.dart';
 import '../../../models/user_profile_model.dart';
 import '../api/api.dart';
 import '../api/api_endpoints.dart';
@@ -64,18 +63,21 @@ class ProfileRepository {
     String? fullName,
     String? phone,
     String? birthdate,
+    String? email,
   }) {
     final body = <String, dynamic>{
       if (fullName != null) 'full_name': fullName,
       if (phone != null) 'phone': phone,
       if (birthdate != null) 'birthdate': birthdate,
+      if (email != null) 'email': email,
     };
 
     return api.patch<UserProfile>(
       endpoint: ApiEndpoints.editProfile(userId),
       headers: {
         ...ApiHeaders.authed(accessToken),
-        'Prefer': 'return=representation',      },
+        'Prefer': 'return=representation',
+      },
       body: body,
       parser: (json) {
         if (json is List && json.isNotEmpty) {

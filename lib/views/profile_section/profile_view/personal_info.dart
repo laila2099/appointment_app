@@ -7,8 +7,8 @@ import '../../../core/constant/app_images.dart';
 import '../../../core/constant/text_style.dart';
 import '../../../widgets/general_widgets/app_header/app_header.dart';
 import '../../../widgets/general_widgets/primary_button.dart';
+import '../../../widgets/helpful_widgets/text_field_widget.dart';
 import '../profile_controller/personal_info_controller.dart';
-import 'widgets/personal_info/personal_text_field.dart';
 import 'widgets/personal_info/phone_text_field.dart';
 
 class PersonalInfo extends StatelessWidget {
@@ -68,15 +68,27 @@ class PersonalInfo extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: Column(
                 children: [
-                  Obx(() => PersonalTextField(text: controller.name.value)),
+                  CustomTextField(
+                    hint: 'Full Name',
+                    controller: controller.nameController,
+                    textStyle: TextStyle(color: AppColors.black),
+                  ),
                   SizedBox(
                     height: 16.h,
                   ),
-                  Obx(() => PersonalTextField(text: controller.email.value)),
+                  CustomTextField(
+                    hint: 'Email',
+                    controller: controller.emailController,
+                    textStyle: TextStyle(color: AppColors.black),
+                  ),
                   SizedBox(
                     height: 16.h,
                   ),
-                  Obx(() => PersonalTextField(text: controller.password.value)),
+                  CustomTextField(
+                    hint: 'Birthdate',
+                    controller: controller.birthdateController,
+                    textStyle: TextStyle(color: AppColors.black),
+                  ),
                   SizedBox(
                     height: 16.h,
                   ),
@@ -99,7 +111,6 @@ class PersonalInfo extends StatelessWidget {
                       controller.onSave();
                       Get.back();
                     },
-
                     padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 16.h),
                   ),
                   SizedBox(height: 20.h),

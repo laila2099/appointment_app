@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/classes/api/api_result.dart';
+import '../../../core/classes/api/api_result_guard.dart';
 import '../../../core/classes/repositories/profile_repository.dart';
 import '../../../models/user_profile_model.dart';
 
@@ -25,8 +26,6 @@ class ProfileController extends GetxController {
     await _loadAuthData();
     if (_accessToken != null && _userId != null) {
       getProfile();
-    } else {
-      Get.snackbar('Error', 'User not authenticated');
     }
   }
 
@@ -39,8 +38,7 @@ class ProfileController extends GetxController {
   Future<void> getProfile() async {
     loading.value = true;
 
-    final ApiResult<UserProfile> result =
-    await repository.getProfile(
+    final ApiResult<UserProfile> result = await repository.getProfile(
       accessToken: _accessToken!,
       userId: _userId!,
     );
@@ -48,6 +46,7 @@ class ProfileController extends GetxController {
     if (result is ApiSuccess<UserProfile>) {
       profile.value = result.data;
     } else if (result is ApiFailure<UserProfile>) {
+      if (await result.guardUnauthorized()) return;
       Get.snackbar(
         'Error',
         result.error.message ?? 'Failed to load profile',
@@ -59,18 +58,19 @@ class ProfileController extends GetxController {
 
   Future<void> editProfile({
     String? fullName,
+    String? email,
     String? phone,
     String? birthdate,
   }) async {
     loading.value = true;
 
-    final ApiResult<UserProfile> result =
-    await repository.editProfile(
+    final ApiResult<UserProfile> result = await repository.editProfile(
       accessToken: _accessToken!,
       userId: _userId!,
       fullName: fullName,
       phone: phone,
       birthdate: birthdate,
+      email: email,
     );
 
     if (result is ApiSuccess<UserProfile>) {
