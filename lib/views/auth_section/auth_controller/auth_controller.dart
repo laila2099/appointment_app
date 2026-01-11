@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../core/classes/api/api_result.dart';
@@ -111,6 +112,7 @@ class AuthController extends GetxController {
 
   Future<void> login() async {
     if (!(LoginFormKey.currentState?.validate() ?? false)) return;
+    TextInput.finishAutofillContext();
 
     isLoading.value = true;
     errorText.value = null;

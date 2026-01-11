@@ -1,18 +1,22 @@
 import 'package:appointment_app/views/profile_section/profile_controller/profile_controller.dart'
     show ProfileController;
-import 'package:get/get.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../../core/constant/app_keys.dart';
+import '../../../core/services/shared_prefrences.dart';
 import '../../../models/user_profile_model.dart';
 
 class PersonalInfoController extends GetxController {
-  final name = ''.obs;
-  final email = ''.obs;
   final password = 'Password'.obs;
+  final AppPreferencesService prefs = Get.find<AppPreferencesService>();
 
   final selectedCountry = Country.parse('GB').obs;
   final phoneController = TextEditingController();
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final birthdateController = TextEditingController();
 
   late final ProfileController profileController;
   late final Worker _profileWorker;
@@ -21,18 +25,24 @@ class PersonalInfoController extends GetxController {
   void onInit() {
     super.onInit();
     profileController = Get.find<ProfileController>();
+    final userId = prefs.getString(PrefKeys.userId);
+    print(userId);
 
     final profile = profileController.profile.value;
     if (profile != null) {
-      name.value = profile.name;
+      nameController.text = profile.name;
+      emailController.text = profile.email;
+      birthdateController.text = profile.birthdate ?? '';
       _applyPhoneFromProfile(profile.phone);
     }
 
     _profileWorker = ever<UserProfile?>(
       profileController.profile,
-          (profile) {
+      (profile) {
         if (profile != null) {
-          name.value = profile.name;
+          nameController.text = profile.name;
+          emailController.text = profile.email;
+          birthdateController.text = profile.birthdate ?? '';
           _applyPhoneFromProfile(profile.phone);
         }
       },
@@ -62,8 +72,12 @@ class PersonalInfoController extends GetxController {
 
   void onSave() {
     profileController.editProfile(
-      fullName: name.value,
+      fullName: nameController.text,
       phone: fullPhoneNumber,
+      birthdate: birthdateController.text != ''
+          ? birthdateController.text.toString()
+          : null,
+      email: emailController.text,
     );
   }
 
@@ -71,6 +85,9 @@ class PersonalInfoController extends GetxController {
   void onClose() {
     _profileWorker.dispose();
     phoneController.dispose();
+    emailController.dispose();
+    nameController.dispose();
+    birthdateController.dispose();
     super.onClose();
   }
 }

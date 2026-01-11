@@ -1,6 +1,6 @@
+import 'package:appointment_app/core/classes/repositories/doctor_repository.dart';
 import 'package:appointment_app/core/constant/app_colors.dart';
 import 'package:appointment_app/core/constant/text_style.dart';
-import 'package:appointment_app/core/classes/repositories/doctor_repository.dart';
 import 'package:appointment_app/routes/app_routes.dart';
 import 'package:appointment_app/views/home_section/home_screen/controller/category_controller.dart';
 import 'package:appointment_app/views/home_section/home_screen/controller/doctor_controller.dart';
@@ -43,27 +43,31 @@ class HomeScreen extends StatelessWidget {
               height: 72.h,
               child: Row(
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 10),
-                      Obx(() {
-                        final name = profileController.profile.value?.name;
-                        return Text(
-                          "Hi, ${name ?? '...'}",
-                          style: CustomTextStyles.bold,
-                        );
-                      }),
-                      SizedBox(height: 3.h),
-                      Text(
-                        "how_are_you_today".tr,
-                        style: CustomTextStyles.custom(
-                          fontSize: 10.sp,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.subtitle,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 10),
+                        Obx(() {
+                          final name = profileController.profile.value?.name;
+                          return Text(
+                            "Hi, ${name ?? '...'}",
+                            style: CustomTextStyles.bold,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          );
+                        }),
+                        SizedBox(height: 3.h),
+                        Text(
+                          "how_are_you_today".tr,
+                          style: CustomTextStyles.custom(
+                            fontSize: 10.sp,
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.subtitle,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   const Spacer(),
                   Stack(

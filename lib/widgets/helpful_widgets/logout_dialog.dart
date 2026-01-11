@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../core/constant/app_colors.dart';
 import '../../core/constant/app_keys.dart';
+import '../../core/services/auth_gate_service.dart';
 import '../../core/services/shared_prefrences.dart';
 import '../../routes/app_routes.dart';
 
@@ -77,6 +78,7 @@ class LogoutDialog extends StatelessWidget {
                         await prefs.remove(PrefKeys.userId);
                         await prefs.setBool(PrefKeys.isLoggedIn, false);
 
+                        Get.find<AuthGateService>().logout();
                         Get.offAllNamed(AppRoutes.bottomnavbar);
                       },
                       child: Center(
