@@ -46,6 +46,18 @@ class AppointmentView extends GetView<MyAppointmentsController> {
               Padding(
                 padding: const EdgeInsets.only(left: 16.0, right: 16),
                 child: TabBar(
+                  onTap: (index) {
+                    if (index == 0) {
+                      controller.fetchAppointmentsByStatus(
+                          AppointmentStatus.upcoming);
+                    } else if (index == 1) {
+                      controller.fetchAppointmentsByStatus(
+                          AppointmentStatus.completed);
+                    } else if (index == 2) {
+                      controller.fetchAppointmentsByStatus(
+                          AppointmentStatus.cancelled);
+                    }
+                  },
                   labelColor: AppColors.primary,
                   unselectedLabelColor: AppColors.lightGrey,
                   indicatorColor: AppColors.primary,
@@ -60,10 +72,10 @@ class AppointmentView extends GetView<MyAppointmentsController> {
                     fontWeight: FontWeight.w700,
                     color: AppColors.lightGrey,
                   ),
-                  tabs: [
-                    Tab(text: "Upcoming".tr),
-                    Tab(text: "Completed".tr),
-                    Tab(text: "Cancelled".tr),
+                  tabs: const [
+                    Tab(text: "Upcoming"),
+                    Tab(text: "Completed"),
+                    Tab(text: "Cancelled"),
                   ],
                 ),
               ),

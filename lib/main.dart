@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
+      ensureScreenSize: false,
       builder: (context, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,

@@ -1,3 +1,4 @@
+import 'package:appointment_app/views/my_apponiment_section/my_appoitment_binding/my_appoitment_binding.dart';
 import 'package:get/get.dart';
 
 import '../core/classes/api/api.dart';
@@ -16,13 +17,18 @@ class InitializeBinding extends Bindings {
       baseUrl: AppConfig.baseUrl,
     );
 
+    //  سجل ApiClient
+    Get.put<ApiClient>(api);
+
     Get.put(AuthRepository(api: api));
     Get.put(AuthController(
         repo: Get.find<AuthRepository>(),
         prefs: Get.find<AppPreferencesService>()));
 
     // تسجيل MyAppointmentsController
-    Get.put(MyAppointmentsController());
+    Get.put(MyAppointmentsController(), permanent: true);
+
+
 
     // تسجيل InboxController
     Get.put(InboxController());

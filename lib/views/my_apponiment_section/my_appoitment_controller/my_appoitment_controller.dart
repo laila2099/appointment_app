@@ -1,111 +1,107 @@
+import 'package:appointment_app/core/classes/repositories/appointment_repository.dart';
 import 'package:appointment_app/models/appoitments_details.dart';
 import 'package:get/get.dart';
 
+import '../../../core/classes/api/api.dart';
+import '../../../core/classes/api/api_result.dart';
+import '../../../core/services/shared_prefrences.dart';
+import '../../../core/constant/app_keys.dart';
+
 class MyAppointmentsController extends GetxController {
   final appointments = <AppointmentDetailsModel>[].obs;
-  final isLoading = true.obs;
+  final isLoading = false.obs;
+  final selectedStatus = AppointmentStatus.upcoming.obs;
 
-  RxList<AppointmentDetailsModel> get upcomingAppointments => appointments
-      .where((a) => a.status == AppointmentStatus.upcoming)
-      .toList()
-      .obs;
+  late AppointmentRepository _repo;
+  late AppPreferencesService _prefs;
 
-  RxList<AppointmentDetailsModel> get completedAppointments => appointments
-      .where((a) => a.status == AppointmentStatus.completed)
-      .toList()
-      .obs;
-
-  RxList<AppointmentDetailsModel> get cancelledAppointments => appointments
-      .where((a) => a.status == AppointmentStatus.cancelled)
-      .toList()
-      .obs;
+  String? _accessToken;
 
   @override
   void onInit() {
     super.onInit();
-    fetchAppointments();
+
+    final api = Get.find<ApiClient>();
+    _prefs = Get.find<AppPreferencesService>();
+    _repo = AppointmentRepository(api: api);
+
+    _tryLoadAppointments();
   }
 
-  void cancelAppointment(AppointmentDetailsModel appt) {
-    // تحديث الحالة
-    final index = appointments.indexWhere((a) => a.id == appt.id);
-    if (index != -1) {
-      appointments[index] = appointments[index].copyWith(
-        status: AppointmentStatus.cancelled,
-      );
+  void _tryLoadAppointments() async {
+    everAll([], (_) {}); 
+
+    while (true) {
+      final token = _prefs.getString(PrefKeys.accessToken);
+
+      if (token != null && token.isNotEmpty) {
+        _accessToken = token;
+        fetchAppointmentsByStatus(AppointmentStatus.upcoming);
+        break;
+      }
+
+      await Future.delayed(const Duration(milliseconds: 300));
     }
   }
 
   Future<void> fetchAppointments() async {
     isLoading.value = true;
 
-    await Future.delayed(const Duration(seconds: 1));
+    final res = await _repo.getAppointments(
+      accessToken: _accessToken!,
+    );
 
-    appointments.assignAll(_dummy());
+    if (res is ApiSuccess<List<AppointmentDetailsModel>>) {
+      appointments.assignAll(res.data);
+    } else if (res is ApiFailure<List<AppointmentDetailsModel>>) {
+      Get.snackbar('Error', res.error.message);
+    }
 
     isLoading.value = false;
   }
 
-  List<AppointmentDetailsModel> _dummy() => [
-        AppointmentDetailsModel(
-          id: '1',
-          doctorId: '1',
-          doctorName: 'll Randy Wigham',
-          specialty: 'General',
-          clinic: 'RSUD Gatot Subroto',
-          appointmentDateTime: DateTime.now(),
-          createdAt: DateTime.now().subtract(const Duration(days: 2)),
-          status: AppointmentStatus.upcoming,
-        ),
-        AppointmentDetailsModel(
-          id: '2',
-          doctorId: '2',
-          doctorName: 'Dr Randy Wigham',
-          specialty: 'General',
-          clinic: 'RSUD Gatot Subroto',
-          appointmentDateTime: DateTime.now(),
-          createdAt: DateTime.now().subtract(const Duration(days: 2)),
-          status: AppointmentStatus.upcoming,
-        ),
-        AppointmentDetailsModel(
-          id: '3',
-          doctorId: '3',
-          doctorName: 'lo Randy Wigham',
-          specialty: 'General',
-          clinic: 'RSUD Gatot Subroto',
-          appointmentDateTime: DateTime.now(),
-          createdAt: DateTime.now().subtract(const Duration(days: 2)),
-          status: AppointmentStatus.upcoming,
-        ),
-        AppointmentDetailsModel(
-          id: '4',
-          doctorId: '4',
-          doctorName: 'Dr Alice Smith',
-          specialty: 'Dermatology',
-          clinic: 'Gatot Subroto',
-          appointmentDateTime: DateTime.now(),
-          createdAt: DateTime.now().subtract(const Duration(days: 3)),
-          status: AppointmentStatus.completed,
-        ),
-        AppointmentDetailsModel(
-          id: '5',
-          doctorId: '5',
-          doctorName: 'Dr Alice Smith',
-          specialty: 'Dermatology',
-          clinic: 'Gatot Subroto',
-          appointmentDateTime: DateTime.now(),
-          createdAt: DateTime.now().subtract(const Duration(days: 3)),
-          status: AppointmentStatus.completed,
-        ),
-        AppointmentDetailsModel(
-          id: '6',
-          doctorId: '6',
-          doctorName: 'Dr John Doe',
-          specialty: 'Cardiology',
-          clinic: 'RSUD Subroto',
-          appointmentDateTime: DateTime.now(),
-          createdAt: DateTime.now().subtract(const Duration(days: 1)),
-          status: AppointmentStatus.cancelled,
-        ),
-      ];
+  Future<void> cancelAppointment(AppointmentDetailsModel appt) async {
+    final res = await _repo.cancelAppointment(
+      accessToken: _accessToken!,
+      appointmentId: appt.id,
+    );
+
+    if (res is ApiSuccess<void>) {
+      final index = appointments.indexWhere((a) => a.id == appt.id);
+      if (index != -1) {
+        appointments[index] =
+            appointments[index].copyWith(status: AppointmentStatus.cancelled);
+      }
+    } else if (res is ApiFailure<void>) {
+      Get.snackbar('Error', res.error.message);
+    }
+  }
+
+  Future<void> fetchAppointmentsByStatus(AppointmentStatus status) async {
+    isLoading.value = true;
+    selectedStatus.value = status;
+
+    String statusString;
+
+    if (status == AppointmentStatus.upcoming) {
+      statusString = 'upcoming';
+    } else if (status == AppointmentStatus.completed) {
+      statusString = 'completed';
+    } else {
+      statusString = 'canceled'; 
+    }
+
+    final res = await _repo.getAppointmentsByStatus(
+      accessToken: _accessToken!,
+      status: statusString,
+    );
+
+    if (res is ApiSuccess<List<AppointmentDetailsModel>>) {
+      appointments.assignAll(res.data);
+    } else if (res is ApiFailure<List<AppointmentDetailsModel>>) {
+      Get.snackbar('Error', res.error.message);
+    }
+
+    isLoading.value = false;
+  }
 }
