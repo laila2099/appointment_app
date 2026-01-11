@@ -23,7 +23,7 @@ class LanguageScreen extends StatelessWidget {
         child: Column(
           children: [
             AppHeader(
-              onBack: Get.back,
+              // onBack: Get.back,
               center: Text(
                 "language".tr,
                 style: CustomTextStyles.screenTitle,

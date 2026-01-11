@@ -66,9 +66,9 @@ class HomeScreen extends StatelessWidget {
                             color: AppColors.subtitle,
                           ),
                         ),
-                      ),
-                      SizedBox(height: 10.h),
-                    ],
+                        SizedBox(height: 10.h),
+                      ],
+                    ),
                   ),
                   const Spacer(),
                   Stack(
@@ -142,7 +142,7 @@ class HomeScreen extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                          Text(controller.errorMessage.value!),
+                        Text(controller.errorMessage.value!),
                         SizedBox(height: 12.h),
                         ElevatedButton(
                           onPressed: () => controller.retryFetchCategories(),

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../core/constant/app_colors.dart';
-import '../../../../core/constant/app_images.dart';
-import '../../../../core/constant/text_style.dart';
-import '../../../../widgets/helpful_widgets/primary_button_widget.dart';
-import '../../../widgets/helpful_widgets/text_field_widget.dart';
-import '../auth_controller/fill_your_profile_controller.dart';
-import '../widgets/phone_field_widget.dart';
+import '../../../../../core/constant/app_colors.dart';
+import '../../../../../core/constant/app_images.dart';
+import '../../../../../core/constant/text_style.dart';
+import '../../../../../widgets/helpful_widgets/primary_button_widget.dart';
+import '../../../../core/classes/utils/app_snackbar.dart';
+import '../../../../core/utils/auth_validators.dart';
+import '../../../../widgets/helpful_widgets/text_field_widget.dart';
+import '../../widgets/phone_field_widget.dart';
+import '../fill_your_profile_controller/fill_your_profile_controller.dart';
 
 class FillYourProfileView extends StatelessWidget {
   const FillYourProfileView({super.key});
@@ -15,6 +16,7 @@ class FillYourProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final profileController = Get.find<AuthFillProfileController>();
+
     return Scaffold(
       backgroundColor: AppColors.white,
       body: SafeArea(
@@ -42,8 +44,7 @@ class FillYourProfileView extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              // الانتقال لصفحة الهوم
-                              // Get.toNamed(AppRoutes.home);
+                              // يمكن إضافة وظيفة Skip هنا
                             },
                             child: Text(
                               "skip".tr,
@@ -85,7 +86,9 @@ class FillYourProfileView extends StatelessWidget {
                               bottom: 0,
                               end: 0,
                               child: GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  // اختيار صورة
+                                },
                                 child: Container(
                                   width: 36,
                                   height: 36,
@@ -108,6 +111,7 @@ class FillYourProfileView extends StatelessWidget {
                       ),
                       const SizedBox(height: 32),
 
+                      // Full Name
                       CustomTextField(
                         controller: profileController.fullNameController,
                         hint: "full_name".tr,
@@ -119,15 +123,9 @@ class FillYourProfileView extends StatelessWidget {
                         controller: profileController.emailController,
                         hint: "email".tr,
                         keyboardType: TextInputType.emailAddress,
+                        validator: Validators.validateEmail,
                       ),
                       const SizedBox(height: 16),
-
-                      // Password
-                      // const CustomTextField(
-                      //   hint: "Password",
-                      //   isPassword: true,
-                      // ),
-                      // const SizedBox(height: 16),
 
                       // Birthday
                       CustomTextField(
@@ -142,8 +140,8 @@ class FillYourProfileView extends StatelessWidget {
                         onChanged: (value) {
                           profileController.phoneRx.value = value;
                         },
+                        validator: Validators.validatePhone,
                       ),
-
                       const SizedBox(height: 24),
                     ],
                   ),
@@ -153,16 +151,29 @@ class FillYourProfileView extends StatelessWidget {
 
             // الزر ثابت أسفل الشاشة
             Padding(
-              padding: const EdgeInsetsDirectional.symmetric(
-                  horizontal: 24, vertical: 16),
-              child: SizedBox(
-                width: double.infinity,
-                height: 52,
-                child: CustomPrimaryButton(
-                  label: "submit".tr,
-                  onTap: () {
-                    profileController.setProfile();
-                  },
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              child: Obx(
+                () => SizedBox(
+                  width: double.infinity,
+                  height: 52,
+                  child: CustomPrimaryButton(
+                      label: profileController.isLoading.value
+                          ? "Saving..."
+                          : "Submit",
+                      onTap: () {
+                        profileController.isLoading.value
+                            ? null
+                            : () {
+                                if (profileController.formKey.currentState
+                                        ?.validate() ??
+                                    false) {
+                                  profileController.setProfile();
+                                } else {
+                                  AppSnackBar.error(
+                                      'Please fix the errors in the form');
+                                }
+                              };
+                      }),
                 ),
               ),
             ),

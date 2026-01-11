@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 import '../../../../../core/constant/app_colors.dart';
 import '../../../../../widgets/general_widgets/appoinmtmet/appointment_type_tile.dart';
 import '../../../../../widgets/general_widgets/appoinmtmet/center_snap_date_picker.dart';
@@ -21,7 +20,7 @@ class StepDateTime extends StatelessWidget {
     return Obx(() {
       final appointment = c.appointment.value;
       final selectedType = AppointmentTypeX.fromId(
-        appointment.appointmentTypeId,
+        appointment.appointmentType,
       );
 
       return ListView(
@@ -32,7 +31,7 @@ class StepDateTime extends StatelessWidget {
             children: [
               SectionTitle('select_date'.tr),
               ManualDateButton(
-                initialDate: appointment.date,
+                initialDate: appointment.appointmentDate,
                 onPicked: c.selectDate,
               ),
             ],
@@ -44,7 +43,7 @@ class StepDateTime extends StatelessWidget {
           SizedBox(height: 24.h),
           TimeSlotGrid(
             times: c.availableTimes,
-            selected: appointment.time,
+            selected: appointment.appointmentTime,
             onSelect: c.selectTime,
           ),
           SizedBox(height: 24.h),

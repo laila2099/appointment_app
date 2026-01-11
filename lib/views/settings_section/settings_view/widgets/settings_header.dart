@@ -14,7 +14,7 @@ class SettingsHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppHeader(
-      onBack: Get.back,
+      // onBack: Get.back,
       padding: EdgeInsetsDirectional.only(
         start: 16.w,
       ),

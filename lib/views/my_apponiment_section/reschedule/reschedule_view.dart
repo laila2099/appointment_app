@@ -4,13 +4,15 @@ import 'package:appointment_app/views/my_apponiment_section/widgets/reschedule_s
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 import '../../../../widgets/general_widgets/app_header/app_header.dart';
 import '../../../../widgets/general_widgets/app_header/header_title.dart';
 import '../../../../widgets/general_widgets/primary_button.dart';
+import '../../../models/appointment_model.dart';
 
-class ReschedualScreen extends GetView<BookingController> {
-  const ReschedualScreen({super.key});
+class RescheduleScreen extends GetView<BookingController> {
+  RescheduleScreen({super.key});
+
+  final argAppointment = Get.arguments as Appointment?;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,6 @@ class ReschedualScreen extends GetView<BookingController> {
               Expanded(
                 child: Obx(() {
                   final index = controller.stepIndex.value.clamp(0, 1);
-
                   return IndexedStack(
                     index: index,
                     children: const [StepDateTime(), RescheduleSummary()],
@@ -43,15 +44,33 @@ class ReschedualScreen extends GetView<BookingController> {
                     text: controller.stepIndex.value == 1
                         ? 'done'.tr
                         : 'continue'.tr,
-                    onPressed: controller.canContinue
-                        ? controller.stepIndex.value == 1
-                            ? controller.goBackAfterConfirmReschedule
-                            : controller.next
-                        : () => Get.snackbar(
-                              "snackbar_error".tr,
-                              "date_payment_required".tr,
-                              snackPosition: SnackPosition.BOTTOM,
-                            ),
+                    onPressed: () {
+                      if (!controller.canContinue) {
+                        Get.snackbar(
+                          "Error",
+                          "Please select a date, time and payment method",
+                          snackPosition: SnackPosition.BOTTOM,
+                        );
+                        return;
+                      }
+                      if (argAppointment != null) {
+                        controller.appointment.value = argAppointment!;
+                      }
+                      if (controller.stepIndex.value == 1) {
+                        final id = controller.appointment.value.id;
+                        if (id != null && id.isNotEmpty) {
+                          controller.submitReschedule(appointmentId: id);
+                        } else {
+                          Get.snackbar(
+                            'Error',
+                            'Appointment ID not found',
+                            snackPosition: SnackPosition.TOP,
+                          );
+                        }
+                      } else {
+                        controller.next();
+                      }
+                    },
                   ),
                 ),
             ],

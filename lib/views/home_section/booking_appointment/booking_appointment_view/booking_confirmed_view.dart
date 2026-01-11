@@ -27,7 +27,7 @@ class BookingConfirmedScreen extends GetView<BookingController> {
       body: SafeArea(
         child: Obx(() {
           final appointment = controller.appointment.value;
-          final type = AppointmentTypeX.fromId(appointment.appointmentTypeId);
+          final type = AppointmentTypeX.fromId(appointment.appointmentType);
           final doctor = controller.doctor.value;
 
           return Column(
@@ -67,8 +67,8 @@ class BookingConfirmedScreen extends GetView<BookingController> {
                       title: 'date_time'.tr,
                       subtitle: formatDateTime(
                         context,
-                        appointment.date,
-                        appointment.time,
+                        appointment.appointmentDate,
+                        appointment.appointmentTime,
                       ),
                     ),
                     SizedBox(height: 24.h),

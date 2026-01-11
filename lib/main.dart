@@ -4,7 +4,6 @@ import 'package:appointment_app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 import 'bindings/initial_binding.dart';
 import 'core/constant/app_theme.dart';
 import 'core/services/initialize_service.dart';

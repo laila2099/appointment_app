@@ -6,9 +6,12 @@ class ApiEndpoints {
   // -------- Auth
   static const String signUp = '/auth/v1/signup';
   static const String token = '/auth/v1/token';
+  static const String resetPassword = '/auth/v1/reset_password';
 
   static String signUpWithKey() => '$signUp?apikey=${AppConfig.apikey}';
   static String loginPassword() => '$token?grant_type=password';
+  static String resetPasswordWithEmail() => '$resetPassword';
+
 
   // -------- REST
   static const String profiles = '/rest/v1/profiles';
@@ -66,6 +69,8 @@ class ApiEndpoints {
 
 
   // -------- Appointments
+  static String createAppointment() => appointments;
+
   static String filterAppointments(String status) =>
       '$appointmentsWithDoctor?status=eq.$status&apikey=${AppConfig.apikey}';
 

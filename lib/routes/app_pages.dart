@@ -1,12 +1,11 @@
 import 'package:appointment_app/views/settings_section/settings_binding/setting_binding.dart';
 import 'package:get/get.dart';
-
 import '../core/middlewares/splash_redirect_middleware.dart';
-import '../views/auth_section/bindings/fill_your_profile_binding.dart';
-import '../views/auth_section/forgot_password/forgot_password_screens/forgot_password_view.dart';
-import '../views/auth_section/forgot_password/forgot_password_screens/otp_verification_view.dart';
-import '../views/auth_section/sign_in/sign_in_view.dart';
-import '../views/auth_section/sign_up/fill_your_profile_view.dart';
+import '../views/auth_section/fill_your_profile/bindings/fill_your_profile_binding.dart';
+import '../views/auth_section/fill_your_profile/fill_your_profile_view/fill_your_profile_view.dart';
+import '../views/auth_section/forgot_password/forgot_password_screens/views/forgot_password_view.dart';
+import '../views/auth_section/forgot_password/forgot_password_screens/views/otp_verification_view.dart';
+import '../views/auth_section/sign_in/signIn_view/sign_in_view.dart';
 import '../views/auth_section/sign_up/sign_up_view.dart';
 import '../views/home_section/booking_appointment/booking_appointment_binding/booking_binding.dart';
 import '../views/home_section/booking_appointment/booking_appointment_view/booking_confirmed_view.dart';
@@ -53,22 +52,19 @@ final appPages = <GetPage>[
     middlewares: [SplashRedirectMiddleware()],
   ),
   GetPage(name: AppRoutes.onboarding, page: () => const OnBoardingView()),
+
   GetPage(
-    name: AppRoutes.loginRequiredGate,
-    page: () => const LoginRequiredGate(),
-  ),
+      name: AppRoutes.loginRequiredGate, page: () => const LoginRequiredGate()),
 
   // Auth + Reset Password
   GetPage(name: AppRoutes.login, page: () => LoginView()),
-  GetPage(name: AppRoutes.createAccount, page: () => const CreateAccountView()),
-  GetPage(
-      name: AppRoutes.forgotPassword, page: () => const ForgotPasswordView()),
+  GetPage(name: AppRoutes.createAccount, page: () => CreateAccountView()),
+  GetPage(name: AppRoutes.forgotPassword, page: () => ForgotPasswordView()),
   GetPage(name: AppRoutes.otpVerification, page: () => OtpVerificationView()),
   GetPage(
-    name: AppRoutes.fillYourProfile,
-    page: () => const FillYourProfileView(),
-    binding: AuthFillProfileBinding(),
-  ),
+      name: AppRoutes.fillYourProfile,
+      page: () => const FillYourProfileView(),
+      binding: AuthFillProfileBinding()),
 
   // Doctor Details
   GetPage(
@@ -83,13 +79,15 @@ final appPages = <GetPage>[
     page: () => MainLayout(),
     bindings: [
       BottomNavBarBinding(),
-      ProfileBinding(),  // <-- ضيف هذا
+      ProfileBinding(), // <-- ضيف هذا
     ],
   ),
 
-
   // Home
-  GetPage(name: AppRoutes.home, page: () => HomeScreen()),
+  GetPage(
+    name: AppRoutes.home,
+    page: () => HomeScreen(),
+  ),
   GetPage(name: AppRoutes.notificationScreen, page: () => NotificationScreen()),
   GetPage(
       name: AppRoutes.findNearbyScreen, page: () => const FindNearbyScreen()),
@@ -100,26 +98,18 @@ final appPages = <GetPage>[
       name: AppRoutes.recommendationDoctorScreen,
       page: () => RecommendationDoctorScreen()),
 
+  //profile
   GetPage(
-    name: AppRoutes.profile,
-    page: () => ProfileScreen(),
-    binding: ProfileBinding(),
-  ),
+      name: AppRoutes.profile,
+      page: () => ProfileScreen(),
+      binding: ProfileBinding()),
   GetPage(
-    name: AppRoutes.personalInfo,
-    page: () => PersonalInfo(),
-    binding: ProfileBinding(),
-  ),
+      name: AppRoutes.personalInfo,
+      page: () => PersonalInfo(),
+      binding: ProfileBinding()),
+  GetPage(name: AppRoutes.paymentScreen, page: () => PaymentScreen()),
   GetPage(
-    name: AppRoutes.paymentScreen,
-    page: () => PaymentScreen(),
-    binding: ProfileBinding(),
-  ),
-  GetPage(
-    name: AppRoutes.medicalRecordsScreen,
-    page: () => MedicalRecordsScreen(),
-    binding: ProfileBinding(),
-  ),
+      name: AppRoutes.medicalRecordsScreen, page: () => MedicalRecordsScreen()),
 
   // Settings
   GetPage(name: AppRoutes.settingsPage, page: () => const SettingsPage()),
@@ -148,15 +138,19 @@ final appPages = <GetPage>[
   ),
   GetPage(
     name: AppRoutes.reschedule,
-    page: () => const ReschedualScreen(),
+    page: () => RescheduleScreen(),
     binding: BookingBinding(),
   ),
-
-  // Inbox
-  GetPage(name: AppRoutes.inbox, page: () => const InboxView()),
-  GetPage(name: AppRoutes.chat, page: () => ChatView(), binding: ChatBinding()),
-
-  // Search
+  // Inbox Page
+  GetPage(
+    name: AppRoutes.inbox,
+    page: () => const InboxView(),
+  ),
+  GetPage(
+    name: AppRoutes.chat,
+    page: () => ChatView(),
+    binding: ChatBinding(),
+  ),
   GetPage(
     name: AppRoutes.searchresult,
     page: () => const SearchResultView(),

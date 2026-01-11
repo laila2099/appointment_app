@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart' hide TextField;
 import 'package:get/get.dart';
-import '../../../../core/constant/app_colors.dart';
-import '../../../../core/constant/text_style.dart';
-import '../../../../widgets/helpful_widgets/primary_button_widget.dart';
-import '../../widgets/otp_fields_widget.dart';
-import '../verification_controller/verification_controller.dart';
+import '../../../../../core/classes/utils/app_snackbar.dart';
+import '../../../../../core/constant/app_colors.dart';
+import '../../../../../core/constant/text_style.dart';
+import '../../../../../widgets/helpful_widgets/primary_button_widget.dart';
+import '../../../widgets/otp_fields_widget.dart';
+import '../controllers/otp_verification_controller.dart';
 
 class OtpVerificationView extends StatelessWidget {
   OtpVerificationView({super.key});
@@ -77,9 +78,21 @@ class OtpVerificationView extends StatelessWidget {
 
               // الزر ثابت في أسفل الشاشة
               CustomPrimaryButton(
+<<<<<<< HEAD:lib/views/auth_section/forgot_password/forgot_password_screens/otp_verification_view.dart
                 label: "submit".tr,
                 onTap: () {},
               ),
+=======
+                label: "Submit",
+                onTap: () {
+                  if (verificationController.verifyCode()) {
+                    // استدعاء API للتحقق من OTP
+                    AppSnackBar.success('OTP verified!');
+                  }
+                },
+              )
+
+>>>>>>> origin/zahraa:lib/views/auth_section/forgot_password/forgot_password_screens/views/otp_verification_view.dart
             ],
           ),
         ),

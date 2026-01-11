@@ -52,7 +52,7 @@ class DoctorDetailsScreen extends GetView<DoctorDetailsController> {
           return Column(
             children: [
               AppHeader(
-                onBack: Get.back,
+                // onBack: Get.back,
                 center: HeaderTitle(doctor.name),
                 trailing: HeaderButton(
                   onTap: () {},

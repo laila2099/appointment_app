@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-
 import '../../../../../core/classes/utils/format_date_time.dart';
 import '../../../../../core/constant/app_colors.dart';
 import '../../../../../core/constant/app_icons.dart';
@@ -23,7 +22,7 @@ class StepSummary extends StatelessWidget {
 
     return Obx(() {
       final a = c.appointment.value;
-      final type = AppointmentTypeX.fromId(a.appointmentTypeId);
+      final type = AppointmentTypeX.fromId(a.appointmentType);
       final payment = c.selectedPayment.value;
       final doctor = c.doctor.value;
 
@@ -37,7 +36,7 @@ class StepSummary extends StatelessWidget {
             iconBg: AppColors.secondBlue,
             iconColor: AppColors.primary,
             title: 'date_time'.tr,
-            subtitle: formatDateTime(context, a.date, a.time),
+            subtitle: formatDateTime(context, a.appointmentDate, a.appointmentTime),
           ),
           SummaryRow(
             svgAsset: AppIcons.clipboard,

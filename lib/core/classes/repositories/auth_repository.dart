@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:appointment_app/core/classes/api/api_headers.dart';
-
 import '../../../models/auth/auth_models.dart';
 import '../api/api.dart';
 import '../api/api_endpoints.dart';
@@ -26,6 +25,35 @@ class AuthRepository {
     );
   }
 
+  Future<ApiResult<AuthSession>> login({
+    required String email,
+    required String password,
+  }) {
+    return api.post<AuthSession>(
+      endpoint: ApiEndpoints.loginPassword(),
+      headers: ApiHeaders.public(),
+      body: {
+        'email': email,
+        'password': password,
+      },
+      parser: (json) => AuthSession.fromJson(json as Map<String, dynamic>),
+    );
+  }
+
+  Future<ApiResult<void>> resetPassword({
+    required String email,
+    required String newPassword,
+  }) {
+    return api.post<void>(
+      endpoint: ApiEndpoints.resetPassword,
+      body: {
+        'email': email,
+        'new_password': newPassword,
+      },
+      parser: (_) => null,
+    );
+  }
+
   String? extractErrorCode(String raw) {
     try {
       final j = jsonDecode(raw);
@@ -42,20 +70,5 @@ class AuthRepository {
     } catch (_) {
       return raw;
     }
-  }
-
-  Future<ApiResult<AuthSession>> login({
-    required String email,
-    required String password,
-  }) {
-    return api.post<AuthSession>(
-      endpoint: ApiEndpoints.loginPassword(),
-      headers: ApiHeaders.public(),
-      body: {
-        'email': email,
-        'password': password,
-      },
-      parser: (json) => AuthSession.fromJson(json as Map<String, dynamic>),
-    );
   }
 }
