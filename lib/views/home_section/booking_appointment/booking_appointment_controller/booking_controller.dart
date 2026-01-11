@@ -4,6 +4,8 @@ import 'package:collection/collection.dart';
 
 import '../../../../core/classes/api/api_result.dart';
 import '../../../../core/classes/repositories/appointment_repository.dart';
+import '../../../../core/constant/app_keys.dart';
+import '../../../../core/services/shared_prefrences.dart';
 import '../../../../models/appointment_model.dart';
 import '../../../../models/doctor_model.dart';
 import '../../../../models/payment_method.dart';
@@ -294,24 +296,41 @@ class BookingController extends GetxController {
   Future<void> submitAppointment() async {
     isLoading.value = true;
 
-    appointment.value = appointment.value.copyWith(
-      paymentMethod: selectedPayment.value?.type ?? '',
-    );
-
-    final result = await repository.createAppointment(appointment.value);
-
-    if (result is ApiSuccess<Appointment>) {
-      appointment.value = result.data;
-      Get.toNamed(AppRoutes.bookingConfirmed);
-    } else if (result is ApiFailure<Appointment>) {
-      Get.snackbar(
-        'Error',
-        result.error.message,
-        snackPosition: SnackPosition.TOP,
+    try {
+      appointment.value = appointment.value.copyWith(
+        paymentMethod: selectedPayment.value?.type ?? '',
       );
-    }
 
-    isLoading.value = false;
+      final AppPreferencesService prefs = Get.find();
+      final String? accessToken = prefs.getString(PrefKeys.accessToken);
+
+      if (accessToken == null || accessToken.isEmpty) {
+        Get.snackbar(
+          'Error',
+          'Authentication token not found',
+          snackPosition: SnackPosition.TOP,
+        );
+        return;
+      }
+
+      final result = await repository.createAppointment(
+        accessToken: accessToken,
+        appointment: appointment.value,
+      );
+
+      if (result.isSuccess) {
+        appointment.value = result.data!;
+        Get.toNamed(AppRoutes.bookingConfirmed);
+      } else {
+        Get.snackbar(
+          'Error',
+          result.errorMessage ?? 'Unknown error occurred',
+          snackPosition: SnackPosition.TOP,
+        );
+      }
+    } finally {
+      isLoading.value = false;
+    }
   }
 
 

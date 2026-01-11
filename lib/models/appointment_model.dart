@@ -34,17 +34,19 @@ class Appointment {
     );
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toJsonCreate() {
     return {
       if (id != null) 'id': id,
       'doctor_id': doctorId,
-      'appointment_date': appointmentDate.toIso8601String().split('T').first,
+      'appointment_date':
+      appointmentDate.toIso8601String().split('T').first.toString(),
       'appointment_time':
-      '${appointmentTime.hour.toString().padLeft(2, '0')}:${appointmentTime.minute.toString().padLeft(2, '0')}',
+      '${appointmentTime.hour.toString().padLeft(2, '0')}:${appointmentTime.minute.toString().padLeft(2, '0')}'
+          .toString(),
       'payment_method': paymentMethod,
-      'appointment_type': appointmentType,
     };
   }
+
 
   factory Appointment.fromJson(Map<String, dynamic> json) {
     final timeString = (json['appointment_time'] ?? '00:00') as String;
