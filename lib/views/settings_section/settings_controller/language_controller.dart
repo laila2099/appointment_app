@@ -1,43 +1,44 @@
 import 'package:get/get.dart';
+import '../../../core/translations/controller/translation_controller.dart'; // Verify this path
 
 class LanguageModel {
   final String name;
   final String code;
-
   LanguageModel({required this.name, required this.code});
 }
 
 class LanguageController extends GetxController {
-  final selectedCode = 'en'.obs;
+  final TranslationController _translationController =
+      Get.find<TranslationController>();
+
+  final selectedCode = ''.obs;
+
+  final searchText = ''.obs;
 
   final allLanguages = <LanguageModel>[
-    LanguageModel(name: 'Arab', code: 'ar'),
+    LanguageModel(name: 'Arabic', code: 'ar'),
     LanguageModel(name: 'English', code: 'en'),
-    LanguageModel(name: 'France', code: 'fr'),
+    LanguageModel(name: 'French', code: 'fr'),
     LanguageModel(name: 'Ghana', code: 'gh'),
     LanguageModel(name: 'Indonesia', code: 'id'),
     LanguageModel(name: 'India', code: 'in'),
-    LanguageModel(name: 'Italia', code: 'it'),
-    LanguageModel(name: 'Japan', code: 'jp'),
-    LanguageModel(name: 'Russia', code: 'ru'),
+    LanguageModel(name: 'Italian', code: 'it'),
+    LanguageModel(name: 'Japanese', code: 'jp'),
+    LanguageModel(name: 'Russian', code: 'ru'),
   ];
 
   final languages = <LanguageModel>[].obs;
-  final searchText = ''.obs;
 
   @override
   void onInit() {
-    languages.assignAll(allLanguages);
     super.onInit();
-  }
+    languages.assignAll(allLanguages);
 
-  void selectLanguage(String code) {
-    selectedCode.value = code;
+    selectedCode.value = _translationController.locale.value.languageCode;
   }
 
   void searchLanguage(String value) {
     searchText.value = value;
-
     if (value.isEmpty) {
       languages.assignAll(allLanguages);
     } else {
@@ -47,5 +48,13 @@ class LanguageController extends GetxController {
         ),
       );
     }
+  }
+
+  void selectLanguage(String code) {
+    selectedCode.value = code;
+  }
+
+  void applyLanguage() {
+    _translationController.changeLocale(selectedCode.value);
   }
 }

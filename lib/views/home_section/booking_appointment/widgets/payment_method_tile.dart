@@ -21,7 +21,7 @@ class PaymentMethodTile extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 14.h),
+        padding: EdgeInsetsDirectional.symmetric(vertical: 14.h),
         decoration: BoxDecoration(
           border: Border(bottom: BorderSide(color: Colors.grey.shade200)),
         ),
@@ -58,7 +58,7 @@ class _RadioDot extends StatelessWidget {
         shape: BoxShape.circle,
         border: Border.all(color: border, width: 2.w),
       ),
-      alignment: Alignment.center,
+      alignment: AlignmentDirectional.center,
       child: Container(
         width: 10.w,
         height: 10.h,

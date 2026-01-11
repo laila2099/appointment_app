@@ -28,7 +28,7 @@ class StepSummary extends StatelessWidget {
       final doctor = c.doctor.value;
 
       return ListView(
-        padding: EdgeInsets.fromLTRB(20.w, 0, 20.w, 50.h),
+        padding: EdgeInsetsDirectional.fromSTEB(20.w, 0, 20.w, 50.h),
         children: [
           SectionTitle('booking_information'.tr),
           SizedBox(height: 12.h),
@@ -99,7 +99,7 @@ class _PaymentRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10.h),
+      padding: EdgeInsetsDirectional.symmetric(vertical: 10.h),
       child: Row(
         children: [
           Container(
@@ -109,7 +109,7 @@ class _PaymentRow extends StatelessWidget {
               color: Colors.grey.shade100,
               borderRadius: BorderRadius.circular(14.r),
             ),
-            alignment: Alignment.center,
+            alignment: AlignmentDirectional.center,
             child: SvgPicture.asset(svgLogo, width: 26.w, height: 26.w),
           ),
           SizedBox(width: 12.w),
@@ -144,7 +144,8 @@ class _PaymentRow extends StatelessWidget {
             style: OutlinedButton.styleFrom(
               foregroundColor: AppColors.primary,
               side: BorderSide(color: AppColors.primary),
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+              padding: EdgeInsetsDirectional.symmetric(
+                  horizontal: 16.w, vertical: 10.h),
               minimumSize: Size.zero,
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               shape: RoundedRectangleBorder(

@@ -26,7 +26,7 @@ class SummaryRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 14.h),
+      padding: EdgeInsetsDirectional.symmetric(vertical: 14.h),
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(color: Colors.black.withOpacity(.06)),

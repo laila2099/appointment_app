@@ -12,7 +12,8 @@ Widget settingItem({
   return InkWell(
     onTap: onTap,
     child: Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+      padding:
+          EdgeInsetsDirectional.symmetric(horizontal: 24.w, vertical: 16.h),
       child: Row(
         children: [
           icon != null ? Icon(icon, color: color) : const SizedBox.shrink(),

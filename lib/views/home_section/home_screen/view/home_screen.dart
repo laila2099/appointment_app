@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.white,
       body: Padding(
-        padding: EdgeInsets.all(16.r),
+        padding: EdgeInsetsDirectional.all(16.r),
         child: Column(
           children: [
             SizedBox(height: 12.h),
@@ -59,7 +59,7 @@ class HomeScreen extends StatelessWidget {
                         }),
                         SizedBox(height: 3.h),
                         Text(
-                          "How Are You Today?!",
+                          "how_are_you_today".tr,
                           style: CustomTextStyles.custom(
                             fontSize: 10.sp,
                             fontWeight: FontWeight.w400,
@@ -91,8 +91,8 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Positioned(
-                        right: 15.w,
+                      PositionedDirectional(
+                        end: 15.w,
                         top: 13.h,
                         child: Container(
                           width: 8.w,
@@ -114,17 +114,18 @@ class HomeScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Doctor Speciality", style: CustomTextStyles.screenTitle),
+                Text("doctor_speciality".tr,
+                    style: CustomTextStyles.screenTitle),
                 TextButton(
                   style: TextButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    minimumSize: const Size(0, 0),
+                    padding: EdgeInsetsDirectional.zero,
+                    minimumSize: Size(0, 0),
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
                   onPressed: () {
                     Get.toNamed(AppRoutes.doctorSpecialtiesScreen);
                   },
-                  child: Text("See All", style: CustomTextStyles.regular),
+                  child: Text("see_all".tr, style: CustomTextStyles.regular),
                 ),
               ],
             ),
@@ -150,19 +151,19 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Recommendation Doctor",
+                  "recommendation_doctor".tr,
                   style: CustomTextStyles.screenTitle,
                 ),
                 TextButton(
                   style: TextButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    minimumSize: const Size(0, 0),
+                    padding: EdgeInsetsDirectional.zero,
+                    minimumSize: Size(0, 0),
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
                   onPressed: () {
                     Get.toNamed(AppRoutes.recommendationDoctorScreen);
                   },
-                  child: Text("See All", style: CustomTextStyles.regular),
+                  child: Text("see_all".tr, style: CustomTextStyles.regular),
                 ),
               ],
             ),
@@ -183,13 +184,13 @@ class HomeScreen extends StatelessWidget {
                         const SizedBox(height: 16),
                         Text(
                           doctorController.errorMessage.value ??
-                              'No doctors available',
+                              'no_doctors_available'.tr,
                           style: const TextStyle(fontSize: 16),
                         ),
                         const SizedBox(height: 16),
                         ElevatedButton(
                           onPressed: doctorController.refresh,
-                          child: const Text('Retry'),
+                          child: Text('retry'.tr),
                         ),
                       ],
                     ),
@@ -197,7 +198,7 @@ class HomeScreen extends StatelessWidget {
                 }
 
                 return ListView.builder(
-                  padding: EdgeInsets.zero,
+                  padding: EdgeInsetsDirectional.zero,
                   itemCount: doctorController.doctors.length,
                   itemBuilder: (context, index) {
                     final doctor = doctorController.doctors[index];

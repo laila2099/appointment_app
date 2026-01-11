@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 
-
 import '../../../../core/classes/api/api_result.dart';
 import '../../../../core/classes/repositories/doctor_repository.dart';
 import '../../../../core/classes/repositories/review_repository.dart';
@@ -34,7 +33,7 @@ class DoctorDetailsController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    
+
     // Get doctor ID from route arguments, or use default
     final args = Get.arguments;
     if (args is Map && args.containsKey('doctorId')) {
@@ -73,10 +72,10 @@ class DoctorDetailsController extends GetxController {
         if (result.data != null) {
           doctor.value = result.data;
         } else {
-          errorMessage.value = 'Doctor not found';
+          errorMessage.value = 'doctor_not_found'.tr;
           Get.snackbar(
-            'Error',
-            'Doctor not found',
+            'snackbar_error'.tr,
+            'doctor_not_found'.tr,
             snackPosition: SnackPosition.BOTTOM,
           );
         }
@@ -110,7 +109,7 @@ class DoctorDetailsController extends GetxController {
           }
         }
         Get.snackbar(
-          'Error',
+          'snackbar_error'.tr,
           result.error.message,
           snackPosition: SnackPosition.BOTTOM,
         );
@@ -118,8 +117,8 @@ class DoctorDetailsController extends GetxController {
     } catch (e) {
       errorMessage.value = e.toString();
       Get.snackbar(
-        'Error',
-        'Failed to load doctor details: ${e.toString()}',
+        'snackbar_error'.tr,
+        'doctor_load_failed: ${e.toString()}'.tr,
         snackPosition: SnackPosition.BOTTOM,
       );
     } finally {
@@ -141,7 +140,7 @@ class DoctorDetailsController extends GetxController {
         // Prefs service not available, continue without auth
       }
 
-      final ApiResult<List<Review>> result = 
+      final ApiResult<List<Review>> result =
           await reviewRepository.getReviewsByDoctorId(
         doctorId: doctorId,
         accessToken: accessToken,
@@ -149,15 +148,15 @@ class DoctorDetailsController extends GetxController {
 
       if (result is ApiSuccess<List<Review>>) {
         reviews.assignAll(result.data);
-        
+
         // Calculate average rating from actual reviews
         if (reviews.isNotEmpty && doctor.value != null) {
           final totalStars = reviews.fold<double>(
-            0.0, 
+            0.0,
             (sum, review) => sum + review.stars,
           );
           final averageRating = totalStars / reviews.length;
-          
+
           // Update doctor with calculated average rating and review count
           doctor.value = doctor.value!.copyWith(
             ratingAvg: averageRating,
@@ -185,11 +184,10 @@ class DoctorDetailsController extends GetxController {
   }
 
   void onMakeAppointment() {
-
     if (doctor.value == null) {
       Get.snackbar(
-        'Error',
-        'Doctor information is not available',
+        'snackbar_error'.tr,
+        'doctor_info_not_available'.tr,
         snackPosition: SnackPosition.BOTTOM,
       );
       return;

@@ -1,4 +1,3 @@
-
 import 'package:appointment_app/core/constant/app_colors.dart';
 import 'package:appointment_app/core/constant/text_style.dart';
 import 'package:appointment_app/widgets/general_widgets/app_header/app_header.dart';
@@ -15,10 +14,11 @@ class SettingsHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppHeader(
-      padding: EdgeInsets.only(left: 16.w ,),
-     
+      onBack: Get.back,
+      padding: EdgeInsetsDirectional.only(
+        start: 16.w,
+      ),
       backgroundColor: AppColors.white,
-
       center: Text(
         title,
         style: CustomTextStyles.screenTitle,

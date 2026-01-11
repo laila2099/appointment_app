@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+
 enum AppointmentType { inPerson, videoCall, phoneCall }
 
 extension AppointmentTypeX on AppointmentType {
@@ -15,11 +17,11 @@ extension AppointmentTypeX on AppointmentType {
   String get label {
     switch (this) {
       case AppointmentType.inPerson:
-        return 'In Person';
+        return 'appointment_type_in_person'.tr;
       case AppointmentType.videoCall:
-        return 'Video Call';
+        return 'appointment_type_video_call'.tr;
       case AppointmentType.phoneCall:
-        return 'Phone Call';
+        return 'appointment_type_phone_call'.tr;
     }
   }
 

@@ -21,7 +21,8 @@ class StepPayment extends StatelessWidget {
 
       if (c.paymentError.value != null) {
         return Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+          padding:
+              EdgeInsetsDirectional.symmetric(horizontal: 20.w, vertical: 20.h),
           child: Text(
             c.paymentError.value!,
             style: const TextStyle(color: Colors.red),
@@ -33,7 +34,7 @@ class StepPayment extends StatelessWidget {
       final hasCards = c.cardMethods.isNotEmpty;
 
       return ListView(
-        padding: EdgeInsets.fromLTRB(20.w, 0, 20.w, 10.h),
+        padding: EdgeInsetsDirectional.fromSTEB(20.w, 0, 20.w, 10.h),
         children: [
           SizedBox(height: 8.h),
           SectionTitle('payment_option'.tr),
@@ -98,7 +99,7 @@ class _RadioRow extends StatelessWidget {
       onTap: enabled ? onTap : null,
       borderRadius: BorderRadius.circular(12.r),
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 6.h),
+        padding: EdgeInsetsDirectional.symmetric(vertical: 6.h),
         child: Row(
           children: [
             Opacity(
@@ -144,7 +145,7 @@ class _CardRow extends StatelessWidget {
         children: [
           SizedBox(height: 12.h),
           Padding(
-            padding: EdgeInsets.only(left: 42.w),
+            padding: EdgeInsetsDirectional.only(start: 42.w),
             child: Row(
               children: [
                 Container(
@@ -178,7 +179,7 @@ class _CardRow extends StatelessWidget {
           ),
           SizedBox(height: 12.h),
           Padding(
-            padding: EdgeInsets.only(left: 42.w),
+            padding: EdgeInsetsDirectional.only(start: 42.w),
             child: Divider(height: 18.h, color: Colors.grey.withOpacity(.2)),
           ),
         ],

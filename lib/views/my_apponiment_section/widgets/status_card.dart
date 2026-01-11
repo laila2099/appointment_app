@@ -5,6 +5,7 @@ import 'package:appointment_app/models/appoitments_details.dart';
 import 'package:appointment_app/widgets/general_widgets/doctor_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class StatusCard extends StatelessWidget {
@@ -23,11 +24,11 @@ class StatusCard extends StatelessWidget {
     Color statusColor = AppColors.black;
     switch (appt.status) {
       case AppointmentStatus.completed:
-        statusText = 'Appointment done';
+        statusText = 'appointment_done'.tr;
         statusColor = AppColors.green;
         break;
       case AppointmentStatus.cancelled:
-        statusText = 'Appointment cancelled';
+        statusText = 'appointment_cancelled'.tr;
         statusColor = AppColors.red;
         break;
       default:
@@ -50,7 +51,7 @@ class StatusCard extends StatelessWidget {
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
+        padding: const EdgeInsetsDirectional.fromSTEB(12, 8, 12, 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

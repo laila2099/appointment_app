@@ -1,4 +1,5 @@
 import 'package:appointment_app/routes/app_routes.dart';
+import 'package:appointment_app/views/home_section/recommendation_doctor/widgets/custom_bottom_sheet.dart';
 import 'package:appointment_app/views/search_section/controller/search_result_controller.dart';
 import 'package:appointment_app/views/search_section/widget/sort_by_bottom_sheet.dart';
 import 'package:appointment_app/widgets/search/search_text_field.dart';
@@ -20,18 +21,19 @@ class SearchView extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: CustomAppBar(
-        titel: 'Search',
+        titel: 'search'.tr,
         showAction: true,
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+        padding:
+            EdgeInsetsDirectional.symmetric(horizontal: 16.w, vertical: 20.h),
         child: Column(
           children: [
             Row(
               children: [
                 Expanded(
                     child: SearchTextField(
-                        hintText: 'Search Message',
+                        hintText: 'search_message'.tr,
                         onSubmitted: (value) {
                           if (value.trim().isNotEmpty) {
                             Get.toNamed(AppRoutes.searchresult);
@@ -45,7 +47,7 @@ class SearchView extends StatelessWidget {
                       isScrollControlled: true,
                       backgroundColor: Colors.white,
                       builder: (_) {
-                        return const SortByBottomSheet();
+                        return CustomBottomSheet();
                       },
                     );
                   },

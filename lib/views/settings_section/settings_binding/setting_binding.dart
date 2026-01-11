@@ -1,4 +1,5 @@
 import 'package:appointment_app/views/settings_section/settings_controller/help_controllers.dart';
+import 'package:appointment_app/views/settings_section/settings_controller/language_controller.dart';
 import 'package:appointment_app/views/settings_section/settings_controller/notificaions_controllers.dart';
 import 'package:appointment_app/views/settings_section/settings_controller/security_controller.dart';
 import 'package:appointment_app/views/settings_section/settings_controller/setting_controller.dart';
@@ -11,5 +12,6 @@ class SettingBinding extends Bindings {
     Get.lazyPut(() => SecurityController());
     Get.lazyPut(() => HelpController());
     Get.lazyPut(() => NotificationController());
+    // Get.lazyPut(() => LanguageController());
   }
 }

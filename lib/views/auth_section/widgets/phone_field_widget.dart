@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
 import '../../../core/constant/app_colors.dart';
@@ -27,7 +28,7 @@ class PhoneFieldWidget extends StatelessWidget {
       style: CustomTextStyles.textField,
       validator: (phone) {
         if (phone == null || phone.number.isEmpty) {
-          return 'Phone number is required';
+          return 'phone_number_required'.tr;
         }
         return null;
       },

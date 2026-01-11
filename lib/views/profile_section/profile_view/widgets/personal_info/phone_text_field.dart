@@ -16,7 +16,8 @@ class PhoneTextField extends StatelessWidget {
 
     return Container(
       width: 345.w,
-      padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 12.h),
+      padding:
+          EdgeInsetsDirectional.symmetric(horizontal: 18.w, vertical: 12.h),
       decoration: BoxDecoration(
         color: const Color(0xFFFDFDFF),
         borderRadius: BorderRadius.circular(25.r),
@@ -48,7 +49,7 @@ class PhoneTextField extends StatelessWidget {
 
           /// Divider
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 12.w),
+            margin: EdgeInsetsDirectional.symmetric(horizontal: 12.w),
             width: 1.2.w,
             height: 18.h,
             color: Colors.grey.shade200,
