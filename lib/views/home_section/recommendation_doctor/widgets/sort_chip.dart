@@ -7,7 +7,8 @@ class SortChip extends StatelessWidget {
   final IconData? icon;
   final bool active;
 
-  const SortChip({required this.title, this.icon, this.active = false});
+  const SortChip(
+      {super.key, required this.title, this.icon, this.active = false});
 
   @override
   Widget build(BuildContext context) {

@@ -4,8 +4,11 @@ import 'package:get/get.dart';
 
 import '../../../core/classes/api/api.dart';
 import '../../../core/classes/api/api_result.dart';
-import '../../../core/services/shared_prefrences.dart';
+import '../../../core/classes/utils/app_snackbar.dart';
 import '../../../core/constant/app_keys.dart';
+import '../../../core/services/shared_prefrences.dart';
+import '../../../routes/app_routes.dart';
+import '../../home_section/booking_appointment/booking_appointment_controller/booking_controller.dart';
 
 class MyAppointmentsController extends GetxController {
   final appointments = <AppointmentDetailsModel>[].obs;
@@ -29,7 +32,7 @@ class MyAppointmentsController extends GetxController {
   }
 
   void _tryLoadAppointments() async {
-    everAll([], (_) {}); 
+    everAll([], (_) {});
 
     while (true) {
       final token = _prefs.getString(PrefKeys.accessToken);
@@ -67,11 +70,8 @@ class MyAppointmentsController extends GetxController {
     );
 
     if (res is ApiSuccess<void>) {
-      final index = appointments.indexWhere((a) => a.id == appt.id);
-      if (index != -1) {
-        appointments[index] =
-            appointments[index].copyWith(status: AppointmentStatus.cancelled);
-      }
+      appointments.removeWhere((a) => a.id == appt.id);
+      AppSnackBar.success('Appointment cancelled');
     } else if (res is ApiFailure<void>) {
       Get.snackbar('Error', res.error.message);
     }
@@ -88,7 +88,7 @@ class MyAppointmentsController extends GetxController {
     } else if (status == AppointmentStatus.completed) {
       statusString = 'completed';
     } else {
-      statusString = 'canceled'; 
+      statusString = 'canceled';
     }
 
     final res = await _repo.getAppointmentsByStatus(
@@ -97,11 +97,23 @@ class MyAppointmentsController extends GetxController {
     );
 
     if (res is ApiSuccess<List<AppointmentDetailsModel>>) {
+      appointments.clear();
       appointments.assignAll(res.data);
     } else if (res is ApiFailure<List<AppointmentDetailsModel>>) {
       Get.snackbar('Error', res.error.message);
     }
 
     isLoading.value = false;
+  }
+
+  Future<void> reschedule(AppointmentDetailsModel appt) async {
+    if (Get.isRegistered<BookingController>()) {
+      Get.delete<BookingController>(force: true);
+    }
+    final refreshed = await Get.toNamed(AppRoutes.reschedule,
+        arguments: {'appointment': appt.toAppointmentModel()});
+    if (refreshed == true) {
+      fetchAppointmentsByStatus(selectedStatus.value);
+    }
   }
 }

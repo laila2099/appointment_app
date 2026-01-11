@@ -45,13 +45,7 @@ class MainLayout extends StatelessWidget {
           return IndexedStack(index: navCtrl.selectedIndex, children: _screens);
         },
       ),
-      bottomNavigationBar: SafeArea(
-        top: false,
-        child: Padding(
-          padding: const EdgeInsetsDirectional.only(bottom: 10),
-          child: CustomBottomNavBar(),
-        ),
-      ),
+      bottomNavigationBar: CustomBottomNavBar(),
     );
   }
 }

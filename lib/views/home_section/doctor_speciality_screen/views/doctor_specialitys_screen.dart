@@ -31,7 +31,16 @@ class DoctorSpecialitysScreen extends StatelessWidget {
                 ),
                 itemBuilder: (context, index) {
                   final item = controller.categories[index];
-                  return CategoryItem(iconPath: item.icon, title: item.title);
+                  return GestureDetector(
+                    onTap: () {
+                      final String? categoryId =
+                          (item.title == 'general') ? null : item.id;
+
+                      Get.back(result: categoryId);
+                    },
+                    child:
+                        CategoryItem(iconPath: item.iconUrl, title: item.title),
+                  );
                 },
               ),
             ),

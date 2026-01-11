@@ -8,14 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import '../../home_section/booking_appointment/booking_appointment_binding/booking_binding.dart';
-import '../../home_section/booking_appointment/booking_appointment_controller/booking_controller.dart';
-import '../reschedule/reschedule_view.dart';
 
 class UpcomingCard extends StatelessWidget {
   final AppointmentDetailsModel appt;
   final MyAppointmentsController controller = Get.find();
-  final BookingController bookingController = Get.find();
 
   UpcomingCard({required this.appt, Key? key}) : super(key: key);
 
@@ -41,7 +37,8 @@ class UpcomingCard extends StatelessWidget {
               name: appt.doctorName,
               specialty: appt.specialty,
               clinic: appt.clinic,
-              dateText: DateFormat('EEE, dd MMM').format(appt.appointmentDateTime),
+              dateText:
+                  DateFormat('EEE, dd MMM').format(appt.appointmentDateTime),
               time: DateFormat('hh:mm a').format(appt.appointmentDateTime),
               avatar: const AssetImage(AppImages.doctor),
               showChat: true,
@@ -64,8 +61,7 @@ class UpcomingCard extends StatelessWidget {
                   label: 'reschedule'.tr,
                   variant: ButtonVariant.filled,
                   onPressed: () {
-                    Get.to(() => RescheduleScreen(), binding: BookingBinding(), arguments: appt.toAppointmentModel());
-
+                    controller.reschedule(appt);
                   },
                 ),
               ],

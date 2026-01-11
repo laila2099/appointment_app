@@ -6,7 +6,6 @@ import '../../../../core/classes/repositories/review_repository.dart';
 import '../../../../core/constant/app_keys.dart';
 import '../../../../core/services/auth_gate_service.dart';
 import '../../../../core/services/shared_prefrences.dart';
-
 import '../../../../models/doctor_model.dart';
 import '../../../../models/review_model.dart';
 import '../../../../routes/app_routes.dart';
@@ -176,6 +175,7 @@ class DoctorDetailsController extends GetxController {
     }
   }
 
+  @override
   Future<void> refresh() async {
     await Future.wait([
       _loadDoctor(),

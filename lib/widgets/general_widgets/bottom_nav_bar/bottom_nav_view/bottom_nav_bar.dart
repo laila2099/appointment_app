@@ -8,19 +8,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/constant/app_size.dart';
+
 class CustomBottomNavBar extends GetView<NavigationController> {
   const CustomBottomNavBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 110.h,
+      height: AppSize.bottomNavHeight,
       child: Stack(
         alignment: AlignmentDirectional.bottomCenter,
         clipBehavior: Clip.none,
         children: [
           Container(
-            height: 80.h,
+            height: AppSize.bottomNavHeight,
             decoration: BoxDecoration(
               color: AppColors.white,
               boxShadow: [
