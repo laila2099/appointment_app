@@ -78,11 +78,6 @@ class OtpVerificationView extends StatelessWidget {
 
               // الزر ثابت في أسفل الشاشة
               CustomPrimaryButton(
-<<<<<<< HEAD:lib/views/auth_section/forgot_password/forgot_password_screens/otp_verification_view.dart
-                label: "submit".tr,
-                onTap: () {},
-              ),
-=======
                 label: "Submit",
                 onTap: () {
                   if (verificationController.verifyCode()) {
@@ -91,8 +86,6 @@ class OtpVerificationView extends StatelessWidget {
                   }
                 },
               )
-
->>>>>>> origin/zahraa:lib/views/auth_section/forgot_password/forgot_password_screens/views/otp_verification_view.dart
             ],
           ),
         ),
