@@ -25,7 +25,7 @@ class HelpPage extends StatelessWidget {
           ),
           Expanded(
             child: ListView.separated(
-              padding: EdgeInsets.only(top: 20),
+              padding: EdgeInsetsDirectional.only(top: 20),
               itemCount: controller.faqs.length,
               separatorBuilder: (_, __) => const CustomDivider(),
               itemBuilder: (context, index) {
@@ -35,7 +35,7 @@ class HelpPage extends StatelessWidget {
                   return InkWell(
                     onTap: () => controller.toggle(index),
                     child: Padding(
-                      padding: EdgeInsets.fromLTRB(
+                      padding: EdgeInsetsDirectional.fromSTEB(
                         24.w,
                         12,
                         24.w,

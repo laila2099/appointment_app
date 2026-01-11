@@ -19,7 +19,7 @@ class InboxItem extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 12.h),
+        padding: EdgeInsetsDirectional.symmetric(vertical: 12.h),
         child: Row(
           children: [
             /// 👤 Avatar
@@ -72,7 +72,7 @@ class InboxItem extends StatelessWidget {
                 SizedBox(height: 6.h),
                 if (model.unreadCount > 0)
                   Container(
-                    padding: EdgeInsets.all(6.r),
+                    padding: EdgeInsetsDirectional.all(6.r),
                     decoration: const BoxDecoration(
                       color: AppColors.primary,
                       shape: BoxShape.circle,

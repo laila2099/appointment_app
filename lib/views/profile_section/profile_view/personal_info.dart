@@ -7,8 +7,8 @@ import '../../../core/constant/app_images.dart';
 import '../../../core/constant/text_style.dart';
 import '../../../widgets/general_widgets/app_header/app_header.dart';
 import '../../../widgets/general_widgets/primary_button.dart';
+import '../../../widgets/helpful_widgets/text_field_widget.dart';
 import '../profile_controller/personal_info_controller.dart';
-import 'widgets/personal_info/personal_text_field.dart';
 import 'widgets/personal_info/phone_text_field.dart';
 
 class PersonalInfo extends StatelessWidget {
@@ -26,7 +26,7 @@ class PersonalInfo extends StatelessWidget {
           children: [
             AppHeader(
               center: Text(
-                "Personal information",
+                "personal_information".tr,
                 style: CustomTextStyles.screenTitle,
               ),
             ),
@@ -36,7 +36,7 @@ class PersonalInfo extends StatelessWidget {
             /// Avatar
             Center(
               child: Stack(
-                alignment: Alignment.bottomRight,
+                alignment: AlignmentDirectional.bottomEnd,
                 children: [
                   CircleAvatar(
                     radius: 62,
@@ -47,7 +47,7 @@ class PersonalInfo extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(8),
+                    padding: const EdgeInsetsDirectional.all(8),
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Color(0xffF8F8F8),
@@ -65,26 +65,37 @@ class PersonalInfo extends StatelessWidget {
             SizedBox(height: 52.h),
 
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              padding: EdgeInsetsDirectional.symmetric(horizontal: 24.w),
               child: Column(
                 children: [
-                  Obx(() => PersonalTextField(text: controller.name.value)),
+                  CustomTextField(
+                    hint: 'Full Name',
+                    controller: controller.nameController,
+                    textStyle: TextStyle(color: AppColors.black),
+                  ),
                   SizedBox(
                     height: 16.h,
                   ),
-                  Obx(() => PersonalTextField(text: controller.email.value)),
+                  CustomTextField(
+                    hint: 'Email',
+                    controller: controller.emailController,
+                    textStyle: TextStyle(color: AppColors.black),
+                  ),
                   SizedBox(
                     height: 16.h,
                   ),
-                  Obx(() => PersonalTextField(text: controller.password.value)),
+                  CustomTextField(
+                    hint: 'Birthdate',
+                    controller: controller.birthdateController,
+                    textStyle: TextStyle(color: AppColors.black),
+                  ),
                   SizedBox(
                     height: 16.h,
                   ),
                   const PhoneTextField(),
                   SizedBox(height: 24.h),
                   Text(
-                    "When you set up your personal information settings, "
-                    "you should take care to provide accurate information.",
+                    "personal_info_warning".tr,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 12.sp,
@@ -94,8 +105,9 @@ class PersonalInfo extends StatelessWidget {
                   ),
                   SizedBox(height: 60.h),
                   PrimaryButton(
-                    text: "Save",
+                    text: "save".tr,
                     onPressed: () {
+                      controller.onSave();
                       Get.back();
                     },
                     padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 16.h),

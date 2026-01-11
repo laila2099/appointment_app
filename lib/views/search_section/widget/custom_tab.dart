@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import '../../../core/constant/app_colors.dart';
 
 class CustomTab extends StatelessWidget {
@@ -18,7 +19,7 @@ class CustomTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isAllTab = label == 'All';
+    final bool isAllTab = label == 'all_tab'.tr;
 
     final Color backgroundColor =
         isSelected || isAllTab ? AppColors.primary : AppColors.light2Grey;
@@ -27,12 +28,12 @@ class CustomTab extends StatelessWidget {
         isSelected || isAllTab ? AppColors.white : AppColors.black;
 
     return Padding(
-      padding: EdgeInsets.only(right: 8.w),
+      padding: EdgeInsetsDirectional.only(end: 8.w),
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(30.r),
         child: Container(
-          padding: EdgeInsets.symmetric(
+          padding: EdgeInsetsDirectional.symmetric(
             horizontal: isSmall ? 12.w : 20.w,
             vertical: isSmall ? 6.h : 12.h,
           ),

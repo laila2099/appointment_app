@@ -26,7 +26,7 @@ class RecentSearchWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Recent Search',
+              'recent_search'.tr,
               style: TextStyle(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.bold,
@@ -38,7 +38,7 @@ class RecentSearchWidget extends StatelessWidget {
                 searchController.clearHistory();
               },
               child: Text(
-                'Clear All History',
+                'clear_all'.tr,
                 style: TextStyle(
                   fontSize: 14.sp,
                   color: AppColors.primary,
@@ -55,48 +55,48 @@ class RecentSearchWidget extends StatelessWidget {
         Flexible(
           child: recentSearches.isEmpty
               ? Center(
-            child: Text(
-              "No recent searches",
-              style: TextStyle(color: textColor),
-            ),
-          )
+                  child: Text(
+                    "no_recent".tr,
+                    style: TextStyle(color: textColor),
+                  ),
+                )
               : ListView.builder(
-            itemCount: recentSearches.length,
-            itemBuilder: (context, index) {
-              String search = recentSearches[index];
-              return Padding(
-                padding: EdgeInsets.symmetric(vertical: 6.h),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.access_time,
-                      color: AppColors.lightGrey,
-                      size: 18.w,
-                    ),
-                    SizedBox(width: 12.w),
-                    Expanded(
-                      child: Text(
-                        search,
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          color: textColor,
-                        ),
+                  itemCount: recentSearches.length,
+                  itemBuilder: (context, index) {
+                    String search = recentSearches[index];
+                    return Padding(
+                      padding: EdgeInsetsDirectional.symmetric(vertical: 6.h),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.access_time,
+                            color: AppColors.lightGrey,
+                            size: 18.w,
+                          ),
+                          SizedBox(width: 12.w),
+                          Expanded(
+                            child: Text(
+                              search,
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                color: textColor,
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              searchController.removeSearch(search);
+                            },
+                            child: Icon(
+                              Icons.close,
+                              color: AppColors.lightGrey,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        searchController.removeSearch(search);
-                      },
-                      child: Icon(
-                        Icons.close,
-                        color: AppColors.lightGrey,
-                      ),
-                    ),
-                  ],
+                    );
+                  },
                 ),
-              );
-            },
-          ),
         ),
       ],
     );

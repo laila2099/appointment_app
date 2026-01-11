@@ -1,7 +1,10 @@
+import 'package:appointment_app/core/translations/controller/translation_controller.dart';
 import 'package:get/get.dart';
 
 import '../core/classes/api/api.dart';
 import '../core/classes/repositories/auth_repository.dart';
+import '../core/classes/repositories/doctor_repository.dart';
+import '../core/classes/repositories/review_repository.dart';
 import '../core/config/app_config.dart';
 import '../core/services/shared_prefrences.dart';
 import '../views/auth_section/auth_controller/auth_controller.dart';
@@ -17,6 +20,8 @@ class InitializeBinding extends Bindings {
     );
 
     Get.put(AuthRepository(api: api));
+    Get.put(DoctorRepository(api: api));
+    Get.put(ReviewRepository(api: api));
     Get.put(AuthController(
         repo: Get.find<AuthRepository>(),
         prefs: Get.find<AppPreferencesService>()));

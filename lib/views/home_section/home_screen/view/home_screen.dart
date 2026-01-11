@@ -1,3 +1,4 @@
+import 'package:appointment_app/core/classes/repositories/doctor_repository.dart';
 import 'package:appointment_app/core/constant/app_colors.dart';
 import 'package:appointment_app/core/constant/text_style.dart';
 import 'package:appointment_app/routes/app_routes.dart';
@@ -11,17 +12,30 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/services/auth_gate_service.dart';
+import '../../../profile_section/profile_controller/profile_controller.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
+
   final controller = Get.put(CategoryController());
-  final doctorController = Get.put(DoctorController());
+  final profileController = Get.find<ProfileController>();
+  // Initialize doctor controller - will use existing if already registered
+  late final DoctorController doctorController = Get.put(
+    DoctorController(repository: Get.find<DoctorRepository>()),
+    permanent: true,
+  );
+
   @override
   Widget build(BuildContext context) {
+    // Load recommended doctors when the home screen is built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      doctorController.loadRecommendedDoctors();
+    });
+
     return Scaffold(
       backgroundColor: AppColors.white,
       body: Padding(
-        padding: EdgeInsets.all(16.r),
+        padding: EdgeInsetsDirectional.all(16.r),
         child: Column(
           children: [
             SizedBox(height: 12.h),
@@ -29,24 +43,34 @@ class HomeScreen extends StatelessWidget {
               height: 72.h,
               child: Row(
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 10),
-                      Text("Hi, Zaid", style: CustomTextStyles.bold),
-                      SizedBox(height: 3.h),
-                      Text(
-                        "How Are You Today?!",
-                        style: CustomTextStyles.custom(
-                          fontSize: 10.sp,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.subtitle,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 10),
+                        Obx(() {
+                          final name = profileController.profile.value?.name;
+                          return Text(
+                            "Hi, ${name ?? '...'}",
+                            style: CustomTextStyles.bold,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          );
+                        }),
+                        SizedBox(height: 3.h),
+                        Text(
+                          "how_are_you_today".tr,
+                          style: CustomTextStyles.custom(
+                            fontSize: 10.sp,
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.subtitle,
+                          ),
                         ),
                       ),
                       SizedBox(height: 10.h),
                     ],
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Stack(
                     children: [
                       Container(
@@ -64,12 +88,12 @@ class HomeScreen extends StatelessWidget {
                                 AppRoutes.notificationScreen,
                               );
                             },
-                            icon: Icon(Icons.notifications_none),
+                            icon: const Icon(Icons.notifications_none),
                           ),
                         ),
                       ),
-                      Positioned(
-                        right: 15.w,
+                      PositionedDirectional(
+                        end: 15.w,
                         top: 13.h,
                         child: Container(
                           width: 8.w,
@@ -91,17 +115,18 @@ class HomeScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Doctor Speciality", style: CustomTextStyles.screenTitle),
+                Text("doctor_speciality".tr,
+                    style: CustomTextStyles.screenTitle),
                 TextButton(
                   style: TextButton.styleFrom(
-                    padding: EdgeInsets.zero,
+                    padding: EdgeInsetsDirectional.zero,
                     minimumSize: Size(0, 0),
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
                   onPressed: () {
-                    Get.toNamed((AppRoutes.doctorSpecialtiesScreen));
+                    Get.toNamed(AppRoutes.doctorSpecialtiesScreen);
                   },
-                  child: Text("See All", style: CustomTextStyles.regular),
+                  child: Text("see_all".tr, style: CustomTextStyles.regular),
                 ),
               ],
             ),
@@ -165,42 +190,74 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Recommendation Doctor",
+                  "recommendation_doctor".tr,
                   style: CustomTextStyles.screenTitle,
                 ),
                 TextButton(
                   style: TextButton.styleFrom(
-                    padding: EdgeInsets.zero,
+                    padding: EdgeInsetsDirectional.zero,
                     minimumSize: Size(0, 0),
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
                   onPressed: () {
-                    Get.toNamed((AppRoutes.recommendationDoctorScreen));
+                    Get.toNamed(AppRoutes.recommendationDoctorScreen);
                   },
-                  child: Text("See All", style: CustomTextStyles.regular),
+                  child: Text("see_all".tr, style: CustomTextStyles.regular),
                 ),
               ],
             ),
             SizedBox(height: 20.h),
             Expanded(
-              child: ListView.builder(
-                padding: EdgeInsets.zero,
-                itemCount: doctorController.doctors.length,
-                itemBuilder: (context, index) {
-                  final d = doctorController.doctors[index];
-                  return DoctorCard(
-                    onTap: () => Get.toNamed(AppRoutes.doctorDetails),
-                    image: d.image,
-                    name: d.name,
-                    department: d.department,
-                    hospital: d.hospital,
-                    rating: d.rating,
-                    reviews: d.reviews,
+              child: Obx(() {
+                if (doctorController.isLoading.value) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+
+                if (doctorController.doctors.isEmpty) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.medical_services_outlined,
+                            size: 64, color: Colors.grey),
+                        const SizedBox(height: 16),
+                        Text(
+                          doctorController.errorMessage.value ??
+                              'no_doctors_available'.tr,
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        const SizedBox(height: 16),
+                        ElevatedButton(
+                          onPressed: doctorController.refresh,
+                          child: Text('retry'.tr),
+                        ),
+                      ],
+                    ),
                   );
-                },
-              ),
+                }
+
+                return ListView.builder(
+                  padding: EdgeInsetsDirectional.zero,
+                  itemCount: doctorController.doctors.length,
+                  itemBuilder: (context, index) {
+                    final doctor = doctorController.doctors[index];
+                    final imagePath = doctorController.getImagePath(doctor);
+                    return DoctorCard(
+                      onTap: () => Get.toNamed(
+                        AppRoutes.doctorDetails,
+                        arguments: {'doctorId': doctor.id},
+                      ),
+                      image: imagePath,
+                      name: doctor.name,
+                      department: doctor.specialty,
+                      hospital: doctor.clinic,
+                      rating: doctor.ratingAvg,
+                      reviews: doctor.ratingCount,
+                    );
+                  },
+                );
+              }),
             ),
-            SizedBox(height: 100.h),
           ],
         ),
       ),

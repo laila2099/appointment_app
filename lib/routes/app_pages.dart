@@ -1,3 +1,4 @@
+import 'package:appointment_app/views/settings_section/settings_binding/setting_binding.dart';
 import 'package:get/get.dart';
 
 import '../core/middlewares/splash_redirect_middleware.dart';
@@ -52,9 +53,10 @@ final appPages = <GetPage>[
     middlewares: [SplashRedirectMiddleware()],
   ),
   GetPage(name: AppRoutes.onboarding, page: () => const OnBoardingView()),
-
   GetPage(
-      name: AppRoutes.loginRequiredGate, page: () => const LoginRequiredGate()),
+    name: AppRoutes.loginRequiredGate,
+    page: () => const LoginRequiredGate(),
+  ),
 
   // Auth + Reset Password
   GetPage(name: AppRoutes.login, page: () => LoginView()),
@@ -63,9 +65,10 @@ final appPages = <GetPage>[
       name: AppRoutes.forgotPassword, page: () => const ForgotPasswordView()),
   GetPage(name: AppRoutes.otpVerification, page: () => OtpVerificationView()),
   GetPage(
-      name: AppRoutes.fillYourProfile,
-      page: () => const FillYourProfileView(),
-      binding: AuthFillProfileBinding()),
+    name: AppRoutes.fillYourProfile,
+    page: () => const FillYourProfileView(),
+    binding: AuthFillProfileBinding(),
+  ),
 
   // Doctor Details
   GetPage(
@@ -78,14 +81,15 @@ final appPages = <GetPage>[
   GetPage(
     name: AppRoutes.bottomnavbar,
     page: () => MainLayout(),
-    binding: BottomNavBarBinding(),
+    bindings: [
+      BottomNavBarBinding(),
+      ProfileBinding(),  // <-- ضيف هذا
+    ],
   ),
 
+
   // Home
-  GetPage(
-    name: AppRoutes.home,
-    page: () => HomeScreen(),
-  ),
+  GetPage(name: AppRoutes.home, page: () => HomeScreen()),
   GetPage(name: AppRoutes.notificationScreen, page: () => NotificationScreen()),
   GetPage(
       name: AppRoutes.findNearbyScreen, page: () => const FindNearbyScreen()),
@@ -96,25 +100,37 @@ final appPages = <GetPage>[
       name: AppRoutes.recommendationDoctorScreen,
       page: () => RecommendationDoctorScreen()),
 
-  //profile
   GetPage(
-      name: AppRoutes.profile,
-      page: () => ProfileScreen(),
-      binding: ProfileBinding()),
+    name: AppRoutes.profile,
+    page: () => ProfileScreen(),
+    binding: ProfileBinding(),
+  ),
   GetPage(
-      name: AppRoutes.personalInfo,
-      page: () => PersonalInfo(),
-      binding: ProfileBinding()),
-  GetPage(name: AppRoutes.paymentScreen, page: () => PaymentScreen()),
+    name: AppRoutes.personalInfo,
+    page: () => PersonalInfo(),
+    binding: ProfileBinding(),
+  ),
   GetPage(
-      name: AppRoutes.medicalRecordsScreen, page: () => MedicalRecordsScreen()),
+    name: AppRoutes.paymentScreen,
+    page: () => PaymentScreen(),
+    binding: ProfileBinding(),
+  ),
+  GetPage(
+    name: AppRoutes.medicalRecordsScreen,
+    page: () => MedicalRecordsScreen(),
+    binding: ProfileBinding(),
+  ),
 
   // Settings
   GetPage(name: AppRoutes.settingsPage, page: () => const SettingsPage()),
   GetPage(name: AppRoutes.notificationPage, page: () => NotificationPage()),
   GetPage(name: AppRoutes.helpPage, page: () => HelpPage()),
   GetPage(name: AppRoutes.securityPage, page: () => SecurityPage()),
-  GetPage(name: AppRoutes.languageScreen, page: () => LanguageScreen()),
+  GetPage(
+    name: AppRoutes.languageScreen,
+    page: () => LanguageScreen(),
+    // binding: SettingBinding()
+  ),
 
   // Booking
   GetPage(
@@ -123,9 +139,8 @@ final appPages = <GetPage>[
     binding: BookingBinding(),
   ),
   GetPage(
-    name: AppRoutes.bookingConfirmed,
-    page: () => const BookingConfirmedScreen(),
-  ),
+      name: AppRoutes.bookingConfirmed,
+      page: () => const BookingConfirmedScreen()),
   GetPage(
     name: AppRoutes.myAppointment,
     page: () => const AppointmentView(),
@@ -136,24 +151,20 @@ final appPages = <GetPage>[
     page: () => const ReschedualScreen(),
     binding: BookingBinding(),
   ),
-  // Inbox Page
+
+  // Inbox
+  GetPage(name: AppRoutes.inbox, page: () => const InboxView()),
+  GetPage(name: AppRoutes.chat, page: () => ChatView(), binding: ChatBinding()),
+
+  // Search
   GetPage(
-    name: AppRoutes.inbox,
-    page: () => const InboxView(), // تأكد إنه عندك InboxScreen موجودة
-  ),
-  GetPage(
-    name: AppRoutes.chat,
-    page: () => ChatView(),
-    binding: ChatBinding(), // هاد عشان يتحمل ChatController تلقائياً
-  ),
-  GetPage(
-    name: AppRoutes.searchresult, // قم بتحديد اسم URL المناسب
+    name: AppRoutes.searchresult,
     page: () => const SearchResultView(),
-    binding: SearchResultBinding(), // ربط الـ SearchBinding
+    binding: SearchResultBinding(),
   ),
   GetPage(
     name: AppRoutes.search,
     page: () => const SearchView(),
-    binding: SearchBinding(), // <--- مهم
+    binding: SearchBinding(),
   ),
 ];

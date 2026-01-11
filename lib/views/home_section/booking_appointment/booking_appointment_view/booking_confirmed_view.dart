@@ -33,6 +33,7 @@ class BookingConfirmedScreen extends GetView<BookingController> {
           return Column(
             children: [
               AppHeader(
+                onBack: Get.back,
                 center: HeaderTitle('details'.tr),
               ),
 
@@ -55,7 +56,7 @@ class BookingConfirmedScreen extends GetView<BookingController> {
 
               Expanded(
                 child: ListView(
-                  padding: EdgeInsets.fromLTRB(27.w, 0, 20.w, 20.h),
+                  padding: EdgeInsetsDirectional.fromSTEB(27.w, 0, 20.w, 20.h),
                   children: [
                     SectionTitle('booking_information'.tr),
                     SizedBox(height: 24.h),
@@ -82,7 +83,7 @@ class BookingConfirmedScreen extends GetView<BookingController> {
                         style: OutlinedButton.styleFrom(
                           foregroundColor: AppColors.primary,
                           side: BorderSide(color: AppColors.primary),
-                          padding: EdgeInsets.symmetric(
+                          padding: EdgeInsetsDirectional.symmetric(
                             horizontal: 14.w,
                             vertical: 10.h,
                           ),
@@ -116,7 +117,7 @@ class BookingConfirmedScreen extends GetView<BookingController> {
               ),
 
               Padding(
-                padding: EdgeInsets.fromLTRB(20.w, 10.h, 20.w, 16.h),
+                padding: EdgeInsetsDirectional.fromSTEB(20.w, 10.h, 20.w, 16.h),
                 child: SizedBox(
                   width: double.infinity,
                   height: 52.h,

@@ -21,7 +21,7 @@ class ReschedualScreen extends GetView<BookingController> {
           return Column(
             children: [
               AppHeader(
-                center: HeaderTitle('Reschedual'),
+                center: HeaderTitle('reschedual'.tr),
               ),
               SizedBox(height: 20.h),
               Expanded(
@@ -36,7 +36,8 @@ class ReschedualScreen extends GetView<BookingController> {
               ),
               if (controller.stepIndex.value != 2)
                 Padding(
-                  padding: EdgeInsets.fromLTRB(16.w, 10.h, 16.w, 16.h),
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(16.w, 10.h, 16.w, 16.h),
                   child: PrimaryButton(
                     padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 16.h),
                     text: controller.stepIndex.value == 1
@@ -47,8 +48,8 @@ class ReschedualScreen extends GetView<BookingController> {
                             ? controller.goBackAfterConfirmReschedule
                             : controller.next
                         : () => Get.snackbar(
-                              "Error",
-                              "Please select a date, time and payment method",
+                              "snackbar_error".tr,
+                              "date_payment_required".tr,
                               snackPosition: SnackPosition.BOTTOM,
                             ),
                   ),

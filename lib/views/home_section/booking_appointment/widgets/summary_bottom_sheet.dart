@@ -26,7 +26,7 @@ class SummaryBottomSheet extends StatelessWidget {
     return SafeArea(
       top: false,
       child: Container(
-        padding: EdgeInsets.fromLTRB(20.w, 12.h, 20.w, 16.h),
+        padding: EdgeInsetsDirectional.fromSTEB(20.w, 12.h, 20.w, 16.h),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.vertical(top: Radius.circular(28.r)),
@@ -51,7 +51,7 @@ class SummaryBottomSheet extends StatelessWidget {
             ),
             SizedBox(height: 14.h),
             Align(
-              alignment: Alignment.centerLeft,
+              alignment: AlignmentDirectional.centerStart,
               child: Text('payment_info'.tr, style: CustomTextStyles.label14),
             ),
             SizedBox(height: 12.h),

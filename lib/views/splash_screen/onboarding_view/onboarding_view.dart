@@ -18,7 +18,7 @@ class OnBoardingView extends StatelessWidget {
       backgroundColor: AppColors.white,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: const EdgeInsetsDirectional.symmetric(horizontal: 24),
           child: Column(
             children: [
               const SizedBox(height: 40),
@@ -56,7 +56,7 @@ class OnBoardingView extends StatelessWidget {
                   child: Column(
                     children: [
                       Stack(
-                        alignment: Alignment.bottomCenter,
+                        alignment: AlignmentDirectional.bottomCenter,
                         children: [
                           Image.asset(
                             AppImages.onboardingDoctor,
@@ -68,8 +68,8 @@ class OnBoardingView extends StatelessWidget {
                             height: 220,
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
-                                begin: Alignment.bottomCenter,
-                                end: Alignment.topCenter,
+                                begin: AlignmentDirectional.bottomCenter,
+                                end: AlignmentDirectional.topCenter,
                                 colors: [
                                   Colors.white,
                                   Colors.white.withOpacity(0),
@@ -78,10 +78,10 @@ class OnBoardingView extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(
+                            padding: const EdgeInsetsDirectional.symmetric(
                                 horizontal: 24, vertical: 16),
                             child: Text(
-                              "Best Doctor\nAppointment App",
+                              "onboarding_title".tr,
                               textAlign: TextAlign.center,
                               style: CustomTextStyles.headline32Bold,
                             ),
@@ -93,7 +93,7 @@ class OnBoardingView extends StatelessWidget {
 
                       // الوصف
                       Text(
-                        "Manage and schedule all of your medical appointments easily with Docdoc to get a new experience.",
+                        "onboarding_subtitle".tr,
                         textAlign: TextAlign.center,
                         style: CustomTextStyles.subtitle2,
                       ),
@@ -119,7 +119,7 @@ class OnBoardingView extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    "Get Started",
+                    "get_started".tr,
                     style: CustomTextStyles.button,
                   ),
                 ),

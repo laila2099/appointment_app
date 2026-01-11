@@ -8,6 +8,7 @@ import 'package:appointment_app/widgets/general_widgets/app_bar/app_bar.dart';
 import 'package:appointment_app/widgets/map_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class FindNearbyScreen extends StatelessWidget {
   const FindNearbyScreen({super.key});
@@ -16,16 +17,17 @@ class FindNearbyScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: CustomAppBar(titel: "Find Nearby"),
+      appBar: CustomAppBar(titel: "find_nearby".tr),
       body: Stack(
         children: [
           SizedBox.expand(child: MapWidget()),
           Padding(
-            padding: EdgeInsets.only(top: 32.h),
+            padding: EdgeInsetsDirectional.only(top: 32.h),
             child: CustomSearch(icon: AppIcons.setting),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 550.h, left: 16.w, right: 16.w),
+            padding:
+                EdgeInsetsDirectional.only(top: 550.h, start: 16.w, end: 16.w),
             child: SizedBox(
               height: 100.h,
               child: DoctorCard(
