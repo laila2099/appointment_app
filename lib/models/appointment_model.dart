@@ -63,4 +63,6 @@ class Appointment {
       appointmentType: (json['appointment_type'] ?? '') as String,
     );
   }
+
+
 }

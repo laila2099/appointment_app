@@ -27,16 +27,13 @@ class BookingController extends GetxController {
   late final Rx<Appointment> appointment;
 
   final selectedPayment = Rxn<PaymentMethod>();
-
   final availableDates = <DateTime>[].obs;
   final availableTimes = <TimeOfDay>[].obs;
   final paymentMethods = <PaymentMethod>[].obs;
 
   final centeredDateIndex = 0.obs;
   late final PageController datePageController;
-
   final doctor = Rxn<Doctor>();
-
   late final DateWheelController wheel;
 
   final paymentLoading = false.obs;
@@ -48,6 +45,19 @@ class BookingController extends GetxController {
     super.onInit();
 
     doctorId = '1';
+
+    final existingAppointment = Get.arguments;
+    if (existingAppointment is Appointment) {
+      appointment = existingAppointment.obs;
+    } else {
+      appointment = Appointment(
+        doctorId: doctorId,
+        appointmentDate: DateTime.now(),
+        appointmentTime: const TimeOfDay(hour: 8, minute: 0),
+        appointmentType: AppointmentType.inPerson.label,
+        paymentMethod: '',
+      ).obs;
+    }
 
     doctor.value = Doctor(
       id: "1",
@@ -71,14 +81,6 @@ class BookingController extends GetxController {
       lng: 31.2357,
     );
 
-    appointment = Appointment(
-      doctorId: doctorId,
-      appointmentDate: DateTime.now(),
-      appointmentTime: const TimeOfDay(hour: 8, minute: 0),
-      appointmentType: AppointmentType.inPerson.label,
-      paymentMethod: '',
-    ).obs;
-
     _seed();
 
     centeredDateIndex.value = _findDateIndex(appointment.value.appointmentDate);
@@ -94,7 +96,7 @@ class BookingController extends GetxController {
       DateWheelController(
         dates: availableDates,
         initialSelected: appointment.value.appointmentDate,
-        onChanged: selectDate
+        onChanged: selectDate,
       ),
       tag: 'booking_wheel',
     );
@@ -187,7 +189,6 @@ class BookingController extends GetxController {
     if (stepIndex.value < 2) stepIndex.value++;
   }
 
-
   // -------- Selectors
   void selectDate(DateTime d) {
     appointment.value = appointment.value.copyWith(appointmentDate: d);
@@ -250,7 +251,6 @@ class BookingController extends GetxController {
     paymentError.value = null;
 
     try {
-      // Dummy data
       final list = <PaymentMethod>[
         const PaymentMethod(
           id: 'pm_1',
@@ -333,7 +333,61 @@ class BookingController extends GetxController {
     }
   }
 
+  Future<void> submitReschedule({required String appointmentId}) async {
+    isLoading.value = true;
 
+    try {
+      appointment.value = appointment.value.copyWith(
+        paymentMethod: selectedPayment.value?.type ?? '',
+      );
+
+      final AppPreferencesService prefs = Get.find();
+      final String? accessToken = prefs.getString(PrefKeys.accessToken);
+
+      if (accessToken == null || accessToken.isEmpty) {
+        Get.snackbar(
+          'Error',
+          'Authentication token not found',
+          snackPosition: SnackPosition.TOP,
+        );
+        return;
+      }
+
+      final result = await repository.editAppointment(
+        accessToken: accessToken,
+        appointmentId: appointmentId,
+        appointmentDate: appointment.value.appointmentDate,
+        appointmentTime: appointment.value.appointmentTime != null
+            ? DateTime(
+          0,
+          0,
+          0,
+          appointment.value.appointmentTime.hour,
+          appointment.value.appointmentTime.minute,
+        )
+            : null,
+        paymentMethod: appointment.value.paymentMethod,
+      );
+
+      if (result.isSuccess) {
+        appointment.value = result.data!;
+        Get.back();
+        Get.snackbar(
+          'Success',
+          'Appointment rescheduled successfully',
+          snackPosition: SnackPosition.TOP,
+        );
+      } else {
+        Get.snackbar(
+          'Error',
+          result.errorMessage ?? 'Unknown error occurred',
+          snackPosition: SnackPosition.TOP,
+        );
+      }
+    } finally {
+      isLoading.value = false;
+    }
+  }
 
   void goToConfirm() {
     Get.toNamed(AppRoutes.bookingConfirmed);

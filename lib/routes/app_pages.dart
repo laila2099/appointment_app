@@ -132,7 +132,7 @@ final appPages = <GetPage>[
   ),
   GetPage(
     name: AppRoutes.reschedule,
-    page: () => const RescheduleScreen(),
+    page: () => RescheduleScreen(),
     binding: BookingBinding(),
   ),
   // Inbox Page

@@ -1,7 +1,6 @@
 import 'package:appointment_app/core/constant/app_colors.dart';
 import 'package:appointment_app/core/constant/app_images.dart';
 import 'package:appointment_app/models/appoitments_details.dart';
-import 'package:appointment_app/routes/app_routes.dart';
 import 'package:appointment_app/views/my_apponiment_section/my_appoitment_controller/my_appoitment_controller.dart';
 import 'package:appointment_app/views/my_apponiment_section/widgets/status_button.dart';
 import 'package:appointment_app/widgets/general_widgets/doctor_tile.dart';
@@ -9,11 +8,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import '../../home_section/booking_appointment/booking_appointment_binding/booking_binding.dart';
+import '../../home_section/booking_appointment/booking_appointment_controller/booking_controller.dart';
+import '../reschedule/reschedule_view.dart';
 
 class UpcomingCard extends StatelessWidget {
   final AppointmentDetailsModel appt;
   final MyAppointmentsController controller = Get.find();
-  UpcomingCard({required this.appt});
+  final BookingController bookingController = Get.find();
+
+  UpcomingCard({required this.appt, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +41,7 @@ class UpcomingCard extends StatelessWidget {
               name: appt.doctorName,
               specialty: appt.specialty,
               clinic: appt.clinic,
-              dateText: DateFormat(
-                'EEE, dd MMM',
-              ).format(appt.appointmentDateTime),
+              dateText: DateFormat('EEE, dd MMM').format(appt.appointmentDateTime),
               time: DateFormat('hh:mm a').format(appt.appointmentDateTime),
               avatar: const AssetImage(AppImages.doctor),
               showChat: true,
@@ -61,7 +63,10 @@ class UpcomingCard extends StatelessWidget {
                 StatusButton(
                   label: 'Reschedule',
                   variant: ButtonVariant.filled,
-                  onPressed: () => Get.toNamed(AppRoutes.reschedule),
+                  onPressed: () {
+                    Get.to(() => RescheduleScreen(), binding: BookingBinding(), arguments: appt.toAppointmentModel());
+
+                  },
                 ),
               ],
             ),
