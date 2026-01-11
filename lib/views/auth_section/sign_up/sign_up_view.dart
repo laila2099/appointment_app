@@ -8,12 +8,13 @@ import '../../../core/constant/text_style.dart';
 import '../../../widgets/helpful_widgets/primary_button_widget.dart';
 import '../../../widgets/helpful_widgets/text_field_widget.dart';
 import '../auth_controller/auth_controller.dart';
-import '../sign_in/sign_in_view.dart';
+import '../sign_in/signIn_view/sign_in_view.dart';
 import '../widgets/phone_field_widget.dart';
 import '../widgets/socialButton.dart';
 
 class CreateAccountView extends StatelessWidget {
-  const CreateAccountView({super.key});
+  CreateAccountView({super.key});
+  final AuthController authController = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +23,10 @@ class CreateAccountView extends StatelessWidget {
       backgroundColor: AppColors.white,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          padding: const EdgeInsetsDirectional.symmetric(
+              horizontal: 24, vertical: 16),
           child: Form(
-            key: auth.formKey,
+            key: authController.signUpFormKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -32,7 +34,7 @@ class CreateAccountView extends StatelessWidget {
 
                 // Title
                 Text(
-                  "Create Account",
+                  "create_account".tr,
                   style: CustomTextStyles.headline32Bold,
                 ),
 
@@ -40,7 +42,7 @@ class CreateAccountView extends StatelessWidget {
 
                 // Subtitle
                 Text(
-                  "Sign up now and start exploring all that our app has to offer.",
+                  "signup_subtitle".tr,
                   style: CustomTextStyles.subTitle,
                 ),
 
@@ -49,7 +51,7 @@ class CreateAccountView extends StatelessWidget {
                 // Email
                 CustomTextField(
                   controller: auth.emailController,
-                  hint: "Email",
+                  hint: "email".tr,
                   keyboardType: TextInputType.emailAddress,
                 ),
 
@@ -58,7 +60,7 @@ class CreateAccountView extends StatelessWidget {
                 // Password
                 CustomTextField(
                   controller: auth.passwordController,
-                  hint: "Password",
+                  hint: "password".tr,
                   isPassword: true,
                   suffixIcon: IconButton(
                     icon: const Icon(Icons.visibility_off),
@@ -79,13 +81,26 @@ class CreateAccountView extends StatelessWidget {
                 const SizedBox(height: 24),
 
                 // Create Account Button
-                SizedBox(
-                  width: double.infinity,
-                  height: 52,
-                  child: CustomPrimaryButton(
-                    label: "Create Account",
-                    onTap: auth.isLoading.value ? () {} : () => auth.signUp(),
-                  ),
+// <<<<<<< HEAD
+//                 SizedBox(
+//                   width: double.infinity,
+//                   height: 52,
+//                   child: CustomPrimaryButton(
+//                     label: "create_account".tr,
+//                     onTap: auth.isLoading.value ? () {} : () => auth.signUp(),
+//                   ),
+// =======
+                CustomPrimaryButton(
+                  label:
+                      auth.isLoading.value ? "Creating..." : "Create Account",
+                  onTap: () {
+                    if (!auth.isLoading.value) {
+                      if (auth.signUpFormKey.currentState?.validate() ??
+                          false) {
+                        auth.signUp();
+                      }
+                    }
+                  },
                 ),
 
                 const SizedBox(height: 24),
@@ -95,9 +110,10 @@ class CreateAccountView extends StatelessWidget {
                   children: [
                     const Expanded(child: Divider()),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      padding:
+                          const EdgeInsetsDirectional.symmetric(horizontal: 8),
                       child: Text(
-                        "Or sign up with",
+                        "or_sign_up_with".tr,
                         style: CustomTextStyles.subtitle,
                       ),
                     ),
@@ -139,18 +155,17 @@ class CreateAccountView extends StatelessWidget {
                       text: TextSpan(
                         style: CustomTextStyles.subtitle,
                         children: [
-                          const TextSpan(
-                              text: "By signing up, you agree to our "),
+                          TextSpan(text: "signup_terms_prefix".tr),
                           TextSpan(
-                            text: "Terms & Conditions",
+                            text: "terms_conditions".tr,
                             style: CustomTextStyles.subtitle.copyWith(
                               fontWeight: FontWeight.w600,
                               color: AppColors.black,
                             ),
                           ),
-                          const TextSpan(text: " and "),
+                          TextSpan(text: " and ".tr),
                           TextSpan(
-                            text: "Privacy Policy",
+                            text: "privacy_policy".tr,
                             style: CustomTextStyles.subtitle.copyWith(
                               fontWeight: FontWeight.w600,
                               color: AppColors.black,
@@ -168,11 +183,11 @@ class CreateAccountView extends StatelessWidget {
                       text: TextSpan(
                         style: CustomTextStyles.subtitle,
                         children: [
-                          const TextSpan(
-                            text: "Already have an account? ",
+                          TextSpan(
+                            text: "already_have_account".tr,
                           ),
                           TextSpan(
-                            text: "Login",
+                            text: "login".tr,
                             style: CustomTextStyles.subtitle.copyWith(
                               color: AppColors.primary,
                               fontWeight: FontWeight.w600,

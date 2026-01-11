@@ -6,16 +6,13 @@ class ChatController extends GetxController {
   var newMessage = ''.obs;
 
   void sendMessage(String text) {
-    if(text.trim().isEmpty) return;
+    if (text.trim().isEmpty) return;
 
     messages.add(Message(text: text, time: DateTime.now(), isUser: true));
 
     Future.delayed(Duration(seconds: 1), () {
-      messages.add(Message(
-          text: 'Fine, how long has the complaint been?',
-          time: DateTime.now(),
-          isUser: false
-      ));
+      messages
+          .add(Message(text: "fine".tr, time: DateTime.now(), isUser: false));
     });
   }
 }

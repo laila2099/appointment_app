@@ -10,7 +10,7 @@ class StepperHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 46),
+      padding: const EdgeInsetsDirectional.symmetric(horizontal: 46),
       child: Row(
         children: [
           _StepDot(index: 0, activeIndex: activeIndex, label: 'date_time'.tr),
@@ -33,7 +33,7 @@ class _Line extends StatelessWidget {
     return Expanded(
       child: Container(
         height: 2.h,
-        margin: EdgeInsets.symmetric(horizontal: 10.w),
+        margin: EdgeInsetsDirectional.symmetric(horizontal: 10.w),
         color: active ? Colors.green : Colors.grey.shade300,
       ),
     );
@@ -67,7 +67,7 @@ class _StepDot extends StatelessWidget {
           width: 32.w,
           height: 32.h,
           decoration: BoxDecoration(color: fill, shape: BoxShape.circle),
-          alignment: Alignment.center,
+          alignment: AlignmentDirectional.center,
           child: Text(
             '${index + 1}',
             style: TextStyle(

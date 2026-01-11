@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/constant/app_colors.dart';
 import '../../../../core/constant/text_style.dart';
 
@@ -9,7 +10,10 @@ class CustomTextField extends StatelessWidget {
   final bool isPassword;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
+  final InputBorder? border;
+  final TextStyle? textStyle;
   final String? Function(String?)? validator;
+  final List<String>? autofillHints;
 
   const CustomTextField({
     super.key,
@@ -20,6 +24,9 @@ class CustomTextField extends StatelessWidget {
     this.suffixIcon,
     this.prefixIcon,
     this.validator,
+    this.border,
+    this.textStyle,
+    this.autofillHints,
   });
 
   @override
@@ -29,7 +36,8 @@ class CustomTextField extends StatelessWidget {
       keyboardType: keyboardType,
       obscureText: isPassword,
       validator: validator,
-      style: CustomTextStyles.textField,
+      autofillHints: autofillHints,
+      style: textStyle ?? CustomTextStyles.textField,
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: CustomTextStyles.subtitle,
@@ -37,11 +45,11 @@ class CustomTextField extends StatelessWidget {
         suffixIcon: suffixIcon,
         filled: true,
         fillColor: Color(0xfffdfdff),
-        contentPadding: const EdgeInsets.symmetric(
+        contentPadding: const EdgeInsetsDirectional.symmetric(
           horizontal: 16,
           vertical: 18,
         ),
-        border: _border(),
+        border: border ?? _border(),
         enabledBorder: _border(),
         focusedBorder: _border(color: AppColors.primary),
         errorBorder: _border(color: Colors.red),

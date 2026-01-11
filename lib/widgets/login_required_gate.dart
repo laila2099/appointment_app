@@ -33,7 +33,7 @@ class LoginRequiredGate extends StatelessWidget {
             : null,
         body: Center(
           child: Padding(
-            padding: const EdgeInsets.all(24),
+            padding: const EdgeInsetsDirectional.all(24),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -59,17 +59,18 @@ class LoginRequiredGate extends StatelessWidget {
                 ),
                 SizedBox(height: 18.h),
                 SizedBox(
-                  width: double.infinity,
-                  child: PrimaryButton(
-                    onPressed: () => Get.offNamed(AppRoutes.login),
-                    text: 'login'.tr,
-                    padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 16.h),
-                  ),
-                ),
+                    width: double.infinity,
+                    child: PrimaryButton(
+                      onPressed: () => Get.offNamed(AppRoutes.login),
+                      text: 'login'.tr,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(24.w, 16.h, 24.w, 16.h)
+                              .resolve(Directionality.of(context)),
+                    )),
                 SizedBox(height: 8.h),
                 TextButton(
                   onPressed: () => Get.offNamed(AppRoutes.createAccount),
-                  child: Text('Create Account'),
+                  child: Text('create_account'.tr),
                 ),
               ],
             ),

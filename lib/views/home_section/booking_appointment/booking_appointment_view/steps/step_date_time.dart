@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 import '../../../../../core/constant/app_colors.dart';
 import '../../../../../widgets/general_widgets/appoinmtmet/appointment_type_tile.dart';
 import '../../../../../widgets/general_widgets/appoinmtmet/center_snap_date_picker.dart';
@@ -21,40 +20,35 @@ class StepDateTime extends StatelessWidget {
     return Obx(() {
       final appointment = c.appointment.value;
       final selectedType = AppointmentTypeX.fromId(
-        appointment.appointmentTypeId,
+        appointment.appointmentType,
       );
 
       return ListView(
-        padding: EdgeInsets.fromLTRB(20.w, 0.h, 20.w, 10.h),
+        padding: EdgeInsetsDirectional.fromSTEB(20.w, 0.h, 20.w, 10.h),
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SectionTitle('select_date'.tr),
               ManualDateButton(
-                initialDate: appointment.date,
+                initialDate: appointment.appointmentDate,
                 onPicked: c.selectDate,
               ),
             ],
           ),
           SizedBox(height: 24.h),
-
           CenterSnapDatePicker(controller: c.wheel),
-
           SizedBox(height: 24.h),
           SectionTitle('available_time'.tr),
           SizedBox(height: 24.h),
-
           TimeSlotGrid(
             times: c.availableTimes,
-            selected: appointment.time,
+            selected: appointment.appointmentTime,
             onSelect: c.selectTime,
           ),
-
           SizedBox(height: 24.h),
           SectionTitle('appointment_type'.tr),
           SizedBox(height: 24.h),
-
           AppointmentTypeTile(
             type: AppointmentType.inPerson,
             selected: selectedType == AppointmentType.inPerson,

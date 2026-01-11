@@ -16,7 +16,7 @@ class CustomBottomNavBar extends GetView<NavigationController> {
     return SizedBox(
       height: 110.h,
       child: Stack(
-        alignment: Alignment.bottomCenter,
+        alignment: AlignmentDirectional.bottomCenter,
         clipBehavior: Clip.none,
         children: [
           Container(
@@ -32,10 +32,10 @@ class CustomBottomNavBar extends GetView<NavigationController> {
               ],
             ),
           ),
-          Positioned(
+          PositionedDirectional(
             bottom: 0,
-            left: 0,
-            right: 0,
+            start: 0,
+            end: 0,
             height: 80.h,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -48,7 +48,8 @@ class CustomBottomNavBar extends GetView<NavigationController> {
               ],
             ),
           ),
-          Positioned(bottom: 25.h, child: const FloatingSearchButton()),
+          PositionedDirectional(
+              bottom: 25.h, child: const FloatingSearchButton()),
         ],
       ),
     );

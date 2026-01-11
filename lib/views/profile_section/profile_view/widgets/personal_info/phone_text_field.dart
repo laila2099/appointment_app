@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import '../../../../../core/constant/app_colors.dart';
+import '../../../../../widgets/helpful_widgets/text_field_widget.dart';
 import '../../../profile_controller/personal_info_controller.dart';
 
 class PhoneTextField extends StatelessWidget {
@@ -14,7 +16,8 @@ class PhoneTextField extends StatelessWidget {
 
     return Container(
       width: 345.w,
-      padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 12.h),
+      padding:
+          EdgeInsetsDirectional.symmetric(horizontal: 18.w, vertical: 12.h),
       decoration: BoxDecoration(
         color: const Color(0xFFFDFDFF),
         borderRadius: BorderRadius.circular(25.r),
@@ -46,7 +49,7 @@ class PhoneTextField extends StatelessWidget {
 
           /// Divider
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 12.w),
+            margin: EdgeInsetsDirectional.symmetric(horizontal: 12.w),
             width: 1.2.w,
             height: 18.h,
             color: Colors.grey.shade200,
@@ -54,15 +57,13 @@ class PhoneTextField extends StatelessWidget {
 
           /// Phone Number
           Expanded(
-            child: Obx(() => Text(
-                  '+${controller.selectedCountry.value.phoneCode} ${controller.phoneController.text.isEmpty ? "938756 878" : controller.phoneController.text}',
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                    color: const Color(0xFF242424),
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                )),
+            child: CustomTextField(
+              controller: controller.phoneController,
+              hint: '938756 878',
+              keyboardType: TextInputType.phone,
+              border: InputBorder.none,
+              textStyle: TextStyle(color: AppColors.black),
+            ),
           ),
         ],
       ),

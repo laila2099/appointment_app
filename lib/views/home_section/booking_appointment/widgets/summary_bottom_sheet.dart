@@ -1,32 +1,31 @@
+import 'package:appointment_app/views/home_section/booking_appointment/booking_appointment_controller/booking_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 import '../../../../core/constant/app_colors.dart';
 import '../../../../core/constant/text_style.dart';
-import '../../../../routes/app_routes.dart';
 import '../../../../widgets/general_widgets/primary_button.dart';
 
 class SummaryBottomSheet extends StatelessWidget {
   final num subtotal;
   final num tax;
 
-  const SummaryBottomSheet({
+   SummaryBottomSheet({
     super.key,
     required this.subtotal,
     required this.tax,
   });
 
   num get total => subtotal + tax;
-
-  String _money(num v) => '\$${v.toStringAsFixed(0)}';
+  String _money(num v) => '\$${v.toDouble().toStringAsFixed(0)}';
+  final controller = Get.find<BookingController>();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,
       child: Container(
-        padding: EdgeInsets.fromLTRB(20.w, 12.h, 20.w, 16.h),
+        padding: EdgeInsetsDirectional.fromSTEB(20.w, 12.h, 20.w, 16.h),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.vertical(top: Radius.circular(28.r)),
@@ -51,7 +50,7 @@ class SummaryBottomSheet extends StatelessWidget {
             ),
             SizedBox(height: 14.h),
             Align(
-              alignment: Alignment.centerLeft,
+              alignment: AlignmentDirectional.centerStart,
               child: Text('payment_info'.tr, style: CustomTextStyles.label14),
             ),
             SizedBox(height: 12.h),
@@ -70,8 +69,8 @@ class SummaryBottomSheet extends StatelessWidget {
             PrimaryButton(
               padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 16.h),
               text: 'book_now'.tr,
-              onPressed: () {
-                Get.toNamed(AppRoutes.bookingConfirmed);
+              onPressed: () async {
+                await controller.submitAppointment();
               },
             ),
           ],

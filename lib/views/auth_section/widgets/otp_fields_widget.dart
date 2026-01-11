@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import '../../../core/constant/app_colors.dart';
-import '../forgot_password/verification_controller/verification_controller.dart';
-
+import '../forgot_password/forgot_password_screens/controllers/otp_verification_controller.dart';
 
 class OtpFields extends StatelessWidget {
   final VerificationController controller;
@@ -12,14 +10,8 @@ class OtpFields extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery
-        .of(context)
-        .size
-        .width;
-    final screenHeight = MediaQuery
-        .of(context)
-        .size
-        .height;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -44,8 +36,7 @@ class OtpFields extends StatelessWidget {
             ],
             decoration: InputDecoration(
               filled: true,
-              fillColor:
-              isFilled ? AppColors.textField : AppColors.light2Grey,
+              fillColor: isFilled ? AppColors.textField : AppColors.light2Grey,
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide(color: AppColors.infoText, width: .1),

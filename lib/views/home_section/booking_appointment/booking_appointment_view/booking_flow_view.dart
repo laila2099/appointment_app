@@ -24,6 +24,7 @@ class BookingFlowScreen extends GetView<BookingController> {
           return Column(
             children: [
               AppHeader(
+                // onBack: Get.back,
                 center: HeaderTitle('book_appointment'.tr),
               ),
               SizedBox(height: 32.h),
@@ -41,7 +42,8 @@ class BookingFlowScreen extends GetView<BookingController> {
               ),
               if (controller.stepIndex.value != 2)
                 Padding(
-                  padding: EdgeInsets.fromLTRB(16.w, 10.h, 16.w, 16.h),
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(16.w, 10.h, 16.w, 16.h),
                   child: PrimaryButton(
                     padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 16.h),
                     text: 'continue'.tr,

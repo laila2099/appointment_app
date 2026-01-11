@@ -15,7 +15,7 @@ class RateDoctorSheet extends StatelessWidget {
     return SafeArea(
       child: Container(
         height: 420.h,
-        padding: EdgeInsets.fromLTRB(20.w, 10.h, 20.w, 16.h),
+        padding: EdgeInsetsDirectional.fromSTEB(20.w, 10.h, 20.w, 16.h),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.vertical(top: Radius.circular(30.r)),
@@ -93,7 +93,8 @@ class RateDoctorSheet extends StatelessWidget {
                 color: const Color(0xFFF6F7F9),
                 borderRadius: BorderRadius.circular(14.r),
               ),
-              padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.h),
+              padding: EdgeInsetsDirectional.symmetric(
+                  horizontal: 14.w, vertical: 10.h),
               child: TextField(
                 controller: c.review,
                 maxLines: 5,

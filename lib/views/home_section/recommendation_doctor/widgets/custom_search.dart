@@ -2,6 +2,7 @@ import 'package:appointment_app/core/constant/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 class CustomSearch extends StatelessWidget {
   CustomSearch({super.key, required this.icon, this.onTap});
@@ -11,7 +12,7 @@ class CustomSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 18.w),
+      padding: EdgeInsetsDirectional.symmetric(horizontal: 18.w),
       child: Row(
         children: [
           Expanded(
@@ -28,9 +29,10 @@ class CustomSearch extends StatelessWidget {
                     color: Colors.grey,
                     size: 20.sp,
                   ),
-                  hintText: "Search",
+                  hintText: "search".tr,
                   hintStyle: TextStyle(fontSize: 16.sp, color: Colors.grey),
-                  contentPadding: EdgeInsets.symmetric(vertical: 14.h),
+                  contentPadding:
+                      EdgeInsetsDirectional.symmetric(vertical: 14.h),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.r),
                     borderSide: BorderSide.none,
@@ -53,7 +55,7 @@ class CustomSearch extends StatelessWidget {
             ),
             child: IconButton(
               style: TextButton.styleFrom(
-                padding: EdgeInsets.zero,
+                padding: EdgeInsetsDirectional.zero,
                 minimumSize: Size(0, 0),
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),

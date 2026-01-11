@@ -14,7 +14,7 @@ class MedicalRecordItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 16.h),
+      padding: EdgeInsetsDirectional.only(bottom: 16.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -28,7 +28,7 @@ class MedicalRecordItem extends StatelessWidget {
           SizedBox(height: 6.h),
           ...details.map(
             (e) => Padding(
-              padding: EdgeInsets.only(bottom: 2.h),
+              padding: EdgeInsetsDirectional.only(bottom: 2.h),
               child: Text(
                 e,
                 style: TextStyle(

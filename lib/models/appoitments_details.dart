@@ -1,4 +1,5 @@
-import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'appointment_model.dart';
 
 enum AppointmentStatus { upcoming, completed, cancelled }
 
@@ -8,11 +9,9 @@ class AppointmentDetailsModel {
   final String doctorName;
   final String specialty;
   final String clinic;
-
   final DateTime appointmentDateTime;
   final DateTime createdAt;
   final AppointmentStatus status;
-
   final double rating;
   final int reviewsCount;
 
@@ -60,8 +59,6 @@ static AppointmentStatus _mapStatus(String value) {
 }
 
 
-  // ========================================
-  // copyWith لتعديل أي حقل بدون إنشاء كائن جديد بالكامل
   AppointmentDetailsModel copyWith({
     String? id,
     String? doctorId,
@@ -85,6 +82,23 @@ static AppointmentStatus _mapStatus(String value) {
       status: status ?? this.status,
       rating: rating ?? this.rating,
       reviewsCount: reviewsCount ?? this.reviewsCount,
+    );
+  }
+  Appointment toAppointmentModel() {
+    return Appointment(
+      id: id,
+      doctorId: doctorId,
+      appointmentDate: DateTime(
+        appointmentDateTime.year,
+        appointmentDateTime.month,
+        appointmentDateTime.day,
+      ),
+      appointmentTime: TimeOfDay(
+        hour: appointmentDateTime.hour,
+        minute: appointmentDateTime.minute,
+      ),
+      appointmentType: 'in_person',
+      paymentMethod: '',
     );
   }
 }

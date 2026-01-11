@@ -13,7 +13,8 @@ class SortChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: Duration(milliseconds: 250),
-      padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 10.h),
+      padding:
+          EdgeInsetsDirectional.symmetric(horizontal: 18.w, vertical: 10.h),
       decoration: BoxDecoration(
         color: active ? AppColors.primary : AppColors.search,
         borderRadius: BorderRadius.circular(20.r),

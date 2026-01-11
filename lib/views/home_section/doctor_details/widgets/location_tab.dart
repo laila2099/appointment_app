@@ -1,3 +1,5 @@
+import 'package:appointment_app/core/classes/repositories/doctor_repository.dart';
+import 'package:appointment_app/core/classes/repositories/review_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -16,10 +18,13 @@ class LocationTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pos = LatLng(doctor.lat, doctor.lng);
-    final controller = Get.put(DoctorDetailsController());
+    final controller = DoctorDetailsController(
+      doctorRepository: Get.find<DoctorRepository>(),
+      reviewRepository: Get.find<ReviewRepository>(),
+    );
 
     return ListView(
-      padding: EdgeInsets.fromLTRB(24.w, 32.h, 24.w, 0),
+      padding: EdgeInsetsDirectional.fromSTEB(24.w, 32.h, 24.w, 0),
       children: [
         SectionTitle("practice_place".tr),
         SizedBox(height: 12.h),

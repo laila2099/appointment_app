@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:collection/collection.dart';
 
+import '../../../../core/classes/api/api_result.dart';
+import '../../../../core/classes/repositories/appointment_repository.dart';
+import '../../../../core/constant/app_keys.dart';
+import '../../../../core/services/shared_prefrences.dart';
 import '../../../../models/appointment_model.dart';
 import '../../../../models/doctor_model.dart';
 import '../../../../models/payment_method.dart';
@@ -9,31 +14,50 @@ import '../models/appointment_type.dart';
 import 'date_wheel_controller.dart';
 
 class BookingController extends GetxController {
+  final AppointmentRepository repository;
+
+  BookingController({required this.repository});
+
+  // -------- Variables
   late final String doctorId;
 
   final stepIndex = 0.obs;
+  final isLoading = false.obs;
 
   late final Rx<Appointment> appointment;
 
   final selectedPayment = Rxn<PaymentMethod>();
-
   final availableDates = <DateTime>[].obs;
   final availableTimes = <TimeOfDay>[].obs;
   final paymentMethods = <PaymentMethod>[].obs;
 
   final centeredDateIndex = 0.obs;
   late final PageController datePageController;
-
   final doctor = Rxn<Doctor>();
-
   late final DateWheelController wheel;
+
+  final paymentLoading = false.obs;
+  final paymentError = RxnString();
+  final paymentCategory = 'card'.obs;
 
   @override
   void onInit() {
     super.onInit();
 
-    final args = Get.arguments;
     doctorId = '1';
+
+    final existingAppointment = Get.arguments;
+    if (existingAppointment is Appointment) {
+      appointment = existingAppointment.obs;
+    } else {
+      appointment = Appointment(
+        doctorId: doctorId,
+        appointmentDate: DateTime.now(),
+        appointmentTime: const TimeOfDay(hour: 8, minute: 0),
+        appointmentType: AppointmentType.inPerson.label,
+        paymentMethod: '',
+      ).obs;
+    }
 
     doctor.value = Doctor(
       id: "1",
@@ -42,9 +66,10 @@ class BookingController extends GetxController {
       clinic: "RSUD Gatot Subroto",
       ratingAvg: 4.8,
       ratingCount: 4279,
+      isRecommended: true,
       avatarUrl: null,
       about:
-          "Dr. Jenny Watson is the top most Immunologists specialist in Christ Hospital at London. "
+      "Dr. Jenny Watson is the top most Immunologists specialist in Christ Hospital at London. "
           "She achieved several awards for her wonderful contribution in medical field. "
           "She is available for private consultation.",
       workingTime: "Monday - Friday, 08.00 AM - 20.00 PM",
@@ -56,20 +81,13 @@ class BookingController extends GetxController {
       lng: 31.2357,
     );
 
-    appointment = Appointment(
-      doctorId: doctorId,
-      date: DateTime.now(),
-      time: const TimeOfDay(hour: 8, minute: 0),
-      appointmentTypeId: AppointmentType.inPerson.id,
-    ).obs;
-
     _seed();
 
-    centeredDateIndex.value = _findDateIndex(appointment.value.date);
+    centeredDateIndex.value = _findDateIndex(appointment.value.appointmentDate);
 
     datePageController = PageController(
       initialPage: centeredDateIndex.value,
-      viewportFraction: 1 / 5, // 5 عناصر
+      viewportFraction: 1 / 5,
     );
 
     datePageController.addListener(_onDateWheelScroll);
@@ -77,8 +95,8 @@ class BookingController extends GetxController {
     wheel = Get.put(
       DateWheelController(
         dates: availableDates,
-        initialSelected: appointment.value.date,
-        onChanged: selectDate, // ✅ سطر واحد وبس
+        initialSelected: appointment.value.appointmentDate,
+        onChanged: selectDate,
       ),
       tag: 'booking_wheel',
     );
@@ -86,6 +104,7 @@ class BookingController extends GetxController {
     loadPaymentMethods();
   }
 
+  // -------- Seed dummy data
   void _seed() {
     final now = DateTime.now();
     final base = DateTime(now.year, now.month, now.day);
@@ -103,7 +122,6 @@ class BookingController extends GetxController {
       TimeOfDay(hour: 11, minute: 0),
     ]);
 
-    /// dummy user payment methods (لاحقًا من API)
     paymentMethods.assignAll(const [
       PaymentMethod(
         id: 'pm_1',
@@ -115,11 +133,11 @@ class BookingController extends GetxController {
       PaymentMethod(id: 'pm_2', type: 'card', label: 'Visa', last4: '1122'),
     ]);
 
-    selectedPayment.value = paymentMethods.firstWhereOrNull((e) => e.isDefault);
+    selectedPayment.value =
+        paymentMethods.firstWhereOrNull((e) => e.isDefault);
   }
 
-  // -------- appointment Date & Time
-
+  // -------- Date & Time
   void setCenteredIndex(int i) {
     centeredDateIndex.value = i.clamp(0, availableDates.length - 1);
     selectDate(availableDates[centeredDateIndex.value]);
@@ -127,7 +145,7 @@ class BookingController extends GetxController {
 
   int _findDateIndex(DateTime d) {
     final idx = availableDates.indexWhere(
-      (x) => x.year == d.year && x.month == d.month && x.day == d.day,
+          (x) => x.year == d.year && x.month == d.month && x.day == d.day,
     );
     return idx == -1 ? 0 : idx;
   }
@@ -142,12 +160,12 @@ class BookingController extends GetxController {
     }
   }
 
+  // -------- Navigation
   void step(int delta) {
     final next = (centeredDateIndex.value + delta).clamp(
       0,
       availableDates.length - 1,
     );
-
     setCenteredIndex(next);
 
     datePageController.animateToPage(
@@ -157,7 +175,6 @@ class BookingController extends GetxController {
     );
   }
 
-  // -------- navigation
   void back() {
     if (stepIndex.value == 0) {
       Get.back();
@@ -167,37 +184,30 @@ class BookingController extends GetxController {
   }
 
   void next() {
-    if (stepIndex.value == 0 && appointment.value.time == null) return;
+    if (stepIndex.value == 0 && appointment.value.appointmentTime == null) return;
     if (stepIndex.value == 1 && selectedPayment.value == null) return;
-    stepIndex.value++;
+    if (stepIndex.value < 2) stepIndex.value++;
   }
 
-  // -------- appointment updates (Rx)
+  // -------- Selectors
   void selectDate(DateTime d) {
-    appointment.value = appointment.value.copyWith(date: d);
+    appointment.value = appointment.value.copyWith(appointmentDate: d);
   }
 
   void selectTime(TimeOfDay t) {
-    appointment.value = appointment.value.copyWith(time: t);
+    appointment.value = appointment.value.copyWith(appointmentTime: t);
   }
 
   void selectType(AppointmentType type) {
-    appointment.value = appointment.value.copyWith(appointmentTypeId: type.id);
+    appointment.value =
+        appointment.value.copyWith(appointmentType: type.label);
   }
 
-  // -------- payment
-
   bool get canContinue {
-    if (stepIndex.value == 0) return appointment.value.time != null;
+    if (stepIndex.value == 0) return appointment.value.appointmentTime != null;
     if (stepIndex.value == 1) return selectedPayment.value != null;
     return true;
   }
-
-  final paymentLoading = false.obs;
-  final paymentError = RxnString();
-
-  /// UI category: card / bank / paypal
-  final paymentCategory = 'card'.obs;
 
   List<PaymentMethod> get cardMethods =>
       paymentMethods.where((m) => m.type == 'card').toList();
@@ -210,27 +220,23 @@ class BookingController extends GetxController {
 
   void selectPayment(PaymentMethod m) {
     selectedPayment.value = m;
-
-    // keep category synced
     paymentCategory.value = m.type == 'card' ? 'card' : m.type;
   }
 
-  /// لما المستخدم يضغط على "Credit Card" (مش كرت محدد)
   void selectCategory(String type) {
     paymentCategory.value = type;
 
     if (type == 'card') {
-      // حافظي على الكرت الحالي إذا هو card، وإلا خذي default/أول كرت
       final current = selectedPayment.value;
       if (current != null && current.type == 'card') return;
 
       final def = paymentMethods.firstWhereOrNull(
-        (m) => m.type == 'card' && m.isDefault,
+            (m) => m.type == 'card' && m.isDefault,
       );
       final firstCard = cardMethods.isNotEmpty ? cardMethods.first : null;
-      if (def != null)
+      if (def != null) {
         selectPayment(def);
-      else if (firstCard != null) selectPayment(firstCard);
+      } else if (firstCard != null) selectPayment(firstCard);
     } else if (type == 'paypal') {
       final p = paypalMethod;
       if (p != null) selectPayment(p);
@@ -245,10 +251,6 @@ class BookingController extends GetxController {
     paymentError.value = null;
 
     try {
-      // TODO: بدلها بـ repository call
-      // final list = await paymentRepo.getUserPaymentMethods(userId);
-
-      // مؤقت: خليها نفس الدمي عندك أو رجعي list من service
       final list = <PaymentMethod>[
         const PaymentMethod(
           id: 'pm_1',
@@ -264,19 +266,15 @@ class BookingController extends GetxController {
           last4: '1122',
         ),
         const PaymentMethod(
-          id: 'pm_3',
-          type: 'card',
-          label: 'Capital One',
-          last4: '9033',
+          id: 'pm_5',
+          type: 'paypal',
+          label: 'Paypal',
         ),
         const PaymentMethod(
-          id: 'pm_4',
-          type: 'card',
-          label: 'Barclays',
-          last4: '5566',
+          id: 'pm_6',
+          type: 'bank',
+          label: 'Bank Transfer',
         ),
-        const PaymentMethod(id: 'pm_5', type: 'paypal', label: 'Paypal'),
-        const PaymentMethod(id: 'pm_6', type: 'bank', label: 'Bank Transfer'),
       ];
 
       paymentMethods.assignAll(list);
@@ -284,14 +282,110 @@ class BookingController extends GetxController {
       final def = paymentMethods.firstWhereOrNull((m) => m.isDefault);
       selectedPayment.value = def ?? paymentMethods.firstOrNull;
 
-      // category حسب المختار (card/bank/paypal)
       final t = selectedPayment.value?.type;
       paymentCategory.value =
-          (t == 'card' || t == 'bank' || t == 'paypal') ? t! : 'card';
+      (t == 'card' || t == 'bank' || t == 'paypal') ? t! : 'card';
     } catch (e) {
       paymentError.value = e.toString();
     } finally {
       paymentLoading.value = false;
+    }
+  }
+
+  // -------- API - create / update appointment
+  Future<void> submitAppointment() async {
+    isLoading.value = true;
+
+    try {
+      appointment.value = appointment.value.copyWith(
+        paymentMethod: selectedPayment.value?.type ?? '',
+      );
+
+      final AppPreferencesService prefs = Get.find();
+      final String? accessToken = prefs.getString(PrefKeys.accessToken);
+
+      if (accessToken == null || accessToken.isEmpty) {
+        Get.snackbar(
+          'Error',
+          'Authentication token not found',
+          snackPosition: SnackPosition.TOP,
+        );
+        return;
+      }
+
+      final result = await repository.createAppointment(
+        accessToken: accessToken,
+        appointment: appointment.value,
+      );
+
+      if (result.isSuccess) {
+        appointment.value = result.data!;
+        Get.toNamed(AppRoutes.bookingConfirmed);
+      } else {
+        Get.snackbar(
+          'Error',
+          result.errorMessage ?? 'Unknown error occurred',
+          snackPosition: SnackPosition.TOP,
+        );
+      }
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> submitReschedule({required String appointmentId}) async {
+    isLoading.value = true;
+
+    try {
+      appointment.value = appointment.value.copyWith(
+        paymentMethod: selectedPayment.value?.type ?? '',
+      );
+
+      final AppPreferencesService prefs = Get.find();
+      final String? accessToken = prefs.getString(PrefKeys.accessToken);
+
+      if (accessToken == null || accessToken.isEmpty) {
+        Get.snackbar(
+          'Error',
+          'Authentication token not found',
+          snackPosition: SnackPosition.TOP,
+        );
+        return;
+      }
+
+      final result = await repository.editAppointment(
+        accessToken: accessToken,
+        appointmentId: appointmentId,
+        appointmentDate: appointment.value.appointmentDate,
+        appointmentTime: appointment.value.appointmentTime != null
+            ? DateTime(
+          0,
+          0,
+          0,
+          appointment.value.appointmentTime.hour,
+          appointment.value.appointmentTime.minute,
+        )
+            : null,
+        paymentMethod: appointment.value.paymentMethod,
+      );
+
+      if (result.isSuccess) {
+        appointment.value = result.data!;
+        Get.back();
+        Get.snackbar(
+          'Success',
+          'Appointment rescheduled successfully',
+          snackPosition: SnackPosition.TOP,
+        );
+      } else {
+        Get.snackbar(
+          'Error',
+          result.errorMessage ?? 'Unknown error occurred',
+          snackPosition: SnackPosition.TOP,
+        );
+      }
+    } finally {
+      isLoading.value = false;
     }
   }
 

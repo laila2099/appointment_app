@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-
 import '../../../../../core/classes/utils/format_date_time.dart';
 import '../../../../../core/constant/app_colors.dart';
 import '../../../../../core/constant/app_icons.dart';
@@ -23,12 +22,12 @@ class StepSummary extends StatelessWidget {
 
     return Obx(() {
       final a = c.appointment.value;
-      final type = AppointmentTypeX.fromId(a.appointmentTypeId);
+      final type = AppointmentTypeX.fromId(a.appointmentType);
       final payment = c.selectedPayment.value;
       final doctor = c.doctor.value;
 
       return ListView(
-        padding: EdgeInsets.fromLTRB(20.w, 0, 20.w, 50.h),
+        padding: EdgeInsetsDirectional.fromSTEB(20.w, 0, 20.w, 50.h),
         children: [
           SectionTitle('booking_information'.tr),
           SizedBox(height: 12.h),
@@ -37,7 +36,7 @@ class StepSummary extends StatelessWidget {
             iconBg: AppColors.secondBlue,
             iconColor: AppColors.primary,
             title: 'date_time'.tr,
-            subtitle: formatDateTime(context, a.date, a.time),
+            subtitle: formatDateTime(context, a.appointmentDate, a.appointmentTime),
           ),
           SummaryRow(
             svgAsset: AppIcons.clipboard,
@@ -99,7 +98,7 @@ class _PaymentRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10.h),
+      padding: EdgeInsetsDirectional.symmetric(vertical: 10.h),
       child: Row(
         children: [
           Container(
@@ -109,7 +108,7 @@ class _PaymentRow extends StatelessWidget {
               color: Colors.grey.shade100,
               borderRadius: BorderRadius.circular(14.r),
             ),
-            alignment: Alignment.center,
+            alignment: AlignmentDirectional.center,
             child: SvgPicture.asset(svgLogo, width: 26.w, height: 26.w),
           ),
           SizedBox(width: 12.w),
@@ -144,7 +143,8 @@ class _PaymentRow extends StatelessWidget {
             style: OutlinedButton.styleFrom(
               foregroundColor: AppColors.primary,
               side: BorderSide(color: AppColors.primary),
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+              padding: EdgeInsetsDirectional.symmetric(
+                  horizontal: 16.w, vertical: 10.h),
               minimumSize: Size.zero,
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               shape: RoundedRectangleBorder(

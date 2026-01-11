@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart' hide TextField;
 import 'package:get/get.dart';
-import '../../../../core/constant/app_colors.dart';
-import '../../../../core/constant/text_style.dart';
-import '../../../../widgets/helpful_widgets/primary_button_widget.dart';
-import '../../widgets/otp_fields_widget.dart';
-import '../verification_controller/verification_controller.dart';
+import '../../../../../core/classes/utils/app_snackbar.dart';
+import '../../../../../core/constant/app_colors.dart';
+import '../../../../../core/constant/text_style.dart';
+import '../../../../../widgets/helpful_widgets/primary_button_widget.dart';
+import '../../../widgets/otp_fields_widget.dart';
+import '../controllers/otp_verification_controller.dart';
 
 class OtpVerificationView extends StatelessWidget {
   OtpVerificationView({super.key});
@@ -21,7 +22,8 @@ class OtpVerificationView extends StatelessWidget {
       backgroundColor: AppColors.white,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          padding: const EdgeInsetsDirectional.symmetric(
+              horizontal: 24, vertical: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -32,19 +34,20 @@ class OtpVerificationView extends StatelessWidget {
                     children: [
                       const SizedBox(height: 40),
                       Text(
-                        "OTP Verification",
+                        "otp_verification".tr,
                         style: CustomTextStyles.headline32Bold,
                       ),
                       Text(
-                        "Add a PIN number to make your account more secure and easy to sign in.",
+                        "otp_subtitle".tr,
                         style: CustomTextStyles.subTitle,
                       ),
                       const SizedBox(height: 16),
-                      Text('We have sent a verification code to'),
+                      Text("otp_sent_to".tr),
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.04),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        padding: const EdgeInsetsDirectional.symmetric(
+                            horizontal: 16),
                         child: OtpFields(controller: verificationController),
                       ),
                       SizedBox(
@@ -54,14 +57,14 @@ class OtpVerificationView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Didn't receive the code?",
+                            "didnt_receive_code".tr,
                             style: CustomTextStyles.subTitle,
                           ),
                           TextButton(
                             onPressed: () =>
                                 verificationController.resendCode(),
                             child: Text(
-                              "Resend",
+                              "resend".tr,
                               style: CustomTextStyles.subTitle,
                               selectionColor: AppColors.primary,
                             ),
@@ -76,8 +79,13 @@ class OtpVerificationView extends StatelessWidget {
               // الزر ثابت في أسفل الشاشة
               CustomPrimaryButton(
                 label: "Submit",
-                onTap: () {},
-              ),
+                onTap: () {
+                  if (verificationController.verifyCode()) {
+                    // استدعاء API للتحقق من OTP
+                    AppSnackBar.success('OTP verified!');
+                  }
+                },
+              )
             ],
           ),
         ),

@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
 import '../my_appoitment_controller/my_appoitment_controller.dart';
 
 class AppointmentView extends GetView<MyAppointmentsController> {
@@ -27,7 +26,7 @@ class AppointmentView extends GetView<MyAppointmentsController> {
           child: Column(
             children: [
               AppHeader(
-                center: HeaderTitle("Appointments"),
+                center: HeaderTitle("appointments".tr),
                 trailing: HeaderButton(
                   onTap: () {
                     Get.toNamed(AppRoutes.search);
@@ -44,7 +43,7 @@ class AppointmentView extends GetView<MyAppointmentsController> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 16.0, right: 16),
+                padding: const EdgeInsetsDirectional.only(start: 16.0, end: 16),
                 child: TabBar(
                   onTap: (index) {
                     if (index == 0) {
@@ -81,7 +80,7 @@ class AppointmentView extends GetView<MyAppointmentsController> {
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
+                  padding: const EdgeInsetsDirectional.only(top: 8.0),
                   child: TabBarView(
                     children: [
                       AppoitmentStatus(status: AppointmentStatus.upcoming),
