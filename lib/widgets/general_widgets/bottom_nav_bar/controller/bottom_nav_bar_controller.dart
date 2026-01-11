@@ -1,26 +1,25 @@
 import 'package:get/get.dart';
-
 import '../../../../core/constant/app_keys.dart';
 import '../../../../core/services/shared_prefrences.dart';
 
 class NavigationController extends GetxController {
-  final _selectedIndex = 0.obs;
-  int get selectedIndex => _selectedIndex.value;
-  bool get isLoggedIn => _prefs.getBool(PrefKeys.isLoggedIn) ?? false;
-
   final AppPreferencesService _prefs = Get.find<AppPreferencesService>();
 
-  final pendingProtectedIndex = RxnInt();
+  final RxInt _selectedIndex = 0.obs;
+  int get selectedIndex => _selectedIndex.value;
+
+  bool get isLoggedIn => _prefs.getBool(PrefKeys.isLoggedIn) ?? false;
 
   final Set<int> protectedTabs = {1, 2, 3, 4};
 
-  void changeIndex(
-    int index,
-  ) {
-    final isLoggedIn = _prefs.getBool(PrefKeys.isLoggedIn) ?? false;
+  final RxnInt pendingProtectedIndex = RxnInt();
+
+  void changeIndex(int index) {
     if (index == _selectedIndex.value) return;
 
-    if (!isLoggedIn && protectedTabs.contains(index)) {
+    final loggedIn = _prefs.getBool(PrefKeys.isLoggedIn) ?? false;
+
+    if (!loggedIn && protectedTabs.contains(index)) {
       pendingProtectedIndex.value = index;
       _selectedIndex.value = index;
       return;
@@ -28,6 +27,14 @@ class NavigationController extends GetxController {
 
     pendingProtectedIndex.value = null;
     _selectedIndex.value = index;
+  }
+
+  bool handleBack() {
+    if (_selectedIndex.value != 0) {
+      _selectedIndex.value = 0;
+      return false;
+    }
+    return true;
   }
 
   void unlockAfterLogin() {

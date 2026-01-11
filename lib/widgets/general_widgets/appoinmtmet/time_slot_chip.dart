@@ -35,7 +35,7 @@ class TimeSlotChip extends StatelessWidget {
           color: bg,
           borderRadius: BorderRadius.circular(14.r),
         ),
-        alignment: Alignment.center,
+        alignment: AlignmentDirectional.center,
         child: Text(
           _format(time),
           style: TextStyle(

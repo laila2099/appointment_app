@@ -16,7 +16,7 @@ class ProfileInfo extends StatelessWidget {
       children: [
         Center(
           child: Stack(
-            alignment: Alignment.bottomRight,
+            alignment: AlignmentDirectional.bottomEnd,
             children: [
               CircleAvatar(
                 radius: 62,
@@ -27,7 +27,7 @@ class ProfileInfo extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsetsDirectional.all(8),
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: Color(0xffF8F8F8),
@@ -42,16 +42,14 @@ class ProfileInfo extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 32),
-
         Obx(
-              () => Text(
+          () => Text(
             controller.profile.value?.name ?? '',
             style: CustomTextStyles.profileTitle,
           ),
         ),
-
         Obx(
-              () => Text(
+          () => Text(
             controller.profile.value?.email ?? '',
             style: CustomTextStyles.subTitle,
           ),

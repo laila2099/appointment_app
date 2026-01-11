@@ -20,7 +20,8 @@ class ProfileTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 6),
+      padding:
+          const EdgeInsetsDirectional.symmetric(horizontal: 24, vertical: 6),
       child: InkWell(
         onTap: onTap,
         child: ListTile(
@@ -33,8 +34,7 @@ class ProfileTile extends StatelessWidget {
               iconPath,
               width: 20,
               height: 20,
-              colorFilter:
-                  ColorFilter.mode(iconColor, BlendMode.srcIn),
+              colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
             ),
           ),
           title: Text(title),

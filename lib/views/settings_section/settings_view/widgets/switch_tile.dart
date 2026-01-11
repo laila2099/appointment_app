@@ -8,7 +8,7 @@ Widget switchTile({
   required RxBool value,
 }) {
   return Padding(
-    padding:  EdgeInsets.symmetric(horizontal: 24.w),
+    padding: EdgeInsetsDirectional.symmetric(horizontal: 24.w),
     child: Row(
       children: [
         Expanded(

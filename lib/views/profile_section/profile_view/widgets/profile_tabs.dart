@@ -8,7 +8,7 @@ class ProfileTabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
+      padding: const EdgeInsetsDirectional.symmetric(horizontal: 24),
       child: Container(
         height: 60,
         decoration: BoxDecoration(
@@ -18,16 +18,14 @@ class ProfileTabs extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-
               child: InkWell(
-                onTap: (){},
+                onTap: () {},
                 child: Container(
-                  alignment: Alignment.center,
+                  alignment: AlignmentDirectional.center,
                   child: Text(
                     'my_appointment'.tr,
                     style: CustomTextStyles.body14,
                   ),
-
                 ),
               ),
             ),
@@ -37,7 +35,7 @@ class ProfileTabs extends StatelessWidget {
             ),
             Expanded(
               child: InkWell(
-                onTap: (){},
+                onTap: () {},
                 child: Container(
                   child: Center(
                     child: Text(

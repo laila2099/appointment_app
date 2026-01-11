@@ -36,12 +36,12 @@ class PaymentScreen extends StatelessWidget {
                 ),
                 onTap: () {},
               ),
-              center: const Text('Payment'),
+              center: Text('payment'.tr),
             ),
             SizedBox(height: 20.h),
             Expanded(
               child: SingleChildScrollView(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                padding: EdgeInsetsDirectional.symmetric(horizontal: 16.w),
                 child: Obx(
                   () => Column(
                     children: List.generate(
@@ -56,7 +56,7 @@ class PaymentScreen extends StatelessWidget {
               ),
             ),
             PrimaryButton(
-              text: "Add New",
+              text: "add_new".tr,
               onPressed: () {
                 Get.back();
               },

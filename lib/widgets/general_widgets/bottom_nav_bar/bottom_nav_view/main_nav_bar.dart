@@ -48,7 +48,7 @@ class MainLayout extends StatelessWidget {
       bottomNavigationBar: SafeArea(
         top: false,
         child: Padding(
-          padding: const EdgeInsets.only(bottom: 10),
+          padding: const EdgeInsetsDirectional.only(bottom: 10),
           child: CustomBottomNavBar(),
         ),
       ),

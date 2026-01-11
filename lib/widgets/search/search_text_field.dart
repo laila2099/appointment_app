@@ -31,7 +31,7 @@ class SearchTextField extends StatelessWidget {
             decoration: InputDecoration(
               hintText: hintText,
               prefixIcon: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsetsDirectional.all(8.0),
                 child: SvgPicture.asset(
                   AppIcons.search,
                   width: 24.w,
@@ -41,7 +41,7 @@ class SearchTextField extends StatelessWidget {
               ),
               hintStyle: TextStyle(fontSize: 13.sp, color: AppColors.subtitle),
               isDense: true,
-              contentPadding: EdgeInsets.symmetric(
+              contentPadding: EdgeInsetsDirectional.symmetric(
                 vertical: 8.h,
                 horizontal: 14.w,
               ),

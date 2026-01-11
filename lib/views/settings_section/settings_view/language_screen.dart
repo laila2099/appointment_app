@@ -23,8 +23,9 @@ class LanguageScreen extends StatelessWidget {
         child: Column(
           children: [
             AppHeader(
+              onBack: Get.back,
               center: Text(
-                "Language",
+                "language".tr,
                 style: CustomTextStyles.screenTitle,
               ),
             ),
@@ -32,11 +33,11 @@ class LanguageScreen extends StatelessWidget {
               height: 30.h,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              padding: EdgeInsetsDirectional.symmetric(horizontal: 20.w),
               child: Container(
                 width: 343.w,
                 height: 56.h,
-                padding: EdgeInsets.symmetric(
+                padding: EdgeInsetsDirectional.symmetric(
                   horizontal: 12.w,
                   vertical: 10.h,
                 ),
@@ -60,7 +61,7 @@ class LanguageScreen extends StatelessWidget {
                       child: TextField(
                         onChanged: controller.searchLanguage,
                         decoration: InputDecoration(
-                          hintText: 'Search',
+                          hintText: 'search'.tr,
                           hintStyle: TextStyle(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w500,
@@ -68,7 +69,7 @@ class LanguageScreen extends StatelessWidget {
                           ),
                           border: InputBorder.none,
                           isDense: true,
-                          contentPadding: EdgeInsets.zero,
+                          contentPadding: EdgeInsetsDirectional.zero,
                         ),
                         style: TextStyle(
                           fontSize: 12.sp,
@@ -84,7 +85,7 @@ class LanguageScreen extends StatelessWidget {
             Expanded(
               child: Obx(
                 () => ListView.separated(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  padding: EdgeInsetsDirectional.symmetric(horizontal: 20.w),
                   itemCount: controller.languages.length,
                   separatorBuilder: (_, __) => Divider(
                     height: 1,
@@ -104,8 +105,9 @@ class LanguageScreen extends StatelessWidget {
               ),
             ),
             PrimaryButton(
-              text: "Save",
+              text: "save".tr,
               onPressed: () {
+                controller.applyLanguage();
                 Get.back();
               },
               padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 16.h),

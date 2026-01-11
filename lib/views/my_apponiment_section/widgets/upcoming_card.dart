@@ -30,7 +30,7 @@ class UpcomingCard extends StatelessWidget {
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
+        padding: const EdgeInsetsDirectional.fromSTEB(12, 8, 12, 8),
         child: Column(
           children: [
             DoctorTile.withDate(
@@ -51,7 +51,7 @@ class UpcomingCard extends StatelessWidget {
             Row(
               children: [
                 StatusButton(
-                  label: 'Cancel Appointment',
+                  label: "cancel_appointment".tr,
                   variant: ButtonVariant.stroke,
                   onPressed: () {
                     controller.cancelAppointment(appt);
@@ -59,7 +59,7 @@ class UpcomingCard extends StatelessWidget {
                 ),
                 SizedBox(width: 10.w),
                 StatusButton(
-                  label: 'Reschedule',
+                  label: 'reschedule'.tr,
                   variant: ButtonVariant.filled,
                   onPressed: () => Get.toNamed(AppRoutes.reschedule),
                 ),

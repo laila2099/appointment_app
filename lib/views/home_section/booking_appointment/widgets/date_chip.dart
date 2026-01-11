@@ -32,7 +32,7 @@ class DateChip extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: 64.w,
-        padding: EdgeInsets.symmetric(vertical: 10.h),
+        padding: EdgeInsetsDirectional.symmetric(vertical: 10.h),
         decoration: BoxDecoration(
           color: bg,
           borderRadius: BorderRadius.circular(14.r),

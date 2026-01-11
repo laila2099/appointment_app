@@ -1,10 +1,7 @@
-
 import 'package:appointment_app/views/home_section/home_screen/model/doctor_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/constant/app_colors.dart';
-
-
 
 class DoctorCard extends StatelessWidget {
   final DoctorModel doctor;
@@ -15,12 +12,11 @@ class DoctorCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 5,
-      margin: EdgeInsets.symmetric(vertical: 10.h),
+      margin: EdgeInsetsDirectional.symmetric(vertical: 10.h),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
       child: ListTile(
-
         leading: _DoctorAvatar(imageUrl: doctor.image),
         title: Text(
           doctor.name,
@@ -36,14 +32,12 @@ class DoctorCard extends StatelessWidget {
             const Icon(Icons.star, color: AppColors.primary, size: 18),
             const SizedBox(width: 4),
             Text(doctor.rating.toStringAsFixed(1)),
-
           ],
         ),
       ),
     );
   }
 }
-
 
 // -------------------- AVATAR --------------------
 
@@ -57,12 +51,12 @@ class _DoctorAvatar extends StatelessWidget {
     return CircleAvatar(
       radius: 30,
       backgroundColor: AppColors.primary.withOpacity(0.1),
-      backgroundImage:
-          imageUrl == null || imageUrl!.isEmpty ? null : NetworkImage(imageUrl!),
+      backgroundImage: imageUrl == null || imageUrl!.isEmpty
+          ? null
+          : NetworkImage(imageUrl!),
       child: imageUrl == null || imageUrl!.isEmpty
           ? const Icon(Icons.person, color: AppColors.primary, size: 28)
           : null,
     );
   }
 }
-

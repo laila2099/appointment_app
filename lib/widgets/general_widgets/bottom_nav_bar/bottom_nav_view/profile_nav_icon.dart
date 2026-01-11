@@ -15,7 +15,7 @@ class ProfileNavIcon extends GetView<NavigationController> {
       return GestureDetector(
         onTap: () => controller.changeIndex(index),
         child: Container(
-          padding: EdgeInsets.all(2.r),
+          padding: EdgeInsetsDirectional.all(2.r),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(

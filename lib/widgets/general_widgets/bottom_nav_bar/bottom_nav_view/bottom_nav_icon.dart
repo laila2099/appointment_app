@@ -26,7 +26,7 @@ class NavBarIcon extends GetView<NavigationController> {
         child: SizedBox(
           width: 50.w,
           child: Stack(
-            alignment: Alignment.center,
+            alignment: AlignmentDirectional.center,
             children: [
               SvgPicture.asset(
                 iconPath,
@@ -38,11 +38,11 @@ class NavBarIcon extends GetView<NavigationController> {
                 ),
               ),
               if (hasBadge)
-                Positioned(
+                PositionedDirectional(
                   top: 1.h,
-                  right: 10.w,
+                  end: 10.w,
                   child: Container(
-                    padding: EdgeInsets.all(4.r),
+                    padding: EdgeInsetsDirectional.all(4.r),
                     decoration: BoxDecoration(
                       color: AppColors.red,
                       shape: BoxShape.circle,

@@ -9,9 +9,8 @@ class RadioDot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final border = selected
-        ? AppColors.primary.withOpacity(.4)
-        : Colors.blueGrey.shade200;
+    final border =
+        selected ? AppColors.primary.withOpacity(.4) : Colors.blueGrey.shade200;
     final fill = selected ? AppColors.primary : Colors.transparent;
 
     return Container(
@@ -21,7 +20,7 @@ class RadioDot extends StatelessWidget {
         shape: BoxShape.circle,
         border: Border.all(color: border, width: 1.w),
       ),
-      alignment: Alignment.center,
+      alignment: AlignmentDirectional.center,
       child: Container(
         width: 10.w,
         height: 10.h,

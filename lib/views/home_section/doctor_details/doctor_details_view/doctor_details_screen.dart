@@ -35,13 +35,13 @@ class DoctorDetailsScreen extends GetView<DoctorDetailsController> {
                   const Icon(Icons.error_outline, size: 64, color: Colors.red),
                   const SizedBox(height: 16),
                   Text(
-                    controller.errorMessage.value ?? 'Doctor not found',
+                    controller.errorMessage.value ?? 'doctor_not_found'.tr,
                     style: const TextStyle(fontSize: 16),
                   ),
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: controller.refresh,
-                    child: const Text('Retry'),
+                    child: Text('retry'.tr),
                   ),
                 ],
               ),
@@ -52,6 +52,7 @@ class DoctorDetailsScreen extends GetView<DoctorDetailsController> {
           return Column(
             children: [
               AppHeader(
+                onBack: Get.back,
                 center: HeaderTitle(doctor.name),
                 trailing: HeaderButton(
                   onTap: () {},
@@ -69,7 +70,9 @@ class DoctorDetailsScreen extends GetView<DoctorDetailsController> {
                 rating: doctor.ratingAvg,
                 reviewsCount: doctor.ratingCount,
                 avatar: const AssetImage(AppImages.doctor),
-                onChatTap: () {print("MODEL IMAGE => ${doctor.avatarUrl}");},
+                onChatTap: () {
+                  print("MODEL IMAGE => ${doctor.avatarUrl}");
+                },
               ),
               SizedBox(height: 8.h),
               Expanded(

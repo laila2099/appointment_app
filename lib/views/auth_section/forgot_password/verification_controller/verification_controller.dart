@@ -44,17 +44,18 @@ class VerificationController extends GetxController {
   void submit() {
     if (enteredCode.length < codeLength) {
       Get.snackbar(
-        'Error',
-        'Please enter the full code',
+        'snackbar_info'.tr,
+        "otp_enter_full_code".tr,
         snackPosition: SnackPosition.TOP,
       );
       return;
     }
   }
+
   void resendCode() {
     Get.snackbar(
-      'Info',
-      'Verification code resent',
+      'snackbar_error'.tr,
+      "otp_code_resent".tr,
       snackPosition: SnackPosition.TOP,
     );
   }

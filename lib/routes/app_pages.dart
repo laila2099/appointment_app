@@ -1,3 +1,4 @@
+import 'package:appointment_app/views/settings_section/settings_binding/setting_binding.dart';
 import 'package:get/get.dart';
 
 import '../core/middlewares/splash_redirect_middleware.dart';
@@ -60,7 +61,8 @@ final appPages = <GetPage>[
   // Auth + Reset Password
   GetPage(name: AppRoutes.login, page: () => LoginView()),
   GetPage(name: AppRoutes.createAccount, page: () => const CreateAccountView()),
-  GetPage(name: AppRoutes.forgotPassword, page: () => const ForgotPasswordView()),
+  GetPage(
+      name: AppRoutes.forgotPassword, page: () => const ForgotPasswordView()),
   GetPage(name: AppRoutes.otpVerification, page: () => OtpVerificationView()),
   GetPage(
     name: AppRoutes.fillYourProfile,
@@ -85,9 +87,14 @@ final appPages = <GetPage>[
   // Home
   GetPage(name: AppRoutes.home, page: () => HomeScreen()),
   GetPage(name: AppRoutes.notificationScreen, page: () => NotificationScreen()),
-  GetPage(name: AppRoutes.findNearbyScreen, page: () => const FindNearbyScreen()),
-  GetPage(name: AppRoutes.doctorSpecialtiesScreen, page: () => DoctorSpecialitysScreen()),
-  GetPage(name: AppRoutes.recommendationDoctorScreen, page: () => RecommendationDoctorScreen()),
+  GetPage(
+      name: AppRoutes.findNearbyScreen, page: () => const FindNearbyScreen()),
+  GetPage(
+      name: AppRoutes.doctorSpecialtiesScreen,
+      page: () => DoctorSpecialitysScreen()),
+  GetPage(
+      name: AppRoutes.recommendationDoctorScreen,
+      page: () => RecommendationDoctorScreen()),
 
   GetPage(
     name: AppRoutes.profile,
@@ -115,7 +122,11 @@ final appPages = <GetPage>[
   GetPage(name: AppRoutes.notificationPage, page: () => NotificationPage()),
   GetPage(name: AppRoutes.helpPage, page: () => HelpPage()),
   GetPage(name: AppRoutes.securityPage, page: () => SecurityPage()),
-  GetPage(name: AppRoutes.languageScreen, page: () => LanguageScreen()),
+  GetPage(
+    name: AppRoutes.languageScreen,
+    page: () => LanguageScreen(),
+    // binding: SettingBinding()
+  ),
 
   // Booking
   GetPage(
@@ -123,7 +134,9 @@ final appPages = <GetPage>[
     page: () => const BookingFlowScreen(),
     binding: BookingBinding(),
   ),
-  GetPage(name: AppRoutes.bookingConfirmed, page: () => const BookingConfirmedScreen()),
+  GetPage(
+      name: AppRoutes.bookingConfirmed,
+      page: () => const BookingConfirmedScreen()),
   GetPage(
     name: AppRoutes.myAppointment,
     page: () => const AppointmentView(),
