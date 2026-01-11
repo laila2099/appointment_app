@@ -1,5 +1,6 @@
 import 'package:appointment_app/core/constant/app_colors.dart';
 import 'package:appointment_app/core/constant/text_style.dart';
+import 'package:appointment_app/core/classes/repositories/doctor_repository.dart';
 import 'package:appointment_app/routes/app_routes.dart';
 import 'package:appointment_app/views/home_section/home_screen/controller/category_controller.dart';
 import 'package:appointment_app/views/home_section/home_screen/controller/doctor_controller.dart';
@@ -17,11 +18,20 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
   final controller = Get.put(CategoryController());
-  final doctorController = Get.put(DoctorController());
-  final profileController = Get.find<ProfileController>();
+  final profileController = Get.find<ProfileController>();  
+  // Initialize doctor controller - will use existing if already registered
+  late final DoctorController doctorController = Get.put(
+    DoctorController(repository: Get.find<DoctorRepository>()),
+    permanent: true,
+  );
 
   @override
   Widget build(BuildContext context) {
+    // Load recommended doctors when the home screen is built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      doctorController.loadRecommendedDoctors();
+    });
+
     return Scaffold(
       backgroundColor: AppColors.white,
       body: Padding(
@@ -154,24 +164,56 @@ class HomeScreen extends StatelessWidget {
             ),
             SizedBox(height: 20.h),
             Expanded(
-              child: ListView.builder(
-                padding: EdgeInsets.zero,
-                itemCount: doctorController.doctors.length,
-                itemBuilder: (context, index) {
-                  final d = doctorController.doctors[index];
-                  return DoctorCard(
-                    onTap: () => Get.toNamed(AppRoutes.doctorDetails),
-                    image: d.image,
-                    name: d.name,
-                    department: d.department,
-                    hospital: d.hospital,
-                    rating: d.rating,
-                    reviews: d.reviews,
+              child: Obx(() {
+                if (doctorController.isLoading.value) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+
+                if (doctorController.doctors.isEmpty) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.medical_services_outlined, 
+                            size: 64, color: Colors.grey),
+                        const SizedBox(height: 16),
+                        Text(
+                          doctorController.errorMessage.value ?? 
+                          'No doctors available',
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        const SizedBox(height: 16),
+                        ElevatedButton(
+                          onPressed: doctorController.refresh,
+                          child: const Text('Retry'),
+                        ),
+                      ],
+                    ),
                   );
-                },
-              ),
+                }
+
+                return ListView.builder(
+                  padding: EdgeInsets.zero,
+                  itemCount: doctorController.doctors.length,
+                  itemBuilder: (context, index) {
+                    final doctor = doctorController.doctors[index];
+                    final imagePath = doctorController.getImagePath(doctor);
+                    return DoctorCard(
+                      onTap: () => Get.toNamed(
+                        AppRoutes.doctorDetails,
+                        arguments: {'doctorId': doctor.id},
+                      ),
+                      image: imagePath,
+                      name: doctor.name,
+                      department: doctor.specialty,
+                      hospital: doctor.clinic,
+                      rating: doctor.ratingAvg,
+                      reviews: doctor.ratingCount,
+                    );
+                  },
+                );
+              }),
             ),
-            SizedBox(height: 100.h),
           ],
         ),
       ),

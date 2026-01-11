@@ -27,6 +27,27 @@ class DoctorDetailsScreen extends GetView<DoctorDetailsController> {
             return const Center(child: CircularProgressIndicator());
           }
 
+          if (controller.doctor.value == null) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.error_outline, size: 64, color: Colors.red),
+                  const SizedBox(height: 16),
+                  Text(
+                    controller.errorMessage.value ?? 'Doctor not found',
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: controller.refresh,
+                    child: const Text('Retry'),
+                  ),
+                ],
+              ),
+            );
+          }
+
           final doctor = controller.doctor.value!;
           return Column(
             children: [
@@ -48,7 +69,7 @@ class DoctorDetailsScreen extends GetView<DoctorDetailsController> {
                 rating: doctor.ratingAvg,
                 reviewsCount: doctor.ratingCount,
                 avatar: const AssetImage(AppImages.doctor),
-                onChatTap: () {},
+                onChatTap: () {print("MODEL IMAGE => ${doctor.avatarUrl}");},
               ),
               SizedBox(height: 8.h),
               Expanded(
