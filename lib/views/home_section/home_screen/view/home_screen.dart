@@ -66,8 +66,9 @@ class HomeScreen extends StatelessWidget {
                             color: AppColors.subtitle,
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(height: 10.h),
+                    ],
                   ),
                   const Spacer(),
                   Stack(
@@ -132,19 +133,57 @@ class HomeScreen extends StatelessWidget {
             SizedBox(height: 16.h),
             SizedBox(
               height: 100.h,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: controller.categories.length,
-                itemBuilder: (context, index) {
-                  final item = controller.categories[index];
-                  return Row(
-                    children: [
-                      CategoryItem(iconPath: item.icon, title: item.title),
-                      SizedBox(width: 25.w),
-                    ],
+              child: Obx(() {
+                if (controller.isLoading.value) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                if (controller.errorMessage.value != null) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                          Text(controller.errorMessage.value!),
+                        SizedBox(height: 12.h),
+                        ElevatedButton(
+                          onPressed: () => controller.retryFetchCategories(),
+                          child: const Text('Retry'),
+                        ),
+                      ],
+                    ),
                   );
-                },
-              ),
+                }
+                if (controller.categories.isEmpty) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('No categories available'),
+                        SizedBox(height: 12.h),
+                        ElevatedButton(
+                          onPressed: () => controller.retryFetchCategories(),
+                          child: const Text('Retry'),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+                return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: controller.categories.length,
+                  itemBuilder: (context, index) {
+                    final item = controller.categories[index];
+                    return Row(
+                      children: [
+                        CategoryItem(
+                          iconPath: item.icon,
+                          title: item.title,
+                        ),
+                        SizedBox(width: 25.w),
+                      ],
+                    );
+                  },
+                );
+              }),
             ),
             SizedBox(height: 24.h),
             Row(

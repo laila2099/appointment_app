@@ -20,13 +20,14 @@ class ApiEndpoints {
 
   // -------- Profiles
   static String getProfile(String userId, {String select = '*'}) =>
-      '$profiles?id=eq.$userId&select=$select';
+      '$profiles?id=eq.$userId&select=$select&apikey=${AppConfig.apikey}';
 
-  static String editProfile(String userId) => '$profiles?id=eq.$userId';
+  static String editProfile(String userId) =>
+      '$profiles?id=eq.$userId&apikey=${AppConfig.apikey}';
 
   // -------- Categories
   static String getCategories({String select = '*'}) =>
-      '$categories?select=$select';
+      '$categories?select=$select&apikey=${AppConfig.apikey}';
 
   // -------- Doctors
 
@@ -61,13 +62,13 @@ class ApiEndpoints {
       '$reviews?id=eq.$reviewId&select=$select';
 
   static String filterDoctors(String categoryId) =>
-      '$doctorsWithReviews?category_id=eq.$categoryId';
+      '$doctorsWithReviews?category_id=eq.$categoryId&apikey=${AppConfig.apikey}';
 
 
   // -------- Appointments
   static String filterAppointments(String status) =>
-      '$appointmentsWithDoctor?status=eq.$status';
+      '$appointmentsWithDoctor?status=eq.$status&apikey=${AppConfig.apikey}';
 
   static String editAppointment(String appointmentId) =>
-      '$appointments?id=eq.$appointmentId';
+      '$appointments?id=eq.$appointmentId&apikey=${AppConfig.apikey}';
 }
