@@ -68,6 +68,8 @@ class ApiEndpoints {
 
 
   // -------- Appointments
+  static String createAppointment() => appointments;
+
   static String filterAppointments(String status) =>
       '$appointmentsWithDoctor?status=eq.$status';
 

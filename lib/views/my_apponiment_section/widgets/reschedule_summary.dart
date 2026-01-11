@@ -21,7 +21,7 @@ class RescheduleSummary extends StatelessWidget {
 
     return Obx(() {
       final a = c.appointment.value;
-      final type = AppointmentTypeX.fromId(a.appointmentTypeId);
+      final type = AppointmentTypeX.fromId(a.appointmentType);
       final doctor = c.doctor.value;
 
       return ListView(
@@ -46,7 +46,7 @@ class RescheduleSummary extends StatelessWidget {
             iconBg: AppColors.secondBlue,
             iconColor: AppColors.primary,
             title: 'date_time'.tr,
-            subtitle: formatDateTime(context, a.date, a.time),
+            subtitle: formatDateTime(context, a.appointmentDate, a.appointmentTime),
           ),
           SummaryRow(
             svgAsset: AppIcons.clipboard,

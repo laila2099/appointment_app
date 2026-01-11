@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import '../../../core/constant/text_style.dart';
 import '../../../routes/app_routes.dart';
 import '../../../core/constant/app_images.dart';
-import '../../../core/constant/app_colors.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
