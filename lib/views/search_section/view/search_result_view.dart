@@ -69,7 +69,9 @@ class SearchResultView extends StatelessWidget {
                               onTap: () {
                                 sortController.selectSpeciality(index);
                                 searchResultController.fetchDoctors(
-                                    categoryId: category.id.toString());
+                                    categoryId: (category.title == 'general')
+                                        ? null
+                                        : category.id.toString());
                               },
                               child: SortChip(
                                 active: sortController.specialityIndex.value ==

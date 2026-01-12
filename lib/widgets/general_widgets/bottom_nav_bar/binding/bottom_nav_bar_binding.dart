@@ -7,7 +7,7 @@ import '../controller/bottom_nav_bar_controller.dart';
 class BottomNavBarBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(NavigationController());
+    Get.put(NavigationController(), permanent: true);
     Get.lazyPut<InboxController>(() => InboxController(), fenix: true);
     Get.lazyPut<MyAppointmentsController>(() => MyAppointmentsController(),
         fenix: true);
