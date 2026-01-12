@@ -68,7 +68,17 @@ class AuthGateService extends GetxService {
 
   Future<void> handleUnauthorized() async {
     await logout();
-    Get.toNamed(AppRoutes.loginRequiredGate,
-        arguments: {'sessionExpired': true});
+    final currentRoute = Get.currentRoute;
+    if (currentRoute == AppRoutes.bottomnavbar ||
+        currentRoute == AppRoutes.home) {
+      Get.offAllNamed(AppRoutes.bottomnavbar);
+      return;
+    } else if (currentRoute == AppRoutes.doctorDetails) {
+      Get.offAllNamed(AppRoutes.bottomnavbar);
+    }
+    Get.toNamed(
+      AppRoutes.loginRequiredGate,
+      arguments: {'sessionExpired': true},
+    );
   }
 }

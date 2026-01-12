@@ -76,12 +76,15 @@ class SortController extends GetxController {
   }
 
   void done() {
-    final selectedId = specialityList[specialityIndex.value].id.toString();
+    final selected = specialityList[specialityIndex.value];
+
+    final String? categoryId =
+        (selected.title == 'general') ? null : selected.id;
 
     if (Get.isRegistered<SearchResultController>()) {
-      Get.find<SearchResultController>().fetchDoctors(categoryId: selectedId);
+      Get.find<SearchResultController>().fetchDoctors(categoryId: categoryId);
     } else if (Get.isRegistered<DoctorController>()) {
-      Get.find<DoctorController>().filterDoctors(categoryId: selectedId);
+      Get.find<DoctorController>().filterDoctors(categoryId: categoryId);
     }
 
     Get.back();

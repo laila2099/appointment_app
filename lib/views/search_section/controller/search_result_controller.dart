@@ -31,9 +31,10 @@ class SearchResultController extends GetxController {
             await doctorRepo.filterDoctorsByCategory(categoryId: categoryId);
       } else if (query != null && query.isNotEmpty) {
         result = await doctorRepo.searchDoctors(query: query);
-      } else {
+      } else if (categoryId == null) {
         result = await doctorRepo.getAllDoctors();
-      }
+      } else
+        result = await doctorRepo.getAllDoctors();
 
       if (result.isSuccess) {
         doctorsList.assignAll(result.data ?? []);
