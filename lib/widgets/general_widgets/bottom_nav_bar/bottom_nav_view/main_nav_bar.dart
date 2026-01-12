@@ -18,7 +18,7 @@ class MainLayout extends StatelessWidget {
 
   final List<Widget> _screens = [
     HomeScreen(),
-    const InboxView(),
+    InboxView(),
     const SearchView(),
     const AppointmentView(),
     const ProfileScreen(),

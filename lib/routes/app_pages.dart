@@ -143,7 +143,7 @@ final appPages = <GetPage>[
   // Inbox Page
   GetPage(
     name: AppRoutes.inbox,
-    page: () => const InboxView(),
+    page: () => InboxView(),
   ),
   GetPage(
     name: AppRoutes.chat,

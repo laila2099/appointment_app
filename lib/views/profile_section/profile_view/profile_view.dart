@@ -46,37 +46,44 @@ class ProfileScreen extends StatelessWidget {
                       const ProfileTabs(),
                       const SizedBox(height: 24),
                       Expanded(
-                        child: ListView(
-                          padding: EdgeInsetsDirectional.only(bottom: 24.h),
-                          physics: const BouncingScrollPhysics(),
-                          children: [
-                            ProfileTile(
-                              iconPath: AppIcons.personalCard,
-                              title: "personal_information".tr,
-                              iconColor: AppColors.primary,
-                              bgColor: const Color(0xFFD8E7FE),
-                              onTap: () => Get.toNamed(AppRoutes.personalInfo),
+                        child: SafeArea(
+                          bottom: true,
+                          child: SingleChildScrollView(
+                            physics: const BouncingScrollPhysics(),
+                            child: Column(
+                              children: [
+                                ProfileTile(
+                                  iconPath: AppIcons.personalCard,
+                                  title: "personal_information".tr,
+                                  iconColor: AppColors.primary,
+                                  bgColor: const Color(0xFFD8E7FE),
+                                  onTap: () =>
+                                      Get.toNamed(AppRoutes.personalInfo),
+                                ),
+                                const CustomDivider(),
+                                ProfileTile(
+                                  iconPath: AppIcons.medicalRecord,
+                                  title: "my_test_diagnostic".tr,
+                                  iconColor: AppColors.green,
+                                  bgColor: const Color(0xFFDCF4E7),
+                                  onTap: () => Get.toNamed(
+                                      AppRoutes.medicalRecordsScreen),
+                                ),
+                                const CustomDivider(),
+                                ProfileTile(
+                                  iconPath: AppIcons.wallet,
+                                  title: "payment".tr,
+                                  iconColor: AppColors.red,
+                                  bgColor: const Color(0xFFFEE1E1),
+                                  onTap: () =>
+                                      Get.toNamed(AppRoutes.paymentScreen),
+                                ),
+                                const CustomDivider(),
+                                SizedBox(
+                                    height: kBottomNavigationBarHeight + 20.h),
+                              ],
                             ),
-                            const CustomDivider(),
-                            ProfileTile(
-                              iconPath: AppIcons.medicalRecord,
-                              title: "my_test_diagnostic".tr,
-                              iconColor: AppColors.green,
-                              bgColor: const Color(0xFFDCF4E7),
-                              onTap: () =>
-                                  Get.toNamed(AppRoutes.medicalRecordsScreen),
-                            ),
-                            const CustomDivider(),
-                            ProfileTile(
-                              iconPath: AppIcons.wallet,
-                              title: "payment".tr,
-                              iconColor: AppColors.red,
-                              bgColor: const Color(0xFFFEE1E1),
-                              onTap: () => Get.toNamed(AppRoutes.paymentScreen),
-                            ),
-                            const CustomDivider(),
-                            SizedBox(height: 60.h),
-                          ],
+                          ),
                         ),
                       ),
                     ],

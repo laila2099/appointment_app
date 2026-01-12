@@ -1,5 +1,6 @@
 import 'package:appointment_app/core/constant/app_icons.dart';
 import 'package:appointment_app/routes/app_routes.dart';
+import 'package:appointment_app/views/home_section/recommendation_doctor/controllers/sort_controller.dart';
 import 'package:appointment_app/views/home_section/recommendation_doctor/widgets/custom_bottom_sheet.dart';
 import 'package:appointment_app/views/inbox_section/view/widget/Bottom_Sheet.dart';
 import 'package:appointment_app/views/inbox_section/view/widget/inbox_item.dart';
@@ -54,7 +55,12 @@ class InboxView extends GetView<InboxController> {
                       ),
                       SizedBox(width: 8.w),
                       IconButton(
-                        onPressed: () => Get.bottomSheet(CustomBottomSheet()),
+                        onPressed: () {
+                          Get.find<SortController>().currentTarget =
+                              FilterTarget.inbox;
+
+                          Get.bottomSheet(CustomBottomSheet());
+                        },
                         icon: Icon(Icons.filter_list),
                         color: AppColors.black,
                         iconSize: 24.w,

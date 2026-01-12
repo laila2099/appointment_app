@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 class CustomBottomSheet extends StatelessWidget {
   CustomBottomSheet({super.key});
 
-  final SortController controller = Get.put(SortController());
+  final controller = Get.find<SortController>();
 
   @override
   Widget build(BuildContext context) {

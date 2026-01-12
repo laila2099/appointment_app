@@ -1,6 +1,7 @@
 import 'package:appointment_app/views/home_section/home_screen/controller/doctor_controller.dart';
 import 'package:appointment_app/views/home_section/home_screen/model/category_model.dart';
 import 'package:appointment_app/views/home_section/recommendation_doctor/models/sort_model.dart';
+import 'package:appointment_app/views/inbox_section/controller/inbox_controller.dart';
 import 'package:appointment_app/views/search_section/controller/search_result_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,9 +9,11 @@ import 'package:get/get.dart';
 import '../../../../core/classes/api/api_result.dart';
 import '../../../../core/classes/repositories/doctor_repository.dart';
 
+enum FilterTarget { search, inbox, home }
+
 class SortController extends GetxController {
   final DoctorRepository _repository = Get.find();
-
+  FilterTarget currentTarget = FilterTarget.home;
   var specialityList = <CategoryModel>[].obs;
   var ratingList = <SortModel>[].obs;
 
@@ -77,14 +80,25 @@ class SortController extends GetxController {
 
   void done() {
     final selected = specialityList[specialityIndex.value];
-
     final String? categoryId =
         (selected.title == 'general') ? null : selected.id;
-
-    if (Get.isRegistered<SearchResultController>()) {
-      Get.find<SearchResultController>().fetchDoctors(categoryId: categoryId);
-    } else if (Get.isRegistered<DoctorController>()) {
-      Get.find<DoctorController>().filterDoctors(categoryId: categoryId);
+    switch (currentTarget) {
+      case FilterTarget.search:
+        if (Get.isRegistered<SearchResultController>()) {
+          Get.find<SearchResultController>()
+              .fetchDoctors(categoryId: categoryId);
+        }
+        break;
+      case FilterTarget.inbox:
+        if (Get.isRegistered<InboxController>()) {
+          Get.find<InboxController>().fetchInboxDoctors(categoryId: categoryId);
+        }
+        break;
+      case FilterTarget.home:
+        if (Get.isRegistered<DoctorController>()) {
+          Get.find<DoctorController>().filterDoctors(categoryId: categoryId);
+        }
+        break;
     }
 
     Get.back();

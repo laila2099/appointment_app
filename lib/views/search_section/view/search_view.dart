@@ -1,4 +1,5 @@
 import 'package:appointment_app/routes/app_routes.dart';
+import 'package:appointment_app/views/home_section/recommendation_doctor/controllers/sort_controller.dart';
 import 'package:appointment_app/views/home_section/recommendation_doctor/widgets/custom_bottom_sheet.dart';
 import 'package:appointment_app/widgets/search/search_text_field.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +44,8 @@ class SearchView extends StatelessWidget {
                 SizedBox(width: 8.w),
                 IconButton(
                   onPressed: () async {
+                    Get.find<SortController>().currentTarget =
+                        FilterTarget.search;
                     final result =
                         await showModalBottomSheet<Map<String, dynamic>>(
                       context: context,
