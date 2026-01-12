@@ -24,6 +24,7 @@ class BookingFlowScreen extends GetView<BookingController> {
           return Column(
             children: [
               AppHeader(
+                onBack: Get.back,
                 center: HeaderTitle('book_appointment'.tr),
               ),
               SizedBox(height: 32.h),

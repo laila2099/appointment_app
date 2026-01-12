@@ -13,6 +13,12 @@ class TranslationController extends GetxController {
     'en': const Locale('en', 'US'),
     'ar': const Locale('ar', 'SY'),
     'fr': const Locale('fr', 'FR'),
+    'id': const Locale('id', 'ID'),
+    'hi': const Locale('hi', 'IN'),
+    'gh': const Locale('gh', 'GH'),
+    'it': const Locale('it', 'IT'),
+    'jp': const Locale('jp', 'JP'),
+    'ru': const Locale('ru', 'RU'),
   };
 
   @override
