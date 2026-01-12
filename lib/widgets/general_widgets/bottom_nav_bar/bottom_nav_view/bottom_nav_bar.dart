@@ -1,5 +1,6 @@
 import 'package:appointment_app/core/constant/app_colors.dart';
 import 'package:appointment_app/core/constant/app_icons.dart';
+import 'package:appointment_app/core/constant/app_size.dart';
 import 'package:appointment_app/widgets/general_widgets/bottom_nav_bar/bottom_nav_view/bottom_nav_icon.dart';
 import 'package:appointment_app/widgets/general_widgets/bottom_nav_bar/bottom_nav_view/floating_bottom.dart';
 import 'package:appointment_app/widgets/general_widgets/bottom_nav_bar/bottom_nav_view/profile_nav_icon.dart';
@@ -7,8 +8,6 @@ import 'package:appointment_app/widgets/general_widgets/bottom_nav_bar/controlle
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
-import '../../../../core/constant/app_size.dart';
 
 class CustomBottomNavBar extends GetView<NavigationController> {
   const CustomBottomNavBar({super.key});
@@ -38,7 +37,7 @@ class CustomBottomNavBar extends GetView<NavigationController> {
             bottom: 0,
             start: 0,
             end: 0,
-            height: 80.h,
+            height: AppSize.bottomNavHeight,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [

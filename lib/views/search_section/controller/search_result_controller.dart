@@ -1,47 +1,55 @@
+import 'package:appointment_app/core/classes/api/api_result.dart';
+import 'package:appointment_app/core/classes/repositories/doctor_repository.dart';
+import 'package:appointment_app/models/doctor_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../home_section/home_screen/model/doctor_model.dart';
 
 class SearchResultController extends GetxController {
-  final searchController = TextEditingController();
-  final doctorsList = <DoctorModel>[].obs;
+  final DoctorRepository doctorRepo = Get.find<DoctorRepository>();
+
+  final doctorsList = <Doctor>[].obs;
+  final isLoading = false.obs;
+  String lastQuery = "";
 
   @override
   void onInit() {
     super.onInit();
-    doctorsList.assignAll([
-      DoctorModel(
-        image: 'assets/images/doctor1.png',
-        name: 'Dr. Randy Wigham',
-        department: 'General',
-        hospital: 'City Hospital',
-        rating: 4.8,
-        reviews: 120,
-      ),
-      DoctorModel(
-        image: 'assets/images/doctor2.png',
-        name: 'Dr. Jack Sulivan',
-        department: 'General',
-        hospital: 'Green Clinic',
-        rating: 4.5,
-        reviews: 90,
-      ),
-      DoctorModel(
-        image: 'assets/images/doctor3.png',
-        name: 'Dr. Hanna Stanton',
-        department: 'Neurologic',
-        hospital: 'Neuro Center',
-        rating: 4.7,
-        reviews: 75,
-      ),
-    ]);
+    lastQuery = Get.arguments ?? "";
+    fetchDoctors(query: lastQuery);
   }
 
-  void searchDoctors(String query) {
-    final results = doctorsList.where((doctor) =>
-        doctor.name.toLowerCase().contains(query.toLowerCase())
-    ).toList();
+  Future<void> fetchDoctors({String? query, String? categoryId}) async {
+    try {
+      isLoading.value = true;
 
-    doctorsList.assignAll(results);
+      if (query != null) lastQuery = query;
+
+      final ApiResult<List<Doctor>> result;
+
+      if (categoryId != null && categoryId.isNotEmpty) {
+        result =
+            await doctorRepo.filterDoctorsByCategory(categoryId: categoryId);
+      } else if (query != null && query.isNotEmpty) {
+        result = await doctorRepo.searchDoctors(query: query);
+      } else {
+        result = await doctorRepo.getAllDoctors();
+      }
+
+      if (result.isSuccess) {
+        doctorsList.assignAll(result.data ?? []);
+      } else {
+        Get.snackbar(
+          "تنبيه",
+          result.errorMessage ?? "حدث خطأ أثناء جلب البيانات",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red.withOpacity(0.8),
+          colorText: Colors.white,
+        );
+      }
+    } catch (e) {
+      print("Unexpected Error: $e");
+    } finally {
+      isLoading.value = false;
+    }
   }
 }

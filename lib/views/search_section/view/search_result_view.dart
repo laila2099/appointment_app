@@ -16,8 +16,8 @@ class SearchResultView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final searchController = Get.find<SearchResultController>();
-    final controller = Get.find<SortController>();
+    final searchResultController = Get.find<SearchResultController>();
+    final sortController = Get.find<SortController>();
 
     return Scaffold(
       backgroundColor: AppColors.white,
@@ -31,9 +31,15 @@ class SearchResultView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Expanded(child: SearchTextField()),
+                Expanded(
+                  child: SearchTextField(
+                    hintText: searchResultController.lastQuery,
+                    onSubmitted: (value) {
+                      searchResultController.fetchDoctors(query: value);
+                    },
+                  ),
+                ),
                 SizedBox(width: 8.w),
                 IconButton(
                   onPressed: () {
@@ -41,88 +47,73 @@ class SearchResultView extends StatelessWidget {
                       context: context,
                       isScrollControlled: true,
                       backgroundColor: Colors.white,
-                      builder: (_) {
-                        return CustomBottomSheet();
-                      },
+                      builder: (_) => CustomBottomSheet(),
                     );
                   },
-                  icon: Icon(
-                    Icons.filter_list,
-                    color: AppColors.black,
-                    size: 24.w,
-                  ),
+                  icon: Icon(Icons.filter_list,
+                      color: AppColors.black, size: 24.w),
                 ),
-                SizedBox(width: 12.w),
               ],
             ),
-
             SizedBox(height: 12.h),
-
-            // Tabs
             SizedBox(
               height: 45.h,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: controller.specialityList.length,
-                itemBuilder: (context, index) {
-                  return Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () => controller.selectSpeciality(index),
-                        child: SortChip(
-                          active: controller.specialityIndex == index,
-                          title: controller.specialityList[index].title,
-                        ),
-                      ),
-                      SizedBox(width: 25.w),
-                    ],
-                  );
-                },
-              ),
+              child: Obx(() => ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: sortController.specialityList.length,
+                    itemBuilder: (context, index) {
+                      final category = sortController.specialityList[index];
+                      return Padding(
+                        padding: EdgeInsetsDirectional.only(end: 15.w),
+                        child: Obx(() => GestureDetector(
+                              onTap: () {
+                                sortController.selectSpeciality(index);
+                                searchResultController.fetchDoctors(
+                                    categoryId: category.id.toString());
+                              },
+                              child: SortChip(
+                                active: sortController.specialityIndex.value ==
+                                    index,
+                                title: category.title,
+                              ),
+                            )),
+                      );
+                    },
+                  )),
             ),
             SizedBox(height: 12.h),
-
             Obx(() {
-              int count = searchController.doctorsList.length;
-              return Container(
-                width: double.infinity,
-                padding: EdgeInsetsDirectional.symmetric(vertical: 4.h),
-                child: Text(
-                  "$count founds",
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.black,
-                  ),
-                  textAlign: TextAlign.left,
-                ),
+              if (searchResultController.isLoading.value) {
+                return const SizedBox.shrink();
+              }
+              return Text(
+                "${searchResultController.doctorsList.length} founds",
+                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
               );
             }),
-
             SizedBox(height: 12.h),
-
             Expanded(
               child: Obx(() {
-                var doctorList = searchController.doctorsList;
-                if (doctorList.isEmpty) {
-                  return Center(
-                    child: Text(
-                      "no_doctors_found".tr,
-                      style: TextStyle(color: AppColors.subtitle),
-                    ),
-                  );
+                if (searchResultController.isLoading.value) {
+                  return const Center(child: CircularProgressIndicator());
                 }
+
+                if (searchResultController.doctorsList.isEmpty) {
+                  return Center(child: Text("no_doctors_found".tr));
+                }
+
                 return ListView.builder(
-                  itemCount: doctorList.length,
+                  itemCount: searchResultController.doctorsList.length,
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
-                    final doctor = doctorList[index];
+                    final doctor = searchResultController.doctorsList[index];
                     return DoctorCard(
-                      image: doctor.image,
+                      image: doctor.avatarUrl ?? '',
                       name: doctor.name,
-                      department: doctor.department,
-                      hospital: doctor.hospital,
-                      rating: doctor.rating,
-                      reviews: doctor.reviews,
+                      department: doctor.specialty,
+                      hospital: doctor.clinic,
+                      rating: doctor.ratingAvg,
+                      reviews: doctor.ratingCount,
                     );
                   },
                 );

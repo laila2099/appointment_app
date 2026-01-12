@@ -24,6 +24,7 @@ class PaymentScreen extends StatelessWidget {
         child: Column(
           children: [
             AppHeader(
+              onBack: Get.back,
               trailing: HeaderButton(
                 child: SvgPicture.asset(
                   AppIcons.scanner,

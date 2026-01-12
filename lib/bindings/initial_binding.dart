@@ -1,3 +1,4 @@
+import 'package:appointment_app/views/home_section/recommendation_doctor/controllers/sort_controller.dart';
 import 'package:get/get.dart';
 
 import '../core/classes/api/api.dart';
@@ -38,5 +39,6 @@ class InitializeBinding extends Bindings {
     // تسجيل InboxController
     Get.put(InboxController());
     Get.put(NavigationController());
+    Get.lazyPut<SortController>(() => SortController(), fenix: true);
   }
 }

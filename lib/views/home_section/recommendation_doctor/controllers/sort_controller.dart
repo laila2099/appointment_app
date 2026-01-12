@@ -1,5 +1,7 @@
+import 'package:appointment_app/views/home_section/home_screen/controller/doctor_controller.dart';
 import 'package:appointment_app/views/home_section/home_screen/model/category_model.dart';
 import 'package:appointment_app/views/home_section/recommendation_doctor/models/sort_model.dart';
+import 'package:appointment_app/views/search_section/controller/search_result_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -74,11 +76,14 @@ class SortController extends GetxController {
   }
 
   void done() {
-    final selected = specialityList[specialityIndex.value];
+    final selectedId = specialityList[specialityIndex.value].id.toString();
 
-    final String? categoryId =
-        (selected.title == 'general') ? null : selected.id;
+    if (Get.isRegistered<SearchResultController>()) {
+      Get.find<SearchResultController>().fetchDoctors(categoryId: selectedId);
+    } else if (Get.isRegistered<DoctorController>()) {
+      Get.find<DoctorController>().filterDoctors(categoryId: selectedId);
+    }
 
-    Get.back(result: categoryId);
+    Get.back();
   }
 }

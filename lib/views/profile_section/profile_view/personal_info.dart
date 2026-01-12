@@ -25,6 +25,7 @@ class PersonalInfo extends StatelessWidget {
         child: Column(
           children: [
             AppHeader(
+              onBack: Get.back,
               center: Text(
                 "personal_information".tr,
                 style: CustomTextStyles.screenTitle,

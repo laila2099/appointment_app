@@ -25,6 +25,7 @@ class MedicalRecordsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppHeader(
+                onBack: Get.back,
                 center: Text(
                   "medical_record".tr,
                   style: CustomTextStyles.screenTitle,
