@@ -6,7 +6,8 @@ import '../../../models/doctor_model.dart';
 import '../model/inbox_model.dart';
 
 class InboxController extends GetxController {
-  final DoctorRepository doctorRepo = Get.find<DoctorRepository>();
+  final DoctorRepository doctorRepo = DoctorRepository(
+      api: ApiClient(baseUrl: 'https://hlpmplopjolzmntqrjky.supabase.co'));
 
   RxList<InboxModel> inboxList = <InboxModel>[].obs;
   RxBool isLoading = false.obs;
@@ -14,37 +15,30 @@ class InboxController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    fetchInboxDoctors();
+    loadInbox();
   }
 
-  Future<void> fetchInboxDoctors({String? categoryId}) async {
-    try {
-      isLoading.value = true;
-      final ApiResult<List<Doctor>> result;
+  void loadInbox() async {
+    isLoading.value = true;
 
-      if (categoryId != null && categoryId.isNotEmpty) {
-        result =
-            await doctorRepo.filterDoctorsByCategory(categoryId: categoryId);
-      } else {
-        result = await doctorRepo.getAllDoctors();
-      }
+    final ApiResult<List<Doctor>> result = await doctorRepo.getAllDoctors();
 
-      if (result.isSuccess) {
-        final doctors = result.data ?? [];
-        inboxList.value = doctors.map((doctor) {
-          return InboxModel(
-            name: doctor.name,
-            message: doctor.specialty,
-            unreadCount: 0,
-            time: '',
-            image: doctor.avatarUrl ?? '',
-          );
-        }).toList();
-      } else {
-        Get.snackbar("Error", result.errorMessage ?? "Failed to load messages");
-      }
-    } finally {
-      isLoading.value = false;
+    if (result is ApiSuccess<List<Doctor>>) {
+      final doctors = result.data;
+      inboxList.value = doctors.map((doctor) {
+        return InboxModel(
+          name: doctor.name,
+          message: doctor.specialty,
+          unreadCount: 0,
+          time: '',
+          image: '',
+        );
+      }).toList();
+    } else if (result is ApiFailure) {
+      print('Failed to load doctors: ${result.errorMessage}');
+      inboxList.clear();
     }
+
+    isLoading.value = false;
   }
 }

@@ -44,8 +44,6 @@ class SearchView extends StatelessWidget {
                 SizedBox(width: 8.w),
                 IconButton(
                   onPressed: () async {
-                    Get.find<SortController>().currentTarget =
-                        FilterTarget.search;
                     final result =
                         await showModalBottomSheet<Map<String, dynamic>>(
                       context: context,
