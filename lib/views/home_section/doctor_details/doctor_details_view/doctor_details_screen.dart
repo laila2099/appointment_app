@@ -1,3 +1,4 @@
+import 'package:appointment_app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -71,7 +72,9 @@ class DoctorDetailsScreen extends GetView<DoctorDetailsController> {
                 reviewsCount: doctor.ratingCount,
                 avatar: const AssetImage(AppImages.doctor),
                 onChatTap: () {
-                  print("MODEL IMAGE => ${doctor.avatarUrl}");
+                  Get.toNamed(AppRoutes.chat, arguments: {
+                    'name': doctor.name,
+                  });
                 },
               ),
               SizedBox(height: 8.h),

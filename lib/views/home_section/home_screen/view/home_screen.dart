@@ -279,7 +279,6 @@ class HomeScreen extends StatelessWidget {
                         },
                       );
                     }),
-                    // SizedBox(height: AppSize.bottomNavHeight),
                   ],
                 )),
               ),

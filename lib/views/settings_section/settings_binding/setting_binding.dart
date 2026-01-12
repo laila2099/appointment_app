@@ -12,6 +12,6 @@ class SettingBinding extends Bindings {
     Get.lazyPut(() => SecurityController());
     Get.lazyPut(() => HelpController());
     Get.lazyPut(() => NotificationController());
-    // Get.lazyPut(() => LanguageController());
+    Get.lazyPut(() => LanguageController());
   }
 }

@@ -63,24 +63,34 @@ class InboxView extends GetView<InboxController> {
                   ),
                   SizedBox(height: 20.h),
                   Expanded(
-                    child: Obx(
-                      () => ListView.separated(
-                        itemCount: controller.inboxList.length,
-                        itemBuilder: (context, index) {
-                          return InboxItem(
-                            onTap: () {
-                              Get.toNamed(AppRoutes.chat);
+                    child: SafeArea(
+                      bottom: true,
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 16.h),
+                        child: Obx(
+                          () => ListView.separated(
+                            itemCount: controller.inboxList.length,
+                            itemBuilder: (context, index) {
+                              return InboxItem(
+                                onTap: () {
+                                  final doctor = controller.inboxList[index];
+                                  Get.toNamed(AppRoutes.chat, arguments: {
+                                    'name': doctor.name,
+                                    'avatar': doctor.image,
+                                  });
+                                },
+                                model: controller.inboxList[index],
+                              );
                             },
-                            model: controller.inboxList[index],
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return Divider(
-                            color: AppColors.separator,
-                            thickness: 1,
-                            height: 12.h,
-                          );
-                        },
+                            separatorBuilder: (context, index) {
+                              return Divider(
+                                color: AppColors.separator,
+                                thickness: 1,
+                                height: 12.h,
+                              );
+                            },
+                          ),
+                        ),
                       ),
                     ),
                   ),

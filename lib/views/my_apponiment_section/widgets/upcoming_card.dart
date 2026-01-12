@@ -1,6 +1,7 @@
 import 'package:appointment_app/core/constant/app_colors.dart';
 import 'package:appointment_app/core/constant/app_images.dart';
 import 'package:appointment_app/models/appoitments_details.dart';
+import 'package:appointment_app/routes/app_routes.dart';
 import 'package:appointment_app/views/my_apponiment_section/my_appoitment_controller/my_appoitment_controller.dart';
 import 'package:appointment_app/views/my_apponiment_section/widgets/status_button.dart';
 import 'package:appointment_app/widgets/general_widgets/doctor_tile.dart';
@@ -42,7 +43,11 @@ class UpcomingCard extends StatelessWidget {
               time: DateFormat('hh:mm a').format(appt.appointmentDateTime),
               avatar: const AssetImage(AppImages.doctor),
               showChat: true,
-              onChatTap: () {},
+              onChatTap: () {
+                Get.toNamed(AppRoutes.chat, arguments: {
+                  'name': appt.doctorName,
+                });
+              },
             ),
             SizedBox(height: 15.h),
             Container(height: 1.h, color: AppColors.separator),

@@ -33,12 +33,6 @@ class InitializeBinding extends Bindings {
         repo: Get.find<AuthRepository>(),
         prefs: Get.find<AppPreferencesService>()));
 
-    // تسجيل MyAppointmentsController
-    Get.put(MyAppointmentsController(), permanent: true);
-
-    // تسجيل InboxController
-    Get.put(InboxController());
-    Get.put(NavigationController());
     Get.lazyPut<SortController>(() => SortController(), fenix: true);
   }
 }

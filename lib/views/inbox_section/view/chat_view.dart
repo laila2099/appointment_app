@@ -6,15 +6,18 @@ import '../../../core/constant/app_colors.dart';
 import '../controller/chat_controller.dart';
 
 class ChatView extends StatelessWidget {
-  final ChatController controller = Get.put(ChatController());
+  final controller = Get.find<ChatController>();
 
   ChatView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final args = Get.arguments as Map<String, dynamic>? ?? {};
+    final doctorName = args['name'] ?? 'Unknown Doctor';
+
     return Scaffold(
       appBar: CustomAppBar(
-        titel: 'Dr. Randy Wigham',
+        titel: doctorName,
         subTitle: 'online',
         showAction: true,
         actionicon: Icon(Icons.video_call, color: Colors.grey),
