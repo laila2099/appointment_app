@@ -159,6 +159,11 @@ class LoginView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SocialButton(
+                        imagePath: AppImages.google,
+                        onTap: () {},
+                      ),
+                      SizedBox(width: 16.w),
+                      SocialButton(
                         imagePath: AppImages.facebook,
                         onTap: () {},
                       ),
