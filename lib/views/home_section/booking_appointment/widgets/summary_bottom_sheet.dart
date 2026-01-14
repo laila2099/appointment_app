@@ -2,6 +2,7 @@ import 'package:appointment_app/views/home_section/booking_appointment/booking_a
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
 import '../../../../core/constant/app_colors.dart';
 import '../../../../core/constant/text_style.dart';
 import '../../../../widgets/general_widgets/primary_button.dart';
@@ -10,7 +11,7 @@ class SummaryBottomSheet extends StatelessWidget {
   final num subtotal;
   final num tax;
 
-   SummaryBottomSheet({
+  SummaryBottomSheet({
     super.key,
     required this.subtotal,
     required this.tax,
@@ -96,14 +97,14 @@ class _TotalRow extends StatelessWidget {
     final style = TextStyle(
       fontSize: bold ? 16.sp : 14.sp,
       fontWeight: bold ? FontWeight.w800 : FontWeight.w600,
-      color: AppColors.black,
+      color: bold ? AppColors.black : AppColors.subtitle,
     );
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: style.copyWith(color: AppColors.subtitle)),
-        Text(value, style: style),
+        Text(label, style: style),
+        Text(value, style: style.copyWith(color: AppColors.black)),
       ],
     );
   }

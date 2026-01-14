@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../core/classes/utils/date_text.dart';
+import '../../../core/constant/app_colors.dart';
 import '../../../views/home_section/booking_appointment/booking_appointment_controller/date_wheel_controller.dart';
 
 class CenterSnapDatePicker extends StatelessWidget {
@@ -12,7 +13,7 @@ class CenterSnapDatePicker extends StatelessWidget {
 
   const CenterSnapDatePicker({
     super.key,
-    this.itemHeight = 60,
+    this.itemHeight = 62,
     this.padding = EdgeInsetsDirectional.zero,
     required this.controller,
   });
@@ -33,7 +34,7 @@ class CenterSnapDatePicker extends StatelessWidget {
               enabled: canLeft,
               onTap: () => controller.step(-1),
             ),
-            SizedBox(width: 10.w),
+            SizedBox(width: 8.w),
             Expanded(
               child: SizedBox(
                 height: itemHeight * 1.45,
@@ -49,7 +50,7 @@ class CenterSnapDatePicker extends StatelessWidget {
                         ? (controller.datePageController.page ?? idx.toDouble())
                         : idx.toDouble();
 
-                    final dist = (i - current).abs().clamp(0.0, 2.0);
+                    final dist = (i - current).abs().clamp(0.0, 1.0);
                     final scale = 1.18 - (dist * 0.12);
                     final selected = i == idx;
 
@@ -98,8 +99,8 @@ class _Arrow extends StatelessWidget {
       onTap: enabled ? onTap : null,
       borderRadius: BorderRadius.circular(12.r),
       child: SizedBox(
-        width: 31.w,
-        height: 42.h,
+        width: 24.w,
+        height: 24.h,
         child: Icon(
           icon,
           size: 18.sp,
@@ -129,18 +130,17 @@ class _DateChip extends StatelessWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 100),
       curve: Curves.easeOut,
-      height: height,
-      margin: EdgeInsetsDirectional.symmetric(horizontal: 5.w),
-      padding: EdgeInsetsDirectional.symmetric(vertical: 7.h),
+      height: selected ? height.h : 48.h,
+      width: selected ? 55.w : 43.w,
       decoration: BoxDecoration(
-        color: selected ? const Color(0xFF2F6BFF) : const Color(0xFFF3F4F6),
-        borderRadius: BorderRadius.circular(14.r),
+        color: selected ? const Color(0xFF2F6BFF) : Colors.white,
+        borderRadius: BorderRadius.circular(12.r),
         boxShadow: selected
             ? [
                 BoxShadow(
                   color: Colors.blue.withOpacity(.22),
                   blurRadius: 14.r,
-                  offset: const Offset(0, 5),
+                  offset: const Offset(0, 1),
                 ),
               ]
             : [],
@@ -152,10 +152,10 @@ class _DateChip extends StatelessWidget {
             Text(
               dayName,
               style: TextStyle(
-                fontSize: selected ? 15.sp : 14.sp,
+                fontSize: selected ? 15.sp : 12.sp,
                 height: 1.0,
                 fontWeight: FontWeight.w600,
-                color: selected ? Colors.white : Colors.black.withOpacity(.35),
+                color: selected ? Colors.white : AppColors.textField,
               ),
             ),
             SizedBox(height: 4.h),

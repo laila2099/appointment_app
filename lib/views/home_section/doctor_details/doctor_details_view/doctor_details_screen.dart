@@ -70,7 +70,7 @@ class DoctorDetailsScreen extends GetView<DoctorDetailsController> {
                 clinic: doctor.clinic,
                 rating: doctor.ratingAvg,
                 reviewsCount: doctor.ratingCount,
-                avatar: const AssetImage(AppImages.doctor),
+                avatar: AppImages.doctor,
                 onChatTap: () {
                   Get.toNamed(AppRoutes.chat, arguments: {
                     'name': doctor.name,

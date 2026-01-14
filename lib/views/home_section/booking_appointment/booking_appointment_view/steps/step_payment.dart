@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../../../../core/constant/app_colors.dart';
 import '../../../../../models/payment_method.dart';
 import '../../../../../widgets/general_widgets/section_title.dart';
 import '../../booking_appointment_controller/booking_controller.dart';
@@ -50,7 +52,6 @@ class StepPayment extends StatelessWidget {
             ...c.cardMethods.map(
               (m) => _CardRow(
                 method: m,
-                selected: c.selectedPayment.value?.id == m.id,
                 onTap: () => c.selectPayment(m),
               ),
             ),
@@ -124,66 +125,84 @@ class _RadioRow extends StatelessWidget {
 
 class _CardRow extends StatelessWidget {
   final PaymentMethod method;
-  final bool selected;
   final VoidCallback onTap;
 
   const _CardRow({
     required this.method,
-    required this.selected,
     required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    final subtitle = (method.last4 == null || method.last4!.isEmpty)
-        ? ''
-        : '•••• ${method.last4}';
+    final title = method.label;
 
     return InkWell(
       onTap: onTap,
       child: Column(
         children: [
-          SizedBox(height: 12.h),
+          SizedBox(height: 14.h),
           Padding(
             padding: EdgeInsetsDirectional.only(start: 42.w),
             child: Row(
               children: [
-                Container(
-                  width: 34.w,
-                  height: 34.h,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
-                    borderRadius: BorderRadius.circular(8.r),
-                  ),
-                  child: Icon(Icons.credit_card, size: 18.sp),
-                ),
-                SizedBox(width: 12.w),
+                _CardLogo(icon: method.icon),
+                SizedBox(width: 14.w),
                 Expanded(
                   child: Text(
-                    subtitle.isEmpty
-                        ? method.label
-                        : '${method.label}  $subtitle',
+                    title,
                     style: TextStyle(
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w400,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.black,
                     ),
                   ),
-                ),
-                InkWell(
-                  onTap: onTap,
-                  borderRadius: BorderRadius.circular(12.r),
-                  child: RadioDot(selected: selected),
                 ),
               ],
             ),
           ),
-          SizedBox(height: 12.h),
+          SizedBox(height: 14.h),
           Padding(
             padding: EdgeInsetsDirectional.only(start: 42.w),
-            child: Divider(height: 18.h, color: Colors.grey.withOpacity(.2)),
+            child: Divider(
+              height: 1,
+              thickness: 1,
+              color: Colors.black.withOpacity(.10),
+            ),
           ),
         ],
       ),
+    );
+  }
+}
+
+class _CardLogo extends StatelessWidget {
+  final String icon;
+  const _CardLogo({required this.icon});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 34.w,
+      height: 34.w,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10.r),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(.06),
+            blurRadius: 10.r,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: icon.isNotEmpty
+          ? SvgPicture.asset(icon)
+          : Icon(
+              Icons.credit_card,
+              size: 18.sp,
+              color: Colors.black.withOpacity(.45),
+            ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../../core/classes/api/api_result.dart';
 import '../../../../core/classes/repositories/profile_repository.dart';
 import '../../../../core/classes/utils/app_snackbar.dart';
@@ -71,6 +72,7 @@ class AuthFillProfileController extends GetxController {
       final res = await repo.setProfile(
         accessToken: accessToken,
         id: userId,
+        email: emailController.text.trim(),
         fullName: fullNameController.text.trim(),
         phone: phoneRx.value.trim(),
         birthdate: (birthdateController.text.trim().isEmpty)

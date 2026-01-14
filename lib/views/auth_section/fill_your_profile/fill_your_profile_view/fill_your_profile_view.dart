@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../../../core/constant/app_colors.dart';
 import '../../../../../core/constant/app_images.dart';
 import '../../../../../core/constant/text_style.dart';
@@ -161,18 +162,14 @@ class FillYourProfileView extends StatelessWidget {
                           ? "Saving..."
                           : "Submit",
                       onTap: () {
-                        profileController.isLoading.value
-                            ? null
-                            : () {
-                                if (profileController.formKey.currentState
-                                        ?.validate() ??
-                                    false) {
-                                  profileController.setProfile();
-                                } else {
-                                  AppSnackBar.error(
-                                      'Please fix the errors in the form');
-                                }
-                              };
+                        if (profileController.formKey.currentState
+                                ?.validate() ??
+                            false) {
+                          profileController.setProfile();
+                        } else {
+                          AppSnackBar.error(
+                              'Please fix the errors in the form');
+                        }
                       }),
                 ),
               ),

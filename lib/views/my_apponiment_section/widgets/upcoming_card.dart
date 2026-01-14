@@ -41,7 +41,7 @@ class UpcomingCard extends StatelessWidget {
               dateText:
                   DateFormat('EEE, dd MMM').format(appt.appointmentDateTime),
               time: DateFormat('hh:mm a').format(appt.appointmentDateTime),
-              avatar: const AssetImage(AppImages.doctor),
+              avatar: AppImages.doctor,
               showChat: true,
               onChatTap: () {
                 Get.toNamed(AppRoutes.chat, arguments: {

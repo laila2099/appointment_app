@@ -46,7 +46,8 @@ class RescheduleSummary extends StatelessWidget {
             iconBg: AppColors.secondBlue,
             iconColor: AppColors.primary,
             title: 'date_time'.tr,
-            subtitle: formatDateTime(context, a.appointmentDate, a.appointmentTime),
+            subtitle:
+                formatDateTime(context, a.appointmentDate, a.appointmentTime),
           ),
           SummaryRow(
             svgAsset: AppIcons.clipboard,
@@ -65,7 +66,7 @@ class RescheduleSummary extends StatelessWidget {
               clinic: doctor.clinic,
               rating: doctor.ratingAvg,
               reviewsCount: doctor.ratingCount,
-              avatar: const AssetImage(AppImages.doctor),
+              avatar: AppImages.doctor,
               showChat: false,
             ),
           SizedBox(height: 18.h),
