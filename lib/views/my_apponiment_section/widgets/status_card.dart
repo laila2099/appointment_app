@@ -96,7 +96,7 @@ class StatusCard extends StatelessWidget {
               clinic: appt.clinic,
               rating: appt.rating,
               reviewsCount: appt.reviewsCount,
-              avatar: const AssetImage(AppImages.nurse),
+              avatar: AppImages.nurse,
             ),
           ],
         ),

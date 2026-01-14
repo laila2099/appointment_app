@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
 import '../../../../../core/classes/utils/format_date_time.dart';
 import '../../../../../core/constant/app_colors.dart';
 import '../../../../../core/constant/app_icons.dart';
@@ -33,14 +34,13 @@ class StepSummary extends StatelessWidget {
           SizedBox(height: 12.h),
           SummaryRow(
             svgAsset: AppIcons.calendar2,
-            iconBg: AppColors.secondBlue,
             iconColor: AppColors.primary,
             title: 'date_time'.tr,
-            subtitle: formatDateTime(context, a.appointmentDate, a.appointmentTime),
+            subtitle:
+                formatDateTime(context, a.appointmentDate, a.appointmentTime),
           ),
           SummaryRow(
             svgAsset: AppIcons.clipboard,
-            iconBg: AppColors.secondGreen,
             iconColor: AppColors.green,
             title: 'appointment_type'.tr,
             subtitle: type.label.tr,
@@ -55,8 +55,8 @@ class StepSummary extends StatelessWidget {
               clinic: doctor.clinic,
               rating: doctor.ratingAvg,
               reviewsCount: doctor.ratingCount,
-              avatar: const AssetImage(AppImages.doctor),
               showChat: false,
+              avatar: AppImages.doctor,
             ),
           SizedBox(height: 18.h),
           SectionTitle('payment_information'.tr),

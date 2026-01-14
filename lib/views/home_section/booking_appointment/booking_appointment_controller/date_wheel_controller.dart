@@ -13,11 +13,13 @@ class DateWheelController extends GetxController {
 
     datePageController = PageController(
       initialPage: centeredDateIndex.value,
-      viewportFraction: 1 / visibleCount,
+      viewportFraction: 0.26,
     );
 
     datePageController.addListener(_onDateWheelScroll);
   }
+
+  final viewportFraction = 0.19.obs;
 
   final int visibleCount;
   final ValueChanged<DateTime>? onChanged;
@@ -27,16 +29,6 @@ class DateWheelController extends GetxController {
 
   late final PageController datePageController;
 
-  void _seed() {
-    final now = DateTime.now();
-    final base = DateTime(now.year, now.month, now.day);
-
-    availableDates.assignAll(
-      List.generate(60, (i) => base.add(Duration(days: i))),
-    );
-  }
-
-  // ------- public API (نفس اللي عندك)
   void setCenteredIndex(int i) {
     if (availableDates.isEmpty) return;
 

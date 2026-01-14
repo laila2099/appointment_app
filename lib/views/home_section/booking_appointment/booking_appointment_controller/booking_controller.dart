@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/classes/repositories/appointment_repository.dart';
+import '../../../../core/constant/app_icons.dart';
 import '../../../../core/constant/app_keys.dart';
 import '../../../../core/services/shared_prefrences.dart';
 import '../../../../models/appointment_model.dart';
@@ -119,8 +120,10 @@ class BookingController extends GetxController {
         label: 'Paypal',
         last4: '3784',
         isDefault: true,
+        icon: AppIcons.paypal,
       ),
-      PaymentMethod(id: 'pm_2', type: 'card', label: 'Visa', last4: '1122'),
+      PaymentMethod(
+          id: 'pm_2', type: 'card', label: 'Visa', last4: '1122', icon: ''),
     ]);
 
     selectedPayment.value = paymentMethods.firstWhereOrNull((e) => e.isDefault);
@@ -247,22 +250,38 @@ class BookingController extends GetxController {
           label: 'Master Card',
           last4: '3784',
           isDefault: true,
+          icon: AppIcons.masterCard,
         ),
         const PaymentMethod(
           id: 'pm_2',
           type: 'card',
           label: 'American Express',
           last4: '1122',
+          icon: AppIcons.americanExpress,
+        ),
+        const PaymentMethod(
+          id: 'pm_3',
+          type: 'card',
+          label: 'Capital One',
+          icon: AppIcons.capitalOne,
+        ),
+        const PaymentMethod(
+          id: 'pm_4',
+          type: 'card',
+          label: 'Barclays',
+          icon: AppIcons.barclays,
         ),
         const PaymentMethod(
           id: 'pm_5',
           type: 'paypal',
           label: 'Paypal',
+          icon: AppIcons.paypal,
         ),
         const PaymentMethod(
           id: 'pm_6',
           type: 'bank',
           label: 'Bank Transfer',
+          icon: '',
         ),
       ];
 

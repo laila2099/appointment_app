@@ -4,6 +4,7 @@ class PaymentMethod {
   final String label;
   final String? last4;
   final bool isDefault;
+  final String icon;
 
   const PaymentMethod({
     required this.id,
@@ -11,5 +12,6 @@ class PaymentMethod {
     required this.label,
     this.last4,
     this.isDefault = false,
+    required this.icon,
   });
 }

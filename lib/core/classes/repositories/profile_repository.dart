@@ -14,12 +14,14 @@ class ProfileRepository {
     required String fullName,
     required String phone,
     String? birthdate,
+    String? email,
   }) {
     final body = <String, dynamic>{
       'id': id,
       'full_name': fullName,
       'phone': phone,
       'birthdate': birthdate,
+      'email': email ?? '',
     };
 
     return api.post<UserProfile>(

@@ -32,7 +32,7 @@ class MedicalRecordsScreen extends StatelessWidget {
                 ),
                 trailing: HeaderButton(
                   child: SvgPicture.asset(
-                    AppIcons.three_point,
+                    AppIcons.threePoint,
                     width: 22.sp,
                     height: 22.sp,
                     colorFilter: const ColorFilter.mode(
