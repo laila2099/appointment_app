@@ -1,6 +1,5 @@
 import 'package:appointment_app/core/constant/app_icons.dart';
 import 'package:appointment_app/routes/app_routes.dart';
-import 'package:appointment_app/views/home_section/recommendation_doctor/widgets/custom_bottom_sheet.dart';
 import 'package:appointment_app/views/inbox_section/view/widget/Bottom_Sheet.dart';
 import 'package:appointment_app/views/inbox_section/view/widget/inbox_item.dart';
 import 'package:appointment_app/widgets/general_widgets/app_header/app_header.dart';
@@ -26,7 +25,7 @@ class InboxView extends GetView<InboxController> {
       body: Column(
         children: [
           AppHeader(
-            center: HeaderTitle('message'.tr),
+            center: HeaderTitle('Message'),
             trailing: HeaderButton(
               onTap: () {
                 showInboxSheet(context);
@@ -41,56 +40,44 @@ class InboxView extends GetView<InboxController> {
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsetsDirectional.symmetric(
-                  horizontal: 16.w, vertical: 20.h),
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
               child: Column(
                 children: [
                   Row(
                     children: [
                       Expanded(
-                        child: SearchTextField(
-                          hintText: 'search_message'.tr,
+                        child: const SearchTextField(
+                          hintText: 'Search Message',
                         ),
                       ),
                       SizedBox(width: 8.w),
-                      IconButton(
-                        onPressed: () => Get.bottomSheet(CustomBottomSheet()),
-                        icon: Icon(Icons.filter_list),
+                      Icon(
+                        Icons.filter_list,
                         color: AppColors.black,
-                        iconSize: 24.w,
+                        size: 24.w,
                       ),
                     ],
                   ),
                   SizedBox(height: 20.h),
                   Expanded(
-                    child: SafeArea(
-                      bottom: true,
-                      child: Padding(
-                        padding: EdgeInsets.only(bottom: 16.h),
-                        child: Obx(
-                          () => ListView.separated(
-                            itemCount: controller.inboxList.length,
-                            itemBuilder: (context, index) {
-                              return InboxItem(
-                                onTap: () {
-                                  final doctor = controller.inboxList[index];
-                                  Get.toNamed(AppRoutes.chat, arguments: {
-                                    'name': doctor.name,
-                                    'avatar': doctor.image,
-                                  });
-                                },
-                                model: controller.inboxList[index],
-                              );
+                    child: Obx(
+                      () => ListView.separated(
+                        itemCount: controller.inboxList.length,
+                        itemBuilder: (context, index) {
+                          return InboxItem(
+                            onTap: () {
+                              Get.toNamed(AppRoutes.chat);
                             },
-                            separatorBuilder: (context, index) {
-                              return Divider(
-                                color: AppColors.separator,
-                                thickness: 1,
-                                height: 12.h,
-                              );
-                            },
-                          ),
-                        ),
+                            model: controller.inboxList[index],
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return Divider(
+                            color: AppColors.separator,
+                            thickness: 1,
+                            height: 12.h,
+                          );
+                        },
                       ),
                     ),
                   ),

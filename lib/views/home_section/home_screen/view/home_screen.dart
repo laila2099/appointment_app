@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/constant/app_size.dart';
 import '../../../../core/services/auth_gate_service.dart';
 import '../../../profile_section/profile_controller/profile_controller.dart';
 
@@ -39,16 +38,16 @@ class HomeScreen extends StatelessWidget {
         padding: EdgeInsetsDirectional.all(16.r),
         child: Column(
           children: [
-            SizedBox(height: 12.h),
+            SizedBox(height: 10.h),
             SizedBox(
-              height: 72.h,
+              height: 65.h,
               child: Row(
                 children: [
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(height: 10),
+                        SizedBox(height: 5.h),
                         Obx(() {
                           final name = profileController.profile.value?.name;
                           return Text(
