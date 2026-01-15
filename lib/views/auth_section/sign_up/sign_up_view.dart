@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' hide TextField;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
 import '../../../core/constant/app_colors.dart';
 import '../../../core/constant/app_images.dart';
 import '../../../core/constant/text_style.dart';
@@ -15,7 +16,8 @@ import '../widgets/socialButton.dart';
 import 'package:country_picker/country_picker.dart';
 
 class CreateAccountView extends StatelessWidget {
-  const CreateAccountView({super.key});
+  CreateAccountView({super.key});
+  final AuthController authController = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,8 @@ class CreateAccountView extends StatelessWidget {
       backgroundColor: AppColors.white,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          padding: const EdgeInsetsDirectional.symmetric(
+              horizontal: 24, vertical: 16),
           child: Form(
             key: authController.signUpFormKey,
             child: Column(
@@ -35,14 +38,15 @@ class CreateAccountView extends StatelessWidget {
 
                 // Title
                 Text(
-                  "Create Account",
+                  "create_account".tr,
                   style: CustomTextStyles.headline32Bold,
                 ),
                 SizedBox(height: 16.h),
 
                 // Subtitle
                 Text(
-                  "Sign up now and start exploring all that our app has to offer. We're excited to welcome you to our community!",
+                  "Sign up now and start exploring all that our app has to offer. We're excited to welcome you to our community!"
+                      .tr,
                   style: CustomTextStyles.subTitle
                       .copyWith(fontSize: 20, height: 1.5),
                 ),
@@ -51,7 +55,7 @@ class CreateAccountView extends StatelessWidget {
                 // Email
                 CustomTextField(
                   controller: authController.emailController,
-                  hint: "Email",
+                  hint: "Email".tr,
                   keyboardType: TextInputType.emailAddress,
                   tfBackground: AppColors.textField2,
                   validator: Validators.validateEmail,
@@ -61,7 +65,7 @@ class CreateAccountView extends StatelessWidget {
                 // Password
                 CustomTextField(
                   controller: authController.passwordController,
-                  hint: "Password",
+                  hint: "Password".tr,
                   tfBackground: AppColors.textField2,
                   isPassword: true,
                   validator: Validators.validatePassword,
@@ -69,25 +73,25 @@ class CreateAccountView extends StatelessWidget {
                 SizedBox(height: 16.h),
 
                 Obx(
-                    ()=>PhoneFieldWidget(
-                      country: authController.selectedCountry.value,
-                      controller: authController.phoneController,
-                      validator: (value) =>
-                          Validators.validatePhone(value, authController.selectedCountry),
-                      onChanged: (value) {
-                        authController.phoneController.text = value;
-                      },
-                      onTapCountry: () {
-                        showCountryPicker(
-                          context: context,
-                          showPhoneCode: false,
-                          onSelect: (country) {
-                            authController.selectedCountry.value = country;
-                            authController.signUpFormKey.currentState?.validate();
-                          },
-                        );
-                      },
-                    ),
+                  () => PhoneFieldWidget(
+                    country: authController.selectedCountry.value,
+                    controller: authController.phoneController,
+                    validator: (value) => Validators.validatePhone(
+                        value, authController.selectedCountry),
+                    onChanged: (value) {
+                      authController.phoneController.text = value;
+                    },
+                    onTapCountry: () {
+                      showCountryPicker(
+                        context: context,
+                        showPhoneCode: false,
+                        onSelect: (country) {
+                          authController.selectedCountry.value = country;
+                          authController.signUpFormKey.currentState?.validate();
+                        },
+                      );
+                    },
+                  ),
                 ),
 
                 SizedBox(height: 37.h),
@@ -120,9 +124,10 @@ class CreateAccountView extends StatelessWidget {
                   children: [
                     const Expanded(child: Divider()),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      padding:
+                          const EdgeInsetsDirectional.symmetric(horizontal: 8),
                       child: Text(
-                        "Or sign up with",
+                        "or_sign_up_with".tr,
                         style: CustomTextStyles.subtitle,
                       ),
                     ),
@@ -164,18 +169,17 @@ class CreateAccountView extends StatelessWidget {
                       text: TextSpan(
                         style: CustomTextStyles.subtitle,
                         children: [
-                          const TextSpan(
-                              text: "By signing up, you agree to our "),
+                          TextSpan(text: "signup_terms_prefix".tr),
                           TextSpan(
-                            text: "Terms & Conditions",
+                            text: "terms_conditions".tr,
                             style: CustomTextStyles.subtitle.copyWith(
                               fontWeight: FontWeight.w600,
                               color: AppColors.black,
                             ),
                           ),
-                          const TextSpan(text: " and "),
+                          TextSpan(text: " and ".tr),
                           TextSpan(
-                            text: "Privacy Policy",
+                            text: "privacy_policy".tr,
                             style: CustomTextStyles.subtitle.copyWith(
                               fontWeight: FontWeight.w600,
                               color: AppColors.black,
@@ -193,11 +197,11 @@ class CreateAccountView extends StatelessWidget {
                       text: TextSpan(
                         style: CustomTextStyles.subtitle,
                         children: [
-                          const TextSpan(
-                            text: "Already have an account? ",
+                          TextSpan(
+                            text: "already_have_account".tr,
                           ),
                           TextSpan(
-                            text: "Login",
+                            text: "login".tr,
                             style: CustomTextStyles.subtitle.copyWith(
                               color: AppColors.primary,
                               fontWeight: FontWeight.w600,

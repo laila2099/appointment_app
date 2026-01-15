@@ -10,7 +10,7 @@ class SectionTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 6.h),
+      padding: EdgeInsetsDirectional.only(bottom: 6.h),
       child: Text(text,
           style: TextStyle(
             fontSize: 16.sp,

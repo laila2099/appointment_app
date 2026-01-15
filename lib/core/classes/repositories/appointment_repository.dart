@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import '../../../models/appointment_model.dart';
+import '../../../models/appoitments_details.dart';
 import '../api/api.dart';
 import '../api/api_endpoints.dart';
 import '../api/api_headers.dart';
@@ -24,9 +26,9 @@ class AppointmentRepository {
       body: {
         'doctor_id': appointment.doctorId,
         'appointment_date':
-        appointment.appointmentDate.toIso8601String().split('T').first,
+            appointment.appointmentDate.toIso8601String().split('T').first,
         'appointment_time':
-        '${appointment.appointmentTime.hour.toString().padLeft(2, '0')}:${appointment.appointmentTime.minute.toString().padLeft(2, '0')}',
+            '${appointment.appointmentTime.hour.toString().padLeft(2, '0')}:${appointment.appointmentTime.minute.toString().padLeft(2, '0')}',
         'payment_method': appointment.paymentMethod,
       },
       parser: (json) {
@@ -52,14 +54,15 @@ class AppointmentRepository {
     DateTime? appointmentDate,
     DateTime? appointmentTime,
     String? paymentMethod,
+    String? status,
   }) {
     final body = <String, dynamic>{
+      if (status != null) 'status': status,
       if (appointmentDate != null)
-        'appointment_date':
-        appointmentDate.toIso8601String().split('T').first,
+        'appointment_date': appointmentDate.toIso8601String().split('T').first,
       if (appointmentTime != null)
         'appointment_time':
-        '${appointmentTime.hour.toString().padLeft(2, '0')}:${appointmentTime.minute.toString().padLeft(2, '0')}',
+            '${appointmentTime.hour.toString().padLeft(2, '0')}:${appointmentTime.minute.toString().padLeft(2, '0')}',
       if (paymentMethod != null) 'payment_method': paymentMethod,
     };
 
@@ -97,22 +100,58 @@ class AppointmentRepository {
     );
   }
 
-  /// جلب كل المواعيد
-  Future<ApiResult<List<Appointment>>> getAppointments({
+  /// Get all appointments with doctor
+  Future<ApiResult<List<AppointmentDetailsModel>>> getAppointments({
     required String accessToken,
   }) {
-    return api.get<List<Appointment>>(
-      endpoint: ApiEndpoints.appointments,
+    return api.get<List<AppointmentDetailsModel>>(
+      endpoint: ApiEndpoints.appointmentsWithDoctor,
       headers: ApiHeaders.authed(accessToken),
       parser: (json) {
         if (json is List) {
           return json
-              .whereType<Map<String, dynamic>>()
-              .map(Appointment.fromJson)
+              .map((e) =>
+                  AppointmentDetailsModel.fromJson(e as Map<String, dynamic>))
               .toList();
         }
-        return <Appointment>[];
+        throw Exception('Unexpected response');
       },
+    );
+  }
+
+  /// Get appointments by status (upcoming / completed / cancelled)
+  Future<ApiResult<List<AppointmentDetailsModel>>> getAppointmentsByStatus({
+    required String accessToken,
+    required String status,
+  }) {
+    return api.get<List<AppointmentDetailsModel>>(
+      endpoint: ApiEndpoints.filterAppointments(status),
+      headers: ApiHeaders.authed(accessToken),
+      parser: (json) {
+        if (json is List) {
+          return json
+              .map((e) =>
+                  AppointmentDetailsModel.fromJson(e as Map<String, dynamic>))
+              .toList();
+        }
+        throw Exception('Unexpected response');
+      },
+    );
+  }
+
+  /// Cancel appointment
+  Future<ApiResult<void>> cancelAppointment({
+    required String accessToken,
+    required String appointmentId,
+  }) {
+    print(ApiEndpoints.editAppointment(appointmentId));
+    return api.patch<void>(
+      endpoint: ApiEndpoints.editAppointment(appointmentId),
+      headers: ApiHeaders.authed(accessToken),
+      body: {
+        'status': 'canceled',
+      },
+      parser: (_) {},
     );
   }
 }

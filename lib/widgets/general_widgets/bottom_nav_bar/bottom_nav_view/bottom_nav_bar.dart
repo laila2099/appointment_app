@@ -1,5 +1,6 @@
 import 'package:appointment_app/core/constant/app_colors.dart';
 import 'package:appointment_app/core/constant/app_icons.dart';
+import 'package:appointment_app/core/constant/app_size.dart';
 import 'package:appointment_app/widgets/general_widgets/bottom_nav_bar/bottom_nav_view/bottom_nav_icon.dart';
 import 'package:appointment_app/widgets/general_widgets/bottom_nav_bar/bottom_nav_view/floating_bottom.dart';
 import 'package:appointment_app/widgets/general_widgets/bottom_nav_bar/bottom_nav_view/profile_nav_icon.dart';
@@ -14,13 +15,13 @@ class CustomBottomNavBar extends GetView<NavigationController> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 110.h,
+      height: AppSize.bottomNavHeight,
       child: Stack(
-        alignment: Alignment.bottomCenter,
+        alignment: AlignmentDirectional.bottomCenter,
         clipBehavior: Clip.none,
         children: [
           Container(
-            height: 80.h,
+            height: AppSize.bottomNavHeight,
             decoration: BoxDecoration(
               color: AppColors.white,
               boxShadow: [
@@ -32,11 +33,11 @@ class CustomBottomNavBar extends GetView<NavigationController> {
               ],
             ),
           ),
-          Positioned(
+          PositionedDirectional(
             bottom: 0,
-            left: 0,
-            right: 0,
-            height: 80.h,
+            start: 0,
+            end: 0,
+            height: AppSize.bottomNavHeight,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -48,7 +49,8 @@ class CustomBottomNavBar extends GetView<NavigationController> {
               ],
             ),
           ),
-          Positioned(bottom: 25.h, child: const FloatingSearchButton()),
+          PositionedDirectional(
+              bottom: 25.h, child: const FloatingSearchButton()),
         ],
       ),
     );

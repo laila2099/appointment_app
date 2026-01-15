@@ -14,13 +14,13 @@ class DoctorSpecialitysScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: CustomAppBar(titel: 'Doctor Speciality'),
+      appBar: CustomAppBar(titel: 'doctor_speciality'.tr),
       body: Column(
         children: [
           SizedBox(height: 32.h),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              padding: EdgeInsetsDirectional.symmetric(horizontal: 16.w),
               child: GridView.builder(
                 itemCount: controller.categories.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -31,7 +31,16 @@ class DoctorSpecialitysScreen extends StatelessWidget {
                 ),
                 itemBuilder: (context, index) {
                   final item = controller.categories[index];
-                  return CategoryItem(iconPath: item.icon, title: item.title);
+                  return GestureDetector(
+                    onTap: () {
+                      final String? categoryId =
+                          (item.title == 'general') ? null : item.id;
+
+                      Get.back(result: categoryId);
+                    },
+                    child:
+                        CategoryItem(iconPath: item.iconUrl, title: item.title),
+                  );
                 },
               ),
             ),

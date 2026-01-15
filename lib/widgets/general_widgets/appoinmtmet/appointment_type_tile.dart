@@ -39,7 +39,7 @@ class AppointmentTypeTile extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 14.h),
+        padding: EdgeInsetsDirectional.symmetric(vertical: 14.h),
         decoration: BoxDecoration(
           border: Border(bottom: BorderSide(color: Colors.grey.shade200)),
         ),
@@ -50,7 +50,6 @@ class AppointmentTypeTile extends StatelessWidget {
               backgroundColor: color,
               iconColor: iconColor,
             ),
-
             SizedBox(width: 12.w),
             Expanded(child: Text(type.label, style: CustomTextStyles.body14)),
             RadioDot(selected: selected),

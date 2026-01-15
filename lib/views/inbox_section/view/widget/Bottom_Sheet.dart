@@ -5,11 +5,9 @@ import 'package:get/get.dart';
 import '../../../../core/constant/app_colors.dart';
 import '../../../../widgets/search/search_text_field.dart';
 import '../../controller/inbox_controller.dart';
-import '../../inbox_binding/inbox_bottom_sheet_binding.dart';
 import 'inbox_item.dart';
 
 void showInboxSheet(BuildContext context) {
-  InboxBottomSheetBinding().dependencies();
   final InboxController controller = Get.find<InboxController>();
 
   showModalBottomSheet(
@@ -21,7 +19,7 @@ void showInboxSheet(BuildContext context) {
     ),
     builder: (_) {
       return Padding(
-        padding: EdgeInsets.only(
+        padding: EdgeInsetsDirectional.only(
           bottom: MediaQuery.of(context).viewInsets.bottom,
         ),
         child: DraggableScrollableSheet(
@@ -35,7 +33,7 @@ void showInboxSheet(BuildContext context) {
                 color: AppColors.white,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
               ),
-              padding: EdgeInsets.symmetric(
+              padding: EdgeInsetsDirectional.symmetric(
                 horizontal: 16.w,
                 vertical: 16.h,
               ),
@@ -55,8 +53,8 @@ void showInboxSheet(BuildContext context) {
                       SizedBox(
                         width: 50.w,
                       ),
-                      const Text(
-                        'Create New Message',
+                      Text(
+                        "create_new_message".tr,
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -69,8 +67,8 @@ void showInboxSheet(BuildContext context) {
                     child: Row(
                       children: [
                         Flexible(
-                          child: const SearchTextField(
-                            hintText: 'Search Message',
+                          child: SearchTextField(
+                            hintText: 'search_message'.tr,
                           ),
                         ),
                         SizedBox(width: 8.w),
@@ -91,7 +89,7 @@ void showInboxSheet(BuildContext context) {
                       if (controller.inboxList.isEmpty) {
                         return Center(
                           child: Text(
-                            'No messages found',
+                            'no_messages'.tr,
                             style: TextStyle(
                               color: AppColors.subtitle,
                               fontSize: 14.sp,

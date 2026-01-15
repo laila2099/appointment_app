@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/classes/utils/format_date_time.dart';
@@ -33,29 +34,26 @@ class BookingConfirmedScreen extends GetView<BookingController> {
           return Column(
             children: [
               AppHeader(
+                onBack: Get.back,
                 center: HeaderTitle('details'.tr),
               ),
-
               SizedBox(height: 40.h),
-
-              // Check + title
-              Container(
-                width: 70.w,
-                height: 70.w,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Color(0xFF22C55E),
-                ),
-                child: Icon(Icons.check, color: Colors.white, size: 34.sp),
+              SvgPicture.asset(
+                AppIcons.check,
+                width: 65.w,
+                height: 65.w,
               ),
               SizedBox(height: 20.h),
-              SectionTitle('booking_confirmed'.tr),
-
-              SizedBox(height: 24.h),
-
+              Text('booking_confirmed'.tr,
+                  style: TextStyle(
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.black,
+                  )),
+              SizedBox(height: 57.h),
               Expanded(
                 child: ListView(
-                  padding: EdgeInsets.fromLTRB(27.w, 0, 20.w, 20.h),
+                  padding: EdgeInsetsDirectional.fromSTEB(27.w, 0, 20.w, 20.h),
                   children: [
                     SectionTitle('booking_information'.tr),
                     SizedBox(height: 24.h),
@@ -82,7 +80,7 @@ class BookingConfirmedScreen extends GetView<BookingController> {
                         style: OutlinedButton.styleFrom(
                           foregroundColor: AppColors.primary,
                           side: BorderSide(color: AppColors.primary),
-                          padding: EdgeInsets.symmetric(
+                          padding: EdgeInsetsDirectional.symmetric(
                             horizontal: 14.w,
                             vertical: 10.h,
                           ),
@@ -108,15 +106,14 @@ class BookingConfirmedScreen extends GetView<BookingController> {
                         clinic: doctor.clinic,
                         rating: doctor.ratingAvg,
                         reviewsCount: doctor.ratingCount,
-                        avatar: const AssetImage(AppImages.doctor),
+                        avatar:  AppImages.doctor,
                         showChat: false,
                       ),
                   ],
                 ),
               ),
-
               Padding(
-                padding: EdgeInsets.fromLTRB(20.w, 10.h, 20.w, 16.h),
+                padding: EdgeInsetsDirectional.fromSTEB(20.w, 10.h, 20.w, 16.h),
                 child: SizedBox(
                   width: double.infinity,
                   height: 52.h,

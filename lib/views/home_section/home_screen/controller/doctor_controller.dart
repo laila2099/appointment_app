@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/classes/api/api_result.dart';
@@ -8,6 +9,10 @@ import '../../../../core/constant/app_keys.dart';
 import '../../../../core/services/auth_gate_service.dart';
 import '../../../../core/services/shared_prefrences.dart';
 import '../../../../models/doctor_model.dart';
+import '../../../../routes/app_routes.dart';
+import '../../recommendation_doctor/widgets/custom_bottom_sheet.dart';
+
+enum CategoryPickerSource { bottomSheet, specialtiesScreen }
 
 class DoctorController extends GetxController {
   final DoctorRepository repository;
@@ -18,10 +23,25 @@ class DoctorController extends GetxController {
   final errorMessage = Rxn<String>();
   final doctors = <Doctor>[].obs;
 
-  @override
-  void onInit() {
-    super.onInit();
+  void filterDoctors({required String? categoryId}) async {
+    if (categoryId == null) {
+      loadDoctors();
+    } else {
+      final res = await repository.filterDoctors(
+        categoryId: categoryId,
+      );
 
+      if (res is ApiSuccess<List<Doctor>>) {
+        debugPrint('Doctors count: ${res.data.length}');
+        doctors.clear();
+        doctors.assignAll(res.data);
+        for (final d in res.data) {
+          debugPrint(d.name);
+        }
+      } else if (res is ApiFailure<List<Doctor>>) {
+        debugPrint('Error: ${res.error.message}');
+      }
+    }
   }
 
   Future<void> loadDoctors() async {
@@ -43,11 +63,12 @@ class DoctorController extends GetxController {
       );
 
       if (result is ApiSuccess<List<Doctor>>) {
+        doctors.clear();
         doctors.assignAll(result.data);
         if (result.data.isEmpty) {
           errorMessage.value = 'No doctors found in the database';
         } else {
-          errorMessage.value = null; 
+          errorMessage.value = null;
         }
       } else if (result is ApiFailure<List<Doctor>>) {
         // Handle unauthorized/JWT expired errors
@@ -61,6 +82,7 @@ class DoctorController extends GetxController {
               accessToken: null,
             );
             if (retryResult is ApiSuccess<List<Doctor>>) {
+              doctors.clear();
               doctors.assignAll(retryResult.data);
               if (doctors.isEmpty) {
                 errorMessage.value = 'No doctors found';
@@ -68,15 +90,13 @@ class DoctorController extends GetxController {
               return;
             }
           }
-          
+
           // If retry failed or no token was used, handle unauthorized
           try {
             final authGate = Get.find<AuthGateService>();
             await authGate.handleUnauthorized();
-            return; 
-          } catch (_) {
-           
-          }
+            return;
+          } catch (_) {}
         }
 
         errorMessage.value = result.error.message;
@@ -109,15 +129,15 @@ class DoctorController extends GetxController {
       try {
         final prefs = Get.find<AppPreferencesService>();
         accessToken = prefs.getString(PrefKeys.accessToken);
-      } catch (_) {
-      
-      }
+      } catch (_) {}
 
-      final ApiResult<List<Doctor>> result = await repository.getRecommendedDoctors(
+      final ApiResult<List<Doctor>> result =
+          await repository.getRecommendedDoctors(
         accessToken: accessToken,
       );
 
       if (result is ApiSuccess<List<Doctor>>) {
+        doctors.clear();
         doctors.assignAll(result.data);
         if (result.data.isEmpty) {
           errorMessage.value = 'No recommended doctors found';
@@ -136,6 +156,7 @@ class DoctorController extends GetxController {
               accessToken: null,
             );
             if (retryResult is ApiSuccess<List<Doctor>>) {
+              doctors.clear();
               doctors.assignAll(retryResult.data);
               if (doctors.isEmpty) {
                 errorMessage.value = 'No recommended doctors found';
@@ -143,7 +164,7 @@ class DoctorController extends GetxController {
               return;
             }
           }
-          
+
           // If retry failed or no token was used, handle unauthorized
           try {
             final authGate = Get.find<AuthGateService>();
@@ -173,8 +194,9 @@ class DoctorController extends GetxController {
     }
   }
 
+  @override
   Future<void> refresh() async {
-    await loadDoctors();
+    await loadRecommendedDoctors();
   }
 
   // Helper method to get image path (local asset fallback or network URL)
@@ -182,31 +204,30 @@ class DoctorController extends GetxController {
     // Check if avatarUrl exists and is valid
     if (doctor.avatarUrl != null) {
       final urlStr = doctor.avatarUrl!.trim();
-      
+
       // Check if it's not empty or "null" string
-      if (urlStr.isNotEmpty && 
+      if (urlStr.isNotEmpty &&
           urlStr.toLowerCase() != 'null' &&
           urlStr.toLowerCase() != 'undefined' &&
           urlStr != '' &&
           urlStr != 'null') {
-        
         // If it's already a full URL (http/https), return it as-is
         if (urlStr.startsWith('http://') || urlStr.startsWith('https://')) {
           return urlStr;
         }
-        
+
         // If it starts with assets/, treat as asset path
         if (urlStr.startsWith('assets/')) {
           return urlStr;
         }
-        
+
         // If it's a relative path starting with /storage/, construct full Supabase storage URL
         if (urlStr.startsWith('/storage/')) {
           // Construct full Supabase storage URL
           // Format: https://{project_ref}.supabase.co/storage/v1/object/public/{bucket}/{path}
           return '${AppConfig.baseUrl}$urlStr';
         }
-        
+
         // If it starts with /, it might be a relative path - prepend base URL
         if (urlStr.startsWith('/')) {
           return '${AppConfig.baseUrl}$urlStr';
@@ -216,7 +237,7 @@ class DoctorController extends GetxController {
         // But for now, if it doesn't match any pattern, use placeholder
       }
     }
-   
+
     final doctorImages = [
       AppImages.doctor1,
       AppImages.doctor2,
@@ -224,15 +245,43 @@ class DoctorController extends GetxController {
       AppImages.doctor4,
       AppImages.doctor5,
     ];
-    
+
     if (doctor.id.isEmpty) {
       return AppImages.doctor;
     }
 
-    final hashValue = (doctor.id.hashCode.abs() + 
-                      (doctor.name.hashCode.abs())).abs();
+    final hashValue =
+        (doctor.id.hashCode.abs() + (doctor.name.hashCode.abs())).abs();
     final imageIndex = hashValue % doctorImages.length;
-    
+
     return doctorImages[imageIndex];
+  }
+
+  Future<void> sortDoctorsBySpeciality({
+    CategoryPickerSource source = CategoryPickerSource.bottomSheet,
+  }) async {
+    String? categoryId;
+
+    switch (source) {
+      case CategoryPickerSource.bottomSheet:
+        final result = await Get.bottomSheet(
+          CustomBottomSheet(),
+          isScrollControlled: true,
+        );
+        categoryId = result as String?;
+
+        break;
+
+      case CategoryPickerSource.specialtiesScreen:
+        final result = await Get.toNamed(
+          AppRoutes.doctorSpecialtiesScreen,
+        );
+        categoryId = result as String?;
+        break;
+    }
+
+    if (categoryId == null) return;
+
+    filterDoctors(categoryId: categoryId);
   }
 }

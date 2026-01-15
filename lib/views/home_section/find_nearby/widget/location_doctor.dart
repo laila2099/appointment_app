@@ -25,10 +25,10 @@ class LocationDoctor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
+    return PositionedDirectional(
       top: top,
-      right: right,
-      left: left,
+      end: right,
+      start: left,
       child: Container(
         width: width?.w ?? 50.w,
         height: height?.h ?? 50.h,

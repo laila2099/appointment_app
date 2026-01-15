@@ -22,7 +22,8 @@ class OtpVerificationView extends StatelessWidget {
       backgroundColor: AppColors.white,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          padding: const EdgeInsetsDirectional.symmetric(
+              horizontal: 24, vertical: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -33,19 +34,20 @@ class OtpVerificationView extends StatelessWidget {
                     children: [
                       const SizedBox(height: 40),
                       Text(
-                        "OTP Verification",
+                        "otp_verification".tr,
                         style: CustomTextStyles.headline32Bold,
                       ),
                       Text(
-                        "Add a PIN number to make your account more secure and easy to sign in.",
+                        "otp_subtitle".tr,
                         style: CustomTextStyles.subTitle,
                       ),
                       const SizedBox(height: 16),
-                      Text('We have sent a verification code to'),
+                      Text("otp_sent_to".tr),
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.04),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        padding: const EdgeInsetsDirectional.symmetric(
+                            horizontal: 16),
                         child: OtpFields(controller: verificationController),
                       ),
                       SizedBox(
@@ -55,14 +57,14 @@ class OtpVerificationView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Didn't receive the code?",
+                            "didnt_receive_code".tr,
                             style: CustomTextStyles.subTitle,
                           ),
                           TextButton(
                             onPressed: () =>
                                 verificationController.resendCode(),
                             child: Text(
-                              "Resend",
+                              "resend".tr,
                               style: CustomTextStyles.subTitle,
                               selectionColor: AppColors.primary,
                             ),
@@ -84,7 +86,6 @@ class OtpVerificationView extends StatelessWidget {
                   }
                 },
               )
-
             ],
           ),
         ),

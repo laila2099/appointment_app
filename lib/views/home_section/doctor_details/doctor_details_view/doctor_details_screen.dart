@@ -1,3 +1,4 @@
+import 'package:appointment_app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -35,13 +36,13 @@ class DoctorDetailsScreen extends GetView<DoctorDetailsController> {
                   const Icon(Icons.error_outline, size: 64, color: Colors.red),
                   const SizedBox(height: 16),
                   Text(
-                    controller.errorMessage.value ?? 'Doctor not found',
+                    controller.errorMessage.value ?? 'doctor_not_found'.tr,
                     style: const TextStyle(fontSize: 16),
                   ),
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: controller.refresh,
-                    child: const Text('Retry'),
+                    child: Text('retry'.tr),
                   ),
                 ],
               ),
@@ -52,6 +53,7 @@ class DoctorDetailsScreen extends GetView<DoctorDetailsController> {
           return Column(
             children: [
               AppHeader(
+                onBack: Get.back,
                 center: HeaderTitle(doctor.name),
                 trailing: HeaderButton(
                   onTap: () {},
@@ -68,8 +70,12 @@ class DoctorDetailsScreen extends GetView<DoctorDetailsController> {
                 clinic: doctor.clinic,
                 rating: doctor.ratingAvg,
                 reviewsCount: doctor.ratingCount,
-                avatar: const AssetImage(AppImages.doctor),
-                onChatTap: () {print("MODEL IMAGE => ${doctor.avatarUrl}");},
+                avatar: AppImages.doctor,
+                onChatTap: () {
+                  Get.toNamed(AppRoutes.chat, arguments: {
+                    'name': doctor.name,
+                  });
+                },
               ),
               SizedBox(height: 8.h),
               Expanded(

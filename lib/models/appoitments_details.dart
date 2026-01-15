@@ -28,31 +28,36 @@ class AppointmentDetailsModel {
     this.reviewsCount = 0,
   });
 
-  factory AppointmentDetailsModel.fromJson(Map<String, dynamic> json) {
-    return AppointmentDetailsModel(
-      id: json['id'],
-      doctorId: json['doctor_id'],
-      doctorName: json['doctor_name'],
-      specialty: json['specialty'],
-      clinic: json['clinic'],
-      appointmentDateTime: DateTime.parse(json['appointment_datetime']),
-      createdAt: DateTime.parse(json['created_at']),
-      status: _mapStatus(json['status']),
-      rating: json['rating']?.toDouble() ?? 0,
-      reviewsCount: json['reviews_count'] ?? 0,
-    );
-  }
+factory AppointmentDetailsModel.fromJson(Map<String, dynamic> json) {
+  final date = json['appointment_date'];
+  final time = json['appointment_time'];
+  final dateTime = DateTime.parse('$date $time');
 
-  static AppointmentStatus _mapStatus(String value) {
-    switch (value) {
-      case 'completed':
-        return AppointmentStatus.completed;
-      case 'cancelled':
-        return AppointmentStatus.cancelled;
-      default:
-        return AppointmentStatus.upcoming;
-    }
+  return AppointmentDetailsModel(
+    id: json['appointment_id'],
+    doctorId: json['doctor_id'],
+    doctorName: json['doctor_name'],
+    specialty: json['specialization'],
+    clinic: json['location'],
+    appointmentDateTime: dateTime,
+    createdAt: DateTime.parse(json['created_at']),
+    status: _mapStatus(json['status']),
+    rating: 0,
+    reviewsCount: 0,
+  );
+}
+
+static AppointmentStatus _mapStatus(String value) {
+  switch (value) {
+    case 'completed':
+      return AppointmentStatus.completed;
+    case 'canceled':
+      return AppointmentStatus.cancelled;
+    default:
+      return AppointmentStatus.upcoming;
   }
+}
+
 
   AppointmentDetailsModel copyWith({
     String? id,
@@ -97,3 +102,5 @@ class AppointmentDetailsModel {
     );
   }
 }
+
+

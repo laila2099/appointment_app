@@ -1,9 +1,10 @@
+import 'package:appointment_app/core/classes/utils/app_snackbar.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:collection/collection.dart';
 
-import '../../../../core/classes/api/api_result.dart';
 import '../../../../core/classes/repositories/appointment_repository.dart';
+import '../../../../core/constant/app_icons.dart';
 import '../../../../core/constant/app_keys.dart';
 import '../../../../core/services/shared_prefrences.dart';
 import '../../../../models/appointment_model.dart';
@@ -18,7 +19,7 @@ class BookingController extends GetxController {
 
   BookingController({required this.repository});
 
-  // -------- Variables
+  // Variables
   late final String doctorId;
 
   final stepIndex = 0.obs;
@@ -44,11 +45,23 @@ class BookingController extends GetxController {
   void onInit() {
     super.onInit();
 
-    doctorId = '1';
+    final args = (Get.arguments as Map?) ?? {};
 
-    final existingAppointment = Get.arguments;
+    doctorId = (args['doctorId'] ?? '') as String;
+
+    final passedDoctor = args['doctor'];
+    if (passedDoctor is Doctor) {
+      doctor.value = passedDoctor;
+    } else if (passedDoctor is Map<String, dynamic>) {
+      doctor.value = Doctor.fromJson(passedDoctor);
+    } else {
+      doctor.value = null;
+    }
+
+    final existingAppointment = args['appointment'];
     if (existingAppointment is Appointment) {
       appointment = existingAppointment.obs;
+      print(appointment.value.id);
     } else {
       appointment = Appointment(
         doctorId: doctorId,
@@ -58,7 +71,6 @@ class BookingController extends GetxController {
         paymentMethod: '',
       ).obs;
     }
-
     doctor.value = Doctor(
       id: "1",
       name: "Dr Randy Wigham",
@@ -98,7 +110,7 @@ class BookingController extends GetxController {
         initialSelected: appointment.value.appointmentDate,
         onChanged: selectDate,
       ),
-      tag: 'booking_wheel',
+      tag: 'booking_wheel_$doctorId',
     );
 
     loadPaymentMethods();
@@ -129,8 +141,10 @@ class BookingController extends GetxController {
         label: 'Paypal',
         last4: '3784',
         isDefault: true,
+        icon: AppIcons.paypal,
       ),
-      PaymentMethod(id: 'pm_2', type: 'card', label: 'Visa', last4: '1122'),
+      PaymentMethod(
+          id: 'pm_2', type: 'card', label: 'Visa', last4: '1122', icon: ''),
     ]);
 
     selectedPayment.value = paymentMethods.firstWhereOrNull((e) => e.isDefault);
@@ -257,22 +271,38 @@ class BookingController extends GetxController {
           label: 'Master Card',
           last4: '3784',
           isDefault: true,
+          icon: AppIcons.masterCard,
         ),
         const PaymentMethod(
           id: 'pm_2',
           type: 'card',
           label: 'American Express',
           last4: '1122',
+          icon: AppIcons.americanExpress,
+        ),
+        const PaymentMethod(
+          id: 'pm_3',
+          type: 'card',
+          label: 'Capital One',
+          icon: AppIcons.capitalOne,
+        ),
+        const PaymentMethod(
+          id: 'pm_4',
+          type: 'card',
+          label: 'Barclays',
+          icon: AppIcons.barclays,
         ),
         const PaymentMethod(
           id: 'pm_5',
           type: 'paypal',
           label: 'Paypal',
+          icon: AppIcons.paypal,
         ),
         const PaymentMethod(
           id: 'pm_6',
           type: 'bank',
           label: 'Bank Transfer',
+          icon: '',
         ),
       ];
 
@@ -304,11 +334,7 @@ class BookingController extends GetxController {
       final String? accessToken = prefs.getString(PrefKeys.accessToken);
 
       if (accessToken == null || accessToken.isEmpty) {
-        Get.snackbar(
-          'Error',
-          'Authentication token not found',
-          snackPosition: SnackPosition.TOP,
-        );
+        AppSnackBar.error('Authentication token not found');
         return;
       }
 
@@ -321,10 +347,8 @@ class BookingController extends GetxController {
         appointment.value = result.data!;
         Get.toNamed(AppRoutes.bookingConfirmed);
       } else {
-        Get.snackbar(
-          'Error',
+        AppSnackBar.error(
           result.errorMessage ?? 'Unknown error occurred',
-          snackPosition: SnackPosition.TOP,
         );
       }
     } finally {
@@ -370,7 +394,7 @@ class BookingController extends GetxController {
 
       if (result.isSuccess) {
         appointment.value = result.data!;
-        Get.back();
+        Get.back(result: true);
         Get.snackbar(
           'Success',
           'Appointment rescheduled successfully',

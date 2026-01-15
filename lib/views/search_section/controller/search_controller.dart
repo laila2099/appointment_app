@@ -1,27 +1,33 @@
+import 'package:appointment_app/routes/app_routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class SearchViewController extends GetxController {
-  var searchController = TextEditingController();
+  final searchController = TextEditingController();
   var recentSearches = <String>[
-    'Dental',
-    'General Medical Check',
-    'Nearest Hospital',
-    'Neurologic',
+    'general',
   ].obs;
 
+  void goToSearch(String query) {
+    String trimmed = query.trim();
+    if (trimmed.isEmpty) return;
+
+    recentSearches.remove(trimmed);
+    recentSearches.insert(0, trimmed);
+
+    Get.toNamed(AppRoutes.searchresult, arguments: trimmed);
+
+    searchController.clear();
+  }
+
   void addSearch(String query) {
-    final trimmed = query.trim();
-    if (trimmed.isNotEmpty && !recentSearches.contains(trimmed)) {
-      recentSearches.add(trimmed);
-    }
+    String trimmed = query.trim();
+    if (trimmed.isEmpty) return;
+
+    recentSearches.remove(trimmed);
+    recentSearches.insert(0, trimmed);
   }
 
-  void clearHistory() {
-    recentSearches.clear();
-  }
-
-  void removeSearch(String query) {
-    recentSearches.remove(query);
-  }
+  void removeSearch(String query) => recentSearches.remove(query);
+  void clearHistory() => recentSearches.clear();
 }

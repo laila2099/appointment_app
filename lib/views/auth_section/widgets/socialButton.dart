@@ -22,8 +22,7 @@ class SocialButton extends StatelessWidget {
         width: size,
         height: size,
         padding: const EdgeInsets.all(12),
-
-        decoration: BoxDecoration(
+       decoration: BoxDecoration(
           color: backgroundColor ?? const Color(0xFFf9f9f9),
           shape: BoxShape.circle,
         ),

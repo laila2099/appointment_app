@@ -16,7 +16,7 @@ class ReviewsTab extends StatelessWidget {
     }
 
     return ListView.separated(
-      padding: EdgeInsets.fromLTRB(24.w, 32.h, 24.w, 0),
+      padding: EdgeInsetsDirectional.fromSTEB(24.w, 32.h, 24.w, 0),
       itemCount: reviews.length,
       separatorBuilder: (_, __) => SizedBox(height: 24.h),
       itemBuilder: (_, i) {

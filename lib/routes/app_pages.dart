@@ -1,4 +1,6 @@
+import 'package:appointment_app/views/settings_section/settings_binding/setting_binding.dart';
 import 'package:get/get.dart';
+
 import '../core/middlewares/splash_redirect_middleware.dart';
 import '../views/auth_section/fill_your_profile/bindings/fill_your_profile_binding.dart';
 import '../views/auth_section/fill_your_profile/fill_your_profile_view/fill_your_profile_view.dart';
@@ -19,7 +21,6 @@ import '../views/home_section/recommendation_doctor/views/recommendation_doctor_
 import '../views/inbox_section/inbox_binding/chat_binding.dart';
 import '../views/inbox_section/view/chat_view.dart' show ChatView;
 import '../views/inbox_section/view/inbox_view.dart';
-import '../views/my_apponiment_section/my_appoitment_binding/my_appoitment_binding.dart';
 import '../views/my_apponiment_section/my_appoitment_view/my_appoitment_view.dart';
 import '../views/my_apponiment_section/reschedule/reschedule_view.dart';
 import '../views/profile_section/profile_binding/profile_binding.dart';
@@ -38,7 +39,7 @@ import '../views/settings_section/settings_view/security_view.dart';
 import '../views/settings_section/settings_view/setting_view.dart';
 import '../views/splash_screen/onboarding_view/onboarding_view.dart';
 import '../views/splash_screen/splash_screen_view/splash_screen_view.dart';
-import '../widgets/general_widgets/bottom_nav_bar/bottom_nav_view/bottom_nav_bar_binding.dart';
+import '../widgets/general_widgets/bottom_nav_bar/binding/bottom_nav_bar_binding.dart';
 import '../widgets/general_widgets/bottom_nav_bar/bottom_nav_view/main_nav_bar.dart';
 import '../widgets/login_required_gate.dart';
 import 'app_routes.dart';
@@ -76,7 +77,11 @@ final appPages = <GetPage>[
   GetPage(
     name: AppRoutes.bottomnavbar,
     page: () => MainLayout(),
-    binding: BottomNavBarBinding(),
+    bindings: [
+      BottomNavBarBinding(),
+      ProfileBinding(), // <-- ضيف هذا
+      BookingBinding(),
+    ],
   ),
 
   // Home
@@ -112,7 +117,10 @@ final appPages = <GetPage>[
   GetPage(name: AppRoutes.notificationPage, page: () => NotificationPage()),
   GetPage(name: AppRoutes.helpPage, page: () => HelpPage()),
   GetPage(name: AppRoutes.securityPage, page: () => SecurityPage()),
-  GetPage(name: AppRoutes.languageScreen, page: () => LanguageScreen()),
+  GetPage(
+      name: AppRoutes.languageScreen,
+      page: () => LanguageScreen(),
+      binding: SettingBinding()),
 
   // Booking
   GetPage(
@@ -121,13 +129,11 @@ final appPages = <GetPage>[
     binding: BookingBinding(),
   ),
   GetPage(
-    name: AppRoutes.bookingConfirmed,
-    page: () => const BookingConfirmedScreen(),
-  ),
+      name: AppRoutes.bookingConfirmed,
+      page: () => const BookingConfirmedScreen()),
   GetPage(
     name: AppRoutes.myAppointment,
     page: () => const AppointmentView(),
-    binding: MyAppoitmentBinding(),
   ),
   GetPage(
     name: AppRoutes.reschedule,
@@ -137,7 +143,7 @@ final appPages = <GetPage>[
   // Inbox Page
   GetPage(
     name: AppRoutes.inbox,
-    page: () => const InboxView(),
+    page: () => InboxView(),
   ),
   GetPage(
     name: AppRoutes.chat,

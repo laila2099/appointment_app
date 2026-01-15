@@ -16,6 +16,7 @@ class SplashScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
+
         children: [
           Center(
             child: SizedBox(
@@ -24,6 +25,7 @@ class SplashScreen extends StatelessWidget {
                 AppImages.logo,
                 fit: BoxFit.cover,
                 color: Colors.white.withOpacity(0.06),
+
                 colorBlendMode: BlendMode.modulate,
               ),
             ),

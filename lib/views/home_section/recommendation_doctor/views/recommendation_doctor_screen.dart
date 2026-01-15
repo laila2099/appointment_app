@@ -1,9 +1,8 @@
+import 'package:appointment_app/core/classes/repositories/doctor_repository.dart';
 import 'package:appointment_app/core/constant/app_colors.dart';
 import 'package:appointment_app/core/constant/app_icons.dart';
-import 'package:appointment_app/core/classes/repositories/doctor_repository.dart';
 import 'package:appointment_app/routes/app_routes.dart';
 import 'package:appointment_app/views/home_section/home_screen/controller/doctor_controller.dart';
-import 'package:appointment_app/views/home_section/recommendation_doctor/widgets/custom_bottom_sheet.dart';
 import 'package:appointment_app/views/home_section/recommendation_doctor/widgets/custom_search.dart';
 import 'package:appointment_app/widgets/doctor_card.dart';
 import 'package:appointment_app/widgets/general_widgets/app_bar/app_bar.dart';
@@ -23,7 +22,7 @@ class RecommendationDoctorScreen extends StatelessWidget {
             DoctorController(repository: Get.find<DoctorRepository>()),
             permanent: true,
           );
-    
+
     // Load ALL doctors for the "See All" page (not just recommended) when screen is built
     // Always reload when this screen is shown to ensure we have all doctors, not just recommended
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -35,7 +34,7 @@ class RecommendationDoctorScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: CustomAppBar(
-        titel: "Recommendation Doctor",
+        titel: "recommendation_doctor".tr,
         showAction: true,
         actionicon: Icon(Icons.more_horiz, size: 24.sp, color: AppColors.black),
       ),
@@ -45,7 +44,9 @@ class RecommendationDoctorScreen extends StatelessWidget {
 
           CustomSearch(
             icon: AppIcons.sort,
-            onTap: () => Get.bottomSheet(CustomBottomSheet()),
+            onTap: () {
+              doctorController.sortDoctorsBySpeciality();
+            },
           ),
 
           SizedBox(height: 24.h),
@@ -67,13 +68,13 @@ class RecommendationDoctorScreen extends StatelessWidget {
                       SizedBox(height: 16.h),
                       Text(
                         doctorController.errorMessage.value ??
-                            'No doctors available',
+                            'no_doctors_available'.tr,
                         style: const TextStyle(fontSize: 16),
                       ),
                       SizedBox(height: 16.h),
                       ElevatedButton(
                         onPressed: doctorController.refresh,
-                        child: const Text('Retry'),
+                        child: Text('retry'.tr),
                       ),
                     ],
                   ),
@@ -81,9 +82,9 @@ class RecommendationDoctorScreen extends StatelessWidget {
               }
 
               return Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                padding: EdgeInsetsDirectional.symmetric(horizontal: 16.w),
                 child: ListView.separated(
-                  padding: EdgeInsets.zero,
+                  padding: EdgeInsetsDirectional.zero,
                   itemCount: doctorController.doctors.length,
                   separatorBuilder: (_, __) => SizedBox(height: 14.h),
                   itemBuilder: (context, index) {

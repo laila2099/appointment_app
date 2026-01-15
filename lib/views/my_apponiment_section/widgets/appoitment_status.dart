@@ -18,20 +18,21 @@ class AppoitmentStatus extends GetView<MyAppointmentsController> {
         return const Center(child: CircularProgressIndicator());
       }
 
-      final filteredAppointments =
-          controller.appointments.where((a) => a.status == status).toList();
+      // final filteredAppointments =
+      //     controller.appointments.where((a) => a.status == status).toList();
+      final filteredAppointments = controller.appointments;
 
       if (filteredAppointments.isEmpty) {
         String text = "";
         switch (status) {
           case AppointmentStatus.upcoming:
-            text = "No upcoming appointments";
+            text = "no_upcoming".tr;
             break;
           case AppointmentStatus.completed:
-            text = "No completed appointments";
+            text = "no_completed".tr;
             break;
           case AppointmentStatus.cancelled:
-            text = "No cancelled appointments";
+            text = "no_cancelled".tr;
             break;
         }
         return Center(child: Text(text));
@@ -46,12 +47,12 @@ class AppoitmentStatus extends GetView<MyAppointmentsController> {
 
           if (appt.status == AppointmentStatus.upcoming) {
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsetsDirectional.symmetric(horizontal: 16.0),
               child: UpcomingCard(appt: appt),
             );
           } else {
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsetsDirectional.symmetric(horizontal: 16.0),
               child: StatusCard(appt: appt),
             );
           }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../../../core/constant/app_colors.dart';
 import '../../../../../core/constant/app_images.dart';
 import '../../../../../core/constant/text_style.dart';
@@ -26,8 +27,9 @@ class FillYourProfileView extends StatelessWidget {
           children: [
             Expanded(
               child: SingleChildScrollView(
-                padding:
+        padding:
                     const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+
                 child: Form(
                   key: autoProfileController.formKey,
                   child: Column(
@@ -40,7 +42,7 @@ class FillYourProfileView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            "Fill Your Profile",
+                            "fill_your_profile".tr,
                             style: CustomTextStyles.headline32Bold,
                           ),
                           GestureDetector(
@@ -48,7 +50,7 @@ class FillYourProfileView extends StatelessWidget {
                               Get.offAllNamed('/home');
                             },
                             child: Text(
-                              "Skip",
+                              "skip".tr,
                               style: CustomTextStyles.subtitle.copyWith(
                                 color: AppColors.primary,
                                 fontSize: 20,
@@ -62,7 +64,7 @@ class FillYourProfileView extends StatelessWidget {
 
                       // Subtitle
                       Text(
-                        "Please take a few minutes to fill out your profile with as much detail as possible.",
+                        "fill_profile_subtitle".tr,
                         style: CustomTextStyles.subtitle,
                       ),
                       const SizedBox(height: 32),
@@ -83,9 +85,9 @@ class FillYourProfileView extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            Positioned(
+                            PositionedDirectional(
                               bottom: 0,
-                              right: 0,
+                              end: 0,
                               child: GestureDetector(
                                 onTap: () {},
                                 child: Container(
@@ -113,15 +115,16 @@ class FillYourProfileView extends StatelessWidget {
                       // Full Name
                       CustomTextField(
                         controller: autoProfileController.fullNameController,
-                        hint: "Full Name",
+                      hint: "full_name".tr,
                         validator: Validators.validateFullName,
+
                       ),
                       const SizedBox(height: 16),
 
                       // Email
                       CustomTextField(
                         controller: autoProfileController.emailController,
-                        hint: "Email",
+                        hint: "Email".tr,
                         keyboardType: TextInputType.emailAddress,
                         validator: Validators.validateEmail,
                       ),
@@ -145,7 +148,6 @@ class FillYourProfileView extends StatelessWidget {
                             ),
                           ),
                         ),
-
 
                       const SizedBox(height: 16),
 
@@ -189,6 +191,7 @@ class FillYourProfileView extends StatelessWidget {
                         : "Submit",
                     onTap: autoProfileController.submitProfile,
                   ),
+
                 ),
               ),
             ),

@@ -21,9 +21,9 @@ class IconBadge extends StatelessWidget {
     this.radius = 18,
     this.iconSize = 22,
   }) : assert(
-         svgAsset != null || icon != null,
-         'You must provide either svgAsset or icon',
-       );
+          svgAsset != null || icon != null,
+          'You must provide either svgAsset or icon',
+        );
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class IconBadge extends StatelessWidget {
         color: backgroundColor,
         borderRadius: BorderRadius.circular(radius.r),
       ),
-      alignment: Alignment.center,
+      alignment: AlignmentDirectional.center,
       child: _buildIcon(),
     );
   }

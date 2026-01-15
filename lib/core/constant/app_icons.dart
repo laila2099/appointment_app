@@ -7,7 +7,9 @@ class AppIcons {
   static const String home = '${basePath}home-2.svg';
   static const String search = '${basePath}search.svg';
   static const String chat = '${basePath}chat.svg';
+  static const String check = '${basePath}check.svg';
   static const String calendar = '${basePath}calendar.svg';
+  static const String star = '${basePath}star.svg';
   static const String call = "${basePath}call.svg";
   static const String profile = "${basePath}profile-2user.svg";
   static const String video = "${basePath}video.svg";
@@ -16,11 +18,14 @@ class AppIcons {
   static const String card = "${basePath}Mastercard_logo.svg";
   static const String scanner = "${basePath}scanner.svg";
   static const String paypal = "${basePath}paypal_logo.svg";
-  static const String master_card = "${basePath}Mastercard_logo.svg";
-  static const String applepay = "${basePath}applepay_logo.svg";
+  static const String americanExpress = "${basePath}americanExpress.svg";
+  static const String masterCard = "${basePath}Mastercard_logo.svg";
+  static const String capitalOne = "${basePath}capitalOne.svg";
+  static const String barclays = "${basePath}barclays.svg";
+  static const String applePay = "${basePath}applepay_logo.svg";
   static const String payoneer = "${basePath}payoneer_logo.svg";
   static const String dana = "${basePath}dana_logo.svg";
-  static const String three_point = "${basePath}three_point.svg";
+  static const String threePoint = "${basePath}three_point.svg";
   static const String add = "${basePath}message-add.svg";
   static const String cardiologist = "${basePath}cardiologist.svg";
   static const String dentistry = "${basePath}dentistry.svg";

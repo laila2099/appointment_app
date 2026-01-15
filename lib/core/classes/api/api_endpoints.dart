@@ -12,7 +12,6 @@ class ApiEndpoints {
   static String loginPassword() => '$token?grant_type=password';
   static String resetPasswordWithEmail() => '$resetPassword';
 
-
   // -------- REST
   static const String profiles = '/rest/v1/profiles';
   static const String categories = '/rest/v1/categories';
@@ -23,37 +22,38 @@ class ApiEndpoints {
 
   // -------- Profiles
   static String getProfile(String userId, {String select = '*'}) =>
-      '$profiles?id=eq.$userId&select=$select';
+      '$profiles?id=eq.$userId&select=$select&apikey=${AppConfig.apikey}';
 
-  static String editProfile(String userId) => '$profiles?id=eq.$userId';
+  static String editProfile(String userId) =>
+      '$profiles?id=eq.$userId&apikey=${AppConfig.apikey}';
 
   // -------- Categories
   static String getCategories({String select = '*'}) =>
-      '$categories?select=$select';
+      '$categories?select=$select&apikey=${AppConfig.apikey}';
 
   // -------- Doctors
 
   static String getAllDoctors({String select = '*'}) =>
       '$doctorsWithReviews?select=$select';
-  
+
   static String getRecommendedDoctors({String select = '*'}) =>
       '$doctorsWithReviews?is_recommended=eq.true&select=$select';
-  
+
   static String getDoctorById(String doctorId, {String select = '*'}) =>
       '$doctorsWithReviews?id=eq.$doctorId&select=$select';
 
-  
   static String searchDoctors(String query, {String select = '*'}) {
     final encodedQuery = Uri.encodeComponent(query);
     return '$doctorsWithReviews?name=ilike.%25$encodedQuery%25&select=$select';
   }
-  
-  static String getDoctorsBySpecialty(String specialty, {String select = '*'}) =>
+
+  static String getDoctorsBySpecialty(String specialty,
+          {String select = '*'}) =>
       '$doctorsWithReviews?specialty=eq.$specialty&select=$select';
 
   // -------- Reviews
   static const String reviews = '/rest/v1/reviews';
-  
+
   static String getReviewsByDoctorId(String doctorId, {String select = '*'}) =>
       '$reviews?doctor_id=eq.$doctorId&select=$select&order=created_at.desc';
 
@@ -64,14 +64,13 @@ class ApiEndpoints {
       '$reviews?id=eq.$reviewId&select=$select';
 
   static String filterDoctors(String categoryId) =>
-      '$doctorsWithReviews?category_id=eq.$categoryId';
-
+      '$doctorsWithReviews?category_id=eq.$categoryId&apikey=${AppConfig.apikey}';
 
   // -------- Appointments
   static String createAppointment() => appointments;
 
   static String filterAppointments(String status) =>
-      '$appointmentsWithDoctor?status=eq.$status';
+      '$appointmentsWithDoctor?status=eq.$status&apikey=${AppConfig.apikey}';
 
   static String editAppointment(String appointmentId) =>
       '$appointments?id=eq.$appointmentId';

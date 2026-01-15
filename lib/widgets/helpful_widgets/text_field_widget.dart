@@ -9,10 +9,13 @@ class CustomTextField extends StatelessWidget {
   final bool isPassword;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
+  final InputBorder? border;
+  final TextStyle? textStyle;
   final String? Function(String?)? validator;
   final Color? tfBackground;
   final bool? readOnly;
-  final void Function()? onTap;
+  final VoidCallback? onTap;
+  final List<String>? autofillHints;
 
   const CustomTextField({
     super.key,
@@ -24,9 +27,11 @@ class CustomTextField extends StatelessWidget {
     this.prefixIcon,
     this.validator,
     this.tfBackground,
-    this.readOnly,
-  this.onTap,
-
+    this.readOnly = false,
+    this.onTap,
+    this.border,
+    this.textStyle,
+    this.autofillHints,
   });
 
   @override
@@ -36,19 +41,27 @@ class CustomTextField extends StatelessWidget {
       keyboardType: keyboardType,
       obscureText: isPassword,
       validator: validator,
-      style: CustomTextStyles.textField,
+      readOnly: readOnly ?? false,
+      onTap: onTap,
+      autofillHints: autofillHints,
+      style: textStyle ??
+          CustomTextStyles.custom(
+            fontWeight: FontWeight.w500,
+            fontSize: 14,
+            color: AppColors.black,
+          ),
       decoration: InputDecoration(
         hintText: hint,
-        hintStyle: CustomTextStyles.subtitle,
+        hintStyle: CustomTextStyles.textField,
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
         filled: true,
-        fillColor: tfBackground ?? const Color(0xfffdfdff),
-        contentPadding: const EdgeInsets.symmetric(
+        fillColor: tfBackground ?? const Color(0xffFDFDFF),
+        contentPadding: const EdgeInsetsDirectional.symmetric(
           horizontal: 16,
           vertical: 18,
         ),
-        border: _border(),
+        border: border ?? _border(),
         enabledBorder: _border(),
         focusedBorder: _border(color: AppColors.primary),
         errorBorder: _border(color: Colors.red),

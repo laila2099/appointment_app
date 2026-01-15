@@ -13,13 +13,13 @@ class PaymentController extends GetxController {
     ),
     WalletsModel(
       title: 'Master Card',
-      icon: AppIcons.master_card,
+      icon: AppIcons.masterCard,
       number: '**** **** **** 4428',
       isConnected: true,
     ),
     WalletsModel(
       title: 'Apple Pay',
-      icon: AppIcons.applepay,
+      icon: AppIcons.applePay,
       number: '**** **** **** 3476',
       isConnected: true,
     ),

@@ -24,7 +24,7 @@ class StepDateTime extends StatelessWidget {
       );
 
       return ListView(
-        padding: EdgeInsets.fromLTRB(20.w, 0.h, 20.w, 10.h),
+        padding: EdgeInsetsDirectional.fromSTEB(20.w, 0.h, 20.w, 10.h),
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -37,23 +37,18 @@ class StepDateTime extends StatelessWidget {
             ],
           ),
           SizedBox(height: 24.h),
-
           CenterSnapDatePicker(controller: c.wheel),
-
           SizedBox(height: 24.h),
           SectionTitle('available_time'.tr),
           SizedBox(height: 24.h),
-
           TimeSlotGrid(
             times: c.availableTimes,
             selected: appointment.appointmentTime,
             onSelect: c.selectTime,
           ),
-
           SizedBox(height: 24.h),
           SectionTitle('appointment_type'.tr),
           SizedBox(height: 24.h),
-
           AppointmentTypeTile(
             type: AppointmentType.inPerson,
             selected: selectedType == AppointmentType.inPerson,

@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/constant/app_colors.dart';
-import '../../../../core/constant/text_style.dart';
 import '../../../../widgets/general_widgets/icon_badge.dart';
 
 class SummaryRow extends StatelessWidget {
   final String svgAsset;
-  final Color iconBg;
+  final Color? iconBg;
   final Color iconColor;
   final String title;
   final String subtitle;
@@ -16,7 +15,7 @@ class SummaryRow extends StatelessWidget {
   const SummaryRow({
     super.key,
     required this.svgAsset,
-    required this.iconBg,
+    this.iconBg,
     required this.iconColor,
     required this.title,
     required this.subtitle,
@@ -26,7 +25,7 @@ class SummaryRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 14.h),
+      padding: EdgeInsetsDirectional.symmetric(vertical: 14.h),
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(color: Colors.black.withOpacity(.06)),
@@ -36,7 +35,7 @@ class SummaryRow extends StatelessWidget {
         children: [
           IconBadge(
             svgAsset: svgAsset,
-            backgroundColor: iconBg,
+            backgroundColor: iconBg ?? Colors.transparent,
             iconColor: iconColor,
           ),
           SizedBox(width: 12.w),
@@ -54,7 +53,12 @@ class SummaryRow extends StatelessWidget {
                           color: AppColors.black,
                         )),
                     SizedBox(height: 4.h),
-                    Text(subtitle, style: CustomTextStyles.body12),
+                    Text(subtitle,
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.subtitle,
+                        )),
                   ],
                 ),
                 if (trailing != null) ...[SizedBox(width: 12.w), trailing!],

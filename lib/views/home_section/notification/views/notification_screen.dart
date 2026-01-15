@@ -20,7 +20,7 @@ class NotificationScreen extends StatelessWidget {
         showAction: true,
         width: 51.w,
         height: 27.h,
-        titel: "Notifications",
+        titel: "notifications".tr,
         actionicon: Container(
           decoration: BoxDecoration(
             color: AppColors.primary,
@@ -35,7 +35,7 @@ class NotificationScreen extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(24.r),
+        padding: EdgeInsetsDirectional.all(24.r),
         child: Column(
           children: [
             SizedBox(height: 12.h),
@@ -43,10 +43,10 @@ class NotificationScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Today",
+                  "today".tr,
                   style: TextStyle(fontSize: 16.sp, color: Color(0xff9E9E9E)),
                 ),
-                Text("Mark all as read", style: CustomTextStyles.regular),
+                Text("mark_all_as_read".tr, style: CustomTextStyles.regular),
               ],
             ),
             SizedBox(height: 16.h),

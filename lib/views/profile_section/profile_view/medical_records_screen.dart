@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 import '../../../core/constant/app_colors.dart';
 import '../../../core/constant/app_icons.dart';
@@ -24,13 +25,14 @@ class MedicalRecordsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppHeader(
+                onBack: Get.back,
                 center: Text(
-                  "Medical Record",
+                  "medical_record".tr,
                   style: CustomTextStyles.screenTitle,
                 ),
                 trailing: HeaderButton(
                   child: SvgPicture.asset(
-                    AppIcons.three_point,
+                    AppIcons.threePoint,
                     width: 22.sp,
                     height: 22.sp,
                     colorFilter: const ColorFilter.mode(
@@ -43,37 +45,37 @@ class MedicalRecordsScreen extends StatelessWidget {
               ),
               SizedBox(height: 32.h),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                padding: EdgeInsetsDirectional.symmetric(horizontal: 20.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     /// This Month
                     MedicalRecordSection(
-                      title: 'This Month',
-                      children: const [
+                      title: "this_month".tr,
+                      children: [
                         MedicalRecordRow(
                           date: 'Feb 25',
-                          title: 'End of observation',
+                          title: "end_of_observation".tr,
                           details: [],
                         ),
                         MedicalRecordRow(
                           date: 'Feb 25',
-                          title: 'Blood Analysis',
+                          title: "blood_analysis".tr,
                           details: [
-                            'red blood cell: 4.10 million cells/mcL',
-                            'hemoglobin: 142 grams/L',
-                            'hematocrit: 33.6%',
-                            'white blood cells: 3.850 cells/mcL',
+                            '${"red_blood_cell".tr}: 4.10 million cells/mcL',
+                            '${"hemoglobin".tr}: 142 grams/L',
+                            '${"hematocrit".tr}: 33.6%',
+                            '${"white_blood_cells".tr}: 3.850 cells/mcL',
                           ],
                         ),
                         MedicalRecordRow(
                           date: 'Feb 25',
-                          title: 'Blood Analysis',
+                          title: "blood_analysis".tr,
                           details: [
-                            'red blood cell : 3.90 million cells/mcL',
-                            'hemogoblin : 122 grams/L',
-                            'hematocrit : 47.7%',
-                            'white blood cells : 4.300 cells/mcL',
+                            '${"red_blood_cell".tr} : 3.90 million cells/mcL',
+                            '${"hemoglobin".tr} : 122 grams/L',
+                            '${"hematocrit".tr} : 47.7%',
+                            '${"white_blood_cells".tr} : 4.300 cells/mcL',
                           ],
                         ),
                       ],
@@ -82,30 +84,30 @@ class MedicalRecordsScreen extends StatelessWidget {
                     /// January
                     MedicalRecordSection(
                       title: 'January',
-                      children: const [
+                      children: [
                         MedicalRecordRow(
                           date: 'Feb 25',
-                          title: 'End of observation',
+                          title: "end_of_observation".tr,
                           details: [],
                         ),
                         MedicalRecordRow(
                           date: 'Feb 25',
-                          title: 'Blood Analysis',
+                          title: "blood_analysis".tr,
                           details: [
-                            'red blood cell : 4.30 million cells/mcL',
-                            'hemogoblin : 132 grams/L',
-                            'hematocrit : 37.7%',
-                            'white blood cells : 4.700 cells/mcL',
+                            '${"red_blood_cell".tr} : 4.30 million cells/mcL',
+                            '${"hemoglobin".tr} : 132 grams/L',
+                            '${"hematocrit".tr} : 37.7%',
+                            '${"white_blood_cells".tr} : 4.700 cells/mcL',
                           ],
                         ),
                         MedicalRecordRow(
                           date: 'Feb 25',
-                          title: 'Blood Analysis',
+                          title: "blood_analysis".tr,
                           details: [
-                            'red blood cell : 3.90 million cells/mcL',
-                            'hemogoblin : 118 grams/L',
-                            'hematocrit : 38.7%',
-                            'white blood cells : 4.500 cells/mcL',
+                            '${"red_blood_cell".tr} : 3.90 million cells/mcL',
+                            '${"hemoglobin".tr} : 118 grams/L',
+                            '${"hematocrit".tr} : 38.7%',
+                            '${"white_blood_cells".tr} : 4.500 cells/mcL',
                           ],
                         ),
                       ],

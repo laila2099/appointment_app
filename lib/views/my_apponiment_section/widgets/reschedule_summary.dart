@@ -25,7 +25,7 @@ class RescheduleSummary extends StatelessWidget {
       final doctor = c.doctor.value;
 
       return ListView(
-        padding: EdgeInsets.fromLTRB(20.w, 0, 20.w, 50.h),
+        padding: EdgeInsetsDirectional.fromSTEB(20.w, 0, 20.w, 50.h),
         children: [
           Container(
             width: 70.w,
@@ -37,7 +37,7 @@ class RescheduleSummary extends StatelessWidget {
             child: Icon(Icons.check, color: Colors.white, size: 34.sp),
           ),
           SizedBox(height: 20.h),
-          Center(child: SectionTitle('Booking has been rescheduled'.tr)),
+          Center(child: SectionTitle('booking_rescheduled'.tr)),
           SizedBox(height: 40.h),
           SectionTitle('booking_information'.tr),
           SizedBox(height: 12.h),
@@ -46,7 +46,8 @@ class RescheduleSummary extends StatelessWidget {
             iconBg: AppColors.secondBlue,
             iconColor: AppColors.primary,
             title: 'date_time'.tr,
-            subtitle: formatDateTime(context, a.appointmentDate, a.appointmentTime),
+            subtitle:
+                formatDateTime(context, a.appointmentDate, a.appointmentTime),
           ),
           SummaryRow(
             svgAsset: AppIcons.clipboard,
@@ -65,7 +66,7 @@ class RescheduleSummary extends StatelessWidget {
               clinic: doctor.clinic,
               rating: doctor.ratingAvg,
               reviewsCount: doctor.ratingCount,
-              avatar: const AssetImage(AppImages.doctor),
+              avatar: AppImages.doctor,
               showChat: false,
             ),
           SizedBox(height: 18.h),

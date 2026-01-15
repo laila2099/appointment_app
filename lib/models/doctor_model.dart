@@ -88,9 +88,8 @@ class Doctor {
       strNumber: json['str_number']?.toString() ?? '',
       experiencePlace: json['experience_place']?.toString() ?? '',
       experiencePeriod: json['experience_period']?.toString() ?? '',
-      locationText: json['location_text']?.toString() ??
-          json['address']?.toString() ??
-          '',
+      locationText:
+          json['location']?.toString() ?? json['address']?.toString() ?? '',
       lat: parseDouble(json['lat'] ?? json['latitude']),
       lng: parseDouble(json['lng'] ?? json['longitude']),
       isRecommended: json['is_recommended'] == true ||

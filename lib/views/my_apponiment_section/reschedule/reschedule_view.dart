@@ -4,6 +4,7 @@ import 'package:appointment_app/views/my_apponiment_section/widgets/reschedule_s
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
 import '../../../../widgets/general_widgets/app_header/app_header.dart';
 import '../../../../widgets/general_widgets/app_header/header_title.dart';
 import '../../../../widgets/general_widgets/primary_button.dart';
@@ -11,7 +12,6 @@ import '../../../models/appointment_model.dart';
 
 class RescheduleScreen extends GetView<BookingController> {
   RescheduleScreen({super.key});
-
   final argAppointment = Get.arguments as Appointment?;
 
   @override
@@ -23,7 +23,8 @@ class RescheduleScreen extends GetView<BookingController> {
           return Column(
             children: [
               AppHeader(
-                center: HeaderTitle('Reschedule'),
+                onBack: Get.back,
+                center: HeaderTitle('reschedual'.tr),
               ),
               SizedBox(height: 20.h),
               Expanded(
@@ -37,7 +38,8 @@ class RescheduleScreen extends GetView<BookingController> {
               ),
               if (controller.stepIndex.value != 2)
                 Padding(
-                  padding: EdgeInsets.fromLTRB(16.w, 10.h, 16.w, 16.h),
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(16.w, 10.h, 16.w, 16.h),
                   child: PrimaryButton(
                     padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 16.h),
                     text: controller.stepIndex.value == 1
@@ -52,9 +54,7 @@ class RescheduleScreen extends GetView<BookingController> {
                         );
                         return;
                       }
-                      if (argAppointment != null) {
-                        controller.appointment.value = argAppointment!;
-                      }
+
                       if (controller.stepIndex.value == 1) {
                         final id = controller.appointment.value.id;
                         if (id != null && id.isNotEmpty) {

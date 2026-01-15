@@ -13,7 +13,7 @@ class DoctorTile extends StatelessWidget {
   final String clinic;
   final double rating;
   final int reviewsCount;
-  final ImageProvider avatar;
+  final String avatar;
 
   final String? dateText;
   final String? time;
@@ -62,7 +62,7 @@ class DoctorTile extends StatelessWidget {
     required String clinic,
     required double rating,
     required int reviewsCount,
-    required ImageProvider avatar,
+    required String avatar,
     VoidCallback? onTap,
     VoidCallback? onChatTap,
     bool showChat = true,
@@ -77,9 +77,9 @@ class DoctorTile extends StatelessWidget {
       avatar: avatar,
       onTap: onTap,
       onChatTap: onChatTap,
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+      padding: EdgeInsetsDirectional.symmetric(horizontal: 16.w, vertical: 8.h),
       asCard: false,
-      avatarSize: 56,
+      avatarSize: 74,
       avatarRadius: 16,
       showChat: showChat,
       chatButtonSize: 44,
@@ -96,7 +96,7 @@ class DoctorTile extends StatelessWidget {
     required String clinic,
     required String dateText,
     required String time,
-    required ImageProvider avatar,
+    required String avatar,
     VoidCallback? onTap,
     VoidCallback? onChatTap,
     bool showChat = true,
@@ -111,7 +111,7 @@ class DoctorTile extends StatelessWidget {
       avatar: avatar,
       onTap: onTap,
       onChatTap: onChatTap,
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+      padding: EdgeInsetsDirectional.symmetric(horizontal: 16.w, vertical: 8.h),
       asCard: false,
       avatarSize: 56,
       avatarRadius: 16,
@@ -132,7 +132,7 @@ class DoctorTile extends StatelessWidget {
     required String clinic,
     required double rating,
     required int reviewsCount,
-    required ImageProvider avatar,
+    required String avatar,
     VoidCallback? onTap,
   }) {
     return DoctorTile._(
@@ -145,7 +145,7 @@ class DoctorTile extends StatelessWidget {
       avatar: avatar,
       onTap: onTap,
       onChatTap: null,
-      padding: EdgeInsets.all(14.w),
+      padding: EdgeInsetsDirectional.all(14.w),
       asCard: true,
       avatarSize: 64,
       avatarRadius: 18,
@@ -186,11 +186,12 @@ class DoctorTile extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(avatarRadius.r),
-          child: Image(
-            image: avatar,
-            width: avatarSize.sp,
-            height: avatarSize.sp,
+          child: Image.asset(
+            avatar,
+            width: avatarSize.w,
+            height: avatarSize.w,
             fit: BoxFit.cover,
+            alignment: Alignment.topCenter,
           ),
         ),
         SizedBox(width: 12.w),
@@ -286,7 +287,11 @@ class DoctorTile extends StatelessWidget {
 
     return Row(
       children: [
-        Icon(Icons.star, size: 16.w, color: Colors.amber),
+        SvgPicture.asset(
+          AppIcons.star,
+          height: 16.w,
+          width: 16.w,
+        ),
         SizedBox(width: 6.w),
         Text(rating.toStringAsFixed(1), style: ratingStyle),
         SizedBox(width: 6.w),
@@ -315,12 +320,7 @@ class _ChatButton extends StatelessWidget {
       child: Container(
         width: size.w,
         height: size.h,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: radius.r,
-          border: Border.all(color: Colors.black.withOpacity(0.08)),
-        ),
+        alignment: AlignmentDirectional.center,
         child: SvgPicture.asset(
           AppIcons.chat,
           width: 22.w,

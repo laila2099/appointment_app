@@ -1,49 +1,92 @@
-import 'package:get/get.dart';
+import 'package:appointment_app/views/home_section/home_screen/controller/doctor_controller.dart';
+import 'package:appointment_app/views/home_section/home_screen/model/category_model.dart';
+import 'package:appointment_app/views/home_section/recommendation_doctor/models/sort_model.dart';
+import 'package:appointment_app/views/search_section/controller/search_result_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class SortModel {
-  final String title;
-  final IconData? icon;
-
-  SortModel({required this.title, this.icon});
-}
+import '../../../../core/classes/api/api_result.dart';
+import '../../../../core/classes/repositories/doctor_repository.dart';
 
 class SortController extends GetxController {
-  int specialityIndex = 0;
-  int ratingIndex = 0;
+  final DoctorRepository _repository = Get.find();
 
-  List<SortModel> specialityList = [
-    SortModel(title: "All"),
-    SortModel(title: "General"),
-    SortModel(title: "Neurologic"),
-    SortModel(title: "Pediatric"),
-    SortModel(title: "Radiology"),
-    SortModel(title: "ENT"),
-    SortModel(title: "Dentistry"),
-    SortModel(title: "intestine"),
-    SortModel(title: "Histologist"),
-    SortModel(title: "Hepatology"),
-    SortModel(title: "Cardiologist"),
-    SortModel(title: "Pulmonary"),
-    SortModel(title: "Optometry"),
-  ];
+  var specialityList = <CategoryModel>[].obs;
+  var ratingList = <SortModel>[].obs;
 
-  List<SortModel> ratingList = [
-    SortModel(title: "All", icon: Icons.star),
-    SortModel(title: "5", icon: Icons.star),
-    SortModel(title: "4", icon: Icons.star),
-    SortModel(title: "3", icon: Icons.star),
-    SortModel(title: "2", icon: Icons.star),
-    SortModel(title: "1", icon: Icons.star),
-  ];
+  var specialityIndex = 0.obs;
+  var ratingIndex = 0.obs;
+
+  var isLoading = true.obs;
+  var errorMessage = Rx<String?>(null);
+
+  @override
+  void onInit() {
+    super.onInit();
+
+    _initializeRatingList();
+    fetchSpecialities();
+  }
+
+  void _initializeRatingList() {
+    ratingList.assignAll([
+      SortModel(title: "All", icon: Icons.star),
+      SortModel(title: "5", icon: Icons.star),
+      SortModel(title: "4", icon: Icons.star),
+      SortModel(title: "3", icon: Icons.star),
+      SortModel(title: "2", icon: Icons.star),
+      SortModel(title: "1", icon: Icons.star),
+    ]);
+  }
+
+  Future<void> fetchSpecialities() async {
+    try {
+      isLoading(true);
+      errorMessage.value = null;
+
+      final result = await _repository.getCategories();
+
+      if (result is ApiSuccess<List<CategoryModel>>) {
+        specialityList.assignAll([
+          ...result.data,
+        ]);
+      } else if (result is ApiFailure<List<CategoryModel>>) {
+        final errorMsg = result.error.message;
+        errorMessage.value = errorMsg;
+        Get.snackbar("Error", "Failed to load specialities: $errorMsg");
+      }
+    } catch (e) {
+      errorMessage.value = e.toString();
+      Get.snackbar("Error", "Exception: $e");
+    } finally {
+      isLoading(false);
+    }
+  }
 
   void selectSpeciality(int index) {
-    specialityIndex = index;
-    update();
+    specialityIndex.value = index;
   }
 
   void selectRating(int index) {
-    ratingIndex = index;
-    update();
+    ratingIndex.value = index;
+  }
+
+  void retryFetch() {
+    fetchSpecialities();
+  }
+
+  void done() {
+    final selected = specialityList[specialityIndex.value];
+
+    final String? categoryId =
+        (selected.title == 'general') ? null : selected.id;
+
+    if (Get.isRegistered<SearchResultController>()) {
+      Get.find<SearchResultController>().fetchDoctors(categoryId: categoryId);
+    } else if (Get.isRegistered<DoctorController>()) {
+      Get.find<DoctorController>().filterDoctors(categoryId: categoryId);
+    }
+
+    Get.back();
   }
 }
