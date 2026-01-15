@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../core/constant/app_colors.dart';
 import '../../model/inbox_model.dart';
 
@@ -22,7 +21,6 @@ class InboxItem extends StatelessWidget {
         padding: EdgeInsetsDirectional.symmetric(vertical: 12.h),
         child: Row(
           children: [
-            /// 👤 Avatar
             CircleAvatar(
               radius: 26.r,
               backgroundColor: AppColors.light2Grey,
@@ -31,7 +29,6 @@ class InboxItem extends StatelessWidget {
 
             SizedBox(width: 12.w),
 
-            /// 📝 Name + Message
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,7 +55,6 @@ class InboxItem extends StatelessWidget {
               ),
             ),
 
-            /// ⏰ Time + Badge
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
@@ -72,19 +68,21 @@ class InboxItem extends StatelessWidget {
                 SizedBox(height: 6.h),
                 if (model.unreadCount > 0)
                   Container(
-                    padding: EdgeInsetsDirectional.all(6.r),
-                    decoration: const BoxDecoration(
+                    padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                    decoration: BoxDecoration(
                       color: AppColors.primary,
-                      shape: BoxShape.circle,
+                      borderRadius: BorderRadius.circular(4.r),
                     ),
                     child: Text(
                       model.unreadCount.toString(),
                       style: TextStyle(
                         fontSize: 10.sp,
                         color: AppColors.white,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
+
               ],
             ),
           ],

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+
 import '../../../widgets/general_widgets/app_bar/app_bar.dart';
-import '../../../core/constant/app_colors.dart';
 import '../controller/chat_controller.dart';
 
 class ChatView extends StatelessWidget {
@@ -13,139 +14,172 @@ class ChatView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final args = Get.arguments as Map<String, dynamic>? ?? {};
-    final doctorName = args['name'] ?? 'Unknown Doctor';
+    final doctorName = args['name'] ?? 'Dr. Jack Sullivan';
+
+    const Color iconColor = Color(0xFF333333);
 
     return Scaffold(
       appBar: CustomAppBar(
         titel: doctorName,
         subTitle: 'online',
         showAction: true,
-        actionicon: Icon(Icons.video_call, color: Colors.grey),
+        actionicon: const Icon(CupertinoIcons.video_camera, color: iconColor),
         onactiontap: () {
           print('Video call tapped!');
         },
       ),
-      backgroundColor: AppColors.white,
+      backgroundColor: Colors.white,
       body: Column(
         children: [
-          Expanded(
-            child: Obx(() => ListView.builder(
-                  reverse: true,
-                  itemCount: controller.messages.length,
-                  itemBuilder: (context, index) {
-                    final message = controller
-                        .messages[controller.messages.length - 1 - index];
-                    final timeStr = DateFormat('h:mm a').format(message.time);
 
-                    return Align(
-                      alignment: message.isUser
-                          ? AlignmentDirectional.centerEnd
-                          : AlignmentDirectional.centerStart,
-                      child: Column(
-                        crossAxisAlignment: message.isUser
-                            ? CrossAxisAlignment.end
-                            : CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            margin: const EdgeInsetsDirectional.symmetric(
-                                vertical: 4, horizontal: 8),
-                            padding: const EdgeInsetsDirectional.all(12),
-                            decoration: BoxDecoration(
+          Expanded(
+            child: Obx(
+                  () => ListView.builder(
+                reverse: true,
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                itemCount: controller.messages.length,
+                itemBuilder: (context, index) {
+                  final message = controller
+                      .messages[controller.messages.length - 1 - index];
+                  final timeStr = DateFormat('HH:mm').format(message.time);
+
+                  return Align(
+                    alignment: message.isUser
+                        ? AlignmentDirectional.centerEnd
+                        : AlignmentDirectional.centerStart,
+                    child: Column(
+                      crossAxisAlignment: message.isUser
+                          ? CrossAxisAlignment.end
+                          : CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.symmetric(vertical: 6),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 14, horizontal: 16),
+                          constraints: BoxConstraints(
+                            maxWidth: MediaQuery.of(context).size.width * 0.75,
+                          ),
+                          decoration: BoxDecoration(
+                            color: message.isUser
+                                ? const Color(0xFF1B75FE)
+                                : Colors.white,
+                            border: message.isUser
+                                ? null
+                                : Border.all(color: const Color(0xFFEEEEEE), width: 1),
+                            borderRadius: BorderRadius.only(
+                              topLeft: const Radius.circular(16),
+                              topRight: const Radius.circular(16),
+                              bottomLeft: message.isUser
+                                  ? const Radius.circular(16)
+                                  : Radius.zero,
+                              bottomRight: message.isUser
+                                  ? Radius.zero
+                                  : const Radius.circular(16),
+                            ),
+                            boxShadow: message.isUser ? [] : [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.04),
+                                blurRadius: 4,
+                                offset: const Offset(0, 2),
+                              )
+                            ],
+                          ),
+                          child: Text(
+                            message.text,
+                            style: TextStyle(
+                              fontSize: 15,
                               color: message.isUser
-                                  ? AppColors.primary
-                                  : Colors.grey[300],
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Text(
-                              message.text,
-                              style: TextStyle(
-                                color: message.isUser
-                                    ? AppColors.white
-                                    : Colors.black,
-                              ),
+                                  ? Colors.white
+                                  : Colors.black87,
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.symmetric(
-                                horizontal: 12.0),
-                            child: Text(
-                              timeStr,
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.grey,
-                              ),
-                            ),
+                        ),
+                        Text(
+                          timeStr,
+                          style: const TextStyle(
+                            fontSize: 11,
+                            color: Color(0xFF9E9E9E),
                           ),
-                        ],
-                      ),
-                    );
-                  },
-                )),
+                        ),
+                        const SizedBox(height: 8),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
           ),
+
           Padding(
-            padding: const EdgeInsetsDirectional.all(8.0),
+            padding: const EdgeInsets.only(left: 12, right: 12, bottom: 25, top: 10),
             child: Row(
               children: [
-                IconButton(
-                  onPressed: () {
-                    print('Emoji tapped!');
-                  },
-                  icon: Icon(Icons.emoji_emotions_outlined,
-                      color: AppColors.lightGrey),
-                ),
                 Expanded(
-                  child: Stack(
-                    alignment: AlignmentDirectional.centerEnd,
-                    children: [
-                      TextField(
-                        onChanged: (val) => controller.newMessage.value = val,
-                        decoration: InputDecoration(
-                          hintText: 'type_message'.tr,
-                          contentPadding: const EdgeInsetsDirectional.symmetric(
-                              vertical: 10, horizontal: 16),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
+                  child: Container(
+
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF9F9F9),
+                      borderRadius: BorderRadius.circular(30),
+                      border: Border.all(color: const Color(0xFFE0E0E0)),
+                    ),
+                    child: TextField(
+                      onChanged: (val) => controller.newMessage.value = val,
+                      decoration: InputDecoration(
+                        hintText: 'Type a message ...',
+                        hintStyle: const TextStyle(color: Color(0xFF9E9E9E), fontSize: 15),
+                        border: InputBorder.none,
+                        contentPadding: const EdgeInsets.symmetric(vertical: 12),
+                        prefixIcon: const Icon(
+                          CupertinoIcons.smiley,
+                          color: iconColor,
+                          size: 24,
+                        ),
+                        suffixIcon: SizedBox(
+                          width: 85,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: const [
+                              Icon(
+                                CupertinoIcons.paperclip,
+                                color: iconColor,
+                                size: 22,
+                              ),
+                              SizedBox(width: 12),
+                              Icon(
+                                CupertinoIcons.camera,
+                                color: iconColor,
+                                size: 22,
+                              ),
+                              SizedBox(width: 15),
+                            ],
                           ),
                         ),
                       ),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              print('Attach file tapped!');
-                            },
-                            icon: Icon(Icons.attach_file,
-                                color: AppColors.lightGrey),
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              print('Camera tapped!');
-                            },
-                            icon: Icon(Icons.camera_alt,
-                                color: AppColors.lightGrey),
-                          ),
-                        ],
-                      ),
-                    ],
+                    ),
                   ),
                 ),
-                const SizedBox(width: 8),
+                const SizedBox(width: 10),
                 Obx(() {
                   final hasText = controller.newMessage.value.trim().isNotEmpty;
-                  return FloatingActionButton(
-                    backgroundColor: AppColors.primary,
-                    onPressed: () {
+                  return GestureDetector(
+                    onTap: () {
                       if (hasText) {
                         controller.sendMessage(controller.newMessage.value);
                         controller.newMessage.value = '';
-                      } else {
-                        print('Start voice recording...');
                       }
                     },
-                    child: Icon(
-                      hasText ? Icons.send : Icons.mic,
-                      color: AppColors.white,
+                    child: Container(
+                      height: 52,
+                      width: 52,
+                      decoration: const BoxDecoration(
+                        color: Color(0xFF1B75FE),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        hasText ? CupertinoIcons.paperplane_fill : Icons.mic,
+                        color: Colors.white,
+                        size: 26,
+                      ),
                     ),
                   );
                 }),
