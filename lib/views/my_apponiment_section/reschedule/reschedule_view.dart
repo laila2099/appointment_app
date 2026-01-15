@@ -10,10 +10,9 @@ import '../../../../widgets/general_widgets/primary_button.dart';
 import '../../../models/appointment_model.dart';
 
 class RescheduleScreen extends GetView<BookingController> {
-   RescheduleScreen({super.key});
+  RescheduleScreen({super.key});
 
   final argAppointment = Get.arguments as Appointment?;
-
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +40,9 @@ class RescheduleScreen extends GetView<BookingController> {
                   padding: EdgeInsets.fromLTRB(16.w, 10.h, 16.w, 16.h),
                   child: PrimaryButton(
                     padding: EdgeInsets.fromLTRB(24.w, 16.h, 24.w, 16.h),
-                    text: controller.stepIndex.value == 1 ? 'done'.tr : 'continue'.tr,
+                    text: controller.stepIndex.value == 1
+                        ? 'done'.tr
+                        : 'continue'.tr,
                     onPressed: () {
                       if (!controller.canContinue) {
                         Get.snackbar(

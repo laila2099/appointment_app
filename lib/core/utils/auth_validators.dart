@@ -1,8 +1,12 @@
+import 'package:country_picker/src/country.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_utils/src/get_utils/get_utils.dart';
 
 class Validators {
 
-  // Auth Validators
+  // AUTH VALIDATORS
+
+  ///Email validator
 
   static String? validateEmail(String? value) {
     if (value == null || value.trim().isEmpty) {
@@ -14,6 +18,8 @@ class Validators {
     return null;
   }
 
+  /// Password Validator
+
   static String? validatePassword(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter your password';
@@ -21,9 +27,16 @@ class Validators {
     if (value.length < 6) {
       return 'Password must be at least 6 characters';
     }
+    if (!RegExp(r'[0-9]').hasMatch(value)) {
+      return 'Password must contain at least one number';
+    }
+    if (!RegExp(r'[A-Za-z]').hasMatch(value)) {
+      return 'Password must contain letters';
+    }
     return null;
   }
 
+  /// Confirm Password Validator
   static String? validateConfirmPassword(String? value, String originalPassword) {
     if (value == null || value.isEmpty) {
       return 'Please confirm your password';
@@ -34,8 +47,9 @@ class Validators {
     return null;
   }
 
-  // Profile Validators
+  // PROFILE VALIDATORS
 
+  /// Full Name Validator
 
   static String? validateFullName(String? value) {
     if (value == null || value.trim().isEmpty) {
@@ -44,23 +58,58 @@ class Validators {
     if (value.trim().length < 3) {
       return 'Name must be at least 3 characters';
     }
-    return null;
-  }
-
-  static String? validateBirthdate(String? value) {
-    if (value == null || value.trim().isEmpty) {
-      return 'Please enter your birthdate';
+    if (!RegExp(r"^[a-zA-Z\s]+$").hasMatch(value.trim())) {
+      return 'Name can only contain letters';
     }
     return null;
   }
 
-  static String? validatePhone(String? value) {
+  /// Username Validator
+
+  static String? validateUsername(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Please enter your username';
+    }
+    if (value.trim().length < 3) {
+      return 'Username must be at least 3 characters';
+    }
+    if (!RegExp(r'^[a-zA-Z0-9_]+$').hasMatch(value.trim())) {
+      return 'Username can only contain letters, numbers, and underscore';
+    }
+    return null;
+  }
+
+  /// Birthdate Validator
+
+  static String? validateBirthdate(DateTime? date) {
+    if (date == null) {
+      return 'Please select your birthdate';
+    }
+
+    if (date.isAfter(DateTime.now())) {
+      return 'Birthdate cannot be in the future';
+    }
+
+    final age = DateTime.now().year - date.year;
+    if (age < 0 || age > 120) {
+      return 'Enter a valid age';
+    }
+
+    return null;
+  }
+
+  /// Phone Validator
+  static String? validatePhone(String? value, Rx<Country> selectedCountry) {
     if (value == null || value.trim().isEmpty) {
       return 'Please enter your phone number';
     }
     if (value.trim().length < 8) {
       return 'Enter a valid phone number';
     }
+    if (!RegExp(r'^[0-9]+$').hasMatch(value.trim())) {
+      return 'Phone number can only contain digits';
+    }
     return null;
   }
+
 }

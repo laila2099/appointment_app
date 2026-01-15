@@ -42,36 +42,29 @@ class LoginView extends StatelessWidget {
                 // Subtitle
                 Text(
                   "We're excited to have you back, can't wait to see what you've been up to since you last logged in.",
-                  style: CustomTextStyles.subTitle,
+                  style: CustomTextStyles.subTitle
+                      .copyWith(fontSize: 20, height: 1.5),
                 ),
-                SizedBox(height: 32.h),
+                SizedBox(height: 20.h),
 
                 //Email
                 CustomTextField(
                   controller: authController.emailController,
                   hint: "Email",
                   keyboardType: TextInputType.emailAddress,
+                  tfBackground: AppColors.textField2,
                   validator: Validators.validateEmail,
                 ),
+                SizedBox(height: 16.h),
 
-                //Password
-                Obx(
-                      () => CustomTextField(
-                    controller: authController.passwordController,
-                    hint: "Password",
-                    isPassword: !authController.isPasswordVisible.value,
-                    validator: Validators.validatePassword,
-                    suffixIcon: IconButton(
-                      icon: Icon(authController.isPasswordVisible.value
-                          ? Icons.visibility
-                          : Icons.visibility_off),
-                      onPressed: () {
-                        authController.isPasswordVisible.value = !authController.isPasswordVisible.value;
-                      },
-                    ),
-                  ),
+                // Password
+                CustomTextField(
+                  controller: authController.passwordController,
+                  hint: "Password",
+                  tfBackground: AppColors.textField2,
+                  isPassword: true,
+                  validator: Validators.validatePassword,
                 ),
-
                 SizedBox(height: 16.h),
 
                 // Remember + Forgot
@@ -80,15 +73,23 @@ class LoginView extends StatelessWidget {
                     Obx(
                       () => Checkbox(
                         value: authController.rememberMe.value,
-                        onChanged: (value) {
-                          authController.rememberMe.value = value ?? false;
-                        },
-                        activeColor: AppColors.primary,
+                        onChanged: (value) =>
+                            authController.rememberMe.value = value ?? false,
+                        checkColor: Colors.white,
+                        fillColor: MaterialStateProperty.resolveWith((states) =>
+                            states.contains(MaterialState.selected)
+                                ? AppColors.primary
+                                : Colors.white),
+                        side: MaterialStateBorderSide.resolveWith((states) =>
+                            states.contains(MaterialState.selected)
+                                ? BorderSide(color: AppColors.primary, width: 2)
+                                : BorderSide(color: Colors.grey, width: 2)),
                       ),
                     ),
                     Text(
                       "Remember me",
-                      style: CustomTextStyles.subtitle12W500,
+                      style: CustomTextStyles.subtitle12W500
+                          .copyWith(color: AppColors.lightGrey),
                     ),
                     const Spacer(),
                     TextButton(
@@ -103,7 +104,7 @@ class LoginView extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 24.h),
+                SizedBox(height: 34.h),
 
                 // Login Button
                 Obx(
@@ -126,8 +127,7 @@ class LoginView extends StatelessWidget {
                     ),
                   ),
                 ),
-
-                SizedBox(height: 24.h),
+                SizedBox(height: 40.h),
 
                 // Divider
                 Row(
@@ -153,12 +153,12 @@ class LoginView extends StatelessWidget {
                       imagePath: AppImages.google,
                       onTap: () {},
                     ),
-                    SizedBox(width: 16.w),
+                    SizedBox(width: 32.w),
                     SocialButton(
                       imagePath: AppImages.facebook,
                       onTap: () {},
                     ),
-                    SizedBox(width: 16.w),
+                    SizedBox(width: 32.w),
                     SocialButton(
                       imagePath: AppImages.apple,
                       onTap: () {},
@@ -177,8 +177,7 @@ class LoginView extends StatelessWidget {
                         style: CustomTextStyles.subtitle,
                         children: [
                           const TextSpan(
-                            text: "By logging, you agree to our ",
-                          ),
+                            text: "By logging, you agree to our ",),
                           TextSpan(
                             text: "Terms & Conditions",
                             style: CustomTextStyles.subtitle.copyWith(
@@ -199,7 +198,7 @@ class LoginView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(height: 25.h),
+                    SizedBox(height: 40.h),
                     RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(
@@ -216,7 +215,7 @@ class LoginView extends StatelessWidget {
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Get.to(() =>  CreateAccountView());
+                                Get.to(() => CreateAccountView());
                               },
                           ),
                         ],

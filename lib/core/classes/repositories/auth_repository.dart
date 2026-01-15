@@ -14,6 +14,7 @@ class AuthRepository {
   Future<ApiResult<AuthSession>> signUp({
     required String email,
     required String password,
+    required String phone,
   }) {
     return api.post<AuthSession>(
       endpoint: ApiEndpoints.signUpWithKey(),

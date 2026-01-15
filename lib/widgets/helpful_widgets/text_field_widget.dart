@@ -10,6 +10,9 @@ class CustomTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final String? Function(String?)? validator;
+  final Color? tfBackground;
+  final bool? readOnly;
+  final void Function()? onTap;
 
   const CustomTextField({
     super.key,
@@ -20,6 +23,9 @@ class CustomTextField extends StatelessWidget {
     this.suffixIcon,
     this.prefixIcon,
     this.validator,
+    this.tfBackground,
+    this.readOnly,
+  this.onTap,
 
   });
 
@@ -37,7 +43,7 @@ class CustomTextField extends StatelessWidget {
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
         filled: true,
-        fillColor: Color(0xfffdfdff),
+        fillColor: tfBackground ?? const Color(0xfffdfdff),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 18,

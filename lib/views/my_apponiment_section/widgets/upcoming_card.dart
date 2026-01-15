@@ -41,7 +41,8 @@ class UpcomingCard extends StatelessWidget {
               name: appt.doctorName,
               specialty: appt.specialty,
               clinic: appt.clinic,
-              dateText: DateFormat('EEE, dd MMM').format(appt.appointmentDateTime),
+              dateText:
+                  DateFormat('EEE, dd MMM').format(appt.appointmentDateTime),
               time: DateFormat('hh:mm a').format(appt.appointmentDateTime),
               avatar: const AssetImage(AppImages.doctor),
               showChat: true,
@@ -64,8 +65,9 @@ class UpcomingCard extends StatelessWidget {
                   label: 'Reschedule',
                   variant: ButtonVariant.filled,
                   onPressed: () {
-                    Get.to(() => RescheduleScreen(), binding: BookingBinding(), arguments: appt.toAppointmentModel());
-
+                    Get.to(() => RescheduleScreen(),
+                        binding: BookingBinding(),
+                        arguments: appt.toAppointmentModel());
                   },
                 ),
               ],

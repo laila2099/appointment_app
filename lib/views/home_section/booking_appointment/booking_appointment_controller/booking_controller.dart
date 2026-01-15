@@ -69,7 +69,7 @@ class BookingController extends GetxController {
       isRecommended: true,
       avatarUrl: null,
       about:
-      "Dr. Jenny Watson is the top most Immunologists specialist in Christ Hospital at London. "
+          "Dr. Jenny Watson is the top most Immunologists specialist in Christ Hospital at London. "
           "She achieved several awards for her wonderful contribution in medical field. "
           "She is available for private consultation.",
       workingTime: "Monday - Friday, 08.00 AM - 20.00 PM",
@@ -133,8 +133,7 @@ class BookingController extends GetxController {
       PaymentMethod(id: 'pm_2', type: 'card', label: 'Visa', last4: '1122'),
     ]);
 
-    selectedPayment.value =
-        paymentMethods.firstWhereOrNull((e) => e.isDefault);
+    selectedPayment.value = paymentMethods.firstWhereOrNull((e) => e.isDefault);
   }
 
   // -------- Date & Time
@@ -145,7 +144,7 @@ class BookingController extends GetxController {
 
   int _findDateIndex(DateTime d) {
     final idx = availableDates.indexWhere(
-          (x) => x.year == d.year && x.month == d.month && x.day == d.day,
+      (x) => x.year == d.year && x.month == d.month && x.day == d.day,
     );
     return idx == -1 ? 0 : idx;
   }
@@ -184,7 +183,8 @@ class BookingController extends GetxController {
   }
 
   void next() {
-    if (stepIndex.value == 0 && appointment.value.appointmentTime == null) return;
+    if (stepIndex.value == 0 && appointment.value.appointmentTime == null)
+      return;
     if (stepIndex.value == 1 && selectedPayment.value == null) return;
     if (stepIndex.value < 2) stepIndex.value++;
   }
@@ -199,8 +199,7 @@ class BookingController extends GetxController {
   }
 
   void selectType(AppointmentType type) {
-    appointment.value =
-        appointment.value.copyWith(appointmentType: type.label);
+    appointment.value = appointment.value.copyWith(appointmentType: type.label);
   }
 
   bool get canContinue {
@@ -231,7 +230,7 @@ class BookingController extends GetxController {
       if (current != null && current.type == 'card') return;
 
       final def = paymentMethods.firstWhereOrNull(
-            (m) => m.type == 'card' && m.isDefault,
+        (m) => m.type == 'card' && m.isDefault,
       );
       final firstCard = cardMethods.isNotEmpty ? cardMethods.first : null;
       if (def != null) {
@@ -284,7 +283,7 @@ class BookingController extends GetxController {
 
       final t = selectedPayment.value?.type;
       paymentCategory.value =
-      (t == 'card' || t == 'bank' || t == 'paypal') ? t! : 'card';
+          (t == 'card' || t == 'bank' || t == 'paypal') ? t! : 'card';
     } catch (e) {
       paymentError.value = e.toString();
     } finally {
@@ -359,12 +358,12 @@ class BookingController extends GetxController {
         appointmentDate: appointment.value.appointmentDate,
         appointmentTime: appointment.value.appointmentTime != null
             ? DateTime(
-          0,
-          0,
-          0,
-          appointment.value.appointmentTime.hour,
-          appointment.value.appointmentTime.minute,
-        )
+                0,
+                0,
+                0,
+                appointment.value.appointmentTime.hour,
+                appointment.value.appointmentTime.minute,
+              )
             : null,
         paymentMethod: appointment.value.paymentMethod,
       );

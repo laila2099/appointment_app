@@ -5,6 +5,9 @@ class AppImages {
   static const String doctor = "${basePath}doctor.png";
   static const String onboardingDoctor = "${basePath}onboardingDoctor.png";
   static const String logo = "${basePath}logo.png";
+  static const String leftLogo = "${basePath}leftLogo.png";
+  static const String rightLogo = "${basePath}rightLogo.png";
+
   static const String google = "${basePath}google.png";
   static const String facebook = "${basePath}facebook.png";
   static const String apple = "${basePath}apple.png";

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:intl_phone_field/countries.dart' hide Country;
+import 'package:country_picker/country_picker.dart';
 import '../../../core/classes/api/api_result.dart';
 import '../../../core/classes/repositories/auth_repository.dart';
 import '../../../core/classes/utils/app_snackbar.dart';
@@ -24,11 +25,15 @@ class AuthController extends GetxController {
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final phoneController = TextEditingController();
+
 
   final isLoading = false.obs;
   final errorText = RxnString();
   final isPasswordVisible = false.obs;
   final rememberMe = false.obs;
+
+  Rx<Country> selectedCountry = Country.parse('SA').obs;
 
   Future<void> signUp() async {
     print((!(signUpFormKey.currentState?.validate() ?? false)));
@@ -38,7 +43,7 @@ class AuthController extends GetxController {
     errorText.value = null;
 
     final res = await repo.signUp(
-        email: emailController.text, password: passwordController.text);
+        email: emailController.text, password: passwordController.text, phone: fullPhoneNumber, );
 
     if (res is ApiSuccess<AuthSession>) {
       await _saveSession(res.data);
@@ -107,6 +112,7 @@ class AuthController extends GetxController {
   void onClose() {
     emailController.dispose();
     passwordController.dispose();
+    phoneController.dispose();
     super.onClose();
   }
 
@@ -132,5 +138,34 @@ class AuthController extends GetxController {
     }
 
     isLoading.value = false;
+
   }
+  //تابع لكتابة الرقم الصح حسب كل دولة بدولتا
+  String get fullPhoneNumber {
+    final code = selectedCountry.value.phoneCode;
+    final number = phoneController.text.trim();
+    return '+$code$number';
+  }
+
+  bool get isValidPhone {
+    var number = phoneController.text.trim();
+
+    // إزالة الصفر الأول إذا موجود
+    if (number.startsWith('0')) number = number.substring(1);
+
+    switch (selectedCountry.value.countryCode) {
+      case 'SY': // سوريا
+        return number.length == 9;
+      case 'SA': // السعودية
+        return number.length == 9;
+      case 'EG': // مصر
+        return number.length == 10;
+      case 'AE': // الإمارات
+        return number.length == 9;
+      default:
+        return number.length >= 7;
+    }
+  }
+
+
 }

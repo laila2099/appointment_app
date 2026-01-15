@@ -16,18 +16,18 @@ class SplashScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
-        children:[
-        Center(
-          child: SizedBox(
-            height: 443,
-            child: Image.asset(
-              AppImages.logo,
-              fit: BoxFit.cover,
-              color: Colors.white.withOpacity(0.05),
-              colorBlendMode: BlendMode.modulate,
+        children: [
+          Center(
+            child: SizedBox(
+              height: 443,
+              child: Image.asset(
+                AppImages.logo,
+                fit: BoxFit.cover,
+                color: Colors.white.withOpacity(0.06),
+                colorBlendMode: BlendMode.modulate,
+              ),
             ),
           ),
-        ),
 
           // شعار ونص
           Row(
@@ -43,18 +43,40 @@ class SplashScreen extends StatelessWidget {
                   ),
                 ),
               ),
-
               const SizedBox(height: 16),
               Text(
                 "Docdoc",
                 style: CustomTextStyles.headline.copyWith(
-                  fontSize: 80,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold
-                ),
+                    fontSize: 80,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold),
               ),
             ],
           ),
+
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  height: 220,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors: [
+                        Colors.white,
+                        Colors.white.withOpacity(0.05),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );

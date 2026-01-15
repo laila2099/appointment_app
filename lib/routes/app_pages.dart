@@ -48,8 +48,8 @@ final appPages = <GetPage>[
   GetPage(
     name: AppRoutes.splash,
     page: () => const SplashScreen(),
-    middlewares: [SplashRedirectMiddleware()],
   ),
+
   GetPage(name: AppRoutes.onboarding, page: () => const OnBoardingView()),
 
   GetPage(
@@ -57,13 +57,12 @@ final appPages = <GetPage>[
 
   // Auth + Reset Password
   GetPage(name: AppRoutes.login, page: () => LoginView()),
-  GetPage(name: AppRoutes.createAccount, page: () =>  CreateAccountView()),
-  GetPage(
-      name: AppRoutes.forgotPassword, page: () =>  ForgotPasswordView()),
+  GetPage(name: AppRoutes.createAccount, page: () => CreateAccountView()),
+  GetPage(name: AppRoutes.forgotPassword, page: () => ForgotPasswordView()),
   GetPage(name: AppRoutes.otpVerification, page: () => OtpVerificationView()),
   GetPage(
       name: AppRoutes.fillYourProfile,
-      page: () => const FillYourProfileView(),
+      page: () => FillYourProfileView(),
       binding: AuthFillProfileBinding()),
 
   // Doctor Details
