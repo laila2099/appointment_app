@@ -37,14 +37,10 @@ class CustomTextField extends StatelessWidget {
       obscureText: isPassword,
       validator: validator,
       autofillHints: autofillHints,
-      style: textStyle ??
-          CustomTextStyles.custom(
-              fontWeight: FontWeight.w500,
-              fontSize: 14,
-              color: AppColors.black),
+      style: textStyle ?? CustomTextStyles.textField,
       decoration: InputDecoration(
         hintText: hint,
-        hintStyle: CustomTextStyles.textField,
+        hintStyle: CustomTextStyles.subtitle,
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
         filled: true,

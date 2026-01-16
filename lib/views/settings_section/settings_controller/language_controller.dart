@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import '../../../core/translations/controller/translation_controller.dart'; // Verify this path
+import '../../../core/translations/controller/translation_controller.dart';
 
 class LanguageModel {
   final String name;

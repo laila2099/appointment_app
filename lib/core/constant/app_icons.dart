@@ -16,7 +16,7 @@ class AppIcons {
   static const String calendar2 = "${basePath}calendar-2.svg";
   static const String clipboard = "${basePath}clipboard-text.svg";
   static const String card = "${basePath}Mastercard_logo.svg";
-  static const String scanner = "${basePath}scanner.svg";
+  static const String scanner = "${basePath}scanner1.svg";
   static const String paypal = "${basePath}paypal_logo.svg";
   static const String americanExpress = "${basePath}americanExpress.svg";
   static const String masterCard = "${basePath}Mastercard_logo.svg";
@@ -45,4 +45,5 @@ class AppIcons {
   static const String wallet = "${basePath}wallet.svg";
   static const String setting = "${basePath}setting.svg";
   static const String sort = "${basePath}sort.svg";
+  static const String edit="${basePath}edit.svg";
 }
