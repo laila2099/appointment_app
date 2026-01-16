@@ -21,9 +21,9 @@ class CustomContainer extends StatelessWidget {
             color: AppColors.primary,
           ),
           child: Stack(
+            clipBehavior: Clip.none,
             children: [
               PositionedDirectional(
-                // top: 5.h,
                 child: Image.asset(AppImages.rectangle),
               ),
               Padding(
@@ -34,7 +34,7 @@ class CustomContainer extends StatelessWidget {
                       "home_description".tr,
                       style: CustomTextStyles.container,
                     ),
-                    SizedBox(height: 13.h),
+                    SizedBox(height: 15.h),
                     ElevatedButton(
                       onPressed: () {
                         Get.to(FindNearbyScreen());
@@ -44,6 +44,9 @@ class CustomContainer extends StatelessWidget {
                         style: CustomTextStyles.regular,
                       ),
                     ),
+                    SizedBox(
+                      height: 15.h,
+                    )
                   ],
                 ),
               ),
@@ -53,8 +56,8 @@ class CustomContainer extends StatelessWidget {
         ),
         PositionedDirectional(
           start: 200.w,
-          top: -32.h,
-          child: Image.asset(height: 197.h, width: 136.w, AppImages.nurse),
+          top: -23.h,
+          child: Image.asset(height: 200.h, width: 136.w, AppImages.nurse),
         ),
         PositionedDirectional(
           start: 230.w,

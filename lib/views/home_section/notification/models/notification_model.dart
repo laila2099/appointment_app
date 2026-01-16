@@ -1,4 +1,7 @@
+
 import 'package:flutter/material.dart';
+
+enum NotificationSection { today, yesterday }
 
 class NotificationModel {
   final String title;
@@ -7,6 +10,7 @@ class NotificationModel {
   final String icon;
   final Color circle;
   bool isActive;
+  final NotificationSection section;
 
   NotificationModel({
     required this.title,
@@ -15,6 +19,6 @@ class NotificationModel {
     required this.icon,
     required this.circle,
     this.isActive = false,
+    this.section = NotificationSection.today,
   });
 }
-

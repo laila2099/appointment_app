@@ -45,4 +45,5 @@ class AppIcons {
   static const String wallet = "${basePath}wallet.svg";
   static const String setting = "${basePath}setting.svg";
   static const String sort = "${basePath}sort.svg";
+  static const String notification = "${basePath}notification.svg";
 }

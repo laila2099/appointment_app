@@ -43,80 +43,85 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      scrolledUnderElevation: 0,
-      backgroundColor: AppColors.white,
-      elevation: 0,
-      centerTitle: true,
-      title: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            titel,
-            style: TextStyle(
-              fontSize: 24.sp,
-              fontWeight: FontWeight.w600,
-              color: AppColors.black,
-            ),
-          ),
-          if (subTitle != null)
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      child: AppBar(
+        scrolledUnderElevation: 0,
+        backgroundColor: AppColors.white,
+        elevation: 0,
+        centerTitle: true,
+        title: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
             Text(
-              subTitle!,
+              titel,
               style: TextStyle(
-                fontSize: 14.sp,
-                color: Colors.grey,
+                fontSize: 24.sp,
+                fontWeight: FontWeight.w600,
+                color: AppColors.black,
+              ),
+            ),
+            if (subTitle != null)
+              Text(
+                subTitle!,
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  color: Colors.grey,
+                ),
+              ),
+          ],
+        ),
+        leading: showBack
+            ? Padding(
+                padding: EdgeInsets.all(8.r),
+                child: InkWell(
+                  onTap: _handleBack,
+                  borderRadius: BorderRadius.circular(8.r),
+                  child: Container(
+                    padding: EdgeInsets.only(left: 8.r),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black.withOpacity(0.06),
+                        width: 1.5.w,
+                      ),
+                      borderRadius: BorderRadius.circular(8.r),
+                    ),
+                    child: Center(
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        size: 22.sp,
+                        color: AppColors.black,
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            : null,
+        actions: [
+          if (showAction && actionicon != null)
+            Padding(
+              padding: EdgeInsets.all(8.r),
+              child: InkWell(
+                onTap: onactiontap,
+                borderRadius: BorderRadius.circular(8.r),
+                child: Container(
+                  width: width ?? 40.w,
+                  height: height ?? 40.h,
+                  decoration: BoxDecoration(
+                    border: showActionBorder
+                        ? Border.all(
+                            color: Colors.black.withOpacity(0.06),
+                            width: 1.5.w,
+                          )
+                        : null,
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  child: Center(child: actionicon),
+                ),
               ),
             ),
         ],
       ),
-      leading: showBack
-          ? Padding(
-              padding: EdgeInsets.all(8.r),
-              child: InkWell(
-                onTap: _handleBack,
-                borderRadius: BorderRadius.circular(8.r),
-                child: Container(
-                  padding: EdgeInsets.only(left: 8.r),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black.withOpacity(0.06),
-                      width: 1.5.w,
-                    ),
-                    borderRadius: BorderRadius.circular(8.r),
-                  ),
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    size: 22.sp,
-                    color: AppColors.black,
-                  ),
-                ),
-              ),
-            )
-          : null,
-      actions: [
-        if (showAction && actionicon != null)
-          Padding(
-            padding: EdgeInsets.all(8.r),
-            child: InkWell(
-              onTap: onactiontap,
-              borderRadius: BorderRadius.circular(8.r),
-              child: Container(
-                width: width ?? 40.w,
-                height: height ?? 40.h,
-                decoration: BoxDecoration(
-                  border: showActionBorder
-                      ? Border.all(
-                          color: Colors.black.withOpacity(0.06),
-                          width: 1.5.w,
-                        )
-                      : null,
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                child: actionicon,
-              ),
-            ),
-          ),
-      ],
     );
   }
 }

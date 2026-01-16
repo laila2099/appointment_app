@@ -18,26 +18,26 @@ class NotificationItem extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 325.w,
-        // height: 110.h,
-        margin: EdgeInsetsDirectional.symmetric(vertical: 6.h),
-        padding: EdgeInsetsDirectional.all(12.r),
+        width: notification.isActive ? double.infinity : 167.w,
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
         decoration: BoxDecoration(
-          color: notification.isActive ? Colors.grey.shade100 : Colors.white,
-          borderRadius: BorderRadius.circular(12.r),
+          color: notification.isActive ? const Color(0xffF7F8F9) : Colors.white,
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              width: 40.w,
-              height: 40.h,
+              width: 42.w,
+              height: 42.h,
               decoration: BoxDecoration(
                 color: notification.circle,
                 shape: BoxShape.circle,
               ),
               child: Center(
-                child: SvgPicture.asset(notification.icon, width: 22.sp),
+                child: SvgPicture.asset(
+                  notification.icon,
+                  width: 22.sp,
+                ),
               ),
             ),
             SizedBox(width: 12.w),
@@ -48,26 +48,31 @@ class NotificationItem extends StatelessWidget {
                   Text(
                     notification.title,
                     style: TextStyle(
+                      fontSize: 14.sp,
                       fontWeight: notification.isActive
-                          ? FontWeight.bold
-                          : FontWeight.normal,
+                          ? FontWeight.w600
+                          : FontWeight.w400,
                     ),
                   ),
-                  SizedBox(height: 4.h),
+                  SizedBox(height: 6.h),
                   Text(
                     notification.message,
-                    softWrap: true,
-                    maxLines: null,
-                    style: TextStyle(color: Colors.grey),
+                    style: TextStyle(
+                      fontSize: 13.sp,
+                      color: Colors.grey,
+                      height: 2,
+                    ),
                   ),
                 ],
               ),
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisSize: MainAxisSize.min,
               children: [
-                Text(notification.time, style: TextStyle(color: Colors.grey)),
+                Text(
+                  notification.time,
+                  style: TextStyle(fontSize: 12.sp, color: Colors.grey),
+                ),
                 SizedBox(height: 6.h),
                 if (notification.isActive)
                   Container(
