@@ -1,4 +1,5 @@
 import 'package:appointment_app/core/constant/app_colors.dart';
+import 'package:appointment_app/core/constant/app_icons.dart';
 import 'package:appointment_app/routes/app_routes.dart';
 import 'package:appointment_app/views/settings_section/settings_view/widgets/settings_header.dart';
 import 'package:appointment_app/views/settings_section/settings_view/widgets/settings_item.dart';
@@ -21,7 +22,7 @@ class SettingsPage extends StatelessWidget {
             title: "settings".tr,
           ),
           settingItem(
-            icon: Icons.notifications_none,
+            icon: AppIcons.notification,
             title: 'notification'.tr,
             onTap: () {
               Get.toNamed(AppRoutes.notificationPage);
@@ -29,7 +30,7 @@ class SettingsPage extends StatelessWidget {
           ),
           CustomDivider(),
           settingItem(
-            icon: Icons.help_outline,
+            icon: AppIcons.faq,
             title: 'faq'.tr,
             onTap: () {
               Get.toNamed(AppRoutes.helpPage);
@@ -37,7 +38,7 @@ class SettingsPage extends StatelessWidget {
           ),
           CustomDivider(),
           settingItem(
-            icon: Icons.lock_outline,
+            icon: AppIcons.security,
             title: 'security'.tr,
             onTap: () {
               Get.toNamed(AppRoutes.securityPage);
@@ -45,7 +46,7 @@ class SettingsPage extends StatelessWidget {
           ),
           CustomDivider(),
           settingItem(
-            icon: Icons.language,
+            icon: AppIcons.language,
             title: 'language'.tr,
             onTap: () {
               Get.toNamed(AppRoutes.languageScreen);
@@ -53,13 +54,14 @@ class SettingsPage extends StatelessWidget {
           ),
           CustomDivider(),
           settingItem(
-            icon: Icons.logout,
+            icon:AppIcons.logout,
             title: 'logout'.tr,
             color: AppColors.red,
             onTap: () {
               showLogoutDialog();
             },
           ),
+           CustomDivider(),
         ],
       ),
     );

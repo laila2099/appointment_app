@@ -18,15 +18,24 @@ Widget switchTile({
           ),
         ),
         Obx(
-          () => Switch(
-            value: value.value,
-            onChanged: (val) => value.value = val,
-            activeThumbColor: AppColors.white,
-            activeTrackColor: AppColors.primary,
-            inactiveTrackColor: Colors.grey.shade300,
+          () => Transform.scale(
+            scale: 0.7,
+            
+            child: Switch.adaptive(
+              value: value.value,
+              onChanged: (val) => value.value = val,
+              activeThumbColor: AppColors.white,
+              activeTrackColor: AppColors.primary,
+              inactiveTrackColor: Colors.grey.shade300,
+              inactiveThumbColor: Colors.white,
+             // materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+
+            ),
           ),
         ),
       ],
     ),
   );
 }
+
+
