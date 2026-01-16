@@ -1,7 +1,9 @@
 import 'package:appointment_app/core/constant/app_colors.dart';
+import 'package:appointment_app/core/constant/app_icons.dart';
 import 'package:appointment_app/core/constant/app_images.dart';
 import 'package:appointment_app/core/constant/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../profile_controller/profile_controller.dart';
 
@@ -32,10 +34,10 @@ class ProfileInfo extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: Color(0xffF8F8F8),
                 ),
-                child: const Icon(
-                  Icons.edit,
-                  size: 24,
-                  color: AppColors.primary,
+                child: SvgPicture.asset(
+                  AppIcons.edit,
+                  width: 16,
+                  height: 16
                 ),
               ),
             ],

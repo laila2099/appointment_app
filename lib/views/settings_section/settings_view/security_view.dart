@@ -1,4 +1,3 @@
-
 import 'package:appointment_app/core/constant/app_colors.dart';
 import 'package:appointment_app/core/constant/text_style.dart';
 import 'package:appointment_app/views/settings_section/settings_controller/security_controller.dart';
@@ -22,13 +21,8 @@ class SecurityPage extends StatelessWidget {
       backgroundColor: AppColors.white,
       body: Column(
         children: [
-
-
-
           SettingsHeader(
             title: "security".tr,
-
-
           ),
           switchTile(
             title: 'remember_password'.tr,
@@ -45,7 +39,10 @@ class SecurityPage extends StatelessWidget {
             value: controller.pin,
           ),
           CustomDivider(),
-          settingItem(onTap: () {}, title: "google_authenticator".tr),
+          Padding(
+            padding: const EdgeInsets.only(right: 12),
+            child: settingItem(onTap: () {}, title: "google_authenticator".tr),
+          ),
         ],
       ),
     );

@@ -4,6 +4,8 @@ class AppIcons {
 
   static const String basePath = "assets/icons/";
 
+  static const String settingsIcons = "${basePath}settings_icons/";
+
   static const String home = '${basePath}home-2.svg';
   static const String search = '${basePath}search.svg';
   static const String chat = '${basePath}chat.svg';
@@ -45,4 +47,13 @@ class AppIcons {
   static const String wallet = "${basePath}wallet.svg";
   static const String setting = "${basePath}setting.svg";
   static const String sort = "${basePath}sort.svg";
+  static const String edit = "${basePath}edit.svg";
+
+///settings Icon
+  static const String language="${settingsIcons}language-square.svg";
+  static const String security="${settingsIcons}lock.svg";
+  static const String logout="${settingsIcons}logout.svg";
+  static const String faq="${settingsIcons}message-question.svg";
+  static const String notification="${settingsIcons}notification.svg";
+
 }
