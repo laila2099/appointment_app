@@ -14,58 +14,40 @@ class PhoneTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<PersonalInfoController>();
 
-    return Container(
-      width: 345.w,
-      padding:
-          EdgeInsetsDirectional.symmetric(horizontal: 18.w, vertical: 12.h),
-      decoration: BoxDecoration(
-        color: const Color(0xFFFDFDFF),
-        borderRadius: BorderRadius.circular(25.r),
-        border: Border.all(color: const Color(0xffEEEEEE)),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          InkWell(
-            onTap: () {
-              showCountryPicker(
-                context: context,
-                showPhoneCode: true,
-                onSelect: controller.onCountrySelected,
-              );
-            },
-            child: Obx(() => Row(
-                  children: [
-                    Text(
-                      controller.selectedCountry.value.flagEmoji,
-                      style: TextStyle(fontSize: 18.sp),
-                    ),
-                    SizedBox(width: 4.w),
-                    Icon(Icons.keyboard_arrow_down, size: 18.sp),
-                  ],
-                )),
+    return CustomTextField(
+      hint: '',
+      controller: controller.phoneController,
+      keyboardType: TextInputType.phone,
+      textStyle: TextStyle(color: AppColors.black),
+      prefixIcon: InkWell(
+        onTap: () {
+          showCountryPicker(
+            context: context,
+            showPhoneCode: true,
+            onSelect: controller.onCountrySelected,
+          );
+        },
+        child: Obx(
+          () => Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(width: 12.w),
+              Text(
+                controller.selectedCountry.value.flagEmoji,
+                style: TextStyle(fontSize: 18.sp),
+              ),
+              SizedBox(width: 4.w),
+              Icon(Icons.keyboard_arrow_down, size: 18.sp),
+              SizedBox(width: 8.w),
+              Container(
+                width: 1,
+                height: 24.h,
+                color: Colors.grey.shade300,
+              ),
+              SizedBox(width: 12.w),
+            ],
           ),
-
-          /// Divider
-          Container(
-            margin: EdgeInsetsDirectional.symmetric(horizontal: 12.w),
-            width: 1.2.w,
-            height: 18.h,
-            color: Colors.grey.shade200,
-          ),
-
-          /// Phone Number
-          Expanded(
-            child: CustomTextField(
-              controller: controller.phoneController,
-              hint: '938756 878',
-              keyboardType: TextInputType.phone,
-              border: InputBorder.none,
-              textStyle: TextStyle(color: AppColors.black),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

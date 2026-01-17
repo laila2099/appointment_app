@@ -1,4 +1,5 @@
 import 'package:appointment_app/views/profile_section/profile_controller/profile_controller.dart';
+import 'package:appointment_app/widgets/general_widgets/bottom_nav_bar/controller/bottom_nav_bar_controller.dart';
 import 'package:get/get.dart';
 
 import '../../../core/classes/api/api.dart';
