@@ -15,7 +15,8 @@ class SplashScreen extends StatelessWidget {
 
     return Scaffold(
       body: Stack(
-        alignment: AlignmentDirectional.center,
+        alignment: Alignment.center,
+
         children: [
           Center(
             child: SizedBox(
@@ -23,7 +24,8 @@ class SplashScreen extends StatelessWidget {
               child: Image.asset(
                 AppImages.logo,
                 fit: BoxFit.cover,
-                color: Colors.white.withOpacity(0.05),
+                color: Colors.white.withOpacity(0.06),
+
                 colorBlendMode: BlendMode.modulate,
               ),
             ),
@@ -53,6 +55,30 @@ class SplashScreen extends StatelessWidget {
               ),
             ],
           ),
+
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  height: 220,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors: [
+                        Colors.white,
+                        Colors.white.withOpacity(0.05),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );

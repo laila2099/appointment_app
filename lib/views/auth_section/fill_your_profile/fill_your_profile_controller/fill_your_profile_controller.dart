@@ -14,44 +14,67 @@ class AuthFillProfileController extends GetxController {
   final AppPreferencesService prefs;
 
   AuthFillProfileController({required this.repo, required this.prefs});
-
-  // Form key
   final formKey = GlobalKey<FormState>();
 
   // Controllers
   final fullNameController = TextEditingController();
-  final birthdateController = TextEditingController();
   final emailController = TextEditingController();
+  final birthdateController = TextEditingController();
   final phoneRx = ''.obs;
+  Rx<DateTime?> birthdate = Rx<DateTime?>(null);
 
-  // State
+// State
   final isLoading = false.obs;
   final errorText = RxnString();
 
   @override
   void onInit() {
     super.onInit();
-    // تحميل البريد من argument
     emailController.text = (Get.arguments?['email'] ?? '') as String;
-
-    // مسح الأخطاء عند أي تعديل في الحقول
     fullNameController.addListener(() => errorText.value = null);
-    birthdateController.addListener(() => errorText.value = null);
     emailController.addListener(() => errorText.value = null);
+    birthdateController.addListener(() => errorText.value = null);
   }
 
-  /// تحقق من صحة النموذج قبل الإرسال
-  bool validateForm() {
-    final isValid = formKey.currentState?.validate() ?? false;
-    if (!isValid) {
-      AppSnackBar.error('Please fix the errors in the form');
+  @override
+  void onClose() {
+    fullNameController.dispose();
+    emailController.dispose();
+    birthdateController.dispose();
+    super.onClose();
+  }
+
+  // Pick Birthday
+  Future<void> pickBirthday(BuildContext context) async {
+    DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: birthdate.value ?? DateTime(2000, 1, 1),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+
+    if (pickedDate != null) {
+      birthdate.value = pickedDate;
+      birthdateController.text =
+      "${pickedDate.day.toString().padLeft(2, '0')}/"
+          "${pickedDate.month.toString().padLeft(2, '0')}/"
+          "${pickedDate.year}";
     }
-    return isValid;
   }
 
-  /// حفظ الملف الشخصي
-  Future<void> setProfile() async {
+  // Save Profile
+  Future<void> saveProfile() async {
     if (!validateForm()) return;
+
+    if (birthdate.value == null) {
+      AppSnackBar.error('Please select your birthday');
+      return;
+    }
+
+    if (birthdate.value!.isAfter(DateTime.now())) {
+      AppSnackBar.error('Birthdate cannot be in the future');
+      return;
+    }
 
     isLoading.value = true;
     errorText.value = null;
@@ -75,9 +98,7 @@ class AuthFillProfileController extends GetxController {
         email: emailController.text.trim(),
         fullName: fullNameController.text.trim(),
         phone: phoneRx.value.trim(),
-        birthdate: (birthdateController.text.trim().isEmpty)
-            ? null
-            : birthdateController.text.trim(),
+        birthdate: birthdate.value!.toIso8601String(),
       );
 
       if (res is ApiSuccess<UserProfile>) {
@@ -92,11 +113,48 @@ class AuthFillProfileController extends GetxController {
     }
   }
 
-  @override
-  void onClose() {
-    fullNameController.dispose();
-    birthdateController.dispose();
-    emailController.dispose();
-    super.onClose();
+  // Validation
+  bool validateForm() {
+    final isValid = formKey.currentState?.validate() ?? false;
+    if (!isValid) {
+      AppSnackBar.error('Please fix the errors in the form');
+    }
+    return isValid;
+  }
+
+  // Submit Profile (SharedPreferences + Navigation)
+  Future<void> submitProfile() async {
+    if (isLoading.value) return;
+
+    if (!(formKey.currentState?.validate() ?? false)) {
+      AppSnackBar.error('Please fix the errors in the form');
+      return;
+    }
+
+    if (birthdate.value == null) {
+      AppSnackBar.error('Please select your birthday');
+      return;
+    }
+
+    if (birthdate.value!.isAfter(DateTime.now())) {
+      AppSnackBar.error('Birthdate cannot be in the future');
+      return;
+    }
+
+    isLoading.value = true;
+    try {
+      final prefs = Get.find<AppPreferencesService>();
+
+      await prefs.setString('user_name', fullNameController.text.trim());
+      await prefs.setString('user_email', emailController.text.trim());
+      await prefs.setString('user_birthDate', birthdate.value!.toIso8601String());
+      await prefs.setString('user_phoneNumber', phoneRx.value.trim());
+
+      Get.offAllNamed('/home');
+    } catch (e) {
+      AppSnackBar.error('Failed to save data. Try again.');
+    } finally {
+      isLoading.value = false;
+    }
   }
 }

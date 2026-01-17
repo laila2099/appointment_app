@@ -10,6 +10,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../../home_section/booking_appointment/booking_appointment_binding/booking_binding.dart';
+import '../reschedule/reschedule_view.dart';
+
 class UpcomingCard extends StatelessWidget {
   final AppointmentDetailsModel appt;
   final MyAppointmentsController controller = Get.find();
@@ -67,6 +70,10 @@ class UpcomingCard extends StatelessWidget {
                   variant: ButtonVariant.filled,
                   onPressed: () {
                     controller.reschedule(appt);
+                    Get.to(() => RescheduleScreen(),
+                        binding: BookingBinding(),
+                        arguments: appt.toAppointmentModel());
+
                   },
                 ),
               ],

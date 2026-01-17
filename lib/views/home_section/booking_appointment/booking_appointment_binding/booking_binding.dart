@@ -11,8 +11,7 @@ class BookingBinding extends Bindings {
     final repo = AppointmentRepository(api: apiClient);
 
     Get.lazyPut<BookingController>(
-          () => BookingController(repository: repo),
+      () => BookingController(repository: repo),
     );
   }
 }
-

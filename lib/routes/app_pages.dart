@@ -49,8 +49,8 @@ final appPages = <GetPage>[
   GetPage(
     name: AppRoutes.splash,
     page: () => const SplashScreen(),
-    middlewares: [SplashRedirectMiddleware()],
   ),
+
   GetPage(name: AppRoutes.onboarding, page: () => const OnBoardingView()),
 
   GetPage(
@@ -63,7 +63,7 @@ final appPages = <GetPage>[
   GetPage(name: AppRoutes.otpVerification, page: () => OtpVerificationView()),
   GetPage(
       name: AppRoutes.fillYourProfile,
-      page: () => const FillYourProfileView(),
+      page: () => FillYourProfileView(),
       binding: AuthFillProfileBinding()),
 
   // Doctor Details

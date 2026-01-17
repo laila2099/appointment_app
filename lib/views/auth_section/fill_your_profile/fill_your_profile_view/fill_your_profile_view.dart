@@ -5,18 +5,20 @@ import '../../../../../core/constant/app_colors.dart';
 import '../../../../../core/constant/app_images.dart';
 import '../../../../../core/constant/text_style.dart';
 import '../../../../../widgets/helpful_widgets/primary_button_widget.dart';
-import '../../../../core/classes/utils/app_snackbar.dart';
 import '../../../../core/utils/auth_validators.dart';
 import '../../../../widgets/helpful_widgets/text_field_widget.dart';
+import '../../auth_controller/auth_controller.dart';
 import '../../widgets/phone_field_widget.dart';
 import '../fill_your_profile_controller/fill_your_profile_controller.dart';
+import 'package:country_picker/country_picker.dart';
 
 class FillYourProfileView extends StatelessWidget {
   const FillYourProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final profileController = Get.find<AuthFillProfileController>();
+    final autoProfileController = Get.find<AuthFillProfileController>();
+    final AuthController authController = Get.find<AuthController>();
 
     return Scaffold(
       backgroundColor: AppColors.white,
@@ -25,16 +27,16 @@ class FillYourProfileView extends StatelessWidget {
           children: [
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsetsDirectional.symmetric(
-                    horizontal: 24, vertical: 16),
+        padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+
                 child: Form(
-                  key: profileController.formKey,
+                  key: autoProfileController.formKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 40),
 
-                      // عنوان + زر Skip ضمن نفس السطر
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -45,7 +47,7 @@ class FillYourProfileView extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              // يمكن إضافة وظيفة Skip هنا
+                              Get.offAllNamed('/home');
                             },
                             child: Text(
                               "skip".tr,
@@ -87,15 +89,13 @@ class FillYourProfileView extends StatelessWidget {
                               bottom: 0,
                               end: 0,
                               child: GestureDetector(
-                                onTap: () {
-                                  // اختيار صورة
-                                },
+                                onTap: () {},
                                 child: Container(
                                   width: 36,
                                   height: 36,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: AppColors.textField,
+                                    color: AppColors.light2Grey,
                                     border: Border.all(
                                         color: Colors.white, width: 2),
                                   ),
@@ -114,43 +114,71 @@ class FillYourProfileView extends StatelessWidget {
 
                       // Full Name
                       CustomTextField(
-                        controller: profileController.fullNameController,
-                        hint: "full_name".tr,
+                        controller: autoProfileController.fullNameController,
+                      hint: "full_name".tr,
+                        validator: Validators.validateFullName,
+
                       ),
                       const SizedBox(height: 16),
 
                       // Email
                       CustomTextField(
-                        controller: profileController.emailController,
-                        hint: "email".tr,
+                        controller: autoProfileController.emailController,
+                        hint: "Email".tr,
                         keyboardType: TextInputType.emailAddress,
                         validator: Validators.validateEmail,
                       ),
                       const SizedBox(height: 16),
 
                       // Birthday
-                      CustomTextField(
-                        controller: profileController.birthdateController,
-                        hint: "birthday".tr,
-                      ),
+                      GestureDetector(
+                          onTap: () =>
+                              autoProfileController.pickBirthday(context),
+                          child: AbsorbPointer(
+                            child: CustomTextField(
+                              controller:
+                                  autoProfileController.birthdateController,
+                              hint: "Birthday",
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please select your birthdate';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                        ),
+
                       const SizedBox(height: 16),
 
-                      // Phone
+                      //Phone Number
                       PhoneFieldWidget(
-                        initialCountryCode: 'SA',
+                        country: authController.selectedCountry.value,
+                        controller: authController.phoneController,
+                        validator: (value) => Validators.validatePhone(
+                            value, authController.selectedCountry),
                         onChanged: (value) {
-                          profileController.phoneRx.value = value;
+                          authController.phoneController.text = value;
                         },
-                        validator: Validators.validatePhone,
+                        onTapCountry: () {
+                          showCountryPicker(
+                            context: context,
+                            showPhoneCode: false,
+                            onSelect: (country) {
+                              authController.selectedCountry.value = country;
+                              authController.signUpFormKey.currentState
+                                  ?.validate();
+                            },
+                          );
+                        },
                       ),
+
                       const SizedBox(height: 24),
                     ],
                   ),
                 ),
               ),
             ),
-
-            // الزر ثابت أسفل الشاشة
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               child: Obx(
@@ -158,19 +186,12 @@ class FillYourProfileView extends StatelessWidget {
                   width: double.infinity,
                   height: 52,
                   child: CustomPrimaryButton(
-                      label: profileController.isLoading.value
-                          ? "Saving..."
-                          : "Submit",
-                      onTap: () {
-                        if (profileController.formKey.currentState
-                                ?.validate() ??
-                            false) {
-                          profileController.setProfile();
-                        } else {
-                          AppSnackBar.error(
-                              'Please fix the errors in the form');
-                        }
-                      }),
+                    label: autoProfileController.isLoading.value
+                        ? "Saving..."
+                        : "Submit",
+                    onTap: autoProfileController.submitProfile,
+                  ),
+
                 ),
               ),
             ),

@@ -1,16 +1,19 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' hide TextField;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../core/constant/app_colors.dart';
 import '../../../core/constant/app_images.dart';
 import '../../../core/constant/text_style.dart';
+import '../../../core/utils/auth_validators.dart';
 import '../../../widgets/helpful_widgets/primary_button_widget.dart';
 import '../../../widgets/helpful_widgets/text_field_widget.dart';
 import '../auth_controller/auth_controller.dart';
 import '../sign_in/signIn_view/sign_in_view.dart';
 import '../widgets/phone_field_widget.dart';
 import '../widgets/socialButton.dart';
+import 'package:country_picker/country_picker.dart';
 
 class CreateAccountView extends StatelessWidget {
   CreateAccountView({super.key});
@@ -18,7 +21,8 @@ class CreateAccountView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final auth = Get.find<AuthController>();
+    final AuthController authController = Get.find<AuthController>();
+
     return Scaffold(
       backgroundColor: AppColors.white,
       body: SafeArea(
@@ -30,80 +34,90 @@ class CreateAccountView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 40),
+                SizedBox(height: 40.h),
 
                 // Title
                 Text(
                   "create_account".tr,
                   style: CustomTextStyles.headline32Bold,
                 ),
-
-                const SizedBox(height: 16),
+                SizedBox(height: 16.h),
 
                 // Subtitle
                 Text(
-                  "signup_subtitle".tr,
-                  style: CustomTextStyles.subTitle,
+                  "Sign up now and start exploring all that our app has to offer. We're excited to welcome you to our community!"
+                      .tr,
+                  style: CustomTextStyles.subTitle
+                      .copyWith(fontSize: 20, height: 1.5),
                 ),
-
-                const SizedBox(height: 32),
+                SizedBox(height: 12.h),
 
                 // Email
                 CustomTextField(
-                  controller: auth.emailController,
-                  hint: "email".tr,
+                  controller: authController.emailController,
+                  hint: "Email".tr,
                   keyboardType: TextInputType.emailAddress,
+                  tfBackground: AppColors.textField2,
+                  validator: Validators.validateEmail,
                 ),
-
-                const SizedBox(height: 16),
+                SizedBox(height: 16.h),
 
                 // Password
                 CustomTextField(
-                  controller: auth.passwordController,
-                  hint: "password".tr,
+                  controller: authController.passwordController,
+                  hint: "Password".tr,
+                  tfBackground: AppColors.textField2,
                   isPassword: true,
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.visibility_off),
-                    onPressed: () {},
+                  validator: Validators.validatePassword,
+                ),
+                SizedBox(height: 16.h),
+
+                Obx(
+                  () => PhoneFieldWidget(
+                    country: authController.selectedCountry.value,
+                    controller: authController.phoneController,
+                    validator: (value) => Validators.validatePhone(
+                        value, authController.selectedCountry),
+                    onChanged: (value) {
+                      authController.phoneController.text = value;
+                    },
+                    onTapCountry: () {
+                      showCountryPicker(
+                        context: context,
+                        showPhoneCode: false,
+                        onSelect: (country) {
+                          authController.selectedCountry.value = country;
+                          authController.signUpFormKey.currentState?.validate();
+                        },
+                      );
+                    },
                   ),
                 ),
 
-                const SizedBox(height: 16),
-
-                // Phone number
-                PhoneFieldWidget(
-                  initialCountryCode: 'SA',
-                  onChanged: (value) {
-                    print(value);
-                  },
-                ),
-
-                const SizedBox(height: 24),
+                SizedBox(height: 37.h),
 
                 // Create Account Button
-// <<<<<<< HEAD
-//                 SizedBox(
-//                   width: double.infinity,
-//                   height: 52,
-//                   child: CustomPrimaryButton(
-//                     label: "create_account".tr,
-//                     onTap: auth.isLoading.value ? () {} : () => auth.signUp(),
-//                   ),
-// =======
-                CustomPrimaryButton(
-                  label:
-                      auth.isLoading.value ? "Creating..." : "Create Account",
-                  onTap: () {
-                    if (!auth.isLoading.value) {
-                      if (auth.signUpFormKey.currentState?.validate() ??
-                          false) {
-                        auth.signUp();
-                      }
-                    }
-                  },
+                Obx(
+                  () => SizedBox(
+                    width: double.infinity,
+                    height: 52.h,
+                    child: CustomPrimaryButton(
+                      label: authController.isLoading.value
+                          ? "Creating..."
+                          : "Create Account",
+                      onTap: () {
+                        if (!authController.isLoading.value) {
+                          if (authController.signUpFormKey.currentState
+                                  ?.validate() ??
+                              false) {
+                            authController.signUp();
+                          }
+                        }
+                      },
+                    ),
+                  ),
                 ),
-
-                const SizedBox(height: 24),
+                SizedBox(height: 40.h),
 
                 // Divider
                 Row(
@@ -121,7 +135,7 @@ class CreateAccountView extends StatelessWidget {
                   ],
                 ),
 
-                const SizedBox(height: 24),
+                SizedBox(height: 24.h),
 
                 // Social buttons
                 Row(
@@ -131,12 +145,12 @@ class CreateAccountView extends StatelessWidget {
                       imagePath: AppImages.google,
                       onTap: () {},
                     ),
-                    const SizedBox(width: 16),
+                    SizedBox(width: 32.w),
                     SocialButton(
                       imagePath: AppImages.facebook,
                       onTap: () {},
                     ),
-                    const SizedBox(width: 16),
+                    SizedBox(width: 32.w),
                     SocialButton(
                       imagePath: AppImages.apple,
                       onTap: () {},
@@ -144,12 +158,12 @@ class CreateAccountView extends StatelessWidget {
                   ],
                 ),
 
-                const SizedBox(height: 40),
+                SizedBox(height: 40.h),
 
                 // Footer
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    /// Terms
                     RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(
@@ -175,7 +189,7 @@ class CreateAccountView extends StatelessWidget {
                       ),
                     ),
 
-                    const SizedBox(height: 16),
+                    SizedBox(height: 40.h),
 
                     // Back to Login
                     RichText(
@@ -202,8 +216,6 @@ class CreateAccountView extends StatelessWidget {
                     ),
                   ],
                 ),
-
-                const SizedBox(height: 40),
               ],
             ),
           ),

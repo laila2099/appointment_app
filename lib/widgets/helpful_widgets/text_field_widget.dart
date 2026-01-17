@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../../core/constant/app_colors.dart';
 import '../../../../core/constant/text_style.dart';
 
@@ -13,6 +12,9 @@ class CustomTextField extends StatelessWidget {
   final InputBorder? border;
   final TextStyle? textStyle;
   final String? Function(String?)? validator;
+  final Color? tfBackground;
+  final bool? readOnly;
+  final VoidCallback? onTap;
   final List<String>? autofillHints;
 
   const CustomTextField({
@@ -24,6 +26,9 @@ class CustomTextField extends StatelessWidget {
     this.suffixIcon,
     this.prefixIcon,
     this.validator,
+    this.tfBackground,
+    this.readOnly = false,
+    this.onTap,
     this.border,
     this.textStyle,
     this.autofillHints,
@@ -36,19 +41,22 @@ class CustomTextField extends StatelessWidget {
       keyboardType: keyboardType,
       obscureText: isPassword,
       validator: validator,
+      readOnly: readOnly ?? false,
+      onTap: onTap,
       autofillHints: autofillHints,
       style: textStyle ??
           CustomTextStyles.custom(
-              fontWeight: FontWeight.w500,
-              fontSize: 14,
-              color: AppColors.black),
+            fontWeight: FontWeight.w500,
+            fontSize: 14,
+            color: AppColors.black,
+          ),
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: CustomTextStyles.textField,
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
         filled: true,
-        fillColor: Color(0xfffdfdff),
+        fillColor: tfBackground ?? const Color(0xffFDFDFF),
         contentPadding: const EdgeInsetsDirectional.symmetric(
           horizontal: 16,
           vertical: 18,

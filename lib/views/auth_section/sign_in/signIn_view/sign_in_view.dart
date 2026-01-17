@@ -36,49 +36,102 @@ class LoginView extends StatelessWidget {
                 children: [
                   SizedBox(height: 40.h),
 
-                  // Title
-                  Text(
-                    "welcome_back".tr,
-                    style: CustomTextStyles.headline32Bold,
-                  ),
-                  SizedBox(height: 16.h),
+                // Title
+                Text(
+                  "Welcome Back".tr,
+                  style: CustomTextStyles.headline32Bold,
+                ),
+                SizedBox(height: 16.h),
 
-                  // Subtitle
-                  Text(
-                    "login_subtitle".tr,
-                    style: CustomTextStyles.subTitle,
-                  ),
-                  SizedBox(height: 32.h),
+                // Subtitle
+                Text(
+                  "We're excited to have you back, can't wait to see what you've been up to since you last logged in.".tr,
+                  style: CustomTextStyles.subTitle
+                      .copyWith(fontSize: 20, height: 1.5),
+                ),
+                SizedBox(height: 20.h),
 
-                  //Email
-                  CustomTextField(
-                    controller: authController.emailController,
-                    hint: "Email",
-                    keyboardType: TextInputType.emailAddress,
-                    validator: Validators.validateEmail,
-                  ),
-                  SizedBox(height: 16.h),
+                //Email
+                CustomTextField(
+                  controller: authController.emailController,
+                  hint: "Email",
+                  keyboardType: TextInputType.emailAddress,
+                  tfBackground: AppColors.textField2,
+                  validator: Validators.validateEmail,
+                ),
+                SizedBox(height: 16.h),
 
-                  //Password
-                  Obx(
-                    () => CustomTextField(
-                      controller: authController.passwordController,
-                      hint: "Password",
-                      isPassword: !authController.isPasswordVisible.value,
-                      validator: Validators.validatePassword,
-                      suffixIcon: IconButton(
-                        icon: Icon(authController.isPasswordVisible.value
-                            ? Icons.visibility
-                            : Icons.visibility_off),
-                        onPressed: () {
-                          authController.isPasswordVisible.value =
-                              !authController.isPasswordVisible.value;
-                        },
+                // Password
+                CustomTextField(
+                  controller: authController.passwordController,
+                  hint: "Password",
+                  tfBackground: AppColors.textField2,
+                  isPassword: true,
+                  validator: Validators.validatePassword,
+                ),
+                SizedBox(height: 16.h),
+
+                // Remember + Forgot
+                Row(
+                  children: [
+                    Obx(
+                      () => Checkbox(
+                        value: authController.rememberMe.value,
+                        onChanged: (value) =>
+                            authController.rememberMe.value = value ?? false,
+                        checkColor: Colors.white,
+                        fillColor: MaterialStateProperty.resolveWith((states) =>
+                            states.contains(MaterialState.selected)
+                                ? AppColors.primary
+                                : Colors.white),
+                        side: MaterialStateBorderSide.resolveWith((states) =>
+                            states.contains(MaterialState.selected)
+                                ? BorderSide(color: AppColors.primary, width: 2)
+                                : BorderSide(color: Colors.grey, width: 2)),
                       ),
                     ),
-                  ),
+                    Text(
+                      "Remember me",
+                      style: CustomTextStyles.subtitle12W500
+                          .copyWith(color: AppColors.lightGrey),
+                    ),
+                    const Spacer(),
+                    TextButton(
+                      onPressed: () {
+                        Get.toNamed(AppRoutes.forgotPassword);
+                      },
+                      child: Text(
+                        "Forgot Password?",
+                        style: CustomTextStyles.subtitle12W500
+                            .copyWith(color: AppColors.primary),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 34.h),
 
-                  SizedBox(height: 16.h),
+                // Login Button
+                Obx(
+                  () => SizedBox(
+                    width: double.infinity,
+                    height: 52.h,
+                    child: CustomPrimaryButton(
+                      label: authController.isLoading.value
+                          ? "Logging in..."
+                          : "Login",
+                      onTap: () {
+                        if (!authController.isLoading.value) {
+                          if (authController.loginFormKey.currentState
+                                  ?.validate() ??
+                              false) {
+                            authController.login();
+                          }
+                        }
+                      },
+                    ),
+                  ),
+                ),
+                SizedBox(height: 40.h),
 
                   // Remember + Forgot
                   Row(
@@ -129,11 +182,86 @@ class LoginView extends StatelessWidget {
                               authController.login();
                             }
                           }
-                          return null;
+                          return;
                         },
                       ),
                     ),
                   ),
+
+                // Social buttons
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SocialButton(
+                      imagePath: AppImages.google,
+                      onTap: () {},
+                    ),
+                    SizedBox(width: 32.w),
+                    SocialButton(
+                      imagePath: AppImages.facebook,
+                      onTap: () {},
+                    ),
+                    SizedBox(width: 32.w),
+                    SocialButton(
+                      imagePath: AppImages.apple,
+                      onTap: () {},
+                    ),
+                  ],
+                ),
+                SizedBox(height: 40.h),
+
+                // Footer
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        style: CustomTextStyles.subtitle,
+                        children: [
+                          const TextSpan(
+                            text: "By logging, you agree to our ",),
+                          TextSpan(
+                            text: "Terms & Conditions",
+                            style: CustomTextStyles.subtitle.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.black,
+                            ),
+                          ),
+                          const TextSpan(
+                            text: " and ",
+                          ),
+                          TextSpan(
+                            text: "Privacy Policy",
+                            style: CustomTextStyles.subtitle.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 40.h),
+                    RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        style: CustomTextStyles.subtitle,
+                        children: [
+                          const TextSpan(
+                            text: "Don't have an account yet? ",
+                          ),
+                          TextSpan(
+                            text: "Sign Up",
+                            style: CustomTextStyles.subtitle.copyWith(
+                              color: AppColors.primary,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Get.to(() => CreateAccountView());
+                              },
+                          ),
+                        ],),),
 
                   SizedBox(height: 24.h),
 
@@ -235,10 +363,10 @@ class LoginView extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
+            ]),
           ),
         ),
       ),
-    );
+    ));
   }
 }

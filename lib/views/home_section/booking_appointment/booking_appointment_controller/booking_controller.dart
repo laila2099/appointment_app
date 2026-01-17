@@ -19,7 +19,7 @@ class BookingController extends GetxController {
 
   BookingController({required this.repository});
 
-  // -------- Variables
+  // Variables
   late final String doctorId;
 
   final stepIndex = 0.obs;
@@ -71,6 +71,27 @@ class BookingController extends GetxController {
         paymentMethod: '',
       ).obs;
     }
+    doctor.value = Doctor(
+      id: "1",
+      name: "Dr Randy Wigham",
+      specialty: "General",
+      clinic: "RSUD Gatot Subroto",
+      ratingAvg: 4.8,
+      ratingCount: 4279,
+      isRecommended: true,
+      avatarUrl: null,
+      about:
+          "Dr. Jenny Watson is the top most Immunologists specialist in Christ Hospital at London. "
+          "She achieved several awards for her wonderful contribution in medical field. "
+          "She is available for private consultation.",
+      workingTime: "Monday - Friday, 08.00 AM - 20.00 PM",
+      strNumber: "4726482464",
+      experiencePlace: "RSPAD Gatot Soebroto",
+      experiencePeriod: "2017 - sekarang",
+      locationText: "Cairo, Egypt",
+      lat: 30.0444,
+      lng: 31.2357,
+    );
 
     _seed();
 
