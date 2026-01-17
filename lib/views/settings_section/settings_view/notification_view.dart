@@ -51,6 +51,7 @@ class NotificationPage extends StatelessWidget {
             title: 'special_offers'.tr,
             value: controller.specialOffers,
           ),
+          CustomDivider(),
         ],
       ),
     );
