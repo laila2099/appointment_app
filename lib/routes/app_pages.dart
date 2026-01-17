@@ -79,7 +79,7 @@ final appPages = <GetPage>[
     page: () => MainLayout(),
     bindings: [
       BottomNavBarBinding(),
-      ProfileBinding(), // <-- ضيف هذا
+      ProfileBinding(),
       BookingBinding(),
     ],
   ),

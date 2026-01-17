@@ -123,9 +123,10 @@ class OnBoardingView extends StatelessWidget {
                 const SizedBox(height: 18),
                 Padding(
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: Text(
-                    "Manage and schedule all of your medical appointments easily with Docdoc to get a new experience.".tr,
+                    "Manage and schedule all of your medical appointments easily with Docdoc to get a new experience."
+                        .tr,
                     textAlign: TextAlign.center,
                     style: CustomTextStyles.subtitle.copyWith(
                       fontSize: 16,
@@ -135,7 +136,7 @@ class OnBoardingView extends StatelessWidget {
                 ),
                 Padding(
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 10, vertical: 55),
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 55),
                   child: CustomPrimaryButton(
                     label: "Get Started".tr,
                     onTap: () {

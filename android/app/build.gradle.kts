@@ -8,11 +8,7 @@ plugins {
 android {
     namespace = "com.example.appointment_app"
     compileSdk = flutter.compileSdkVersion
-<<<<<<< HEAD
-    ndkVersion = "29.0.13599879"
-=======
-    ndkVersion = "29.0.14206865"
->>>>>>> youssuf
+    ndkVersion = "29.0.13113456"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
