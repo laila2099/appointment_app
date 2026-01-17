@@ -42,11 +42,18 @@ class RecommendationDoctorScreen extends StatelessWidget {
         children: [
           SizedBox(height: 16.h),
 
+          // CustomSearch(
+          //   icon: AppIcons.sort,
+          //   onTap: () {
+          //     doctorController.sortDoctorsBySpeciality();
+          //   },
+          // ),
           CustomSearch(
+            controller: doctorController.searchController,
+            hintText: "search_doctor".tr,
             icon: AppIcons.sort,
-            onTap: () {
-              doctorController.sortDoctorsBySpeciality();
-            },
+            onChanged: doctorController.searchDoctors,
+            onTap: () => doctorController.sortDoctorsBySpeciality(),
           ),
 
           SizedBox(height: 24.h),

@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 
 class NotificationScreen extends StatelessWidget {
   NotificationScreen({super.key});
-  final notificationController = Get.put(NotificationController());
+  final controller = Get.put(NotificationController());
 
   @override
   Widget build(BuildContext context) {
@@ -34,44 +34,61 @@ class NotificationScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Padding(
-        padding: EdgeInsetsDirectional.all(24.r),
-        child: Column(
-          children: [
-            SizedBox(height: 12.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "today".tr,
-                  style: TextStyle(fontSize: 16.sp, color: Color(0xff9E9E9E)),
-                ),
-                Text("mark_all_as_read".tr, style: CustomTextStyles.regular),
-              ],
-            ),
-            SizedBox(height: 16.h),
-            Expanded(
-              child: Obx(
-                () => ListView.builder(
-                  itemCount: notificationController.notifications.length,
-                  itemBuilder: (context, index) {
-                    final notification =
-                        notificationController.notifications[index];
-                    return Column(
-                      children: [
-                        NotificationItem(
-                          notification: notification,
-                          onTap: () {},
-                        ),
-                        SizedBox(height: 20.h),
-                      ],
-                    );
-                  },
+      body: Obx(() => ListView(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                child: _header(
+                  title: "today".tr,
+                  action: GestureDetector(
+                    onTap: controller.markAllAsRead,
+                    child: Text(
+                      "mark_all_as_read".tr,
+                      style: CustomTextStyles.regular,
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
+              ...controller.todayNotifications.map(
+                (n) => Padding(
+                  padding: EdgeInsets.only(bottom: 16.h),
+                  child: NotificationItem(
+                    notification: n,
+                    onTap: () => controller.markAsRead(n),
+                  ),
+                ),
+              ),
+              SizedBox(height: 12.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                child: _header(title: "yesterday".tr),
+              ),
+              ...controller.yesterdayNotifications.map(
+                (n) => Padding(
+                  padding: EdgeInsets.only(bottom: 16.h),
+                  child: NotificationItem(
+                    notification: n,
+                    onTap: () {},
+                  ),
+                ),
+              ),
+            ],
+          )),
+    );
+  }
+
+  Widget _header({required String title, Widget? action}) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 16.h),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: TextStyle(fontSize: 16.sp, color: const Color(0xff9E9E9E)),
+          ),
+          if (action != null) action,
+        ],
       ),
     );
   }

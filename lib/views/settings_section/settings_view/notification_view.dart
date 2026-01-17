@@ -1,9 +1,6 @@
-
-import 'package:appointment_app/core/constant/text_style.dart';
 import 'package:appointment_app/views/settings_section/settings_controller/notificaions_controllers.dart';
 import 'package:appointment_app/views/settings_section/settings_view/widgets/settings_header.dart';
 import 'package:appointment_app/views/settings_section/settings_view/widgets/switch_tile.dart';
-import 'package:appointment_app/widgets/general_widgets/app_header/app_header.dart';
 import 'package:appointment_app/widgets/general_widgets/custom_divider.dart';
 
 import 'package:flutter/material.dart';
@@ -20,12 +17,8 @@ class NotificationPage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-
           SettingsHeader(
             title: "notification".tr,
-
-    
-
           ),
           switchTile(
             title: 'notification_from_docnow'.tr,
