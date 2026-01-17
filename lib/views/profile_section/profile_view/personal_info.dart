@@ -1,5 +1,7 @@
+import 'package:appointment_app/core/constant/app_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../core/constant/app_colors.dart';
@@ -53,10 +55,10 @@ class PersonalInfo extends StatelessWidget {
                       shape: BoxShape.circle,
                       color: Color(0xffF8F8F8),
                     ),
-                    child: const Icon(
-                      Icons.edit,
-                      size: 24,
-                      color: AppColors.primary,
+                    child: SvgPicture.asset(
+                      AppIcons.edit,
+                      width: 16.w,
+                      height: 16.h,
                     ),
                   ),
                 ],

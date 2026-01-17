@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' hide TextField;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../core/constant/app_colors.dart';
@@ -80,16 +81,6 @@ class CreateAccountView extends StatelessWidget {
 
                 const SizedBox(height: 24),
 
-                // Create Account Button
-// <<<<<<< HEAD
-//                 SizedBox(
-//                   width: double.infinity,
-//                   height: 52,
-//                   child: CustomPrimaryButton(
-//                     label: "create_account".tr,
-//                     onTap: auth.isLoading.value ? () {} : () => auth.signUp(),
-//                   ),
-// =======
                 CustomPrimaryButton(
                   label:
                       auth.isLoading.value ? "Creating..." : "Create Account",
@@ -175,7 +166,7 @@ class CreateAccountView extends StatelessWidget {
                       ),
                     ),
 
-                    const SizedBox(height: 16),
+                    SizedBox(height: 24.h),
 
                     // Back to Login
                     RichText(
@@ -185,6 +176,11 @@ class CreateAccountView extends StatelessWidget {
                         children: [
                           TextSpan(
                             text: "already_have_account".tr,
+                            style: CustomTextStyles.custom(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 11.sp,
+                              color: AppColors.black,
+                            ),
                           ),
                           TextSpan(
                             text: "login".tr,

@@ -39,14 +39,19 @@ class LoginView extends StatelessWidget {
                   // Title
                   Text(
                     "welcome_back".tr,
-                    style: CustomTextStyles.headline32Bold,
+                    style: CustomTextStyles.custom(
+                        fontWeight: FontWeight.w900,
+                        fontSize: 24.sp,
+                        color: AppColors.primary),
                   ),
                   SizedBox(height: 16.h),
 
                   // Subtitle
                   Text(
                     "login_subtitle".tr,
-                    style: CustomTextStyles.subTitle,
+                    style: CustomTextStyles.subTitle.copyWith(
+                      height: 1.8,
+                    ),
                   ),
                   SizedBox(height: 32.h),
 
@@ -89,12 +94,21 @@ class LoginView extends StatelessWidget {
                           onChanged: (value) {
                             authController.rememberMe.value = value ?? false;
                           },
+                          side: BorderSide(
+                            color: authController.rememberMe.value
+                                ? AppColors.primary
+                                : AppColors.lightGrey,
+                            width: 2,
+                          ),
                           activeColor: AppColors.primary,
                         ),
                       ),
                       Text(
                         "Remember me",
-                        style: CustomTextStyles.subtitle12W500,
+                        style: CustomTextStyles.custom(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w400,
+                            color: AppColors.lightGrey),
                       ),
                       const Spacer(),
                       TextButton(
@@ -159,10 +173,15 @@ class LoginView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SocialButton(
+                        imagePath: AppImages.google,
+                        onTap: () {},
+                      ),
+                      SizedBox(width: 32.w),
+                      SocialButton(
                         imagePath: AppImages.facebook,
                         onTap: () {},
                       ),
-                      SizedBox(width: 16.w),
+                      SizedBox(width: 32.w),
                       SocialButton(
                         imagePath: AppImages.apple,
                         onTap: () {},
@@ -182,6 +201,11 @@ class LoginView extends StatelessWidget {
                           children: [
                             TextSpan(
                               text: "login_terms_prefix".tr,
+                              style: CustomTextStyles.custom(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 11.sp,
+                                color: AppColors.subtitle,
+                              ),
                             ),
                             TextSpan(
                               text: "terms_conditions".tr,
@@ -211,6 +235,11 @@ class LoginView extends StatelessWidget {
                           children: [
                             TextSpan(
                               text: "no_account".tr,
+                              style: CustomTextStyles.custom(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 11.sp,
+                                color: AppColors.black,
+                              ),
                             ),
                             TextSpan(
                               text: "sign_up".tr,

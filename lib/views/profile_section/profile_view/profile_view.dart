@@ -42,11 +42,12 @@ class ProfileScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       const ProfileInfo(),
-                      const SizedBox(height: 32),
-                      const ProfileTabs(),
                       const SizedBox(height: 24),
+                      const ProfileTabs(),
+                      const SizedBox(height: 15),
                       Expanded(
                         child: SafeArea(
+                          top: false,
                           bottom: true,
                           child: SingleChildScrollView(
                             physics: const BouncingScrollPhysics(),

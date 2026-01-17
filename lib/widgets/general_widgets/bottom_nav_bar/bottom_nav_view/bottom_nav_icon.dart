@@ -9,17 +9,21 @@ class NavBarIcon extends GetView<NavigationController> {
   final String iconPath;
   final int index;
   final bool hasBadge;
+  final String? selectedIconPath;
 
   const NavBarIcon({
     required this.iconPath,
     required this.index,
     this.hasBadge = false,
+    this.selectedIconPath,
   });
 
   @override
   Widget build(BuildContext context) {
     return Obx(() {
       final bool isActive = controller.selectedIndex == index;
+      final String displayedIcon =
+          isActive && selectedIconPath != null ? selectedIconPath! : iconPath;
       return GestureDetector(
         onTap: () => controller.changeIndex(index),
         behavior: HitTestBehavior.opaque,
@@ -29,7 +33,7 @@ class NavBarIcon extends GetView<NavigationController> {
             alignment: AlignmentDirectional.center,
             children: [
               SvgPicture.asset(
-                iconPath,
+                displayedIcon,
                 width: 24.w,
                 height: 24.h,
                 colorFilter: ColorFilter.mode(

@@ -1,5 +1,6 @@
 import 'package:appointment_app/core/classes/repositories/doctor_repository.dart';
 import 'package:appointment_app/core/constant/app_colors.dart';
+import 'package:appointment_app/core/constant/app_icons.dart';
 import 'package:appointment_app/core/constant/text_style.dart';
 import 'package:appointment_app/routes/app_routes.dart';
 import 'package:appointment_app/views/home_section/home_screen/controller/category_controller.dart';
@@ -9,6 +10,7 @@ import 'package:appointment_app/views/home_section/home_screen/widgets/custom_co
 import 'package:appointment_app/widgets/doctor_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/services/auth_gate_service.dart';
@@ -38,83 +40,89 @@ class HomeScreen extends StatelessWidget {
         padding: EdgeInsetsDirectional.all(16.r),
         child: Column(
           children: [
-            SizedBox(height: 10.h),
-            SizedBox(
-              height: 65.h,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+            SizedBox(height: 30.h),
+            Stack(children: [
+              SizedBox(
+                height: 75.h,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 12.h),
+                          Obx(() {
+                            final name = profileController.profile.value?.name;
+                            return Text(
+                              "Hi, ${name ?? '...'}",
+                              style: CustomTextStyles.bold,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            );
+                          }),
+                          SizedBox(height: 3.h),
+                          Text(
+                            "how_are_you_today".tr,
+                            style: CustomTextStyles.custom(
+                              fontSize: 10.sp,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.subtitle,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Spacer(),
+                    Stack(
                       children: [
-                        SizedBox(height: 5.h),
-                        Obx(() {
-                          final name = profileController.profile.value?.name;
-                          return Text(
-                            "Hi, ${name ?? '...'}",
-                            style: CustomTextStyles.bold,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          );
-                        }),
-                        SizedBox(height: 3.h),
-                        Text(
-                          "how_are_you_today".tr,
-                          style: CustomTextStyles.custom(
-                            fontSize: 10.sp,
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.subtitle,
+                        Container(
+                          height: 48.h,
+                          width: 48.w,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Color(0xffF5F9FF),
+                          ),
+                          child: Center(
+                            child: IconButton(
+                              color: AppColors.black,
+                              onPressed: () {
+                                Get.find<AuthGateService>().goProtected(
+                                  AppRoutes.notificationScreen,
+                                );
+                              },
+                              icon: SvgPicture.asset(
+                                AppIcons.notification,
+                                width: 17.9.w,
+                                height: 20.h,
+                              ),
+                            ),
+                          ),
+                        ),
+                        PositionedDirectional(
+                          end: 15.w,
+                          top: 13.h,
+                          child: Container(
+                            width: 8.w,
+                            height: 8.h,
+                            decoration: const BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                            ),
                           ),
                         ),
                       ],
                     ),
-                  ),
-                  const Spacer(),
-                  Stack(
-                    children: [
-                      Container(
-                        height: 48.h,
-                        width: 48.w,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color(0xffF5F9FF),
-                        ),
-                        child: Center(
-                          child: IconButton(
-                            color: AppColors.black,
-                            onPressed: () {
-                              Get.find<AuthGateService>().goProtected(
-                                AppRoutes.notificationScreen,
-                              );
-                            },
-                            icon: const Icon(Icons.notifications_none),
-                          ),
-                        ),
-                      ),
-                      PositionedDirectional(
-                        end: 15.w,
-                        top: 13.h,
-                        child: Container(
-                          width: 8.w,
-                          height: 8.h,
-                          decoration: const BoxDecoration(
-                            color: Colors.red,
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
+            ]),
             Expanded(
               child: SafeArea(
                 bottom: true,
                 child: SingleChildScrollView(
                     child: Column(
                   children: [
-                    SizedBox(height: 30.h),
+                    SizedBox(height: 5.h),
                     CustomContainer(),
                     SizedBox(height: 24.h),
                     Row(

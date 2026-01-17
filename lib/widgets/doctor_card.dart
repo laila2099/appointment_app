@@ -1,5 +1,7 @@
+import 'package:appointment_app/core/constant/app_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 
 class DoctorCard extends StatelessWidget {
@@ -189,7 +191,11 @@ class DoctorCard extends StatelessWidget {
                   // التقييم والريڤيوز
                   Row(
                     children: [
-                      const Icon(Icons.star, color: Colors.amber, size: 18),
+                      SvgPicture.asset(
+                        AppIcons.star,
+                        height: 16.w,
+                        width: 16.w,
+                      ),
                       const SizedBox(width: 5),
                       Text(
                         "$rating ($formattedReviews reviews)",

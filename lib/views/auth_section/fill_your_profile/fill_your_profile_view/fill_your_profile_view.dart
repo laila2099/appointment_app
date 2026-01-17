@@ -1,4 +1,7 @@
+import 'package:appointment_app/core/constant/app_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../../core/constant/app_colors.dart';
@@ -76,7 +79,7 @@ class FillYourProfileView extends StatelessWidget {
                               height: 120,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: AppColors.lightGrey,
+                                color: Color(0xffF8F8F8),
                                 image: const DecorationImage(
                                   image: AssetImage(AppImages.personPhoto),
                                   fit: BoxFit.cover,
@@ -95,14 +98,17 @@ class FillYourProfileView extends StatelessWidget {
                                   height: 36,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: AppColors.textField,
+                                    color: Color(0xffF8F8F8),
                                     border: Border.all(
                                         color: Colors.white, width: 2),
                                   ),
-                                  child: const Icon(
-                                    Icons.edit_outlined,
-                                    color: AppColors.primary,
-                                    size: 20,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: SvgPicture.asset(
+                                      AppIcons.edit,
+                                      width: 16.w,
+                                      height: 16.h,
+                                    ),
                                   ),
                                 ),
                               ),

@@ -11,6 +11,7 @@ class AppImages {
   static const String personPhoto = "${basePath}personPhoto.png";
   //profile icons
   static const String avatar = "${basePath}AVATAR.png";
+  static const String rightLogo = "${basePath}rightLogo.png";
 
   static const String rectangle = "${basePath}rectangle.png";
   static const String doctor1 = "${basePath}doctor1.png";

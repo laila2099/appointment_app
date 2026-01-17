@@ -1,8 +1,10 @@
+import 'package:appointment_app/core/constant/text_style.dart';
 import 'package:appointment_app/views/home_section/booking_appointment/booking_appointment_controller/booking_controller.dart';
 import 'package:appointment_app/views/home_section/booking_appointment/models/appointment_type.dart';
 import 'package:appointment_app/views/home_section/booking_appointment/widgets/summary_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../../core/classes/utils/format_date_time.dart';
@@ -27,14 +29,10 @@ class RescheduleSummary extends StatelessWidget {
       return ListView(
         padding: EdgeInsetsDirectional.fromSTEB(20.w, 0, 20.w, 50.h),
         children: [
-          Container(
+          SvgPicture.asset(
+            AppIcons.done,
             width: 70.w,
-            height: 70.w,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColors.green,
-            ),
-            child: Icon(Icons.check, color: Colors.white, size: 34.sp),
+            height: 70.h,
           ),
           SizedBox(height: 20.h),
           Center(child: SectionTitle('booking_rescheduled'.tr)),
@@ -55,6 +53,26 @@ class RescheduleSummary extends StatelessWidget {
             iconColor: AppColors.green,
             title: 'appointment_type'.tr,
             subtitle: type.label.tr,
+            trailing: OutlinedButton(
+              onPressed: () {},
+              style: OutlinedButton.styleFrom(
+                foregroundColor: AppColors.primary,
+                side: BorderSide(color: AppColors.primary),
+                padding: EdgeInsetsDirectional.symmetric(
+                  horizontal: 14.w,
+                  vertical: 10.h,
+                ),
+                minimumSize: Size.zero,
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(22.r),
+                ),
+                textStyle: CustomTextStyles.body12.copyWith(
+                  color: AppColors.primary,
+                ),
+              ),
+              child: Text('Get link'),
+            ),
           ),
           SizedBox(height: 18.h),
           SectionTitle('doctor_information'.tr),

@@ -7,6 +7,8 @@ class AppIcons {
   static const String home = '${basePath}home-2.svg';
   static const String search = '${basePath}search.svg';
   static const String chat = '${basePath}chat.svg';
+  static const String chat2 = '${basePath}chat2.svg';
+
   static const String check = '${basePath}check.svg';
   static const String calendar = '${basePath}calendar.svg';
   static const String star = '${basePath}star.svg';
@@ -45,4 +47,7 @@ class AppIcons {
   static const String wallet = "${basePath}wallet.svg";
   static const String setting = "${basePath}setting.svg";
   static const String sort = "${basePath}sort.svg";
+  static const String edit = "${basePath}edit.svg";
+  static const String notification = "${basePath}notification.svg";
+  static const String done = "${basePath}done.svg";
 }
