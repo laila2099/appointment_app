@@ -76,6 +76,10 @@ class AuthController extends GetxController {
   }
 
   Future<void> logout() async {
+    emailController.clear();
+    passwordController.clear();
+    phoneController.clear();
+    errorText.value = null;
     await prefs.remove(PrefKeys.accessToken);
     await prefs.remove(PrefKeys.refreshToken);
     await prefs.remove(PrefKeys.expiresAt);

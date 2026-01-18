@@ -28,7 +28,8 @@ class VerificationController extends GetxController {
   }
 
   void _generateOtpInternal() {
-    expectedCode = (1000 + Random().nextInt(9000)).toString();
+    expectedCode = "1111";
+    // expectedCode = (1000 + Random().nextInt(9000)).toString();
     print("📌🟢 Debug OTP generated: $expectedCode");
   }
 
@@ -51,6 +52,11 @@ class VerificationController extends GetxController {
   }
 
   bool verifyCode() {
+    enteredCode.value = controllers.map((e) => e.text.trim()).join();
+
+    print("🔍 Verification Attempt:");
+    print("Entered: '${enteredCode.value}' | Expected: '$expectedCode'");
+
     if (enteredCode.value.length < codeLength) {
       AppSnackBar.error('Please enter the complete OTP code');
       return false;

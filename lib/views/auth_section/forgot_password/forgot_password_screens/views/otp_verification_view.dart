@@ -1,4 +1,8 @@
+import 'package:appointment_app/core/constant/app_keys.dart';
+import 'package:appointment_app/core/services/auth_gate_service.dart';
+import 'package:appointment_app/core/services/shared_prefrences.dart';
 import 'package:appointment_app/routes/app_routes.dart';
+import 'package:appointment_app/widgets/general_widgets/bottom_nav_bar/controller/bottom_nav_bar_controller.dart';
 import 'package:flutter/material.dart' hide TextField;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -65,12 +69,19 @@ class OtpVerificationView extends StatelessWidget {
               // الزر ثابت في أسفل الشاشة
               CustomPrimaryButton(
                 label: "Submit",
-                onTap: () {
+                onTap: () async {
                   if (verificationController.verifyCode()) {
-                    // استدعاء API للتحقق من OTP
+                    // 1. حفظ حالة الدخول فوراً
+                    final prefs = Get.find<AppPreferencesService>();
+                    await prefs.setBool(PrefKeys.isLoggedIn, true);
+
                     AppSnackBar.success('OTP verified!');
+
+                    Get.find<NavigationController>().unlockAfterLogin();
+                    Get.offAllNamed(AppRoutes.bottomnavbar);
+
+                    Get.find<AuthGateService>().clearPending();
                   }
-                  Get.toNamed(AppRoutes.profile);
                 },
               )
             ],
