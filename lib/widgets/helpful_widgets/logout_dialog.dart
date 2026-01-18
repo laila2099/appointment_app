@@ -77,6 +77,7 @@ class LogoutDialog extends StatelessWidget {
                         await prefs.remove(PrefKeys.expiresAt);
                         await prefs.remove(PrefKeys.userId);
                         await prefs.setBool(PrefKeys.isLoggedIn, false);
+                        await prefs.setBool(PrefKeys.isVerified, false);
 
                         Get.find<AuthGateService>().logout();
                         Get.offAllNamed(AppRoutes.bottomnavbar);

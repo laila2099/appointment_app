@@ -6,6 +6,7 @@ import 'package:appointment_app/widgets/general_widgets/bottom_nav_bar/controlle
 import 'package:flutter/material.dart' hide TextField;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
 import '../../../../../core/classes/utils/app_snackbar.dart';
 import '../../../../../core/constant/app_colors.dart';
 import '../../../../../core/constant/text_style.dart';
@@ -74,6 +75,7 @@ class OtpVerificationView extends StatelessWidget {
                     // 1. حفظ حالة الدخول فوراً
                     final prefs = Get.find<AppPreferencesService>();
                     await prefs.setBool(PrefKeys.isLoggedIn, true);
+                    await prefs.setBool(PrefKeys.isVerified, true);
 
                     AppSnackBar.success('OTP verified!');
 

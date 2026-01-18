@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:get/get.dart';
-import 'package:intl_phone_field/countries.dart' hide Country;
 import 'package:country_picker/country_picker.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import '../../../core/classes/api/api_result.dart';
 import '../../../core/classes/repositories/auth_repository.dart';
 import '../../../core/classes/utils/app_snackbar.dart';
@@ -94,6 +93,7 @@ class AuthController extends GetxController {
       PrefKeys.accessToken,
       session.accessToken,
     );
+    await prefs.setBool(PrefKeys.isVerified, false);
 
     await prefs.setString(
       PrefKeys.refreshToken,
