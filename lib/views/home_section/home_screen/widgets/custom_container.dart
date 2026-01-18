@@ -1,6 +1,7 @@
 import 'package:appointment_app/core/constant/app_colors.dart';
 import 'package:appointment_app/core/constant/app_images.dart';
 import 'package:appointment_app/core/constant/text_style.dart';
+import 'package:appointment_app/routes/app_routes.dart';
 import 'package:appointment_app/views/home_section/find_nearby/views/find_nearby_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -37,7 +38,7 @@ class CustomContainer extends StatelessWidget {
                     SizedBox(height: 15.h),
                     ElevatedButton(
                       onPressed: () {
-                        Get.to(FindNearbyScreen());
+                        Get.toNamed(AppRoutes.findNearbyScreen);
                       },
                       child: Text(
                         "Find Nearby".tr,
