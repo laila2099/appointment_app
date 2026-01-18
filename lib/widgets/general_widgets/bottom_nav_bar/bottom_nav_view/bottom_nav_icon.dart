@@ -7,13 +7,16 @@ import 'package:get/get.dart';
 
 class NavBarIcon extends GetView<NavigationController> {
   final String iconPath;
+  final String selectedIconPath;
   final int index;
   final bool hasBadge;
 
   const NavBarIcon({
+    super.key,
     required this.iconPath,
     required this.index,
     this.hasBadge = false,
+    required this.selectedIconPath,
   });
 
   @override
@@ -29,7 +32,7 @@ class NavBarIcon extends GetView<NavigationController> {
             alignment: AlignmentDirectional.center,
             children: [
               SvgPicture.asset(
-                iconPath,
+                isActive ? selectedIconPath : iconPath,
                 width: 24.w,
                 height: 24.h,
                 colorFilter: ColorFilter.mode(

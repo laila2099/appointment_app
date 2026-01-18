@@ -2,7 +2,6 @@ import 'package:appointment_app/core/utils/auth_validators.dart';
 import 'package:appointment_app/views/auth_section/auth_controller/auth_controller.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' hide TextField;
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -23,350 +22,386 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsetsDirectional.symmetric(
-              horizontal: 24, vertical: 16),
-          child: Form(
-            key: authController.loginFormKey,
-            child: AutofillGroup(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 40.h),
-
-                // Title
-                Text(
-                  "Welcome Back".tr,
-                  style: CustomTextStyles.headline32Bold,
-                ),
-                SizedBox(height: 16.h),
-
-                // Subtitle
-                Text(
-                  "We're excited to have you back, can't wait to see what you've been up to since you last logged in.".tr,
-                  style: CustomTextStyles.subTitle
-                      .copyWith(fontSize: 20, height: 1.5),
-                ),
-                SizedBox(height: 20.h),
-
-                //Email
-                CustomTextField(
-                  controller: authController.emailController,
-                  hint: "Email",
-                  keyboardType: TextInputType.emailAddress,
-                  tfBackground: AppColors.textField2,
-                  validator: Validators.validateEmail,
-                ),
-                SizedBox(height: 16.h),
-
-                // Password
-                CustomTextField(
-                  controller: authController.passwordController,
-                  hint: "Password",
-                  tfBackground: AppColors.textField2,
-                  isPassword: true,
-                  validator: Validators.validatePassword,
-                ),
-                SizedBox(height: 16.h),
-
-                // Remember + Forgot
-                Row(
-                  children: [
-                    Obx(
-                      () => Checkbox(
-                        value: authController.rememberMe.value,
-                        onChanged: (value) =>
-                            authController.rememberMe.value = value ?? false,
-                        checkColor: Colors.white,
-                        fillColor: MaterialStateProperty.resolveWith((states) =>
-                            states.contains(MaterialState.selected)
-                                ? AppColors.primary
-                                : Colors.white),
-                        side: MaterialStateBorderSide.resolveWith((states) =>
-                            states.contains(MaterialState.selected)
-                                ? BorderSide(color: AppColors.primary, width: 2)
-                                : BorderSide(color: Colors.grey, width: 2)),
-                      ),
-                    ),
-                    Text(
-                      "Remember me",
-                      style: CustomTextStyles.subtitle12W500
-                          .copyWith(color: AppColors.lightGrey),
-                    ),
-                    const Spacer(),
-                    TextButton(
-                      onPressed: () {
-                        Get.toNamed(AppRoutes.forgotPassword);
-                      },
-                      child: Text(
-                        "Forgot Password?",
-                        style: CustomTextStyles.subtitle12W500
-                            .copyWith(color: AppColors.primary),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 34.h),
-
-                // Login Button
-                Obx(
-                  () => SizedBox(
-                    width: double.infinity,
-                    height: 52.h,
-                    child: CustomPrimaryButton(
-                      label: authController.isLoading.value
-                          ? "Logging in..."
-                          : "Login",
-                      onTap: () {
-                        if (!authController.isLoading.value) {
-                          if (authController.loginFormKey.currentState
-                                  ?.validate() ??
-                              false) {
-                            authController.login();
-                          }
-                        }
-                      },
-                    ),
-                  ),
-                ),
-                SizedBox(height: 40.h),
-
-                  // Remember + Forgot
-                  Row(
+        backgroundColor: AppColors.white,
+        body: SafeArea(
+          child: SingleChildScrollView(
+            padding: EdgeInsetsDirectional.symmetric(
+                horizontal: 24.w, vertical: 16.h),
+            child: Form(
+              key: authController.loginFormKey,
+              child: AutofillGroup(
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Obx(
-                        () => Checkbox(
-                          value: authController.rememberMe.value,
-                          onChanged: (value) {
-                            authController.rememberMe.value = value ?? false;
-                          },
-                          activeColor: AppColors.primary,
-                        ),
-                      ),
-                      Text(
-                        "Remember me",
-                        style: CustomTextStyles.subtitle12W500,
-                      ),
-                      const Spacer(),
-                      TextButton(
-                        onPressed: () {
-                          Get.toNamed(AppRoutes.forgotPassword);
-                        },
+                      SizedBox(height: 40.h),
+
+                      // Title
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 6.5.w),
                         child: Text(
-                          "Forgot Password?",
-                          style: CustomTextStyles.subtitle12W500
-                              .copyWith(color: AppColors.primary),
+                          "Welcome Back".tr,
+                          style:
+                              CustomTextStyles.headline.copyWith(height: 1.5.h),
                         ),
                       ),
-                    ],
-                  ),
-                  SizedBox(height: 24.h),
+                      SizedBox(height: 16.h),
 
-                  // Login Button
-                  Obx(
-                    () => SizedBox(
-                      width: double.infinity,
-                      height: 52.h,
-                      child: CustomPrimaryButton(
-                        label: authController.isLoading.value
-                            ? "Logging in..."
-                            : "Login",
-                        onTap: () {
-                          if (!authController.isLoading.value) {
-                            if (authController.loginFormKey.currentState
-                                    ?.validate() ??
-                                false) {
-                              TextInput.finishAutofillContext();
-                              authController.login();
-                            }
-                          }
-                          return;
-                        },
+                      // Subtitle
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 6.5.w),
+                        child: Text(
+                          "We're excited to have you back, can't wait to see what you've been up to since you last logged in."
+                              .tr,
+                          style: CustomTextStyles.subTitle.copyWith(
+                              fontSize: 14.sp,
+                              height: 1.8.h,
+                              letterSpacing: .5.sp),
+                        ),
                       ),
-                    ),
-                  ),
+                      SizedBox(height: 20.h),
 
-                // Social buttons
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SocialButton(
-                      imagePath: AppImages.google,
-                      onTap: () {},
-                    ),
-                    SizedBox(width: 32.w),
-                    SocialButton(
-                      imagePath: AppImages.facebook,
-                      onTap: () {},
-                    ),
-                    SizedBox(width: 32.w),
-                    SocialButton(
-                      imagePath: AppImages.apple,
-                      onTap: () {},
-                    ),
-                  ],
-                ),
-                SizedBox(height: 40.h),
+                      //Email
+                      CustomTextField(
+                        controller: authController.emailController,
+                        hint: "Email",
+                        keyboardType: TextInputType.emailAddress,
+                        tfBackground: AppColors.textField2,
+                        validator: Validators.validateEmail,
+                      ),
+                      SizedBox(height: 16.h),
 
-                // Footer
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(
-                        style: CustomTextStyles.subtitle,
+                      // Password
+                      CustomTextField(
+                        controller: authController.passwordController,
+                        hint: "Password",
+                        tfBackground: AppColors.textField2,
+                        isPassword: true,
+                        validator: Validators.validatePassword,
+                      ),
+                      SizedBox(height: 16.h),
+
+                      // Remember + Forgot
+                      Row(
                         children: [
-                          const TextSpan(
-                            text: "By logging, you agree to our ",),
-                          TextSpan(
-                            text: "Terms & Conditions",
-                            style: CustomTextStyles.subtitle.copyWith(
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.black,
+                          Obx(
+                            () => Checkbox(
+                              value: authController.rememberMe.value,
+                              onChanged: (value) => authController
+                                  .rememberMe.value = value ?? false,
+                              checkColor: Colors.white,
+                              fillColor: MaterialStateProperty.resolveWith(
+                                  (states) =>
+                                      states.contains(MaterialState.selected)
+                                          ? AppColors.primary
+                                          : Colors.white),
+                              side: MaterialStateBorderSide.resolveWith(
+                                  (states) =>
+                                      states.contains(MaterialState.selected)
+                                          ? BorderSide(
+                                              color: AppColors.primary,
+                                              width: 2)
+                                          : BorderSide(
+                                              color: Colors.grey, width: 2)),
                             ),
                           ),
-                          const TextSpan(
-                            text: " and ",
+                          Text(
+                            "Remember me",
+                            style: CustomTextStyles.subtitle12W500
+                                .copyWith(color: AppColors.lightGrey),
                           ),
-                          TextSpan(
-                            text: "Privacy Policy",
-                            style: CustomTextStyles.subtitle.copyWith(
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.black,
+                          const Spacer(),
+                          TextButton(
+                            onPressed: () {
+                              Get.toNamed(AppRoutes.forgotPassword);
+                            },
+                            child: Text(
+                              "Forgot Password?",
+                              style: CustomTextStyles.subtitle12W500
+                                  .copyWith(color: AppColors.primary),
                             ),
                           ),
                         ],
                       ),
-                    ),
-                    SizedBox(height: 40.h),
-                    RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(
-                        style: CustomTextStyles.subtitle,
+                      SizedBox(height: 32.h),
+
+                      // Login Button
+                      Obx(
+                        () => SizedBox(
+                          width: double.infinity,
+                          height: 52.h,
+                          child: CustomPrimaryButton(
+                            label: authController.isLoading.value
+                                ? "Logging in..."
+                                : "Login",
+                            onTap: () {
+                              if (!authController.isLoading.value) {
+                                if (authController.loginFormKey.currentState
+                                        ?.validate() ??
+                                    false) {
+                                  authController.login();
+                                }
+                              }
+                            },
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 40.h),
+
+                      /*   // Remember + Forgot
+                      Row(
                         children: [
-                          const TextSpan(
-                            text: "Don't have an account yet? ",
-                          ),
-                          TextSpan(
-                            text: "Sign Up",
-                            style: CustomTextStyles.subtitle.copyWith(
-                              color: AppColors.primary,
-                              fontWeight: FontWeight.w600,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Get.to(() => CreateAccountView());
+                          Obx(
+                            () => Checkbox(
+                              value: authController.rememberMe.value,
+                              onChanged: (value) {
+                                authController.rememberMe.value =
+                                    value ?? false;
                               },
+                              activeColor: AppColors.primary,
+                            ),
                           ),
-                        ],),),
+                          Text(
+                            "Remember me",
+                            style: CustomTextStyles.subtitle12W500,
+                          ),
+                          const Spacer(),
+                          TextButton(
+                            onPressed: () {
+                              Get.toNamed(AppRoutes.forgotPassword);
+                            },
+                            child: Text(
+                              "Forgot Password?",
+                              style: CustomTextStyles.subtitle12W500
+                                  .copyWith(color: AppColors.primary),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 24.h),
 
-                  SizedBox(height: 24.h),
-
-                  // Divider
-                  Row(
-                    children: [
-                      const Expanded(child: Divider()),
-                      Padding(
-                        padding: const EdgeInsetsDirectional.symmetric(
-                            horizontal: 8),
-                        child: Text(
-                          "or_sign_in_with".tr,
-                          style: CustomTextStyles.subtitle,
+                      // Login Button
+                      Obx(
+                        () => SizedBox(
+                          width: double.infinity,
+                          height: 52.h,
+                          child: CustomPrimaryButton(
+                            label: authController.isLoading.value
+                                ? "Logging in..."
+                                : "Login",
+                            onTap: () {
+                              if (!authController.isLoading.value) {
+                                if (authController.loginFormKey.currentState
+                                        ?.validate() ??
+                                    false) {
+                                  TextInput.finishAutofillContext();
+                                  authController.login();
+                                }
+                              }
+                              return;
+                            },
+                          ),
                         ),
-                      ),
-                      const Expanded(child: Divider()),
-                    ],
-                  ),
-                  SizedBox(height: 25.h),
+                      ),*/
 
-                  // Social Buttons
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SocialButton(
-                        imagePath: AppImages.google,
-                        onTap: () {},
-                      ),
-                      SizedBox(width: 16.w),
-                      SocialButton(
-                        imagePath: AppImages.facebook,
-                        onTap: () {},
-                      ),
-                      SizedBox(width: 16.w),
-                      SocialButton(
-                        imagePath: AppImages.apple,
-                        onTap: () {},
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 40.h),
-
-                  // Footer
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      RichText(
-                        textAlign: TextAlign.center,
-                        text: TextSpan(
-                          style: CustomTextStyles.subtitle,
-                          children: [
-                            TextSpan(
-                              text: "login_terms_prefix".tr,
+                      // Divider
+                      Row(
+                        children: [
+                          const Expanded(child: Divider()),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.symmetric(
+                                horizontal: 8),
+                            child: Text(
+                              "or_sign_in_with".tr,
+                              style: CustomTextStyles.subtitle,
                             ),
-                            TextSpan(
-                              text: "terms_conditions".tr,
-                              style: CustomTextStyles.subtitle.copyWith(
-                                fontWeight: FontWeight.w600,
-                                color: AppColors.black,
-                              ),
-                            ),
-                            TextSpan(
-                              text: " and ".tr,
-                            ),
-                            TextSpan(
-                              text: "privacy_policy".tr,
-                              style: CustomTextStyles.subtitle.copyWith(
-                                fontWeight: FontWeight.w600,
-                                color: AppColors.black,
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                          const Expanded(child: Divider()),
+                        ],
                       ),
                       SizedBox(height: 25.h),
-                      RichText(
-                        textAlign: TextAlign.center,
-                        text: TextSpan(
-                          style: CustomTextStyles.subtitle,
-                          children: [
-                            TextSpan(
-                              text: "no_account".tr,
-                            ),
-                            TextSpan(
-                              text: "sign_up".tr,
-                              style: CustomTextStyles.subtitle.copyWith(
-                                color: AppColors.primary,
-                                fontWeight: FontWeight.w600,
-                              ),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  Get.to(() => CreateAccountView());
-                                },
-                            ),
-                          ],
-                        ),
+
+                      // Social buttons
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SocialButton(
+                            imagePath: AppImages.google,
+                            onTap: () {},
+                          ),
+                          SizedBox(width: 32.w),
+                          SocialButton(
+                            imagePath: AppImages.facebook,
+                            onTap: () {},
+                          ),
+                          SizedBox(width: 32.w),
+                          SocialButton(
+                            imagePath: AppImages.apple,
+                            onTap: () {},
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ],
+                      SizedBox(height: 40.h),
+
+                      /*  // Footer
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
+                              style: CustomTextStyles.subtitle,
+                              children: [
+                                const TextSpan(
+                                  text: "By logging, you agree to our ",
+                                ),
+                                TextSpan(
+                                  text: "Terms & Conditions",
+                                  style: CustomTextStyles.subtitle.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.black,
+                                  ),
+                                ),
+                                const TextSpan(
+                                  text: " and ",
+                                ),
+                                TextSpan(
+                                  text: "Privacy Policy",
+                                  style: CustomTextStyles.subtitle.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 40.h),
+                          RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
+                              style: CustomTextStyles.subtitle,
+                              children: [
+                                const TextSpan(
+                                  text: "Don't have an account yet? ",
+                                ),
+                                TextSpan(
+                                  text: "Sign Up",
+                                  style: CustomTextStyles.subtitle.copyWith(
+                                    color: AppColors.primary,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      Get.to(() => CreateAccountView());
+                                    },
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          SizedBox(height: 24.h),
+
+                          // Divider
+                          Row(
+                            children: [
+                              const Expanded(child: Divider()),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.symmetric(
+                                    horizontal: 8),
+                                child: Text(
+                                  "or_sign_in_with".tr,
+                                  style: CustomTextStyles.subtitle,
+                                ),
+                              ),
+                              const Expanded(child: Divider()),
+                            ],
+                          ),
+                          SizedBox(height: 25.h),
+
+                          // Social Buttons
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SocialButton(
+                                imagePath: AppImages.google,
+                                onTap: () {},
+                              ),
+                              SizedBox(width: 16.w),
+                              SocialButton(
+                                imagePath: AppImages.facebook,
+                                onTap: () {},
+                              ),
+                              SizedBox(width: 16.w),
+                              SocialButton(
+                                imagePath: AppImages.apple,
+                                onTap: () {},
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 40.h),
+                        ],
+                      ),*/
+
+                      // Footer
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
+                              style: CustomTextStyles.subtitle,
+                              children: [
+                                TextSpan(
+                                  text: "login_terms_prefix".tr,
+                                ),
+                                TextSpan(
+                                  text: "terms_conditions".tr,
+                                  style: CustomTextStyles.subtitle.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.black,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: " and ".tr,
+                                ),
+                                TextSpan(
+                                  text: "privacy_policy".tr,
+                                  style: CustomTextStyles.subtitle.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 25.h),
+                          RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
+                              style: CustomTextStyles.subtitle,
+                              children: [
+                                TextSpan(
+                                  text: "no_account".tr,
+                                ),
+                                TextSpan(
+                                  text: "sign_up".tr,
+                                  style: CustomTextStyles.subtitle.copyWith(
+                                    color: AppColors.primary,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      Get.to(() => CreateAccountView());
+                                    },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ]),
               ),
-            ]),
+            ),
           ),
-        ),
-      ),
-    ));
+        ));
   }
 }

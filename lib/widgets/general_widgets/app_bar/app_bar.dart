@@ -35,7 +35,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     final navCtrl = Get.find<NavigationController>();
 
     if (Get.key.currentState?.canPop() ?? false) {
-      Get.back();
+      Get.back(result: true);
     } else {
       navCtrl.handleBack();
     }
@@ -56,7 +56,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             Text(
               titel,
               style: TextStyle(
-                fontSize: 24.sp,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.w600,
                 color: AppColors.black,
               ),

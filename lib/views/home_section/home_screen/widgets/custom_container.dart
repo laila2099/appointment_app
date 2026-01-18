@@ -15,7 +15,7 @@ class CustomContainer extends StatelessWidget {
       clipBehavior: Clip.none,
       children: [
         Container(
-          width: 345.w,
+          width: 343.w,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(24.r),
             color: AppColors.primary,

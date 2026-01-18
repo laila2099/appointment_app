@@ -1,10 +1,12 @@
-import 'package:appointment_app/core/constant/app_colors.dart';
 import 'package:appointment_app/core/constant/app_icons.dart';
 import 'package:appointment_app/core/constant/app_images.dart';
 import 'package:appointment_app/core/constant/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+
+import '../../../../core/constant/app_colors.dart';
 import '../../profile_controller/profile_controller.dart';
 
 class ProfileInfo extends StatelessWidget {
@@ -21,23 +23,24 @@ class ProfileInfo extends StatelessWidget {
             alignment: AlignmentDirectional.bottomEnd,
             children: [
               CircleAvatar(
-                radius: 62,
+                radius: 62.r,
                 backgroundColor: Colors.white,
-                child: const CircleAvatar(
-                  radius: 60,
+                child: CircleAvatar(
+                  radius: 60.r,
                   backgroundImage: AssetImage(AppImages.avatar),
                 ),
               ),
               Container(
-                padding: const EdgeInsetsDirectional.all(8),
+                padding: EdgeInsetsDirectional.all(8.w),
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: Color(0xffF8F8F8),
                 ),
                 child: SvgPicture.asset(
                   AppIcons.edit,
-                  width: 16,
-                  height: 16
+                  width: 16.w,
+                  height: 16.w,
+                  color: AppColors.primary,
                 ),
               ),
             ],

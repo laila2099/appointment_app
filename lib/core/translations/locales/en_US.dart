@@ -254,4 +254,7 @@ const Map<String, String> enUS = {
   "doctor_not_found": "Doctor not found",
   "doctor_info_not_available": "Doctor information is not available",
   "doctor_load_failed": "Failed to load doctor details: @error",
+
+  // -------------------
+  'yesterday': 'Yesterday',
 };

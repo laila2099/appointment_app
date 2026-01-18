@@ -50,7 +50,7 @@ class RecommendationDoctorScreen extends StatelessWidget {
           // ),
           CustomSearch(
             controller: doctorController.searchController,
-            hintText: "search_doctor".tr,
+            hintText: "search".tr,
             icon: AppIcons.sort,
             onChanged: doctorController.searchDoctors,
             onTap: () => doctorController.sortDoctorsBySpeciality(),

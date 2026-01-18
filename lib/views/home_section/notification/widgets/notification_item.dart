@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../../core/constant/app_colors.dart';
 import '../models/notification_model.dart';
 
 class NotificationItem extends StatelessWidget {
@@ -48,18 +50,16 @@ class NotificationItem extends StatelessWidget {
                   Text(
                     notification.title,
                     style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: notification.isActive
-                          ? FontWeight.w600
-                          : FontWeight.w400,
-                    ),
+                        color: AppColors.black,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w600),
                   ),
                   SizedBox(height: 6.h),
                   Text(
                     notification.message,
                     style: TextStyle(
-                      fontSize: 13.sp,
-                      color: Colors.grey,
+                      fontSize: 12.sp,
+                      color: AppColors.subtitle,
                       height: 2,
                     ),
                   ),

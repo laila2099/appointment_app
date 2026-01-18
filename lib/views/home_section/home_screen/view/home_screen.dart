@@ -42,245 +42,257 @@ class HomeScreen extends StatelessWidget {
           children: [
             SizedBox(height: 10.h),
             SizedBox(
-              height: 65.h,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+              height: 72.h,
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 12.w),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Obx(() {
+                            final name = profileController.profile.value?.name;
+                            return Text(
+                              "Hi, ${name ?? '...'}",
+                              style: CustomTextStyles.bold.copyWith(
+                                fontSize: 18.sp,
+                                fontWeight: FontWeight.w700,
+                                height: 1.6.h,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            );
+                          }),
+                          SizedBox(height: 3.h),
+                          Text(
+                            "how_are_you_today".tr,
+                            style: CustomTextStyles.custom(
+                              fontSize: 11.sp,
+                              height: 1.5.h,
+                              fontWeight: FontWeight.w400,
+                              color: AppColors.subtitle,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Spacer(),
+                    Stack(
                       children: [
-                        SizedBox(height: 5.h),
-                        Obx(() {
-                          final name = profileController.profile.value?.name;
-                          return Text(
-                            "Hi, ${name ?? '...'}",
-                            style: CustomTextStyles.bold,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          );
-                        }),
-                        SizedBox(height: 3.h),
-                        Text(
-                          "how_are_you_today".tr,
-                          style: CustomTextStyles.custom(
-                            fontSize: 10.sp,
-                            fontWeight: FontWeight.w400,
-                            color: AppColors.subtitle,
+                        Container(
+                          height: 48.h,
+                          width: 48.w,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Color(0xffF5F5F5),
+                          ),
+                          child: Center(
+                            child: IconButton(
+                              color: AppColors.black,
+                              onPressed: () {
+                                Get.find<AuthGateService>().goProtected(
+                                  AppRoutes.notificationScreen,
+                                );
+                              },
+                              icon: SvgPicture.asset(
+                                  height: 24.h,
+                                  width: 24.w,
+                                  AppIcons.notification),
+                            ),
+                          ),
+                        ),
+                        PositionedDirectional(
+                          end: 15.w,
+                          top: 13.h,
+                          child: Container(
+                            width: 8.w,
+                            height: 8.h,
+                            decoration: const BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                            ),
                           ),
                         ),
                       ],
                     ),
-                  ),
-                  const Spacer(),
-                  Stack(
-                    children: [
-                      Container(
-                        height: 48.h,
-                        width: 48.w,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color(0xffF5F9FF),
-                        ),
-                        child: Center(
-                          child: IconButton(
-                            color: AppColors.black,
-                            onPressed: () {
-                              Get.find<AuthGateService>().goProtected(
-                                AppRoutes.notificationScreen,
-                              );
-                            },
-                            icon: SvgPicture.asset(
-                                height: 20.h,
-                                width: 18.w,
-                                AppIcons.notification),
-                          ),
-                        ),
-                      ),
-                      PositionedDirectional(
-                        end: 15.w,
-                        top: 13.h,
-                        child: Container(
-                          width: 8.w,
-                          height: 8.h,
-                          decoration: const BoxDecoration(
-                            color: Colors.red,
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             Expanded(
-              child: SingleChildScrollView(
-                  child: Column(
-                children: [
-                  SizedBox(height: 16.h),
-                  CustomContainer(),
-                  SizedBox(height: 24.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("doctor_speciality".tr,
-                          style: CustomTextStyles.screenTitle),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsetsDirectional.zero,
-                          minimumSize: Size(0, 0),
-                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              child: SafeArea(
+                bottom: true,
+                child: SingleChildScrollView(
+                    child: Column(
+                  children: [
+                    SizedBox(height: 16.h),
+                    CustomContainer(),
+                    SizedBox(height: 24.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("doctor_speciality".tr,
+                            style: CustomTextStyles.screenTitle),
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsetsDirectional.zero,
+                            minimumSize: Size(0, 0),
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          ),
+                          onPressed: () {
+                            doctorController.sortDoctorsBySpeciality(
+                                source: CategoryPickerSource.specialtiesScreen);
+                          },
+                          child: Text("see_all".tr,
+                              style: CustomTextStyles.regular),
                         ),
-                        onPressed: () {
-                          doctorController.sortDoctorsBySpeciality(
-                              source: CategoryPickerSource.specialtiesScreen);
-                        },
-                        child:
-                            Text("see_all".tr, style: CustomTextStyles.regular),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 16.h),
-                  SizedBox(
-                    height: 100.h,
-                    child: Obx(() {
-                      if (categoryController.isLoading.value) {
+                      ],
+                    ),
+                    SizedBox(height: 16.h),
+                    SizedBox(
+                      height: 100.h,
+                      child: Obx(() {
+                        if (categoryController.isLoading.value) {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        }
+                        if (categoryController.errorMessage.value != null) {
+                          return Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(categoryController.errorMessage.value!),
+                                SizedBox(height: 1.h),
+                                ElevatedButton(
+                                  onPressed: () =>
+                                      categoryController.retryFetchCategories(),
+                                  child: const Text('Retry'),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+                        if (categoryController.categories.isEmpty) {
+                          return Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text('No categories available'),
+                                SizedBox(height: 12.h),
+                                ElevatedButton(
+                                  onPressed: () =>
+                                      categoryController.retryFetchCategories(),
+                                  child: const Text('Retry'),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+                        return ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: categoryController.categories.length,
+                          itemBuilder: (context, index) {
+                            final item = categoryController.categories[index];
+                            return Row(
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    doctorController.filterDoctors(
+                                        categoryId: item.title == 'general'
+                                            ? null
+                                            : item.id);
+                                  },
+                                  child: CategoryItem(
+                                    iconPath: item.iconUrl,
+                                    title: item.title,
+                                  ),
+                                ),
+                                SizedBox(width: 25.w),
+                              ],
+                            );
+                          },
+                        );
+                      }),
+                    ),
+                    SizedBox(height: 24.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "recommendation_doctor".tr,
+                          style: CustomTextStyles.screenTitle,
+                        ),
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsetsDirectional.zero,
+                            minimumSize: Size(0, 0),
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          ),
+                          onPressed: () {
+                            Get.toNamed(AppRoutes.recommendationDoctorScreen);
+                          },
+                          child: Text("see_all".tr,
+                              style: CustomTextStyles.regular),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 20.h),
+                    Obx(() {
+                      if (doctorController.isLoading.value) {
                         return const Center(child: CircularProgressIndicator());
                       }
-                      if (categoryController.errorMessage.value != null) {
+
+                      if (doctorController.doctors.isEmpty) {
                         return Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(categoryController.errorMessage.value!),
-                              SizedBox(height: 1.h),
+                              const Icon(Icons.medical_services_outlined,
+                                  size: 64, color: Colors.grey),
+                              const SizedBox(height: 16),
+                              Text(
+                                doctorController.errorMessage.value ??
+                                    'no_doctors_available'.tr,
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                              const SizedBox(height: 16),
                               ElevatedButton(
-                                onPressed: () =>
-                                    categoryController.retryFetchCategories(),
-                                child: const Text('Retry'),
+                                onPressed: doctorController.refresh,
+                                child: Text('retry'.tr),
                               ),
                             ],
                           ),
                         );
                       }
-                      if (categoryController.categories.isEmpty) {
-                        return Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text('No categories available'),
-                              SizedBox(height: 12.h),
-                              ElevatedButton(
-                                onPressed: () =>
-                                    categoryController.retryFetchCategories(),
-                                child: const Text('Retry'),
-                              ),
-                            ],
-                          ),
-                        );
-                      }
+
                       return ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: categoryController.categories.length,
+                        padding: EdgeInsetsDirectional.zero,
+                        itemCount: doctorController.doctors.length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
-                          final item = categoryController.categories[index];
-                          return Row(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  doctorController.filterDoctors(
-                                      categoryId: item.title == 'general'
-                                          ? null
-                                          : item.id);
-                                },
-                                child: CategoryItem(
-                                  iconPath: item.iconUrl,
-                                  title: item.title,
-                                ),
-                              ),
-                              SizedBox(width: 25.w),
-                            ],
+                          final doctor = doctorController.doctors[index];
+                          final imagePath =
+                              doctorController.getImagePath(doctor);
+                          return DoctorCard(
+                            onTap: () => Get.toNamed(
+                              AppRoutes.doctorDetails,
+                              arguments: {'doctorId': doctor.id},
+                            ),
+                            image: imagePath,
+                            name: doctor.name,
+                            department: doctor.specialty,
+                            hospital: doctor.clinic,
+                            rating: doctor.ratingAvg,
+                            reviews: doctor.ratingCount,
                           );
                         },
                       );
                     }),
-                  ),
-                  SizedBox(height: 24.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "recommendation_doctor".tr,
-                        style: CustomTextStyles.screenTitle,
-                      ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsetsDirectional.zero,
-                          minimumSize: Size(0, 0),
-                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        ),
-                        onPressed: () {
-                          Get.toNamed(AppRoutes.recommendationDoctorScreen);
-                        },
-                        child:
-                            Text("see_all".tr, style: CustomTextStyles.regular),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 20.h),
-                  Obx(() {
-                    if (doctorController.isLoading.value) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-
-                    if (doctorController.doctors.isEmpty) {
-                      return Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(Icons.medical_services_outlined,
-                                size: 64, color: Colors.grey),
-                            const SizedBox(height: 16),
-                            Text(
-                              doctorController.errorMessage.value ??
-                                  'no_doctors_available'.tr,
-                              style: const TextStyle(fontSize: 16),
-                            ),
-                            const SizedBox(height: 16),
-                            ElevatedButton(
-                              onPressed: doctorController.refresh,
-                              child: Text('retry'.tr),
-                            ),
-                          ],
-                        ),
-                      );
-                    }
-
-                    return ListView.builder(
-                      padding: EdgeInsetsDirectional.zero,
-                      itemCount: doctorController.doctors.length,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        final doctor = doctorController.doctors[index];
-                        final imagePath = doctorController.getImagePath(doctor);
-                        return DoctorCard(
-                          onTap: () => Get.toNamed(
-                            AppRoutes.doctorDetails,
-                            arguments: {'doctorId': doctor.id},
-                          ),
-                          image: imagePath,
-                          name: doctor.name,
-                          department: doctor.specialty,
-                          hospital: doctor.clinic,
-                          rating: doctor.ratingAvg,
-                          reviews: doctor.ratingCount,
-                        );
-                      },
-                    );
-                  }),
-                ],
-              )),
+                  ],
+                )),
+              ),
             ),
           ],
         ),

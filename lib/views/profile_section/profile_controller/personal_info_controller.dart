@@ -33,6 +33,7 @@ class PersonalInfoController extends GetxController {
       nameController.text = profile.name;
       emailController.text = profile.email;
       birthdateController.text = profile.birthdate ?? '';
+      print(profile.phone);
       _applyPhoneFromProfile(profile.phone);
     }
 
@@ -43,6 +44,7 @@ class PersonalInfoController extends GetxController {
           nameController.text = profile.name;
           emailController.text = profile.email;
           birthdateController.text = profile.birthdate ?? '';
+          phoneController.text = profile.phone ?? '';
           _applyPhoneFromProfile(profile.phone);
         }
       },

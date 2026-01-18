@@ -1,10 +1,10 @@
 import 'package:appointment_app/routes/app_routes.dart';
-import 'package:appointment_app/views/home_section/recommendation_doctor/controllers/sort_controller.dart';
 import 'package:appointment_app/views/home_section/recommendation_doctor/widgets/custom_bottom_sheet.dart';
 import 'package:appointment_app/widgets/search/search_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
 import '../../../core/constant/app_colors.dart';
 import '../../../widgets/general_widgets/app_bar/app_bar.dart';
 import '../controller/search_controller.dart';
@@ -32,11 +32,15 @@ class SearchView extends StatelessWidget {
               children: [
                 Expanded(
                   child: SearchTextField(
+                    controller: searchViewController.searchController,
                     hintText: 'search_message'.tr,
-                    onSubmitted: (value) {
+                    onSubmitted: (value) async {
                       if (value.trim().isNotEmpty) {
                         searchViewController.addSearch(value);
-                        Get.toNamed(AppRoutes.searchresult, arguments: value);
+                        Get.toNamed(AppRoutes.searchresult,
+                                arguments: {'query': value})
+                            ?.then((result) =>
+                                searchViewController.searchController.clear());
                       }
                     },
                   ),
@@ -44,24 +48,20 @@ class SearchView extends StatelessWidget {
                 SizedBox(width: 8.w),
                 IconButton(
                   onPressed: () async {
-                    final result =
-                        await showModalBottomSheet<Map<String, dynamic>>(
-                      context: context,
+                    final result = await Get.bottomSheet(
+                      CustomBottomSheet(),
                       isScrollControlled: true,
-                      backgroundColor: Colors.white,
-                      builder: (_) => CustomBottomSheet(),
                     );
+                    print(result);
 
-                    if (result != null) {
-                      Get.toNamed(
-                        AppRoutes.searchresult,
-                        arguments: {
-                          'query': null,
-                          'categoryId': result['categoryId'],
-                          'ratingIndex': result['ratingIndex'],
-                        },
-                      );
-                    }
+                    Get.toNamed(
+                      AppRoutes.searchresult,
+                      arguments: {
+                        'query': null,
+                        'categoryId': result,
+                        'ratingIndex': null,
+                      },
+                    );
                   },
                   icon: Icon(
                     Icons.filter_list,
@@ -78,8 +78,11 @@ class SearchView extends StatelessWidget {
                   recentSearches: searchViewController.recentSearches.toList(),
                   textColor: AppColors.black,
                   onTap: (selectedText) {
-                    Get.toNamed(AppRoutes.searchresult,
-                        arguments: selectedText);
+                    searchViewController.addSearch(selectedText);
+                    Get.toNamed(AppRoutes.searchresult, arguments: selectedText)
+                        ?.then((result) =>
+                            searchViewController.searchController.clear());
+                    // Get.toNamed(AppRoutes.searchresult, arguments: selectedText)
                   },
                 );
               }),

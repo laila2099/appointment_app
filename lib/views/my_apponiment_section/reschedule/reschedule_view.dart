@@ -8,11 +8,9 @@ import 'package:get/get.dart';
 import '../../../../widgets/general_widgets/app_header/app_header.dart';
 import '../../../../widgets/general_widgets/app_header/header_title.dart';
 import '../../../../widgets/general_widgets/primary_button.dart';
-import '../../../models/appointment_model.dart';
 
 class RescheduleScreen extends GetView<BookingController> {
   RescheduleScreen({super.key});
-  final argAppointment = Get.arguments as Appointment?;
 
   @override
   Widget build(BuildContext context) {

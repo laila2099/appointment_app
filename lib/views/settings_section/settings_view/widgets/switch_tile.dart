@@ -20,7 +20,6 @@ Widget switchTile({
         Obx(
           () => Transform.scale(
             scale: 0.7,
-            
             child: Switch.adaptive(
               value: value.value,
               onChanged: (val) => value.value = val,
@@ -28,8 +27,8 @@ Widget switchTile({
               activeTrackColor: AppColors.primary,
               inactiveTrackColor: Colors.grey.shade300,
               inactiveThumbColor: Colors.white,
-             // materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
 
+              // materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
           ),
         ),
@@ -37,5 +36,3 @@ Widget switchTile({
     ),
   );
 }
-
-

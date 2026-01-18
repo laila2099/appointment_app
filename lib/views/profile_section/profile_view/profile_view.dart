@@ -44,45 +44,41 @@ class ProfileScreen extends StatelessWidget {
                       const ProfileInfo(),
                       const SizedBox(height: 32),
                       const ProfileTabs(),
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 16),
                       Expanded(
-                        child: SafeArea(
-                          bottom: true,
-                          child: SingleChildScrollView(
-                            physics: const BouncingScrollPhysics(),
-                            child: Column(
-                              children: [
-                                ProfileTile(
-                                  iconPath: AppIcons.personalCard,
-                                  title: "personal_information".tr,
-                                  iconColor: AppColors.primary,
-                                  bgColor: const Color(0xFFD8E7FE),
-                                  onTap: () =>
-                                      Get.toNamed(AppRoutes.personalInfo),
-                                ),
-                                const CustomDivider(),
-                                ProfileTile(
-                                  iconPath: AppIcons.medicalRecord,
-                                  title: "my_test_diagnostic".tr,
-                                  iconColor: AppColors.green,
-                                  bgColor: const Color(0xFFDCF4E7),
-                                  onTap: () => Get.toNamed(
-                                      AppRoutes.medicalRecordsScreen),
-                                ),
-                                const CustomDivider(),
-                                ProfileTile(
-                                  iconPath: AppIcons.wallet,
-                                  title: "payment".tr,
-                                  iconColor: AppColors.red,
-                                  bgColor: const Color(0xFFFEE1E1),
-                                  onTap: () =>
-                                      Get.toNamed(AppRoutes.paymentScreen),
-                                ),
-                                const CustomDivider(),
-                                SizedBox(
-                                    height: kBottomNavigationBarHeight + 20.h),
-                              ],
-                            ),
+                        child: SingleChildScrollView(
+                          physics: const BouncingScrollPhysics(),
+                          child: Column(
+                            children: [
+                              ProfileTile(
+                                iconPath: AppIcons.personalCard,
+                                title: "personal_information".tr,
+                                iconColor: AppColors.primary,
+                                bgColor: const Color(0xFFD8E7FE),
+                                onTap: () =>
+                                    Get.toNamed(AppRoutes.personalInfo),
+                              ),
+                              const CustomDivider(),
+                              ProfileTile(
+                                iconPath: AppIcons.medicalRecord,
+                                title: "my_test_diagnostic".tr,
+                                iconColor: AppColors.green,
+                                bgColor: const Color(0xFFDCF4E7),
+                                onTap: () =>
+                                    Get.toNamed(AppRoutes.medicalRecordsScreen),
+                              ),
+                              const CustomDivider(),
+                              ProfileTile(
+                                iconPath: AppIcons.wallet,
+                                title: "payment".tr,
+                                iconColor: AppColors.red,
+                                bgColor: const Color(0xFFFEE1E1),
+                                onTap: () =>
+                                    Get.toNamed(AppRoutes.paymentScreen),
+                              ),
+                              SizedBox(
+                                  height: kBottomNavigationBarHeight + 20.h),
+                            ],
                           ),
                         ),
                       ),

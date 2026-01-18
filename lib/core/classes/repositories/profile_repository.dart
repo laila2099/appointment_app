@@ -18,9 +18,9 @@ class ProfileRepository {
   }) {
     final body = <String, dynamic>{
       'id': id,
-      'full_name': fullName,
+      'full_name': fullName ?? '',
       'phone': phone,
-      'birthdate': birthdate,
+      'birthdate': birthdate ?? '',
       'email': email ?? '',
     };
 

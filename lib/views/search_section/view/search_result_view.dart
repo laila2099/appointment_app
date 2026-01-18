@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../core/constant/app_colors.dart';
+import '../../../routes/app_routes.dart';
 import '../../../widgets/doctor_card.dart';
 import '../../../widgets/general_widgets/app_bar/app_bar.dart';
 import '../controller/search_result_controller.dart';
@@ -34,7 +35,7 @@ class SearchResultView extends StatelessWidget {
               children: [
                 Expanded(
                   child: SearchTextField(
-                    hintText: searchResultController.lastQuery,
+                    hintText: searchResultController.lastQuery ?? '',
                     onSubmitted: (value) {
                       searchResultController.fetchDoctors(query: value);
                     },
@@ -42,12 +43,20 @@ class SearchResultView extends StatelessWidget {
                 ),
                 SizedBox(width: 8.w),
                 IconButton(
-                  onPressed: () {
-                    showModalBottomSheet(
-                      context: context,
+                  onPressed: () async {
+                    final result = await Get.bottomSheet(
+                      CustomBottomSheet(),
                       isScrollControlled: true,
-                      backgroundColor: Colors.white,
-                      builder: (_) => CustomBottomSheet(),
+                    );
+                    print(result);
+
+                    Get.toNamed(
+                      AppRoutes.searchresult,
+                      arguments: {
+                        'query': null,
+                        'categoryId': result,
+                        'ratingIndex': null,
+                      },
                     );
                   },
                   icon: Icon(Icons.filter_list,

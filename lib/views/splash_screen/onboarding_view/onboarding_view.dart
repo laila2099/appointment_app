@@ -1,6 +1,9 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
 import '../../../core/constant/app_colors.dart';
 import '../../../core/constant/app_images.dart';
 import '../../../core/constant/app_keys.dart';
@@ -22,27 +25,27 @@ class OnBoardingView extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const SizedBox(height: 18),
+                SizedBox(height: 18.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
                       AppImages.logo,
-                      width: 35,
-                      height: 35,
+                      width: 35.w,
+                      height: 35.h,
                     ),
-                    const SizedBox(width: 8),
-                    const Text(
+                    SizedBox(width: 8.w),
+                    Text(
                       "Docdoc",
                       style: TextStyle(
-                        fontSize: 35,
+                        fontSize: 35.sp,
                         fontWeight: FontWeight.w700,
                         color: Colors.black,
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 18),
+                SizedBox(height: 18.h),
                 Stack(
                   children: [
                     Positioned(
@@ -54,23 +57,23 @@ class OnBoardingView extends StatelessWidget {
                           opacity: 0.06,
                           child: Image.asset(
                             AppImages.rightLogo,
-                            width: 309.38,
-                            height: 340.05,
+                            width: 309.38.w,
+                            height: 308.05.h,
                             fit: BoxFit.contain,
                           ),
                         ),
                       ),
                     ),
                     Positioned(
-                      left: 47.95,
-                      right: 10,
-                      top: 5,
+                      left: 47.95.w,
+                      right: 10.w,
+                      top: 5.h,
                       child: Opacity(
                         opacity: 0.06,
                         child: Image.asset(
                           AppImages.rightLogo,
-                          width: 306.38,
-                          height: 340.05,
+                          width: 306.38.w,
+                          height: 308.05.h,
                           fit: BoxFit.contain,
                         ),
                       ),
@@ -78,7 +81,7 @@ class OnBoardingView extends StatelessWidget {
                     Image.asset(
                       AppImages.onboardingDoctor,
                       width: double.infinity,
-                      height: 550,
+                      height: 491.h,
                       fit: BoxFit.cover,
                     ),
                     Positioned(
@@ -86,7 +89,7 @@ class OnBoardingView extends StatelessWidget {
                       left: 0,
                       right: 0,
                       child: Container(
-                        height: 200,
+                        height: 200.h,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             begin: Alignment.bottomCenter,
@@ -102,17 +105,17 @@ class OnBoardingView extends StatelessWidget {
                     ),
                     Positioned(
                       bottom: 0,
-                      left: 32,
-                      right: 32,
+                      left: 32.w,
+                      right: 32.w,
                       child: Column(
                         children: [
                           Text(
                             "Best Doctor\nAppointment App".tr,
                             textAlign: TextAlign.center,
                             style: CustomTextStyles.headline32Bold.copyWith(
-                              fontSize: 45,
-                              height: 1.35,
+                              height: 1.5,
                               color: AppColors.primary,
+                              fontWeight: FontWeight.w800,
                             ),
                           ),
                         ],
@@ -120,23 +123,23 @@ class OnBoardingView extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 18),
+                SizedBox(height: 18.h),
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      EdgeInsets.symmetric(horizontal: 32.w, vertical: 8.h),
                   child: Text(
                     "Manage and schedule all of your medical appointments easily with Docdoc to get a new experience."
                         .tr,
                     textAlign: TextAlign.center,
                     style: CustomTextStyles.subtitle.copyWith(
-                      fontSize: 16,
+                      fontSize: 10.sp,
                       height: 1.5,
                     ),
                   ),
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 55),
+                      EdgeInsets.symmetric(horizontal: 10.w, vertical: 55.h),
                   child: CustomPrimaryButton(
                     label: "Get Started".tr,
                     onTap: () {

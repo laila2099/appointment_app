@@ -1,4 +1,6 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../../core/constant/app_colors.dart';
@@ -6,11 +8,11 @@ import '../../../../../core/constant/app_images.dart';
 import '../../../../../core/constant/text_style.dart';
 import '../../../../../widgets/helpful_widgets/primary_button_widget.dart';
 import '../../../../core/utils/auth_validators.dart';
+import '../../../../routes/app_routes.dart';
 import '../../../../widgets/helpful_widgets/text_field_widget.dart';
 import '../../auth_controller/auth_controller.dart';
 import '../../widgets/phone_field_widget.dart';
 import '../fill_your_profile_controller/fill_your_profile_controller.dart';
-import 'package:country_picker/country_picker.dart';
 
 class FillYourProfileView extends StatelessWidget {
   const FillYourProfileView({super.key});
@@ -27,15 +29,13 @@ class FillYourProfileView extends StatelessWidget {
           children: [
             Expanded(
               child: SingleChildScrollView(
-        padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-
+                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
                 child: Form(
                   key: autoProfileController.formKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 40),
+                      SizedBox(height: 40.h),
 
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -43,39 +43,43 @@ class FillYourProfileView extends StatelessWidget {
                         children: [
                           Text(
                             "fill_your_profile".tr,
-                            style: CustomTextStyles.headline32Bold,
+                            style: CustomTextStyles.headline,
                           ),
                           GestureDetector(
                             onTap: () {
-                              Get.offAllNamed('/home');
+                              autoProfileController.saveProfile;
+                              Get.offAllNamed(AppRoutes.bottomnavbar);
                             },
                             child: Text(
                               "skip".tr,
                               style: CustomTextStyles.subtitle.copyWith(
                                 color: AppColors.primary,
-                                fontSize: 20,
+                                fontSize: 20.sp,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16.h),
 
                       // Subtitle
                       Text(
                         "fill_profile_subtitle".tr,
-                        style: CustomTextStyles.subtitle,
+                        style: CustomTextStyles.subTitle.copyWith(
+                            fontSize: 14.sp,
+                            height: 1.8.h,
+                            letterSpacing: .5.sp),
                       ),
-                      const SizedBox(height: 32),
+                      SizedBox(height: 32.h),
 
                       /// Profile Image
                       Center(
                         child: Stack(
                           children: [
                             Container(
-                              width: 120,
-                              height: 120,
+                              width: 120.w,
+                              height: 120.w,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: AppColors.lightGrey,
@@ -91,18 +95,18 @@ class FillYourProfileView extends StatelessWidget {
                               child: GestureDetector(
                                 onTap: () {},
                                 child: Container(
-                                  width: 36,
-                                  height: 36,
+                                  width: 36.w,
+                                  height: 36.w,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: AppColors.light2Grey,
                                     border: Border.all(
-                                        color: Colors.white, width: 2),
+                                        color: Colors.white, width: 2.w),
                                   ),
-                                  child: const Icon(
+                                  child: Icon(
                                     Icons.edit_outlined,
                                     color: AppColors.primary,
-                                    size: 20,
+                                    size: 20.sp,
                                   ),
                                 ),
                               ),
@@ -110,16 +114,15 @@ class FillYourProfileView extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 32),
+                      SizedBox(height: 32.h),
 
                       // Full Name
                       CustomTextField(
                         controller: autoProfileController.fullNameController,
-                      hint: "full_name".tr,
+                        hint: "full_name".tr,
                         validator: Validators.validateFullName,
-
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16.h),
 
                       // Email
                       CustomTextField(
@@ -128,28 +131,28 @@ class FillYourProfileView extends StatelessWidget {
                         keyboardType: TextInputType.emailAddress,
                         validator: Validators.validateEmail,
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16.h),
 
                       // Birthday
                       GestureDetector(
-                          onTap: () =>
-                              autoProfileController.pickBirthday(context),
-                          child: AbsorbPointer(
-                            child: CustomTextField(
-                              controller:
-                                  autoProfileController.birthdateController,
-                              hint: "Birthday",
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please select your birthdate';
-                                }
-                                return null;
-                              },
-                            ),
+                        onTap: () =>
+                            autoProfileController.pickBirthday(context),
+                        child: AbsorbPointer(
+                          child: CustomTextField(
+                            controller:
+                                autoProfileController.birthdateController,
+                            hint: "Birthday",
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please select your birthdate';
+                              }
+                              return null;
+                            },
                           ),
                         ),
+                      ),
 
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16.h),
 
                       //Phone Number
                       PhoneFieldWidget(
@@ -172,15 +175,13 @@ class FillYourProfileView extends StatelessWidget {
                           );
                         },
                       ),
-
-                      const SizedBox(height: 24),
                     ],
                   ),
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
               child: Obx(
                 () => SizedBox(
                   width: double.infinity,
@@ -189,9 +190,8 @@ class FillYourProfileView extends StatelessWidget {
                     label: autoProfileController.isLoading.value
                         ? "Saving..."
                         : "Submit",
-                    onTap: autoProfileController.submitProfile,
+                    onTap: autoProfileController.saveProfile,
                   ),
-
                 ),
               ),
             ),

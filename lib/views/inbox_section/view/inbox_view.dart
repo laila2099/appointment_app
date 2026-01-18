@@ -6,13 +6,12 @@ import 'package:appointment_app/widgets/general_widgets/app_header/app_header.da
 import 'package:appointment_app/widgets/general_widgets/app_header/header_button.dart';
 import 'package:appointment_app/widgets/general_widgets/app_header/header_title.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/constant/app_colors.dart';
 import '../../../widgets/search/search_text_field.dart';
-
 import '../controller/inbox_controller.dart';
 
 class InboxView extends GetView<InboxController> {
@@ -25,7 +24,7 @@ class InboxView extends GetView<InboxController> {
       body: Column(
         children: [
           AppHeader(
-            center: HeaderTitle('Message'),
+            center: HeaderTitle('message'.tr),
             trailing: HeaderButton(
               onTap: () {
                 showInboxSheet(context);
@@ -46,8 +45,8 @@ class InboxView extends GetView<InboxController> {
                   Row(
                     children: [
                       Expanded(
-                        child: const SearchTextField(
-                          hintText: 'Search Message',
+                        child: SearchTextField(
+                          hintText: 'search_message'.tr,
                         ),
                       ),
                       SizedBox(width: 8.w),
@@ -58,7 +57,7 @@ class InboxView extends GetView<InboxController> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 20.h),
+                  SizedBox(height: 8.h),
                   Expanded(
                     child: Obx(
                       () => ListView.separated(

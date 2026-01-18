@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+
 import '../model/inbox_model.dart';
 
 class InboxController extends GetxController {
@@ -14,28 +15,36 @@ class InboxController extends GetxController {
     inboxList.addAll([
       InboxModel(
         name: 'Dr. Randy Wigham',
-        message: 'Fine, I’ll do a check...',
+        message:
+            'Fine, I\'ll do a check. Does the patient have a history of certain diseases?',
         time: '7:11 PM',
         image: 'assets/images/doctor1.png',
         unreadCount: 2,
+        speciality: 'General Doctor | RSUD Gatot Subroto',
       ),
       InboxModel(
         name: 'Dr. Jack Sulivan',
-        message: 'Fine, I’ll do a check...',
+        speciality: 'General Doctor | RSUD Gatot Subroto',
+        message:
+            'Fine, I\'ll do a check. Does the patient have a history of certain diseases?',
         time: '7:11 PM',
         image: 'assets/images/doctor3.png',
         unreadCount: 2,
       ),
       InboxModel(
         name: 'Dr. Emery Lubin',
-        message: 'Fine, I’ll do a check...',
+        speciality: 'General Doctor | RSUD Gatot Subroto',
+        message:
+            'Fine, I\'ll do a check. Does the patient have a history of certain diseases?',
         time: '7:11 PM',
         image: 'assets/images/doctor4.png',
         unreadCount: 0,
       ),
       InboxModel(
         name: 'Dr.Hanna Stanton',
-        message: 'Fine, I’ll do a check...',
+        speciality: 'General Doctor | RSUD Gatot Subroto',
+        message:
+            'Fine, I\'ll do a check. Does the patient have a history of certain diseases?',
         time: '7:11 PM',
         image: 'assets/images/doctor5.png',
         unreadCount: 2,

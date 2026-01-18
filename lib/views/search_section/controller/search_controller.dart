@@ -8,16 +8,22 @@ class SearchViewController extends GetxController {
     'general',
   ].obs;
 
-  void goToSearch(String query) {
+  Future<void> goToSearch(String query) async {
     String trimmed = query.trim();
     if (trimmed.isEmpty) return;
 
     recentSearches.remove(trimmed);
     recentSearches.insert(0, trimmed);
 
-    Get.toNamed(AppRoutes.searchresult, arguments: trimmed);
+    print(searchController.text);
 
-    searchController.clear();
+    final bool? result =
+        await Get.toNamed(AppRoutes.searchresult, arguments: trimmed);
+    print(result);
+    print(searchController.text);
+    if (result == true) {
+      searchController.clear();
+    }
   }
 
   void addSearch(String query) {

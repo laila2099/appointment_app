@@ -87,6 +87,6 @@ class SortController extends GetxController {
       Get.find<DoctorController>().filterDoctors(categoryId: categoryId);
     }
 
-    Get.back();
+    Get.back(result: categoryId);
   }
 }

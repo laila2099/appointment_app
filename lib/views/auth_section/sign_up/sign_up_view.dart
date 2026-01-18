@@ -1,3 +1,4 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' hide TextField;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,7 +14,6 @@ import '../auth_controller/auth_controller.dart';
 import '../sign_in/signIn_view/sign_in_view.dart';
 import '../widgets/phone_field_widget.dart';
 import '../widgets/socialButton.dart';
-import 'package:country_picker/country_picker.dart';
 
 class CreateAccountView extends StatelessWidget {
   CreateAccountView({super.key});
@@ -37,20 +37,26 @@ class CreateAccountView extends StatelessWidget {
                 SizedBox(height: 40.h),
 
                 // Title
-                Text(
-                  "create_account".tr,
-                  style: CustomTextStyles.headline32Bold,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 6.5.w),
+                  child: Text(
+                    "create_account".tr,
+                    style: CustomTextStyles.headline.copyWith(height: 1.5.h),
+                  ),
                 ),
                 SizedBox(height: 16.h),
 
                 // Subtitle
-                Text(
-                  "Sign up now and start exploring all that our app has to offer. We're excited to welcome you to our community!"
-                      .tr,
-                  style: CustomTextStyles.subTitle
-                      .copyWith(fontSize: 20, height: 1.5),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 6.5.w),
+                  child: Text(
+                    "Sign up now and start exploring all that our app has to offer. We're excited to welcome you to our community!"
+                        .tr,
+                    style: CustomTextStyles.subTitle.copyWith(
+                        fontSize: 15.sp, height: 1.8.h, letterSpacing: .5.sp),
+                  ),
                 ),
-                SizedBox(height: 12.h),
+                SizedBox(height: 16.h),
 
                 // Email
                 CustomTextField(
@@ -135,7 +141,7 @@ class CreateAccountView extends StatelessWidget {
                   ],
                 ),
 
-                SizedBox(height: 24.h),
+                SizedBox(height: 32.h),
 
                 // Social buttons
                 Row(

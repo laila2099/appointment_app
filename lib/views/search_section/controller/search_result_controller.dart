@@ -9,13 +9,15 @@ class SearchResultController extends GetxController {
 
   final doctorsList = <Doctor>[].obs;
   final isLoading = false.obs;
-  String lastQuery = "";
+  String? lastQuery = "";
+  String? categoryId = "";
 
   @override
   void onInit() {
     super.onInit();
-    lastQuery = Get.arguments ?? "";
-    fetchDoctors(query: lastQuery);
+    lastQuery = Get.arguments['query'];
+    categoryId = Get.arguments['categoryId'];
+    fetchDoctors(query: lastQuery, categoryId: categoryId);
   }
 
   Future<void> fetchDoctors({String? query, String? categoryId}) async {

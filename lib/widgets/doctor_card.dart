@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
+
+import '../core/constant/app_icons.dart';
 
 class DoctorCard extends StatelessWidget {
   final String image;
@@ -15,7 +18,7 @@ class DoctorCard extends StatelessWidget {
   final double? widthimage;
   final double? heightimage;
 
-  const DoctorCard({
+  DoctorCard({
     super.key,
     required this.image,
     required this.name,
@@ -65,12 +68,12 @@ class DoctorCard extends StatelessWidget {
             height: height,
             decoration: BoxDecoration(
               color: Colors.grey.shade200,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12.r),
             ),
             child: Center(
               child: SizedBox(
-                width: 24,
-                height: 24,
+                width: 24.w,
+                height: 24.h,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
                   value: loadingProgress.expectedTotalBytes != null
@@ -104,9 +107,9 @@ class DoctorCard extends StatelessWidget {
       height: height,
       decoration: BoxDecoration(
         color: Colors.grey.shade200,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.r),
       ),
-      child: const Icon(Icons.person, color: Colors.grey, size: 40),
+      child: Icon(Icons.person, color: Colors.grey, size: 40.sp),
     );
   }
 
@@ -121,7 +124,7 @@ class DoctorCard extends StatelessWidget {
         padding: EdgeInsetsDirectional.only(bottom: 8.h, start: 8.w, top: 8.h),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
           boxShadow: shadow
               ? [
                   BoxShadow(
@@ -138,7 +141,7 @@ class DoctorCard extends StatelessWidget {
               width: widthimage ?? 110.w,
               height: heightimage ?? 110.h,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(12.r),
                 child: _buildImage(
                   image: image,
                   width: widthimage ?? 110.w,
@@ -147,7 +150,7 @@ class DoctorCard extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(width: 16),
+            SizedBox(width: 16.h),
 
             // النصوص
             Expanded(
@@ -158,42 +161,46 @@ class DoctorCard extends StatelessWidget {
                   // اسم الدكتور
                   Text(
                     name,
-                    style: const TextStyle(
-                      fontSize: 18,
+                    style: TextStyle(
+                      fontSize: 18.sp,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
 
-                  const SizedBox(height: 6),
+                  SizedBox(height: 6.h),
 
                   // التخصص + المستشفى
                   Row(
                     children: [
                       Text(
                         department,
-                        style: const TextStyle(color: Colors.grey),
+                        style: TextStyle(color: Colors.grey),
                       ),
-                      const Text("  |  ", style: TextStyle(color: Colors.grey)),
+                      Text("  |  ", style: TextStyle(color: Colors.grey)),
                       Expanded(
                         child: Text(
                           hospital,
-                          style: const TextStyle(color: Colors.grey),
+                          style: TextStyle(color: Colors.grey),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
                   ),
 
-                  const SizedBox(height: 6),
+                  SizedBox(height: 6.h),
 
                   // التقييم والريڤيوز
                   Row(
                     children: [
-                      const Icon(Icons.star, color: Colors.amber, size: 18),
-                      const SizedBox(width: 5),
+                      SvgPicture.asset(
+                        AppIcons.star,
+                        height: 16.w,
+                        width: 16.w,
+                      ),
+                      SizedBox(width: 5.w),
                       Text(
                         "$rating ($formattedReviews reviews)",
-                        style: const TextStyle(color: Colors.grey),
+                        style: TextStyle(color: Colors.grey),
                       ),
                     ],
                   ),

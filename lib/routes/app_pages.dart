@@ -49,6 +49,7 @@ final appPages = <GetPage>[
   GetPage(
     name: AppRoutes.splash,
     page: () => const SplashScreen(),
+    middlewares: [SplashRedirectMiddleware()],
   ),
 
   GetPage(name: AppRoutes.onboarding, page: () => const OnBoardingView()),
