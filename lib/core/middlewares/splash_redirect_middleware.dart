@@ -20,10 +20,11 @@ class SplashRedirectMiddleware extends GetMiddleware {
 
     print(isVerified);
 
-    if (!isVerified) {
-      return const RouteSettings(name: AppRoutes.otpVerification);
-    } else if (isLoggedIn && isVerified) {
+    if (isLoggedIn && isVerified) {
       return const RouteSettings(name: AppRoutes.bottomnavbar);
+    }
+    if (isLoggedIn && !isVerified) {
+      return const RouteSettings(name: AppRoutes.otpVerification);
     }
 
     final hasSeenOnboarding =

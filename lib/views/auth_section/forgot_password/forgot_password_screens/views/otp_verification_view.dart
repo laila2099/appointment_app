@@ -72,14 +72,18 @@ class OtpVerificationView extends StatelessWidget {
                 label: "Submit",
                 onTap: () async {
                   if (verificationController.verifyCode()) {
-                    // 1. حفظ حالة الدخول فوراً
                     final prefs = Get.find<AppPreferencesService>();
                     await prefs.setBool(PrefKeys.isLoggedIn, true);
                     await prefs.setBool(PrefKeys.isVerified, true);
 
                     AppSnackBar.success('OTP verified!');
 
-                    Get.find<NavigationController>().unlockAfterLogin();
+                    final navController =
+                        Get.isRegistered<NavigationController>()
+                            ? Get.find<NavigationController>()
+                            : Get.put(NavigationController());
+
+                    navController.unlockAfterLogin();
                     Get.offAllNamed(AppRoutes.bottomnavbar);
 
                     Get.find<AuthGateService>().clearPending();
