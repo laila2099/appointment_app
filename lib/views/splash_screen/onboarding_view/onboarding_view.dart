@@ -1,9 +1,7 @@
 import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 import '../../../core/constant/app_colors.dart';
 import '../../../core/constant/app_images.dart';
 import '../../../core/constant/app_keys.dart';
@@ -34,7 +32,7 @@ class OnBoardingView extends StatelessWidget {
                       width: 35.w,
                       height: 35.h,
                     ),
-                    SizedBox(width: 8.w),
+                    SizedBox(width: 8.h),
                     Text(
                       "Docdoc",
                       style: TextStyle(
@@ -58,22 +56,22 @@ class OnBoardingView extends StatelessWidget {
                           child: Image.asset(
                             AppImages.rightLogo,
                             width: 309.38.w,
-                            height: 308.05.h,
+                            height: 340.05.h,
                             fit: BoxFit.contain,
                           ),
                         ),
                       ),
                     ),
                     Positioned(
-                      left: 47.95.w,
-                      right: 10.w,
-                      top: 5.h,
+                      left: 47.95,
+                      right: 10,
+                      top: 5,
                       child: Opacity(
                         opacity: 0.06,
                         child: Image.asset(
                           AppImages.rightLogo,
                           width: 306.38.w,
-                          height: 308.05.h,
+                          height: 340.05.h,
                           fit: BoxFit.contain,
                         ),
                       ),
@@ -81,7 +79,7 @@ class OnBoardingView extends StatelessWidget {
                     Image.asset(
                       AppImages.onboardingDoctor,
                       width: double.infinity,
-                      height: 491.h,
+                      height: 555.h,
                       fit: BoxFit.cover,
                     ),
                     Positioned(
@@ -89,7 +87,7 @@ class OnBoardingView extends StatelessWidget {
                       left: 0,
                       right: 0,
                       child: Container(
-                        height: 200.h,
+                        height: 180.h,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             begin: Alignment.bottomCenter,
@@ -105,19 +103,14 @@ class OnBoardingView extends StatelessWidget {
                     ),
                     Positioned(
                       bottom: 0,
-                      left: 32.w,
-                      right: 32.w,
+                      left: 32,
+                      right: 32,
                       child: Column(
                         children: [
-                          Text(
-                            "Best Doctor\nAppointment App".tr,
-                            textAlign: TextAlign.center,
-                            style: CustomTextStyles.headline32Bold.copyWith(
-                              height: 1.5,
-                              color: AppColors.primary,
-                              fontWeight: FontWeight.w800,
-                            ),
-                          ),
+                          Text("Best Doctor\nAppointment App".tr,
+                              textAlign: TextAlign.center,
+                              style: CustomTextStyles.headline32Bold
+                                  .copyWith(fontWeight: FontWeight.w900)),
                         ],
                       ),
                     ),
@@ -125,21 +118,21 @@ class OnBoardingView extends StatelessWidget {
                 ),
                 SizedBox(height: 18.h),
                 Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 32.w, vertical: 8.h),
+                  padding: const EdgeInsets.only(right: 32, left: 32),
                   child: Text(
                     "Manage and schedule all of your medical appointments easily with Docdoc to get a new experience."
                         .tr,
                     textAlign: TextAlign.center,
-                    style: CustomTextStyles.subtitle.copyWith(
-                      fontSize: 10.sp,
-                      height: 1.5,
-                    ),
+                    style: CustomTextStyles.custom(
+                        fontSize: 10.sp,
+                        height: 1.5,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.subtitle),
                   ),
                 ),
+                SizedBox(height: 32.h),
                 Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 10.w, vertical: 55.h),
+                  padding: const EdgeInsets.only(right: 32, left: 32),
                   child: CustomPrimaryButton(
                     label: "Get Started".tr,
                     onTap: () {

@@ -3,7 +3,6 @@ import 'package:appointment_app/core/constant/app_icons.dart';
 import 'package:appointment_app/core/constant/text_style.dart';
 import 'package:appointment_app/views/settings_section/settings_controller/help_controllers.dart';
 import 'package:appointment_app/views/settings_section/settings_view/widgets/settings_header.dart';
-import 'package:appointment_app/widgets/general_widgets/app_header/app_header.dart';
 import 'package:appointment_app/widgets/general_widgets/app_header/header_button.dart';
 import 'package:appointment_app/widgets/general_widgets/custom_divider.dart';
 
@@ -44,51 +43,52 @@ class HelpPage extends StatelessWidget {
             itemCount: controller.faqs.length,
             separatorBuilder: (_, __) => const CustomDivider(),
             itemBuilder: (context, index) {
-              return Obx(() {
-                final isExpanded = controller.expandedIndex.value == index;
+              return Obx(
+                () {
+                  final isExpanded = controller.expandedIndex.value == index;
 
-                return InkWell(
-                  onTap: () => controller.toggle(index),
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(
-                      24.w,
-                      12,
-                      24.w,
-                      12,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                controller.faqs[index]['q']!,
-                                style: CustomTextStyles.body14,
+                  return InkWell(
+                    onTap: () => controller.toggle(index),
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(
+                        24.w,
+                        12,
+                        24.w,
+                        12,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  controller.faqs[index]['q']!,
+                                  style: CustomTextStyles.body14,
+                                ),
+                              ),
+                              Icon(
+                                isExpanded
+                                    ? Icons.keyboard_arrow_up
+                                    : Icons.keyboard_arrow_down,
+                                color: AppColors.black,
+                              ),
+                            ],
+                          ),
+                          if (isExpanded) ...[
+                            const SizedBox(height: 12),
+                            Text(
+                              controller.faqs[index]['a']!,
+                              style: CustomTextStyles.body14.copyWith(
+                                color: AppColors.lightGrey,
                               ),
                             ),
-                            Icon(
-                              isExpanded
-                                  ? Icons.keyboard_arrow_up
-                                  : Icons.keyboard_arrow_down,
-                              color: AppColors.black,
-                            ),
                           ],
-                        ),
-                        if (isExpanded) ...[
-                          const SizedBox(height: 12),
-                          Text(
-                            controller.faqs[index]['a']!,
-                            style: CustomTextStyles.body14.copyWith(
-                              color: AppColors.lightGrey,
-                            ),
-                          ),
                         ],
-                      ],
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
               );
             },
           )),

@@ -123,6 +123,7 @@ const Map<String, String> jpJP = {
   "reschedual": "再スケジュール",
   'cancel_appointment': '予約をキャンセル',
   'booking_rescheduled': '予約が再スケジュールされました',
+  'get_link': 'リンクを取得',
 
   // -------------------- Appointment --------------------
   "appointment_type": "予約タイプ",

@@ -356,7 +356,8 @@ class DoctorController extends GetxController {
           errorMessage.value = null;
         }
       } else if (result is ApiFailure<List<Doctor>>) {
-        await _handleApiFailure(result, accessToken, retryFunction: loadDoctors);
+        await _handleApiFailure(result, accessToken,
+            retryFunction: loadDoctors);
       }
     } catch (e) {
       errorMessage.value = e.toString();
@@ -469,7 +470,8 @@ class DoctorController extends GetxController {
 
       case CategoryPickerSource.specialtiesScreen:
         final result = await Get.toNamed(AppRoutes.doctorSpecialtiesScreen);
-        categoryId = result as String?;
+        categoryId = result is String ? result : null;
+
         break;
     }
 

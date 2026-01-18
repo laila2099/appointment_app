@@ -54,14 +54,14 @@ class SettingsPage extends StatelessWidget {
           ),
           CustomDivider(),
           settingItem(
-            icon:AppIcons.logout,
+            icon: AppIcons.logout,
             title: 'logout'.tr,
             color: AppColors.red,
             onTap: () {
               showLogoutDialog();
             },
           ),
-           CustomDivider(),
+          CustomDivider(),
         ],
       ),
     );

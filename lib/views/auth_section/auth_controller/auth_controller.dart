@@ -28,7 +28,6 @@ class AuthController extends GetxController {
   final passwordController = TextEditingController();
   final phoneController = TextEditingController();
 
-
   final isLoading = false.obs;
   final errorText = RxnString();
   final isPasswordVisible = false.obs;
@@ -44,13 +43,20 @@ class AuthController extends GetxController {
     errorText.value = null;
 
     final res = await repo.signUp(
-        email: emailController.text, password: passwordController.text, phone: fullPhoneNumber, );
+      email: emailController.text,
+      password: passwordController.text,
+      phone: fullPhoneNumber,
+    );
 
     if (res is ApiSuccess<AuthSession>) {
       await _saveSession(res.data);
       Get.offAllNamed(
         AppRoutes.fillYourProfile,
-        arguments: {'email': emailController.text},
+        arguments: {
+          'email': emailController.text,
+          'phone': phoneController.text,
+          'countryCode': selectedCountry.value.countryCode
+        },
       );
     } else if (res is ApiFailure<AuthSession>) {
       final raw = res.error.message;
@@ -139,9 +145,8 @@ class AuthController extends GetxController {
     }
 
     isLoading.value = false;
-
   }
-  //تابع لكتابة الرقم الصح حسب كل دولة بدولتا
+
   String get fullPhoneNumber {
     final code = selectedCountry.value.phoneCode;
     final number = phoneController.text.trim();
@@ -151,7 +156,6 @@ class AuthController extends GetxController {
   bool get isValidPhone {
     var number = phoneController.text.trim();
 
-    // إزالة الصفر الأول إذا موجود
     if (number.startsWith('0')) number = number.substring(1);
 
     switch (selectedCountry.value.countryCode) {
@@ -167,6 +171,4 @@ class AuthController extends GetxController {
         return number.length >= 7;
     }
   }
-
-
 }

@@ -44,7 +44,11 @@ class CustomTextField extends StatelessWidget {
       readOnly: readOnly ?? false,
       onTap: onTap,
       autofillHints: autofillHints,
-      style: textStyle ?? CustomTextStyles.textField,
+      style: textStyle ??
+          CustomTextStyles.custom(
+              fontWeight: FontWeight.w500,
+              fontSize: 14,
+              color: AppColors.black),
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: CustomTextStyles.subtitle,

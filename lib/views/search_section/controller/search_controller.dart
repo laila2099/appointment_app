@@ -1,9 +1,11 @@
 import 'package:appointment_app/routes/app_routes.dart';
+import 'package:appointment_app/views/home_section/recommendation_doctor/controllers/sort_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class SearchViewController extends GetxController {
   final searchController = TextEditingController();
+  final sortController = Get.find<SortController>();
   var recentSearches = <String>[
     'general',
   ].obs;
@@ -12,18 +14,41 @@ class SearchViewController extends GetxController {
     String trimmed = query.trim();
     if (trimmed.isEmpty) return;
 
-    recentSearches.remove(trimmed);
-    recentSearches.insert(0, trimmed);
+    addSearch(trimmed);
 
-    print(searchController.text);
+    String effectiveCategoryId = '';
+    String? effectiveQuery = trimmed;
 
-    final bool? result =
-        await Get.toNamed(AppRoutes.searchresult, arguments: trimmed);
-    print(result);
-    print(searchController.text);
-    if (result == true) {
-      searchController.clear();
+    if (trimmed.toLowerCase() == 'general') {
+      effectiveCategoryId = '0';
+      effectiveQuery = null;
+      sortController.selectSpeciality(0);
+    } else {
+      final matchedCategory = sortController.specialityList.firstWhereOrNull(
+          (cat) =>
+              cat.title.toLowerCase().trim() == trimmed.toLowerCase() ||
+              cat.title.toLowerCase().trim().contains(trimmed.toLowerCase()));
+
+      if (matchedCategory != null &&
+          matchedCategory.title.toLowerCase() != 'general') {
+        effectiveCategoryId = matchedCategory.id.toString();
+        effectiveQuery = null;
+        int index = sortController.specialityList.indexOf(matchedCategory);
+        sortController.selectSpeciality(index);
+      } else {
+        sortController.selectSpeciality(0);
+      }
     }
+
+    await Get.toNamed(
+      AppRoutes.searchresult,
+      arguments: {
+        'query': effectiveQuery,
+        'categoryId': effectiveCategoryId,
+      },
+    );
+
+    searchController.clear();
   }
 
   void addSearch(String query) {

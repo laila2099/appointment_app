@@ -21,70 +21,72 @@ class InboxView extends GetView<InboxController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      body: Column(
-        children: [
-          AppHeader(
-            center: HeaderTitle('message'.tr),
-            trailing: HeaderButton(
-              onTap: () {
-                showInboxSheet(context);
-              },
-              child: SvgPicture.asset(
-                AppIcons.add,
-                width: 24.w,
-                height: 24.h,
-                color: AppColors.black,
+      body: SafeArea(
+        child: Column(
+          children: [
+            AppHeader(
+              center: HeaderTitle('message'.tr),
+              trailing: HeaderButton(
+                onTap: () {
+                  showInboxSheet(context);
+                },
+                child: SvgPicture.asset(
+                  AppIcons.add,
+                  width: 24.w,
+                  height: 24.h,
+                  color: AppColors.black,
+                ),
               ),
             ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: SearchTextField(
-                          hintText: 'search_message'.tr,
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: SearchTextField(
+                            hintText: 'search_message'.tr,
+                          ),
+                        ),
+                        SizedBox(width: 8.w),
+                        Icon(
+                          Icons.filter_list,
+                          color: AppColors.black,
+                          size: 24.w,
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 8.h),
+                    Expanded(
+                      child: Obx(
+                        () => ListView.separated(
+                          itemCount: controller.inboxList.length,
+                          itemBuilder: (context, index) {
+                            return InboxItem(
+                              onTap: () {
+                                Get.toNamed(AppRoutes.chat);
+                              },
+                              model: controller.inboxList[index],
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return Divider(
+                              color: AppColors.separator,
+                              thickness: 1,
+                              height: 12.h,
+                            );
+                          },
                         ),
                       ),
-                      SizedBox(width: 8.w),
-                      Icon(
-                        Icons.filter_list,
-                        color: AppColors.black,
-                        size: 24.w,
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 8.h),
-                  Expanded(
-                    child: Obx(
-                      () => ListView.separated(
-                        itemCount: controller.inboxList.length,
-                        itemBuilder: (context, index) {
-                          return InboxItem(
-                            onTap: () {
-                              Get.toNamed(AppRoutes.chat);
-                            },
-                            model: controller.inboxList[index],
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return Divider(
-                            color: AppColors.separator,
-                            thickness: 1,
-                            height: 12.h,
-                          );
-                        },
-                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

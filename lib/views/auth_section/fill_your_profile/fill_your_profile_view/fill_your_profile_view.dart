@@ -1,6 +1,8 @@
+import 'package:appointment_app/core/constant/app_icons.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../../core/constant/app_colors.dart';
@@ -8,7 +10,6 @@ import '../../../../../core/constant/app_images.dart';
 import '../../../../../core/constant/text_style.dart';
 import '../../../../../widgets/helpful_widgets/primary_button_widget.dart';
 import '../../../../core/utils/auth_validators.dart';
-import '../../../../routes/app_routes.dart';
 import '../../../../widgets/helpful_widgets/text_field_widget.dart';
 import '../../auth_controller/auth_controller.dart';
 import '../../widgets/phone_field_widget.dart';
@@ -44,20 +45,6 @@ class FillYourProfileView extends StatelessWidget {
                           Text(
                             "fill_your_profile".tr,
                             style: CustomTextStyles.headline,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              autoProfileController.saveProfile;
-                              Get.offAllNamed(AppRoutes.bottomnavbar);
-                            },
-                            child: Text(
-                              "skip".tr,
-                              style: CustomTextStyles.subtitle.copyWith(
-                                color: AppColors.primary,
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
                           ),
                         ],
                       ),
@@ -103,10 +90,14 @@ class FillYourProfileView extends StatelessWidget {
                                     border: Border.all(
                                         color: Colors.white, width: 2.w),
                                   ),
-                                  child: Icon(
-                                    Icons.edit_outlined,
-                                    color: AppColors.primary,
-                                    size: 20.sp,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: SvgPicture.asset(
+                                      AppIcons.edit,
+                                      width: 21.w,
+                                      height: 21.h,
+                                      color: AppColors.primary,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -155,25 +146,37 @@ class FillYourProfileView extends StatelessWidget {
                       SizedBox(height: 16.h),
 
                       //Phone Number
-                      PhoneFieldWidget(
-                        country: authController.selectedCountry.value,
-                        controller: authController.phoneController,
-                        validator: (value) => Validators.validatePhone(
-                            value, authController.selectedCountry),
-                        onChanged: (value) {
-                          authController.phoneController.text = value;
-                        },
-                        onTapCountry: () {
-                          showCountryPicker(
-                            context: context,
-                            showPhoneCode: false,
-                            onSelect: (country) {
-                              authController.selectedCountry.value = country;
-                              authController.signUpFormKey.currentState
-                                  ?.validate();
-                            },
-                          );
-                        },
+                      Obx(
+                        () => PhoneFieldWidget(
+                          // ✅ التأكد أن الدولة تُقرأ من autoProfileController
+                          country: autoProfileController.selectedCountry.value,
+                          controller: TextEditingController.fromValue(
+                            TextEditingValue(
+                              text: autoProfileController.phoneRx.value,
+                              selection: TextSelection.collapsed(
+                                  offset: autoProfileController
+                                      .phoneRx.value.length),
+                            ),
+                          ),
+                          validator: (value) => Validators.validatePhone(
+                              value,
+                              autoProfileController
+                                  .selectedCountry), // ✅ تأكدي أنها autoProfileController
+                          onChanged: (value) {
+                            autoProfileController.phoneRx.value = value;
+                          },
+                          onTapCountry: () {
+                            showCountryPicker(
+                              context: context,
+                              showPhoneCode: false,
+                              onSelect: (country) {
+                                // ✅ تحديث autoProfileController وليس authController
+                                autoProfileController.selectedCountry.value =
+                                    country;
+                              },
+                            );
+                          },
+                        ),
                       ),
                     ],
                   ),

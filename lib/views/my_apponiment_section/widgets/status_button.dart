@@ -43,7 +43,12 @@ class StatusButton extends StatelessWidget {
                   shape: const StadiumBorder(),
                 ),
                 onPressed: onPressed,
-                child: Text(label, style: CustomTextStyles.outlinedButton12),
+                child: Text(label,
+                    style: CustomTextStyles.custom(
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.primary,
+                    )),
               ),
       ),
     );

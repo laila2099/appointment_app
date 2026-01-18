@@ -1,48 +1,67 @@
-import 'package:flutter/material.dart';
+import 'dart:math';
+import 'package:flutter/material.dart' hide TextField;
 import 'package:get/get.dart';
 import '../../../../../core/classes/utils/app_snackbar.dart';
 
 class VerificationController extends GetxController {
-  final codeLength = 4; // عدد خانات OTP
+  final codeLength = 4;
   late List<TextEditingController> controllers;
   late List<FocusNode> focusNodes;
 
   var isCodeComplete = false.obs;
   var enteredCode = ''.obs;
 
+  late String expectedCode;
+
   @override
   void onInit() {
     super.onInit();
     controllers = List.generate(codeLength, (_) => TextEditingController());
     focusNodes = List.generate(codeLength, (_) => FocusNode());
+
+    _generateOtpInternal();
   }
 
-  /// يستدعى عند تغيّر أي خانة
+  @override
+  void onReady() {
+    super.onReady();
+  }
+
+  void _generateOtpInternal() {
+    expectedCode = (1000 + Random().nextInt(9000)).toString();
+    print("📌🟢 Debug OTP generated: $expectedCode");
+  }
+
+  void resendCode() {
+    _generateOtpInternal();
+    AppSnackBar.info("Debug OTP: $expectedCode");
+    AppSnackBar.info('OTP code has been resent');
+  }
+
   void onChanged(String value, int index) {
     if (value.isNotEmpty && index < codeLength - 1) {
-      focusNodes[index + 1].requestFocus();    }
+      focusNodes[index + 1].requestFocus();
+    }
     if (value.isEmpty && index > 0) {
-      focusNodes[index - 1].requestFocus();    }
+      focusNodes[index - 1].requestFocus();
+    }
+
     enteredCode.value = controllers.map((e) => e.text).join();
     isCodeComplete.value = enteredCode.value.length == codeLength;
   }
 
-  /// إعادة إرسال الكود
-  void resendCode() {
-    // هنا يمكنك استدعاء API لإعادة إرسال الكود
-    AppSnackBar.info('OTP code has been resent');
-  }
-
-  /// تحقق من صحة الكود قبل الإرسال
   bool verifyCode() {
     if (enteredCode.value.length < codeLength) {
       AppSnackBar.error('Please enter the complete OTP code');
       return false;
     }
 
-    // هنا يمكن ربط API للتحقق من الكود
-    AppSnackBar.success('OTP verified!');
-    return true;
+    if (enteredCode.value == expectedCode) {
+      return true;
+    } else {
+      AppSnackBar.error('Invalid OTP');
+      return false;
+    }
   }
 
   @override

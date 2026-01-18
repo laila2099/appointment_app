@@ -14,7 +14,7 @@ class MedicalRecordSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.only(bottom: 28.h),
+      padding: EdgeInsetsDirectional.only(bottom: 10.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

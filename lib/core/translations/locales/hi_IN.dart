@@ -129,6 +129,7 @@ const Map<String, String> hiIN = {
   "reschedual": "पुनर्निर्धारित करें",
   'cancel_appointment': 'अपॉइंटमेंट रद्द करें',
   'booking_rescheduled': 'बुकिंग को पुनर्निर्धारित किया गया है',
+  'get_link': 'लिंक प्राप्त करें',
 
   // -------------------- Appointment --------------------
   "appointment_type": "अपॉइंटमेंट प्रकार",

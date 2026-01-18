@@ -1,9 +1,9 @@
+import 'package:appointment_app/core/classes/utils/app_snackbar.dart';
 import 'package:country_picker/src/country.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_utils/src/get_utils/get_utils.dart';
 
 class Validators {
-
   // AUTH VALIDATORS
 
   ///Email validator
@@ -37,7 +37,8 @@ class Validators {
   }
 
   /// Confirm Password Validator
-  static String? validateConfirmPassword(String? value, String originalPassword) {
+  static String? validateConfirmPassword(
+      String? value, String originalPassword) {
     if (value == null || value.isEmpty) {
       return 'Please confirm your password';
     }
@@ -101,15 +102,33 @@ class Validators {
   /// Phone Validator
   static String? validatePhone(String? value, Rx<Country> selectedCountry) {
     if (value == null || value.trim().isEmpty) {
+      AppSnackBar.error('Please enter your phone number');
       return 'Please enter your phone number';
     }
-    if (value.trim().length < 8) {
+
+    String phone = value.trim();
+    phone = phone.replaceAll(' ', '');
+
+    final countryCode = '${selectedCountry.value.phoneCode}';
+    if (phone.startsWith('+')) phone = phone.substring(1);
+
+    if (!phone.startsWith(countryCode)) {
+      AppSnackBar.error('Phone number must start with +$countryCode');
+      return 'Phone number must start with +$countryCode';
+    }
+
+    final numberWithoutCode = phone.substring(countryCode.length);
+
+    if (numberWithoutCode.length < 8) {
+      AppSnackBar.error('Enter a valid phone number');
       return 'Enter a valid phone number';
     }
-    if (!RegExp(r'^[0-9]+$').hasMatch(value.trim())) {
+
+    if (!RegExp(r'^[0-9]+$').hasMatch(numberWithoutCode)) {
+      AppSnackBar.error('Phone number can only contain digits');
       return 'Phone number can only contain digits';
     }
+
     return null;
   }
-
 }

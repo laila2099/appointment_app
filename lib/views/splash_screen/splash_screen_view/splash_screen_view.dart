@@ -1,22 +1,30 @@
+import 'package:appointment_app/core/middlewares/splash_redirect_middleware.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../core/constant/text_style.dart';
 import '../../../routes/app_routes.dart';
 import '../../../core/constant/app_images.dart';
+import '../../../core/constant/text_style.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(seconds: 5), () {
-      Get.offNamed(AppRoutes.onboarding);
+    Future.delayed(const Duration(seconds: 3), () {
+      final middleware = SplashRedirectMiddleware();
+
+      final RouteSettings? settings = middleware.redirect('check');
+
+      if (settings != null && settings.name != null) {
+        Get.offNamed(settings.name!);
+      } else {
+        Get.offNamed(AppRoutes.onboarding);
+      }
     });
 
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
-
         children: [
           Center(
             child: SizedBox(
@@ -25,13 +33,10 @@ class SplashScreen extends StatelessWidget {
                 AppImages.logo,
                 fit: BoxFit.cover,
                 color: Colors.white.withOpacity(0.06),
-
                 colorBlendMode: BlendMode.modulate,
               ),
             ),
           ),
-
-          // شعار ونص
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -55,30 +60,24 @@ class SplashScreen extends StatelessWidget {
               ),
             ],
           ),
-
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: Container(
-                  height: 220,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                      colors: [
-                        Colors.white,
-                        Colors.white.withOpacity(0.05),
-                      ],
-                    ),
-                  ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              height: 220,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                  colors: [
+                    Colors.white,
+                    Colors.white.withOpacity(0.05),
+                  ],
                 ),
               ),
-            ],
-          )
+            ),
+          ),
         ],
       ),
     );

@@ -128,6 +128,7 @@ const Map<String, String> ruRU = {
   "reschedual": "Перенос записи",
   'cancel_appointment': 'Отменить запись',
   'booking_rescheduled': 'Бронирование перенесено',
+  'get_link': 'Получить ссылку',
 
   // -------------------- Appointment --------------------
   "appointment_type": "Тип приёма",

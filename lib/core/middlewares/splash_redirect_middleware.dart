@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-
 import '../../routes/app_routes.dart';
 import '../constant/app_keys.dart';
 import '../services/shared_prefrences.dart';
@@ -13,12 +12,19 @@ class SplashRedirectMiddleware extends GetMiddleware {
   RouteSettings? redirect(String? route) {
     final prefs = Get.find<AppPreferencesService>();
 
-    final seen = prefs.getBool(PrefKeys.hasSeenOnboarding) ?? false;
+    if (route == AppRoutes.splash) return null;
 
-    if (!seen) {
+    final isLoggedIn = prefs.getBool(PrefKeys.isLoggedIn) ?? false;
+    if (isLoggedIn) {
+      return const RouteSettings(name: AppRoutes.bottomnavbar);
+    }
+
+    final hasSeenOnboarding =
+        prefs.getBool(PrefKeys.hasSeenOnboarding) ?? false;
+    if (!hasSeenOnboarding) {
       return const RouteSettings(name: AppRoutes.onboarding);
     }
 
-    return const RouteSettings(name: AppRoutes.bottomnavbar);
+    return const RouteSettings(name: AppRoutes.onboarding);
   }
 }

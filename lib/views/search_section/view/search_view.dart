@@ -36,11 +36,12 @@ class SearchView extends StatelessWidget {
                     hintText: 'search_message'.tr,
                     onSubmitted: (value) async {
                       if (value.trim().isNotEmpty) {
-                        searchViewController.addSearch(value);
-                        Get.toNamed(AppRoutes.searchresult,
-                                arguments: {'query': value})
-                            ?.then((result) =>
-                                searchViewController.searchController.clear());
+                        searchViewController.goToSearch(value);
+                        // searchViewController.addSearch(value);
+                        // Get.toNamed(AppRoutes.searchresult,
+                        //         arguments: {'query': value})
+                        //     ?.then((result) =>
+                        //         searchViewController.searchController.clear());
                       }
                     },
                   ),
@@ -78,11 +79,13 @@ class SearchView extends StatelessWidget {
                   recentSearches: searchViewController.recentSearches.toList(),
                   textColor: AppColors.black,
                   onTap: (selectedText) {
-                    searchViewController.addSearch(selectedText);
-                    Get.toNamed(AppRoutes.searchresult, arguments: selectedText)
-                        ?.then((result) =>
-                            searchViewController.searchController.clear());
-                    // Get.toNamed(AppRoutes.searchresult, arguments: selectedText)
+                    searchViewController.goToSearch(selectedText);
+                    // searchViewController.addSearch(selectedText);
+                    // Get.toNamed(AppRoutes.searchresult, arguments: {
+                    //   'query': selectedText,
+                    //   'categoryId': '',
+                    // })?.then((result) =>
+                    //     searchViewController.searchController.clear());
                   },
                 );
               }),

@@ -129,6 +129,7 @@ const Map<String, String> idID = {
   "reschedual": "Jadwal Ulang",
   'cancel_appointment': 'Batalkan Janji Temu',
   'booking_rescheduled': 'Jadwal pemesanan telah diubah',
+  'get_link': 'Dapatkan Tautan',
 
   // -------------------- Appointment --------------------
   "appointment_type": "Jenis Janji Temu",

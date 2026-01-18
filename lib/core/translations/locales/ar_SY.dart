@@ -126,7 +126,7 @@ const Map<String, String> arSY = {
   "reschedual": "إعادة الجدولة",
   'cancel_appointment': 'إلغاء الموعد',
   'booking_rescheduled': 'تم إعادة جدولة الحجز',
-
+  'get_link': 'الحصول على الرابط',
   // -------------------- Appointment --------------------
   "appointment_type": "نوع الموعد",
   "appointment_type_in_person": "حضوري",

@@ -129,6 +129,7 @@ const Map<String, String> itIT = {
   "reschedual": "Ripianifica",
   'cancel_appointment': 'Annulla Appuntamento',
   'booking_rescheduled': 'Appuntamento ripianificato',
+  'get_link': 'Ottieni il link',
 
   // -------------------- Appointment --------------------
   "appointment_type": "Tipo di Appuntamento",

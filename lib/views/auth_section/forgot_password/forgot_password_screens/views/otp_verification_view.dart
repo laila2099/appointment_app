@@ -1,4 +1,6 @@
+import 'package:appointment_app/routes/app_routes.dart';
 import 'package:flutter/material.dart' hide TextField;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../../core/classes/utils/app_snackbar.dart';
 import '../../../../../core/constant/app_colors.dart';
@@ -35,14 +37,16 @@ class OtpVerificationView extends StatelessWidget {
                       const SizedBox(height: 40),
                       Text(
                         "otp_verification".tr,
-                        style: CustomTextStyles.headline32Bold,
+                        style: CustomTextStyles.custom(
+                            fontSize: 24.sp,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.primary),
                       ),
-                      Text(
-                        "otp_subtitle".tr,
-                        style: CustomTextStyles.subTitle,
-                      ),
+                      const SizedBox(height: 8),
+                      Text("otp_subtitle".tr,
+                          style:
+                              CustomTextStyles.subTitle.copyWith(height: 1.8)),
                       const SizedBox(height: 16),
-                      Text("otp_sent_to".tr),
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.04),
                       Padding(
@@ -53,24 +57,6 @@ class OtpVerificationView extends StatelessWidget {
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.04),
                       const SizedBox(height: 16),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "didnt_receive_code".tr,
-                            style: CustomTextStyles.subTitle,
-                          ),
-                          TextButton(
-                            onPressed: () =>
-                                verificationController.resendCode(),
-                            child: Text(
-                              "resend".tr,
-                              style: CustomTextStyles.subTitle,
-                              selectionColor: AppColors.primary,
-                            ),
-                          ),
-                        ],
-                      ),
                     ],
                   ),
                 ),
@@ -84,6 +70,7 @@ class OtpVerificationView extends StatelessWidget {
                     // استدعاء API للتحقق من OTP
                     AppSnackBar.success('OTP verified!');
                   }
+                  Get.toNamed(AppRoutes.profile);
                 },
               )
             ],

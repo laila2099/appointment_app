@@ -37,8 +37,9 @@ class CenterSnapDatePicker extends StatelessWidget {
             SizedBox(width: 8.w),
             Expanded(
               child: SizedBox(
-                height: itemHeight * 1.45,
+                height: itemHeight * 1.6.h,
                 child: PageView.builder(
+                  clipBehavior: Clip.none,
                   controller: controller.datePageController,
                   itemCount: controller.availableDates.length,
                   physics: const BouncingScrollPhysics(),

@@ -128,6 +128,7 @@ const Map<String, String> frFR = {
   "reschedual": "Replanification",
   "cancel_appointment": "Annuler le rendez-vous",
   "booking_rescheduled": "La réservation a été replanifiée",
+  'get_link': 'Obtenir le lien',
 
   // -------------------- Appointment --------------------
   "appointment_type": "Type de rendez-vous",

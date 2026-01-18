@@ -20,6 +20,7 @@ class PersonalInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     final PersonalInfoController controller =
         Get.find<PersonalInfoController>();
+
     return Scaffold(
       backgroundColor: AppColors.white,
       body: SingleChildScrollView(
@@ -59,6 +60,7 @@ class PersonalInfo extends StatelessWidget {
                       AppIcons.edit,
                       width: 21.w,
                       height: 21.h,
+                      color: AppColors.primary,
                     ),
                   ),
                 ],
@@ -90,7 +92,9 @@ class PersonalInfo extends StatelessWidget {
                   CustomTextField(
                     hint: 'Birthdate',
                     controller: controller.birthdateController,
+                    readOnly: true,
                     textStyle: TextStyle(color: AppColors.black),
+                    onTap: controller.pickBirthday,
                   ),
                   SizedBox(
                     height: 16.h,

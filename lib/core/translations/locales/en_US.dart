@@ -54,7 +54,7 @@ const Map<String, String> enUS = {
 // -------- OTP Verification --------
   "otp_verification": "OTP Verification",
   "otp_subtitle":
-      "Add a PIN number to make your account more secure and easy to sign in.",
+      "Add a PIN number to make your account\nmore secure and easy to sign in.",
   "otp_sent_to": "We have sent a verification code to",
   "didnt_receive_code": "Didn't receive the code?",
   "resend": "Resend",
@@ -129,8 +129,8 @@ const Map<String, String> enUS = {
   //--------- reschedual ---------
   "reschedual": "Reschedual",
   'cancel_appointment': 'Cancel Appointment',
-  'booking_rescheduled': 'Booking has been rescheduled',
-
+  'booking_rescheduled': 'Booking has been\nrescheduled',
+  'get_link': 'Get Link',
   // -------------------- Appointment --------------------
   "appointment_type": "Appointment Type",
   "appointment_type_in_person": "In Person",

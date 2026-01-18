@@ -37,7 +37,8 @@ class SearchResultView extends StatelessWidget {
                   child: SearchTextField(
                     hintText: searchResultController.lastQuery ?? '',
                     onSubmitted: (value) {
-                      searchResultController.fetchDoctors(query: value);
+                      searchResultController.fetchDoctors(
+                          query: value, categoryId: "");
                     },
                   ),
                 ),

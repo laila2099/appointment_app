@@ -22,33 +22,46 @@ class PersonalInfoController extends GetxController {
   late final Worker _profileWorker;
 
   @override
+  @override
   void onInit() {
     super.onInit();
     profileController = Get.find<ProfileController>();
-    final userId = prefs.getString(PrefKeys.userId);
-    print(userId);
 
-    final profile = profileController.profile.value;
-    if (profile != null) {
-      nameController.text = profile.name;
-      emailController.text = profile.email;
-      birthdateController.text = profile.birthdate ?? '';
-      print(profile.phone);
-      _applyPhoneFromProfile(profile.phone);
+    final profileData = profileController.profile.value;
+
+    if (profileData != null && (profileData.phone.isNotEmpty)) {
+      _fillAllFields(profileData.name, profileData.email, profileData.birthdate,
+          profileData.phone);
     }
 
     _profileWorker = ever<UserProfile?>(
       profileController.profile,
       (profile) {
         if (profile != null) {
-          nameController.text = profile.name;
-          emailController.text = profile.email;
-          birthdateController.text = profile.birthdate ?? '';
-          phoneController.text = profile.phone ?? '';
-          _applyPhoneFromProfile(profile.phone);
+          _fillAllFields(
+              profile.name, profile.email, profile.birthdate, profile.phone);
         }
       },
     );
+  }
+
+  void _fillAllFields(String name, String email, String? birth, String phone) {
+    nameController.text = name;
+    emailController.text = email;
+    if (birth != null && birth.isNotEmpty) {
+      try {
+        DateTime parsedDate = DateTime.parse(birth);
+        birthdateController.text =
+            "${parsedDate.day.toString().padLeft(2, '0')}/"
+            "${parsedDate.month.toString().padLeft(2, '0')}/"
+            "${parsedDate.year}";
+      } catch (e) {
+        birthdateController.text = birth;
+      }
+    } else {
+      birthdateController.text = '';
+    }
+    _applyPhoneFromProfile(phone);
   }
 
   void _applyPhoneFromProfile(String fullPhone) {
@@ -81,6 +94,23 @@ class PersonalInfoController extends GetxController {
           : null,
       email: emailController.text,
     );
+  }
+
+  void pickBirthday() async {
+    DateTime initialDate =
+        DateTime.tryParse(birthdateController.text) ?? DateTime(2000);
+    DateTime? pickedDate = await showDatePicker(
+      context: Get.context!,
+      initialDate: initialDate,
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+
+    if (pickedDate != null) {
+      String formattedDate =
+          "${pickedDate.day.toString().padLeft(2, '0')}-${pickedDate.month.toString().padLeft(2, '0')}-${pickedDate.year}";
+      birthdateController.text = formattedDate;
+    }
   }
 
   @override

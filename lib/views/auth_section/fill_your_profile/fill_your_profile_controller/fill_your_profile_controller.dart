@@ -1,3 +1,5 @@
+import 'package:appointment_app/views/profile_section/profile_controller/profile_controller.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,11 +28,18 @@ class AuthFillProfileController extends GetxController {
 // State
   final isLoading = false.obs;
   final errorText = RxnString();
+  final selectedCountry = Country.parse('GB').obs;
 
   @override
   void onInit() {
     super.onInit();
     emailController.text = (Get.arguments?['email'] ?? '') as String;
+    String incomingPhone = (Get.arguments?['phone'] ?? '') as String;
+    String? code = Get.arguments?['countryCode'];
+    if (code != null) {
+      selectedCountry.value = Country.parse(code);
+    }
+    phoneRx.value = incomingPhone;
     fullNameController.addListener(() => errorText.value = null);
     emailController.addListener(() => errorText.value = null);
     birthdateController.addListener(() => errorText.value = null);
@@ -55,8 +64,7 @@ class AuthFillProfileController extends GetxController {
 
     if (pickedDate != null) {
       birthdate.value = pickedDate;
-      birthdateController.text =
-      "${pickedDate.day.toString().padLeft(2, '0')}/"
+      birthdateController.text = "${pickedDate.day.toString().padLeft(2, '0')}/"
           "${pickedDate.month.toString().padLeft(2, '0')}/"
           "${pickedDate.year}";
     }
@@ -71,11 +79,6 @@ class AuthFillProfileController extends GetxController {
       return;
     }
 
-    if (birthdate.value!.isAfter(DateTime.now())) {
-      AppSnackBar.error('Birthdate cannot be in the future');
-      return;
-    }
-
     isLoading.value = true;
     errorText.value = null;
 
@@ -83,27 +86,30 @@ class AuthFillProfileController extends GetxController {
       final accessToken = prefs.getString(PrefKeys.accessToken);
       final userId = prefs.getString(PrefKeys.userId);
 
-      if (accessToken == null ||
-          accessToken.isEmpty ||
-          userId == null ||
-          userId.isEmpty) {
-        AppSnackBar.error('auth_session_missing');
+      if (accessToken == null || userId == null) {
         Get.offAllNamed(AppRoutes.login);
         return;
       }
+
+      String fullPhone =
+          '+${selectedCountry.value.phoneCode}${phoneRx.value.trim()}';
 
       final res = await repo.setProfile(
         accessToken: accessToken,
         id: userId,
         email: emailController.text.trim(),
         fullName: fullNameController.text.trim(),
-        phone: phoneRx.value.trim(),
+        phone: fullPhone,
         birthdate: birthdate.value!.toIso8601String(),
       );
 
       if (res is ApiSuccess<UserProfile>) {
+        if (Get.isRegistered<ProfileController>()) {
+          Get.find<ProfileController>().profile.value = res.data;
+        }
+
         AppSnackBar.success('profile_saved');
-        Get.offAllNamed(AppRoutes.bottomnavbar);
+        Get.offAllNamed(AppRoutes.otpVerification);
       } else if (res is ApiFailure<UserProfile>) {
         errorText.value = res.error.message;
         AppSnackBar.error('profile_save_failed');
@@ -144,12 +150,14 @@ class AuthFillProfileController extends GetxController {
     isLoading.value = true;
     try {
       final prefs = Get.find<AppPreferencesService>();
-
+      String fullPhone =
+          '+${selectedCountry.value.phoneCode}${phoneRx.value.trim()}';
       await prefs.setString('user_name', fullNameController.text.trim());
       await prefs.setString('user_email', emailController.text.trim());
-      await prefs.setString('user_birthDate', birthdate.value!.toIso8601String());
-      await prefs.setString('user_phoneNumber', phoneRx.value.trim());
-
+      await prefs.setString(
+          'user_birthDate', birthdate.value!.toIso8601String());
+      await prefs.setString('user_phoneNumber', fullPhone);
+      print("✅ تم حفظ الرقم: $fullPhone");
       Get.offAllNamed('/home');
     } catch (e) {
       AppSnackBar.error('Failed to save data. Try again.');

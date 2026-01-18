@@ -127,6 +127,7 @@ const Map<String, String> ghGH = {
   "reschedual": "San hyɛ schedule",
   'cancel_appointment': 'Gya Apɔintment',
   'booking_rescheduled': 'Apɔintment asan ahyɛ schedule',
+  'get_link': 'Fa Link no',
 
   // -------------------- Appointment --------------------
   "appointment_type": "Apɔintment Type",

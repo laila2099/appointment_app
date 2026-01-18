@@ -25,19 +25,18 @@ class PhoneFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      keyboardType: TextInputType.phone,
+      keyboardType: TextInputType.number,
       style: CustomTextStyles.textField.copyWith(color: Colors.black),
       validator: validator,
       onChanged: onChanged,
       decoration: InputDecoration(
         hintText: hint,
         hintStyle:
-        CustomTextStyles.subtitle.copyWith(color: Colors.grey.shade400),
+            CustomTextStyles.subtitle.copyWith(color: Colors.grey.shade400),
         filled: true,
         fillColor: const Color(0xfffdfdff),
         contentPadding:
-        const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
         prefixIcon: GestureDetector(
           onTap: onTapCountry,
           child: Row(
@@ -64,7 +63,6 @@ class PhoneFieldWidget extends StatelessWidget {
             ],
           ),
         ),
-
         border: _border(),
         enabledBorder: _border(),
         focusedBorder: _border(color: AppColors.primary),

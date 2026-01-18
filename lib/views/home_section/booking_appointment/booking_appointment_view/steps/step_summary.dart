@@ -34,6 +34,7 @@ class StepSummary extends StatelessWidget {
           SizedBox(height: 12.h),
           SummaryRow(
             svgAsset: AppIcons.calendar2,
+            iconBg: AppColors.secondBlue,
             iconColor: AppColors.primary,
             title: 'date_time'.tr,
             subtitle:
@@ -41,6 +42,7 @@ class StepSummary extends StatelessWidget {
           ),
           SummaryRow(
             svgAsset: AppIcons.clipboard,
+            iconBg: AppColors.secondGreen,
             iconColor: AppColors.green,
             title: 'appointment_type'.tr,
             subtitle: type.label.tr,
