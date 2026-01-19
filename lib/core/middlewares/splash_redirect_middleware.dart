@@ -18,19 +18,17 @@ class SplashRedirectMiddleware extends GetMiddleware {
     final isLoggedIn = prefs.getBool(PrefKeys.isLoggedIn) ?? false;
     final isVerified = prefs.getBool(PrefKeys.isVerified) ?? false;
 
-    print(isVerified);
-
-    if (isLoggedIn && isVerified) {
-      return const RouteSettings(name: AppRoutes.bottomnavbar);
-    }
-    if (isLoggedIn && !isVerified) {
-      return const RouteSettings(name: AppRoutes.otpVerification);
-    }
-
     final hasSeenOnboarding =
         prefs.getBool(PrefKeys.hasSeenOnboarding) ?? false;
     if (!hasSeenOnboarding) {
       return const RouteSettings(name: AppRoutes.onboarding);
+    }
+
+    if (isLoggedIn && isVerified) {
+      return const RouteSettings(name: AppRoutes.bottomnavbar);
+    }
+    if (!isVerified) {
+      return const RouteSettings(name: AppRoutes.otpVerification);
     }
 
     return const RouteSettings(name: AppRoutes.onboarding);

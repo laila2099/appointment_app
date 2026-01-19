@@ -33,83 +33,86 @@ class ChatView extends StatelessWidget {
         children: [
           Expanded(
             child: Obx(
-              () => ListView.builder(
-                reverse: true,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                itemCount: controller.messages.length,
-                itemBuilder: (context, index) {
-                  final message = controller
-                      .messages[controller.messages.length - 1 - index];
-                  final timeStr = DateFormat('HH:mm').format(message.time);
+              () {
+                return ListView.builder(
+                  reverse: true,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  itemCount: controller.messages.length,
+                  itemBuilder: (context, index) {
+                    final message = controller
+                        .messages[controller.messages.length - 1 - index];
+                    final timeStr = DateFormat('HH:mm').format(message.time);
 
-                  return Align(
-                    alignment: message.isUser
-                        ? AlignmentDirectional.centerEnd
-                        : AlignmentDirectional.centerStart,
-                    child: Column(
-                      crossAxisAlignment: message.isUser
-                          ? CrossAxisAlignment.end
-                          : CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.symmetric(vertical: 6),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 14, horizontal: 16),
-                          constraints: BoxConstraints(
-                            maxWidth: MediaQuery.of(context).size.width * 0.75,
-                          ),
-                          decoration: BoxDecoration(
-                            color: message.isUser
-                                ? const Color(0xFF1B75FE)
-                                : Colors.white,
-                            border: message.isUser
-                                ? null
-                                : Border.all(
-                                    color: const Color(0xFFEEEEEE), width: 1),
-                            borderRadius: BorderRadius.only(
-                              topLeft: const Radius.circular(16),
-                              topRight: const Radius.circular(16),
-                              bottomLeft: message.isUser
-                                  ? const Radius.circular(16)
-                                  : Radius.zero,
-                              bottomRight: message.isUser
-                                  ? Radius.zero
-                                  : const Radius.circular(16),
+                    return Align(
+                      alignment: message.isUser
+                          ? AlignmentDirectional.centerEnd
+                          : AlignmentDirectional.centerStart,
+                      child: Column(
+                        crossAxisAlignment: message.isUser
+                            ? CrossAxisAlignment.end
+                            : CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.symmetric(vertical: 6),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 14, horizontal: 16),
+                            constraints: BoxConstraints(
+                              maxWidth:
+                                  MediaQuery.of(context).size.width * 0.75,
                             ),
-                            boxShadow: message.isUser
-                                ? []
-                                : [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.04),
-                                      blurRadius: 4,
-                                      offset: const Offset(0, 2),
-                                    )
-                                  ],
-                          ),
-                          child: Text(
-                            message.text,
-                            style: TextStyle(
-                              fontSize: 15,
+                            decoration: BoxDecoration(
                               color: message.isUser
-                                  ? Colors.white
-                                  : Colors.black87,
+                                  ? const Color(0xFF1B75FE)
+                                  : Colors.white,
+                              border: message.isUser
+                                  ? null
+                                  : Border.all(
+                                      color: const Color(0xFFEEEEEE), width: 1),
+                              borderRadius: BorderRadius.only(
+                                topLeft: const Radius.circular(16),
+                                topRight: const Radius.circular(16),
+                                bottomLeft: message.isUser
+                                    ? const Radius.circular(16)
+                                    : Radius.zero,
+                                bottomRight: message.isUser
+                                    ? Radius.zero
+                                    : const Radius.circular(16),
+                              ),
+                              boxShadow: message.isUser
+                                  ? []
+                                  : [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.04),
+                                        blurRadius: 4,
+                                        offset: const Offset(0, 2),
+                                      )
+                                    ],
+                            ),
+                            child: Text(
+                              message.text,
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: message.isUser
+                                    ? Colors.white
+                                    : Colors.black87,
+                              ),
                             ),
                           ),
-                        ),
-                        Text(
-                          timeStr,
-                          style: const TextStyle(
-                            fontSize: 11,
-                            color: Color(0xFF9E9E9E),
+                          Text(
+                            timeStr,
+                            style: const TextStyle(
+                              fontSize: 11,
+                              color: Color(0xFF9E9E9E),
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 8),
-                      ],
-                    ),
-                  );
-                },
-              ),
+                          const SizedBox(height: 8),
+                        ],
+                      ),
+                    );
+                  },
+                );
+              },
             ),
           ),
           Padding(
@@ -126,6 +129,10 @@ class ChatView extends StatelessWidget {
                     ),
                     child: TextField(
                       controller: controller.newMessageController,
+                      onChanged: (value) {
+                        controller.newMessage.value =
+                            controller.newMessageController.text;
+                      },
                       decoration: InputDecoration(
                         hintText: 'Type a message ...',
                         hintStyle: const TextStyle(
@@ -164,10 +171,11 @@ class ChatView extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 Obx(() {
-                  final hasText =
-                      controller.newMessageController.text.isNotEmpty;
+                  final hasText = controller.newMessage.value.isNotEmpty;
                   return GestureDetector(
                     onTap: () {
+                      final hasText =
+                          controller.newMessageController.text.isNotEmpty;
                       if (hasText) {
                         controller
                             .sendMessage(controller.newMessageController.text);

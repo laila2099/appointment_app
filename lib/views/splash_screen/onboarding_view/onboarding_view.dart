@@ -1,7 +1,9 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
 import '../../../core/constant/app_colors.dart';
 import '../../../core/constant/app_images.dart';
 import '../../../core/constant/app_keys.dart';
@@ -130,7 +132,7 @@ class OnBoardingView extends StatelessWidget {
                         color: AppColors.subtitle),
                   ),
                 ),
-                SizedBox(height: 32.h),
+                SizedBox(height: 24.h),
                 Padding(
                   padding: const EdgeInsets.only(right: 32, left: 32),
                   child: CustomPrimaryButton(

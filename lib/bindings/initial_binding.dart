@@ -10,6 +10,7 @@ import '../core/config/app_config.dart';
 import '../core/services/shared_prefrences.dart';
 import '../views/auth_section/auth_controller/auth_controller.dart';
 import '../views/home_section/booking_appointment/booking_appointment_controller/booking_controller.dart';
+import '../widgets/general_widgets/bottom_nav_bar/controller/bottom_nav_bar_controller.dart';
 
 class InitializeBinding extends Bindings {
   @override
@@ -31,5 +32,6 @@ class InitializeBinding extends Bindings {
         prefs: Get.find<AppPreferencesService>()));
 
     Get.lazyPut<SortController>(() => SortController(), fenix: true);
+    Get.put(NavigationController());
   }
 }

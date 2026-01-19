@@ -93,7 +93,8 @@ class AuthController extends GetxController {
       PrefKeys.accessToken,
       session.accessToken,
     );
-    await prefs.setBool(PrefKeys.isVerified, false);
+
+    await prefs.setBool(PrefKeys.hasSeenOnboarding, true);
 
     await prefs.setString(
       PrefKeys.refreshToken,
@@ -137,10 +138,14 @@ class AuthController extends GetxController {
       email: emailController.text,
       password: passwordController.text,
     );
+    print(res);
 
     if (res is ApiSuccess<AuthSession>) {
       await _saveSession(res.data);
-      Get.find<NavigationController>().unlockAfterLogin();
+      await prefs.setBool(PrefKeys.isVerified, true);
+      if (Get.isRegistered<NavigationController>()) {
+        Get.find<NavigationController>().unlockAfterLogin();
+      }
       Get.find<AuthGateService>().continueAfterLogin();
     } else if (res is ApiFailure<AuthSession>) {
       final raw = res.error.message;
