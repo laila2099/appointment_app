@@ -23,62 +23,65 @@ class SplashScreen extends StatelessWidget {
     });
 
     return Scaffold(
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          Center(
-            child: SizedBox(
-              height: 443,
-              child: Image.asset(
-                AppImages.logo,
-                fit: BoxFit.cover,
-                color: Colors.white.withOpacity(0.06),
-                colorBlendMode: BlendMode.modulate,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Center(
+              child: SizedBox(
+                height: 443,
+                child: Image.asset(
+                  AppImages.logo,
+                  fit: BoxFit.cover,
+                  color: Colors.white.withOpacity(0.06),
+                  colorBlendMode: BlendMode.modulate,
+                ),
               ),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: 80,
-                height: 80,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(AppImages.logo),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  "Docdoc",
+                  style: CustomTextStyles.headline.copyWith(
+                      fontSize: 80,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                height: 220,
                 decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(AppImages.logo),
-                    fit: BoxFit.cover,
+                  gradient: LinearGradient(
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                    colors: [
+                      Colors.white,
+                      Colors.white.withOpacity(0.05),
+                    ],
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
-              Text(
-                "Docdoc",
-                style: CustomTextStyles.headline.copyWith(
-                    fontSize: 80,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              height: 220,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
-                  colors: [
-                    Colors.white,
-                    Colors.white.withOpacity(0.05),
-                  ],
-                ),
-              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

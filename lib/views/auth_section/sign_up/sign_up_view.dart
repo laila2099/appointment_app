@@ -3,7 +3,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' hide TextField;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 import '../../../core/constant/app_colors.dart';
 import '../../../core/constant/app_images.dart';
 import '../../../core/constant/text_style.dart';
@@ -21,14 +20,16 @@ class CreateAccountView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AuthController authController = Get.find<AuthController>();
-
     return Scaffold(
       backgroundColor: AppColors.white,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsetsDirectional.symmetric(
-              horizontal: 24, vertical: 16),
+          padding: EdgeInsets.only(
+            left: 24,
+            right: 24,
+            top: 16,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 24,
+          ),
           child: Form(
             key: authController.signUpFormKey,
             child: Column(

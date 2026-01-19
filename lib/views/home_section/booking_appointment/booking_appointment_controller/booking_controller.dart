@@ -91,6 +91,7 @@ class BookingController extends GetxController {
       locationText: "Cairo, Egypt",
       lat: 30.0444,
       lng: 31.2357,
+      practiceExperience: '',
     );
 
     _seed();

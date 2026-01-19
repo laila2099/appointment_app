@@ -66,7 +66,6 @@ class PersonalInfo extends StatelessWidget {
 
                       if (file == null) return;
 
-                      // هنا نستخدم setAvatar بدل تعديل الـ Rx مباشرة
                       profileController.setAvatar(file);
                     },
                     child: Container(

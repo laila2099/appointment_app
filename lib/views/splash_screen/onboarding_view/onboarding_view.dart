@@ -89,7 +89,7 @@ class OnBoardingView extends StatelessWidget {
                       left: 0,
                       right: 0,
                       child: Container(
-                        height: 180.h,
+                        height: 200.h,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             begin: Alignment.bottomCenter,
@@ -104,7 +104,7 @@ class OnBoardingView extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      bottom: 0,
+                      bottom: 25,
                       left: 32,
                       right: 32,
                       child: Column(
@@ -118,7 +118,6 @@ class OnBoardingView extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 18.h),
                 Padding(
                   padding: const EdgeInsets.only(right: 32, left: 32),
                   child: Text(
@@ -132,7 +131,7 @@ class OnBoardingView extends StatelessWidget {
                         color: AppColors.subtitle),
                   ),
                 ),
-                SizedBox(height: 24.h),
+                SizedBox(height: 25.h),
                 Padding(
                   padding: const EdgeInsets.only(right: 32, left: 32),
                   child: CustomPrimaryButton(
@@ -147,7 +146,10 @@ class OnBoardingView extends StatelessWidget {
                     prefs.setBool(PrefKeys.hasSeenOnboarding, true);
                     Get.offAllNamed(AppRoutes.bottomnavbar);
                   },
-                  child: Text("Continue as a Visitor"),
+                  child: Text(
+                    "Continue as a Visitor",
+                    style: CustomTextStyles.outlinedButton12,
+                  ),
                 )
               ],
             ),

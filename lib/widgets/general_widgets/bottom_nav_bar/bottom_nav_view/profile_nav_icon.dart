@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:appointment_app/core/constant/app_colors.dart';
+import 'package:appointment_app/views/profile_section/profile_controller/profile_controller.dart';
 import 'package:appointment_app/widgets/general_widgets/bottom_nav_bar/controller/bottom_nav_bar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,7 +13,11 @@ class ProfileNavIcon extends GetView<NavigationController> {
 
   @override
   Widget build(BuildContext context) {
+    final profileController = Get.find<ProfileController>();
+
     return Obx(() {
+      final File? avatarFile = profileController.avatarFile.value;
+
       final bool isActive = controller.selectedIndex == index;
       return GestureDetector(
         onTap: () => controller.changeIndex(index),
@@ -25,9 +32,11 @@ class ProfileNavIcon extends GetView<NavigationController> {
           ),
           child: CircleAvatar(
             radius: 14.r,
-            backgroundImage: const NetworkImage(
-              "https://i.pravatar.cc/150?u=user_profile",
-            ),
+            backgroundImage: avatarFile != null
+                ? FileImage(avatarFile)
+                : const NetworkImage(
+                    "https://i.pravatar.cc/150?u=user_profile",
+                  ) as ImageProvider,
           ),
         ),
       );

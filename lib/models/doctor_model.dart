@@ -15,6 +15,7 @@ class Doctor {
   final double lat;
   final double lng;
   final bool isRecommended;
+  final String practiceExperience;
 
   const Doctor({
     required this.id,
@@ -33,6 +34,7 @@ class Doctor {
     required this.lat,
     required this.lng,
     required this.isRecommended,
+    required this.practiceExperience,
   });
 
   factory Doctor.fromJson(Map<String, dynamic> json) {
@@ -96,6 +98,7 @@ class Doctor {
           json['is_recommended'] == 'true' ||
           json['isRecommended'] == true ||
           json['isRecommended'] == 'true',
+      practiceExperience: json['practice_experience']?.toString() ?? '',
     );
   }
 
@@ -116,6 +119,7 @@ class Doctor {
     double? lat,
     double? lng,
     bool? isRecommended,
+    String? practiceExperience,
   }) {
     return Doctor(
       id: id ?? this.id,
@@ -134,6 +138,7 @@ class Doctor {
       lat: lat ?? this.lat,
       lng: lng ?? this.lng,
       isRecommended: isRecommended ?? this.isRecommended,
+      practiceExperience: practiceExperience ?? this.practiceExperience,
     );
   }
 }
