@@ -66,7 +66,8 @@ class PersonalInfo extends StatelessWidget {
 
                       if (file == null) return;
 
-                      profileController.avatarFile.value = file;
+                      // هنا نستخدم setAvatar بدل تعديل الـ Rx مباشرة
+                      profileController.setAvatar(file);
                     },
                     child: Container(
                       padding: const EdgeInsetsDirectional.all(8),

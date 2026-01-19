@@ -136,11 +136,17 @@ class OnBoardingView extends StatelessWidget {
                   child: CustomPrimaryButton(
                     label: "Get Started".tr,
                     onTap: () {
-                      prefs.setBool(PrefKeys.hasSeenOnboarding, true);
-                      Get.offAllNamed(AppRoutes.bottomnavbar);
+                      Get.offAllNamed(AppRoutes.createAccount);
                     },
                   ),
                 ),
+                TextButton(
+                  onPressed: () {
+                    prefs.setBool(PrefKeys.hasSeenOnboarding, true);
+                    Get.offAllNamed(AppRoutes.bottomnavbar);
+                  },
+                  child: Text("Continue as a Visitor"),
+                )
               ],
             ),
           ),

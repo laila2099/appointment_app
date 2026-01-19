@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/classes/api/api_result.dart';
@@ -18,11 +19,14 @@ class ProfileController extends GetxController {
 
   String? _accessToken;
   String? _userId;
+  final _box = GetStorage();
+  static const _avatarPathKey = 'avatar_path';
 
   @override
   void onInit() {
     super.onInit();
     _initProfile();
+    _loadAvatar();
   }
 
   Future<void> _initProfile() async {
@@ -87,5 +91,18 @@ class ProfileController extends GetxController {
     }
 
     loading.value = false;
+  }
+
+  void setAvatar(File file) {
+    avatarFile.value = file;
+    _box.write(_avatarPathKey, file.path);
+  }
+
+// تحميل الصورة من التخزين
+  void _loadAvatar() {
+    final path = _box.read(_avatarPathKey);
+    if (path != null && File(path).existsSync()) {
+      avatarFile.value = File(path);
+    }
   }
 }

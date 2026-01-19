@@ -76,7 +76,6 @@ class FillYourProfileView extends StatelessWidget {
                           children: [
                             Obx(() {
                               final file = profileController.avatarFile.value;
-
                               return Container(
                                 width: 120.w,
                                 height: 120.w,
@@ -108,7 +107,8 @@ class FillYourProfileView extends StatelessWidget {
 
                                   if (file == null) return;
 
-                                  profileController.avatarFile.value = file;
+                                  // ✅ حفظ الصورة مؤقت + دائم
+                                  profileController.setAvatar(file);
                                 },
                                 child: Container(
                                   width: 36.w,
