@@ -85,6 +85,7 @@ class PersonalInfoController extends GetxController {
   }
 
   void onSave() {
+    print(birthdateController.text.toString());
     profileController.editProfile(
       fullName: nameController.text,
       phone: fullPhoneNumber,
@@ -107,7 +108,7 @@ class PersonalInfoController extends GetxController {
 
     if (pickedDate != null) {
       String formattedDate =
-          "${pickedDate.day.toString().padLeft(2, '0')}-${pickedDate.month.toString().padLeft(2, '0')}-${pickedDate.year}";
+          "${pickedDate.month.toString().padLeft(2, '0')}-${pickedDate.day.toString().padLeft(2, '0')}-${pickedDate.year}";
       birthdateController.text = formattedDate;
     }
   }
