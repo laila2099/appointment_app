@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,6 +14,7 @@ class ProfileController extends GetxController {
 
   final loading = false.obs;
   final profile = Rxn<UserProfile>();
+  Rx<File?> avatarFile = Rxn<File>();
 
   String? _accessToken;
   String? _userId;

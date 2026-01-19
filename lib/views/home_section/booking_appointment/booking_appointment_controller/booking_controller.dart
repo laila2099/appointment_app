@@ -67,7 +67,7 @@ class BookingController extends GetxController {
         doctorId: doctorId,
         appointmentDate: DateTime.now(),
         appointmentTime: const TimeOfDay(hour: 8, minute: 0),
-        appointmentType: AppointmentType.inPerson.label,
+        appointmentType: AppointmentType.inPerson.id,
         paymentMethod: '',
       ).obs;
     }
@@ -213,7 +213,8 @@ class BookingController extends GetxController {
   }
 
   void selectType(AppointmentType type) {
-    appointment.value = appointment.value.copyWith(appointmentType: type.label);
+    appointment.value = appointment.value.copyWith(appointmentType: type.id);
+    appointment.refresh();
   }
 
   bool get canContinue {

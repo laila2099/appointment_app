@@ -7,10 +7,13 @@ import 'package:get/get.dart';
 import '../../../core/constant/app_colors.dart';
 import '../../../core/constant/app_images.dart';
 import '../../../core/constant/text_style.dart';
+import '../../../core/services/image_picker_service.dart';
 import '../../../widgets/general_widgets/app_header/app_header.dart';
+import '../../../widgets/general_widgets/pick_image_sheet.dart';
 import '../../../widgets/general_widgets/primary_button.dart';
 import '../../../widgets/helpful_widgets/text_field_widget.dart';
 import '../profile_controller/personal_info_controller.dart';
+import '../profile_controller/profile_controller.dart';
 import 'widgets/personal_info/phone_text_field.dart';
 
 class PersonalInfo extends StatelessWidget {
@@ -20,6 +23,7 @@ class PersonalInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     final PersonalInfoController controller =
         Get.find<PersonalInfoController>();
+    final ProfileController profileController = Get.find<ProfileController>();
 
     return Scaffold(
       backgroundColor: AppColors.white,
@@ -42,25 +46,40 @@ class PersonalInfo extends StatelessWidget {
               child: Stack(
                 alignment: AlignmentDirectional.bottomEnd,
                 children: [
-                  CircleAvatar(
-                    radius: 62,
-                    backgroundColor: Colors.white,
-                    child: const CircleAvatar(
-                      radius: 60,
-                      backgroundImage: AssetImage(AppImages.avatar),
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsetsDirectional.all(8),
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color(0xffF8F8F8),
-                    ),
-                    child: SvgPicture.asset(
-                      AppIcons.edit,
-                      width: 21.w,
-                      height: 21.h,
-                      color: AppColors.primary,
+                  Obx(() {
+                    final file = profileController.avatarFile.value;
+                    return CircleAvatar(
+                      radius: 60.r,
+                      backgroundImage: file != null
+                          ? FileImage(file)
+                          : AssetImage(AppImages.avatar) as ImageProvider,
+                    );
+                  }),
+                  GestureDetector(
+                    onTap: () async {
+                      final src = await PickImageSheet.show();
+                      if (src == null) return;
+
+                      final picker = Get.find<ImagePickerService>();
+                      final file = await picker.pickImageFile(
+                          source: src, imageQuality: 85);
+
+                      if (file == null) return;
+
+                      profileController.avatarFile.value = file;
+                    },
+                    child: Container(
+                      padding: const EdgeInsetsDirectional.all(8),
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Color(0xffF8F8F8),
+                      ),
+                      child: SvgPicture.asset(
+                        AppIcons.edit,
+                        width: 21.w,
+                        height: 21.h,
+                        color: AppColors.primary,
+                      ),
                     ),
                   ),
                 ],

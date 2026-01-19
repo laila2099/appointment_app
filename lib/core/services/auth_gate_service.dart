@@ -63,6 +63,7 @@ class AuthGateService extends GetxService {
     await prefs.remove(PrefKeys.userId);
     await prefs.remove(PrefKeys.email);
     await prefs.remove(PrefKeys.expiresAt);
+    await prefs.setBool(PrefKeys.isVerified, false);
     clearPending();
   }
 

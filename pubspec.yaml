@@ -46,6 +46,8 @@ dependencies:
   intl_phone_field: ^3.2.0
   country_picker: ^2.0.26
   flutter_switch: ^0.3.2
+  image_picker: ^1.0.7
+  permission_handler: ^11.3.1
 
 
 

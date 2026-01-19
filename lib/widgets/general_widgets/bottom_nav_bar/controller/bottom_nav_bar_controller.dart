@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+
 import '../../../../core/constant/app_keys.dart';
 import '../../../../core/services/shared_prefrences.dart';
 
@@ -35,6 +36,10 @@ class NavigationController extends GetxController {
       return false;
     }
     return true;
+  }
+
+  void changeTab(int index) {
+    _selectedIndex.value = index;
   }
 
   void unlockAfterLogin() {

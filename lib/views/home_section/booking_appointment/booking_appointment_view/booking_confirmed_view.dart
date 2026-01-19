@@ -8,11 +8,14 @@ import '../../../../core/constant/app_colors.dart';
 import '../../../../core/constant/app_icons.dart';
 import '../../../../core/constant/app_images.dart';
 import '../../../../core/constant/text_style.dart';
+import '../../../../models/appoitments_details.dart';
 import '../../../../routes/app_routes.dart';
 import '../../../../widgets/general_widgets/app_header/app_header.dart';
 import '../../../../widgets/general_widgets/app_header/header_title.dart';
+import '../../../../widgets/general_widgets/bottom_nav_bar/controller/bottom_nav_bar_controller.dart';
 import '../../../../widgets/general_widgets/doctor_tile.dart';
 import '../../../../widgets/general_widgets/section_title.dart';
+import '../../../my_apponiment_section/my_appoitment_controller/my_appoitment_controller.dart';
 import '../../doctor_details/widgets/rate_doctor/rate_doctor_sheet.dart';
 import '../booking_appointment_controller/booking_controller.dart';
 import '../models/appointment_type.dart';
@@ -106,7 +109,7 @@ class BookingConfirmedScreen extends GetView<BookingController> {
                         clinic: doctor.clinic,
                         rating: doctor.ratingAvg,
                         reviewsCount: doctor.ratingCount,
-                        avatar:  AppImages.doctor,
+                        avatar: AppImages.doctor,
                         showChat: false,
                       ),
                   ],
@@ -121,8 +124,15 @@ class BookingConfirmedScreen extends GetView<BookingController> {
                     onPressed: () {
                       Get.until(
                         (route) =>
-                            route.settings.name == AppRoutes.doctorDetails,
+                            route.settings.name == AppRoutes.bottomnavbar,
                       );
+                      final bottomNav = Get.find<NavigationController>();
+
+                      Get.find<MyAppointmentsController>()
+                          .fetchAppointmentsByStatus(
+                              AppointmentStatus.upcoming);
+                      bottomNav.changeTab(3);
+
                       WidgetsBinding.instance.addPostFrameCallback((_) {
                         Get.bottomSheet(
                           const RateDoctorSheet(),

@@ -434,8 +434,10 @@ class DoctorController extends GetxController {
 
   /// --------------------- Filter by Category ---------------------
   void filterDoctors({required String? categoryId}) async {
+    isLoading.value = true;
     if (categoryId == null) {
       loadDoctors();
+      isLoading.value = false;
       return;
     }
 
@@ -451,6 +453,7 @@ class DoctorController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
       );
     }
+    isLoading.value = false;
   }
 
   /// --------------------- Sort / Category Picker ---------------------

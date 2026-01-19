@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -31,12 +31,12 @@ class ChatView extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-
           Expanded(
             child: Obx(
-                  () => ListView.builder(
+              () => ListView.builder(
                 reverse: true,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 itemCount: controller.messages.length,
                 itemBuilder: (context, index) {
                   final message = controller
@@ -65,7 +65,8 @@ class ChatView extends StatelessWidget {
                                 : Colors.white,
                             border: message.isUser
                                 ? null
-                                : Border.all(color: const Color(0xFFEEEEEE), width: 1),
+                                : Border.all(
+                                    color: const Color(0xFFEEEEEE), width: 1),
                             borderRadius: BorderRadius.only(
                               topLeft: const Radius.circular(16),
                               topRight: const Radius.circular(16),
@@ -76,13 +77,15 @@ class ChatView extends StatelessWidget {
                                   ? Radius.zero
                                   : const Radius.circular(16),
                             ),
-                            boxShadow: message.isUser ? [] : [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.04),
-                                blurRadius: 4,
-                                offset: const Offset(0, 2),
-                              )
-                            ],
+                            boxShadow: message.isUser
+                                ? []
+                                : [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.04),
+                                      blurRadius: 4,
+                                      offset: const Offset(0, 2),
+                                    )
+                                  ],
                           ),
                           child: Text(
                             message.text,
@@ -109,26 +112,27 @@ class ChatView extends StatelessWidget {
               ),
             ),
           ),
-
           Padding(
-            padding: const EdgeInsets.only(left: 12, right: 12, bottom: 25, top: 10),
+            padding:
+                const EdgeInsets.only(left: 12, right: 12, bottom: 25, top: 10),
             child: Row(
               children: [
                 Expanded(
                   child: Container(
-
                     decoration: BoxDecoration(
                       color: const Color(0xFFF9F9F9),
                       borderRadius: BorderRadius.circular(30),
                       border: Border.all(color: const Color(0xFFE0E0E0)),
                     ),
                     child: TextField(
-                      onChanged: (val) => controller.newMessage.value = val,
+                      controller: controller.newMessageController,
                       decoration: InputDecoration(
                         hintText: 'Type a message ...',
-                        hintStyle: const TextStyle(color: Color(0xFF9E9E9E), fontSize: 15),
+                        hintStyle: const TextStyle(
+                            color: Color(0xFF9E9E9E), fontSize: 15),
                         border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(vertical: 12),
+                        contentPadding:
+                            const EdgeInsets.symmetric(vertical: 12),
                         prefixIcon: const Icon(
                           CupertinoIcons.smiley,
                           color: iconColor,
@@ -160,12 +164,14 @@ class ChatView extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 Obx(() {
-                  final hasText = controller.newMessage.value.trim().isNotEmpty;
+                  final hasText =
+                      controller.newMessageController.text.isNotEmpty;
                   return GestureDetector(
                     onTap: () {
                       if (hasText) {
-                        controller.sendMessage(controller.newMessage.value);
-                        controller.newMessage.value = '';
+                        controller
+                            .sendMessage(controller.newMessageController.text);
+                        controller.newMessageController.clear();
                       }
                     },
                     child: Container(

@@ -9,8 +9,12 @@ import '../../../../../core/constant/app_colors.dart';
 import '../../../../../core/constant/app_images.dart';
 import '../../../../../core/constant/text_style.dart';
 import '../../../../../widgets/helpful_widgets/primary_button_widget.dart';
+import '../../../../core/classes/repositories/profile_repository.dart';
+import '../../../../core/services/image_picker_service.dart';
 import '../../../../core/utils/auth_validators.dart';
+import '../../../../widgets/general_widgets/pick_image_sheet.dart';
 import '../../../../widgets/helpful_widgets/text_field_widget.dart';
+import '../../../profile_section/profile_controller/profile_controller.dart';
 import '../../auth_controller/auth_controller.dart';
 import '../../widgets/phone_field_widget.dart';
 import '../fill_your_profile_controller/fill_your_profile_controller.dart';
@@ -22,6 +26,12 @@ class FillYourProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     final autoProfileController = Get.find<AuthFillProfileController>();
     final AuthController authController = Get.find<AuthController>();
+
+    final profileController = Get.isRegistered<ProfileController>()
+        ? Get.find<ProfileController>()
+        : Get.put(ProfileController(
+            repository: Get.find<ProfileRepository>(),
+          ));
 
     return Scaffold(
       backgroundColor: AppColors.white,
@@ -64,23 +74,42 @@ class FillYourProfileView extends StatelessWidget {
                       Center(
                         child: Stack(
                           children: [
-                            Container(
-                              width: 120.w,
-                              height: 120.w,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: AppColors.lightGrey,
-                                image: const DecorationImage(
-                                  image: AssetImage(AppImages.personPhoto),
-                                  fit: BoxFit.cover,
+                            Obx(() {
+                              final file = profileController.avatarFile.value;
+
+                              return Container(
+                                width: 120.w,
+                                height: 120.w,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppColors.lightGrey,
+                                  image: DecorationImage(
+                                    image: file != null
+                                        ? FileImage(file)
+                                        : const AssetImage(
+                                                AppImages.personPhoto)
+                                            as ImageProvider,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
-                              ),
-                            ),
+                              );
+                            }),
                             PositionedDirectional(
                               bottom: 0,
                               end: 0,
                               child: GestureDetector(
-                                onTap: () {},
+                                onTap: () async {
+                                  final src = await PickImageSheet.show();
+                                  if (src == null) return;
+
+                                  final picker = Get.find<ImagePickerService>();
+                                  final file = await picker.pickImageFile(
+                                      source: src, imageQuality: 85);
+
+                                  if (file == null) return;
+
+                                  profileController.avatarFile.value = file;
+                                },
                                 child: Container(
                                   width: 36.w,
                                   height: 36.w,
